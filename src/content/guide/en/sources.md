@@ -1,0 +1,55 @@
+---
+title: Sources
+description: Rulebooks, statistics, coaching materials and research the game is built on.
+order: 100
+---
+
+IceFlow's rules, systems and calibration are based on published material. Where the game uses a
+source only for direction and not for numbers, it says so.
+
+## Rules
+
+- IIHF Official Rule Book 2026/27 - [rulebook.iihf.com](https://test.rulebook.iihf.com/documents/rule-book-2026-27)
+- NHL Official Rules - [media.nhl.com](https://media.nhl.com/site/asset/public/ext/2025-26/2025-26Rules.pdf)
+
+## Match statistics
+
+The match engine is calibrated against NHL league averages for the 2024/25 regular season.
+
+- Hockey-Reference, NHL League Averages - [hockey-reference.com](https://www.hockey-reference.com/leagues/stats.html)
+
+## Player types
+
+The ten skater types follow the player profiles of Identity Shift Hockey. The article is the starting
+point for the types, not a source for statements about tactics.
+
+- Identity Shift Hockey: The 14 Hockey Player Archetypes - [identityshifthockey.com](https://www.identityshifthockey.com/post/the-14-hockey-player-archetypes-forwards-defense-updated)
+
+## Tactics
+
+Each tactic describes a real system. Which player types suit it is the game's own reading of the
+system's description and the type's definition; the sources describe the systems, they do not
+test the game's numbers.
+
+| Tactic | Source |
+|---|---|
+| Quick Strike | [NHL.com - Coaches Room: defensemen joining the offense](https://www.nhl.com/news/coaches-room-defensemen-trying-to-help-offense-more-often); [WBS Penguins - A guide to offensive ice hockey strategy](https://www.wbspenguins.com/blog/a-guide-to-offensive-ice-hockey-strategy/) |
+| Stretch Counter | [HockeyMonkey - hockey passes](https://www.hockeymonkey.com/learn/hockey-pass); [Two in the Box](https://twointhebox.com/2017/03/09/bylsmas-shortcomings-arent-exactly-new/) |
+| Possession Cycle | [USA Hockey - Intermediate coaching handbook](https://cdn1.sportngin.com/attachments/document/0028/0001/Intermediate20042.pdf) |
+| Direct Pressure | [Dictionary of Canadianisms - dump and chase](https://dchp.arts.ubc.ca/entries/dump-and-chase) |
+| Point & Traffic | [NHL.com, Seattle Kraken - net-front offense](https://www.nhl.com/kraken/news/net-front-offense-ft) |
+| Puck Hunt | [Ice Hockey Systems - 2-1-2](https://www.icehockeysystems.com/print/standard/61291) |
+| Strong-Side Lock | [The Coaches Site - Barry Smith's left wing lock](https://thecoachessitelive.com/how-barry-smiths-left-wing-lock-changed-hockey-forever/) |
+| Man Marking | [Learn Ice Hockey - defensive zone coverage](https://learn-ice-hockey.com/systems/defensive_zone_coverage/) |
+| Layered Zone, Low Collapse | [Sound of Hockey - Dave Hakstol's defensive zone coverage](https://soundofhockey.com/2022/02/21/kraken-coach-dave-hakstols-scheme-and-philosophies-defensive-zone-coverage-part-3/) |
+| Neutral Trap | [Ice Hockey Systems - NE 1-3-1 forecheck](https://www.icehockeysystems.com/hockey-systems/ne-1-3-1-forecheck) |
+
+## Traits, form and injuries
+
+Traits are game abstractions. From this research the game takes only the direction, not the numbers.
+
+| Finding | Use in the game | Source |
+|---|---|---|
+| Personality becomes more stable with age, but not absolutely | traits change rarely and only a little | Roberts & DelVecchio (2000), [PubMed](https://pubmed.ncbi.nlm.nih.gov/10668348/); meta-analysis (2014), [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC4152379/) |
+| Resilience in sport is a process of adaptation, not an automatic reward for stress | mentality grows from pressure games, but levels off | Gupta & McCarthy (2022), [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC9811683/) |
+| A previous injury raises the risk of another one | injury resistance drops after serious injuries | Safe2Play (2024), [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC11351362/) |
