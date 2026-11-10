@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import logo from '../../assets/branding/logo.png';
 import { localePaths, useTranslations, type Locale, type UiKey } from '../../i18n/ui';
+import { fullName } from '../../brand';
 
 export const getStaticPaths = localePaths;
 
@@ -11,12 +12,13 @@ const t = useTranslations(lang);
 const features = ['club', 'team', 'match', 'transfers', 'juniors', 'leagues'] as const;
 ---
 
-<Base lang={lang} title="IceFlow" description={t('home.tagline')}>
+<Base lang={lang} title={fullName} description={t('home.tagline')}>
   <section class="hero">
     <div class="container hero-inner">
-      <Image src={logo} alt="IceFlow" width={320} class="hero-logo" loading="eager" />
+      <Image src={logo} alt={fullName} width={320} class="hero-logo" loading="eager" />
       <div>
-        <h1>{t('home.title')}</h1>
+        <h1>{fullName}</h1>
+        <p class="subtitle">{t('home.title')}</p>
         <p class="tagline">{t('home.tagline')}</p>
       </div>
     </div>
@@ -58,6 +60,14 @@ const features = ['club', 'team', 'match', 'transfers', 'juniors', 'leagues'] as
     font-size: clamp(1.8rem, 5vw, 2.8rem);
     line-height: 1.15;
     margin: 0 0 12px;
+  }
+
+  .subtitle {
+    margin: -4px 0 12px;
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: 0.02em;
   }
 
   .tagline {

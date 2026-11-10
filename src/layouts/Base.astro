@@ -4,6 +4,7 @@ import { Image } from 'astro:assets';
 import wordmark from '../assets/branding/name_trimmed.png';
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 import { useTranslations, type Locale } from '../i18n/ui';
+import { brand, fullName } from '../brand';
 
 interface Props {
   lang: Locale;
@@ -13,7 +14,8 @@ interface Props {
 
 const { lang, title, description } = Astro.props;
 const t = useTranslations(lang);
-const pageTitle = title === 'IceFlow' ? title : `${title} | IceFlow`;
+// The home page carries the full product name; every other page ends with the brand.
+const pageTitle = title === fullName ? fullName : `${title} | ${brand}`;
 const path = Astro.url.pathname;
 const nav = [
   { href: `/${lang}/`, label: t('nav.home') },
@@ -37,8 +39,8 @@ const isActive = (href: string) =>
   <body>
     <header class="site-header">
       <div class="container bar">
-        <a href={`/${lang}/`} class="brand" aria-label="IceFlow">
-          <Image src={wordmark} alt="IceFlow" width={160} loading="eager" />
+        <a href={`/${lang}/`} class="brand" aria-label={brand}>
+          <Image src={wordmark} alt={brand} width={160} loading="eager" />
         </a>
         <nav class="nav">
           {nav.map((item) => (
@@ -57,7 +59,7 @@ const isActive = (href: string) =>
 
     <footer class="site-footer">
       <div class="container footer-inner">
-        <span>© {new Date().getFullYear()} IceFlow. {t('footer.rights')}</span>
+        <span>© {new Date().getFullYear()} {brand}. {t('footer.rights')}</span>
         <span class="links">
           <a href={`/${lang}/privacy/`}>{t('nav.privacy')}</a>
           <a href={`/${lang}/terms/`}>{t('nav.terms')}</a>

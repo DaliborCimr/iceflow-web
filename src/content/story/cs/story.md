@@ -1,8 +1,8 @@
 ---
-title: Příběh IceFlow
+title: Příběh Ice Flow
 description: Jak jeden vývojář ve spolupráci s AI navrhl a postavil online hokejového manažera pro mobil mezi dubnem a listopadem 2026.
 lead: >-
-  IceFlow je online manažerská hra o ledním hokeji pro mobilní telefony, kterou vyvíjí jeden
+  Ice Flow: Hockey Manager je online manažerská hra o ledním hokeji pro mobilní telefony, kterou vyvíjí jeden
   člověk. Kromě části grafiky, která byla dokončena ve Photoshopu, vzniklo zhruba 99 % práce -
   herní design, server, mobilní aplikace, nástroje i texty - v komunikaci s umělou inteligencí,
   z velké části během procházek s kočárkem. Projekt je praktickou zkouškou toho, kam až může jeden
@@ -181,7 +181,7 @@ notes:
         barvy nebo logo, a dva passy platné 21 dní. Ads Pass odstraní reklamy, ale denní limity
         nemění. Sponsor Pass zvyšuje příjmy od sponzorů ve Flow i Gold Pucks o 20 %, což je skutečná
         ekonomická výhoda; obnovitelný příjem hvězd sám nestačí na to, aby byl aktivní každou
-        sezónu. IceFlow tedy není pay-to-win ve smyslu nákupu hráčů nebo síly, placení ale přináší
+        sezónu. Ice Flow tedy není pay-to-win ve smyslu nákupu hráčů nebo síly, placení ale přináší
         mírnou dlouhodobou ekonomickou výhodu.
       - >-
         Protože hru vyvíjí jeden člověk, jsou náklady na provoz nízké a hra nepotřebuje agresivní
@@ -196,7 +196,7 @@ notes:
         postupné spuštění, sběr telemetrie a balancování.
 ---
 
-Nápad na IceFlow vznikl v dubnu 2026, ještě než byl napsán první řádek kódu. První týdny
+Nápad na Ice Flow vznikl v dubnu 2026, ještě než byl napsán první řádek kódu. První týdny
 probíhaly v rozhovorech s AI, ve kterých se definovalo, čím má hra být: mobilní hokejový manažer,
 ve kterém rozhodování pokračuje i během zápasu, hráči se vyvíjejí celou kariéru a online svět
 běží dál i mezi hraním. Většina těchto rozhovorů probíhala na procházkách s kočárkem - v čase,

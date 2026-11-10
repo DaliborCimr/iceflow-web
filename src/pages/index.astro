@@ -1,6 +1,7 @@
 ---
 // Root: send the visitor to their saved or browser language, English otherwise.
 import { defaultLocale, locales } from '../i18n/ui';
+import { fullName } from '../brand';
 ---
 
 <!doctype html>
@@ -8,7 +9,7 @@ import { defaultLocale, locales } from '../i18n/ui';
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>IceFlow</title>
+    <title>{fullName}</title>
     <link rel="icon" type="image/png" href="/favicon.png" />
     <noscript><meta http-equiv="refresh" content={`0; url=/${defaultLocale}/`} /></noscript>
     <script is:inline define:vars={{ locales, defaultLocale }}>
@@ -25,6 +26,6 @@ import { defaultLocale, locales } from '../i18n/ui';
     </script>
   </head>
   <body style="background:#081018">
-    <a href={`/${defaultLocale}/`}>IceFlow</a>
+    <a href={`/${defaultLocale}/`}>{fullName}</a>
   </body>
 </html>

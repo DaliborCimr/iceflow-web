@@ -1,8 +1,8 @@
 ---
-title: The story of IceFlow
-description: How IceFlow, an online ice hockey manager for mobile, was designed and built by one developer working with AI between April and November 2026.
+title: The story of Ice Flow
+description: How Ice Flow, an online ice hockey manager for mobile, was designed and built by one developer working with AI between April and November 2026.
 lead: >-
-  IceFlow is an online ice hockey management game for mobile, developed by a single person.
+  Ice Flow: Hockey Manager is an online ice hockey management game for mobile, developed by a single person.
   Except for part of the graphics, which was finished in Photoshop, roughly 99 % of the work - game
   design, server, mobile app, tooling and texts - was produced in conversation with AI, largely
   during walks with a baby stroller. The project is meant as a practical test of how far one
@@ -184,7 +184,7 @@ notes:
         passes valid for 21 days. The Ads Pass removes ads without changing any daily limits. The
         Sponsor Pass increases sponsor income in Flow and Gold Pucks by 20 %, which is a real
         economic advantage; renewable Star income alone is not enough to keep it active every
-        season. IceFlow is therefore not pay-to-win in the sense of buying players or strength, but
+        season. Ice Flow is therefore not pay-to-win in the sense of buying players or strength, but
         paying does give a moderate long-term economic benefit.
       - >-
         Because the game is developed by one person, its running costs are low, and it does not
@@ -199,7 +199,7 @@ notes:
         telemetry and balancing rather than new features.
 ---
 
-The idea for IceFlow started in April 2026, before any code was written. The first weeks were
+The idea for Ice Flow started in April 2026, before any code was written. The first weeks were
 spent in conversation with AI, defining what the game should be: a mobile hockey manager where
 decisions continue during the match, players develop over whole careers, and the online world
 keeps running between sessions. Most of these conversations happened on walks with a baby

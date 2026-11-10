@@ -1,6 +1,6 @@
 # iceflow-web
 
-Static informational website for IceFlow, an ice hockey management mobile game:
+Static informational website for Ice Flow: Hockey Manager, an ice hockey management mobile game:
 game description, privacy policy, terms of service and a game guide explaining
 server-side mechanics the in-app help does not cover. Built with [Astro](https://astro.build).
 
