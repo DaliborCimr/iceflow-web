@@ -1,0 +1,152 @@
+---
+import '../styles/global.css';
+import { Image } from 'astro:assets';
+import wordmark from '../assets/branding/name_trimmed.png';
+import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+import { useTranslations, type Locale } from '../i18n/ui';
+
+interface Props {
+  lang: Locale;
+  title: string;
+  description?: string;
+}
+
+const { lang, title, description } = Astro.props;
+const t = useTranslations(lang);
+const pageTitle = title === 'IceFlow' ? title : `${title} | IceFlow`;
+const path = Astro.url.pathname;
+const nav = [
+  { href: `/${lang}/`, label: t('nav.home') },
+  { href: `/${lang}/guide/`, label: t('nav.guide') },
+];
+const isActive = (href: string) =>
+  href === `/${lang}/` ? path === href : path.startsWith(href);
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#081018" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>{pageTitle}</title>
+    {description && <meta name="description" content={description} />}
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container bar">
+        <a href={`/${lang}/`} class="brand" aria-label="IceFlow">
+          <Image src={wordmark} alt="IceFlow" width={160} loading="eager" />
+        </a>
+        <nav class="nav">
+          {nav.map((item) => (
+            <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+              {item.label}
+            </a>
+          ))}
+        </nav>
+        <LanguageSwitcher lang={lang} />
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <span>© {new Date().getFullYear()} IceFlow. {t('footer.rights')}</span>
+        <span class="links">
+          <a href={`/${lang}/privacy/`}>{t('nav.privacy')}</a>
+          <a href={`/${lang}/terms/`}>{t('nav.terms')}</a>
+        </span>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--border);
+    background: var(--surface-2);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    min-height: 60px;
+    flex-wrap: wrap;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+  }
+
+  .brand :global(img) {
+    width: 140px;
+    height: auto;
+  }
+
+  .nav {
+    display: flex;
+    gap: 16px;
+    flex: 1;
+  }
+
+  .nav a {
+    color: var(--muted);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .nav a:hover,
+  .nav a[aria-current='page'] {
+    color: var(--text);
+  }
+
+  .site-footer {
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.85rem;
+    padding: 20px 0;
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: space-between;
+  }
+
+  .links {
+    display: flex;
+    gap: 16px;
+  }
+
+  .links a {
+    color: var(--muted);
+  }
+
+  @media (max-width: 560px) {
+    .bar {
+      padding-block: 10px;
+      gap: 10px 16px;
+    }
+
+    .nav {
+      order: 3;
+      flex-basis: 100%;
+    }
+
+    .brand {
+      flex: 1;
+    }
+  }
+</style>

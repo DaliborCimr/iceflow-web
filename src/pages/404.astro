@@ -1,0 +1,11 @@
+---
+import Base from '../layouts/Base.astro';
+import { defaultLocale } from '../i18n/ui';
+---
+
+<Base lang={defaultLocale} title="Page not found">
+  <section class="container prose">
+    <h1>Page not found</h1>
+    <p><a href={`/${defaultLocale}/`}>IceFlow</a></p>
+  </section>
+</Base>

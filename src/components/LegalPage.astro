@@ -1,0 +1,28 @@
+---
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { getLocalizedEntry } from '../i18n/content';
+import { useTranslations, type Locale } from '../i18n/ui';
+
+interface Props {
+  lang: Locale;
+  slug: 'privacy' | 'terms';
+}
+
+const { lang, slug } = Astro.props;
+const t = useTranslations(lang);
+const { entry, isFallback } = await getLocalizedEntry('legal', slug, lang);
+const { Content } = await render(entry);
+const updated = entry.data.updated.toLocaleDateString(lang, { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<Base lang={lang} title={entry.data.title}>
+  <article class="container prose">
+    {isFallback && <p class="notice">{t('legal.fallbackNotice')}</p>}
+    <h1 lang={isFallback ? 'en' : undefined}>{entry.data.title}</h1>
+    <p class="meta">{t('legal.lastUpdated')}: {updated}</p>
+    <div lang={isFallback ? 'en' : undefined}>
+      <Content />
+    </div>
+  </article>
+</Base>

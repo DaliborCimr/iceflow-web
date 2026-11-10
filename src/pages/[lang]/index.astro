@@ -1,0 +1,113 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import logo from '../../assets/branding/logo.png';
+import { localePaths, useTranslations, type Locale, type UiKey } from '../../i18n/ui';
+
+export const getStaticPaths = localePaths;
+
+const lang = Astro.params.lang as Locale;
+const t = useTranslations(lang);
+const features = ['club', 'team', 'match', 'transfers', 'juniors', 'leagues'] as const;
+---
+
+<Base lang={lang} title="IceFlow" description={t('home.tagline')}>
+  <section class="hero">
+    <div class="container hero-inner">
+      <Image src={logo} alt="IceFlow" width={320} class="hero-logo" loading="eager" />
+      <div>
+        <h1>{t('home.title')}</h1>
+        <p class="tagline">{t('home.tagline')}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="container features">
+    <h2>{t('home.featuresTitle')}</h2>
+    <ul class="grid">
+      {features.map((f) => (
+        <li class="card">
+          <h3>{t(`feature.${f}.title` as UiKey)}</h3>
+          <p>{t(`feature.${f}.text` as UiKey)}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    background: radial-gradient(ellipse at 30% 0%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 65%);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 280px) 1fr;
+    gap: 32px;
+    align-items: center;
+    padding-block: 40px;
+  }
+
+  .hero-inner :global(.hero-logo) {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  h1 {
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    line-height: 1.15;
+    margin: 0 0 12px;
+  }
+
+  .tagline {
+    color: var(--muted);
+    font-size: 1.1rem;
+    margin: 0;
+    max-width: 52ch;
+  }
+
+  .features {
+    padding-block: 40px 64px;
+  }
+
+  .grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+  }
+
+  .card h3 {
+    margin: 0 0 6px;
+    color: var(--gold);
+    font-size: 1.05rem;
+  }
+
+  .card p {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  @media (max-width: 640px) {
+    .hero-inner {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      text-align: center;
+      padding-block: 24px;
+    }
+
+    .hero-inner :global(.hero-logo) {
+      max-width: 200px;
+    }
+  }
+</style>

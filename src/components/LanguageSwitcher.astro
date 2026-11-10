@@ -1,0 +1,97 @@
+---
+import { languageNames, locales, useTranslations, type Locale } from '../i18n/ui';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+// Same page in another language: swap the leading /<lang>/ segment.
+const rest = Astro.url.pathname.replace(/^\/[^/]+/, '');
+const current = languageNames[lang];
+---
+
+<details class="lang">
+  <summary aria-label={t('nav.language')}>
+    <span aria-hidden="true">{current.flag}</span>
+    <span>{current.label}</span>
+  </summary>
+  <ul>
+    {locales.map((code) => (
+      <li>
+        <a
+          href={`/${code}${rest || '/'}`}
+          hreflang={code}
+          lang={code}
+          aria-current={code === lang ? 'true' : undefined}
+        >
+          <span aria-hidden="true">{languageNames[code].flag}</span>
+          {languageNames[code].label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</details>
+
+<script is:inline>
+  // Remember an explicit choice so "/" sends the visitor back to it.
+  document.querySelectorAll('.lang a[hreflang]').forEach((a) =>
+    a.addEventListener('click', () => {
+      try {
+        localStorage.setItem('iceflow-lang', a.getAttribute('hreflang'));
+      } catch {}
+    }),
+  );
+</script>
+
+<style>
+  .lang {
+    position: relative;
+  }
+
+  summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    padding: 6px 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    font-size: 0.9rem;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  ul {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 6px);
+    margin: 0;
+    padding: 6px;
+    list-style: none;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    min-width: 170px;
+    box-shadow: 0 12px 30px rgb(0 0 0 / 45%);
+  }
+
+  a {
+    display: flex;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  a:hover,
+  a[aria-current='true'] {
+    background: var(--accent-strong);
+  }
+</style>

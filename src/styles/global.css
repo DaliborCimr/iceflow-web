@@ -1,0 +1,91 @@
+/* Colours taken from the mobile app theme (iceflow_mobile lib/main.dart). */
+:root {
+  color-scheme: dark;
+  --bg: #081018;
+  --surface: #0a1620;
+  --surface-2: #071019;
+  --border: #203240;
+  --text: #eaf3fa;
+  --muted: #a5b2be;
+  --accent: #00a7e8;
+  --accent-strong: #10445a;
+  --gold: #e3a724;
+  --radius: 8px;
+  --max: 1080px;
+  --gutter: 16px;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+a {
+  color: var(--accent);
+}
+
+a:hover {
+  color: var(--text);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.prose {
+  max-width: 72ch;
+  padding-block: 32px 64px;
+}
+
+.prose h1 {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  line-height: 1.2;
+  margin-bottom: 0.25em;
+}
+
+.prose h2 {
+  margin-top: 2em;
+  font-size: 1.3rem;
+}
+
+.meta {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.notice {
+  border: 1px solid var(--gold);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--gold) 10%, transparent);
+  padding: 10px 14px;
+  margin: 16px 0;
+  font-size: 0.95rem;
+}

@@ -1,0 +1,30 @@
+---
+// Root: send the visitor to their saved or browser language, English otherwise.
+import { defaultLocale, locales } from '../i18n/ui';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>IceFlow</title>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <noscript><meta http-equiv="refresh" content={`0; url=/${defaultLocale}/`} /></noscript>
+    <script is:inline define:vars={{ locales, defaultLocale }}>
+      let pick = null;
+      try {
+        pick = localStorage.getItem('iceflow-lang');
+      } catch {}
+      if (!locales.includes(pick)) {
+        // Norwegian Bokmål/Nynorsk report as nb/nn.
+        const norm = (l) => (l.toLowerCase().split('-')[0].replace(/^n[bn]$/, 'no'));
+        pick = (navigator.languages || [navigator.language]).map(norm).find((l) => locales.includes(l));
+      }
+      location.replace(`/${pick || defaultLocale}/`);
+    </script>
+  </head>
+  <body style="background:#081018">
+    <a href={`/${defaultLocale}/`}>IceFlow</a>
+  </body>
+</html>
