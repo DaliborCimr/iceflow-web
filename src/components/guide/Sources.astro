@@ -1,0 +1,51 @@
+---
+// The sources a chapter is based on, shown right under it - so every claim about real
+// hockey can be traced to where it comes from. Content is a Markdown list of links.
+import Icon from '../Icon.astro';
+import { defaultLocale, type Locale } from '../../i18n/ui';
+
+const labels: Record<string, string> = { en: 'Sources for this section', cs: 'Zdroje k této části' };
+const lang = Astro.params.lang as Locale;
+const label = labels[lang] ?? labels[defaultLocale];
+---
+
+<aside class="sources" data-pagefind-ignore>
+  <p class="title"><Icon name="menu_book" size={16} />{label}</p>
+  <div class="body"><slot /></div>
+</aside>
+
+<style>
+  .sources {
+    margin: 0.6em 0 1.8em;
+    padding: 10px 14px;
+    border: 1px dashed var(--border);
+    border-radius: var(--radius);
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+
+  .title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0 0 4px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .body :global(ul) {
+    margin: 0;
+    padding-left: 1.2em;
+  }
+
+  .body :global(li + li) {
+    margin-top: 2px;
+  }
+
+  .body :global(p) {
+    margin: 0;
+  }
+</style>

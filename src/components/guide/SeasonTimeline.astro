@@ -1,71 +1,84 @@
 ---
-// The 21 game days of a season with the dates the app's rules fix: sponsor payments
-// (days 1, 8, 15), junior signing window (to day 7, ratings visible to day 14), the selling
-// deadline for expiring and retiring players (day 15), the group stage and the playoff.
+// The 21 game days of a season with the dates the game's rules and competition calendar fix
+// (iceflow-server season/simulation/CompetitionCalendar.kt): league group stage to day 19,
+// league playoff on days 20-21, Elite group rounds and knockout, sponsor payments, the junior
+// signing window and the day-15 selling deadline.
 import { defaultLocale, type Locale } from '../../i18n/ui';
 
 const labels = {
   en: {
     title: 'A season of 21 game days',
-    day: 'day',
-    group: 'Group stage - 44 league games',
-    qf: 'Quarterfinal',
-    final: 'Semifinal and final',
-    sponsors: 'Sponsor payments',
+    league: 'League',
+    group: 'Group stage - 44 games',
+    playoff: 'Playoff',
+    elite: 'Elite',
+    eliteGroup: 'group round',
+    eliteKo: 'knockout',
     juniors: 'Junior signing',
     juniorsSeen: 'Real ratings still visible',
-    selling: 'Last day to sell expiring and retiring players',
+    sponsors: 'Sponsor payments',
+    selling: 'Day 15: last day to sell players in their contract’s final season or retiring',
   },
   cs: {
     title: 'Sezóna o 21 herních dnech',
-    day: 'den',
-    group: 'Základní část - 44 ligových zápasů',
-    qf: 'Čtvrtfinále',
-    final: 'Semifinále a finále',
-    sponsors: 'Platby sponzorů',
+    league: 'Liga',
+    group: 'Základní část - 44 zápasů',
+    playoff: 'Play-off',
+    elite: 'Elite',
+    eliteGroup: 'kolo skupiny',
+    eliteKo: 'vyřazovací část',
     juniors: 'Podpis juniorů',
     juniorsSeen: 'Skutečné ratingy ještě vidět',
-    selling: 'Poslední den prodeje končících a odcházejících hráčů',
+    sponsors: 'Platby sponzorů',
+    selling: '15. den: poslední den prodeje hráčů v poslední sezóně smlouvy a před koncem kariéry',
   },
 };
 const lang = Astro.params.lang as Locale;
 const l = labels[lang as keyof typeof labels] ?? labels[defaultLocale as 'en'];
 
-// One column per day; x of the start of day d (1-based).
-const left = 20;
-const width = 600;
+const left = 70;
+const width = 560;
 const col = width / 21;
 const x = (d: number) => left + col * (d - 1);
+const cx = (d: number) => x(d) + col / 2;
 const days = Array.from({ length: 21 }, (_, i) => i + 1);
+const eliteGroup = [2, 4, 6, 9, 11, 13];
+const eliteKo = [15, 16, 18, 19];
 ---
 
 <figure class="chart">
-  <svg viewBox="0 0 640 250" role="img" aria-label={l.title}>
+  <svg viewBox="0 0 640 260" role="img" aria-label={l.title}>
     <title>{l.title}</title>
     {days.map((d) => (
-      <text class="axis mid" x={x(d) + col / 2} y="20">{d}</text>
+      <text class="axis mid" x={cx(d)} y="16">{d}</text>
     ))}
 
-    <rect class="group" x={x(1)} y="32" width={col * 19 - 2} height="30" rx="5" />
-    <text class="label" x={x(1) + 10} y="52">{l.group}</text>
-    <rect class="po" x={x(20)} y="32" width={col - 2} height="30" rx="5" />
-    <rect class="po final" x={x(21)} y="32" width={col - 2} height="30" rx="5" />
-    <text class="note end" x={x(22) - 2} y="80">{l.qf} · {l.final}</text>
+    <text class="row" x="0" y="44">{l.league}</text>
+    <rect class="group" x={x(1)} y="28" width={col * 19 - 2} height="26" rx="5" />
+    <text class="label" x={x(1) + 8} y="46">{l.group}</text>
+    <rect class="po" x={x(20)} y="28" width={col * 2 - 2} height="26" rx="5" />
+    <text class="label dark mid" x={x(20) + col} y="46">{l.playoff}</text>
 
-    <rect class="juniors" x={x(1)} y="98" width={col * 7 - 2} height="22" rx="5" />
-    <rect class="juniors seen" x={x(8)} y="98" width={col * 7 - 2} height="22" rx="5" />
-    <text class="label small" x={x(1) + 8} y="113">{l.juniors}</text>
-    <text class="label small" x={x(8) + 8} y="113">{l.juniorsSeen}</text>
+    <text class="row" x="0" y="84">{l.elite}</text>
+    <line class="track" x1={x(1)} x2={x(22)} y1="80" y2="80" />
+    {eliteGroup.map((d) => <circle class="eg" cx={cx(d)} cy="80" r="7" />)}
+    {eliteKo.map((d) => <rect class="ek" x={cx(d) - 7} y="73" width="14" height="14" rx="3" />)}
+    <circle class="eg" cx={x(1) + 6} cy="104" r="5" />
+    <text class="note" x={x(1) + 16} y="108">{l.eliteGroup}</text>
+    <rect class="ek" x={x(7)} y="99" width="10" height="10" rx="2" />
+    <text class="note" x={x(7) + 16} y="108">{l.eliteKo}</text>
 
-    {[1, 8, 15].map((d) => (
-      <circle class="sponsor" cx={x(d) + col / 2} cy="150" r="8" />
-    ))}
-    <text class="note" x={x(16) + 4} y="154">{l.sponsors}</text>
+    <rect class="juniors" x={x(1)} y="126" width={col * 7 - 2} height="22" rx="5" />
+    <rect class="juniors seen" x={x(8)} y="126" width={col * 7 - 2} height="22" rx="5" />
+    <text class="label small" x={x(1) + 6} y="141">{l.juniors}</text>
+    <text class="label small" x={x(8) + 6} y="141">{l.juniorsSeen}</text>
 
-    <line class="deadline" x1={x(16)} x2={x(16)} y1="172" y2="200" />
-    <text class="note end" x={x(16) - 8} y="194">{l.selling} →</text>
+    {[1, 8, 15].map((d) => <circle class="sponsor" cx={cx(d)} cy="176" r="7" />)}
+    <text class="note" x={cx(15) + 14} y="180">{l.sponsors}</text>
+
+    <line class="deadline" x1={x(16)} x2={x(16)} y1="196" y2="224" />
+    <text class="note" x="0" y="244">{l.selling}</text>
   </svg>
-  <figcaption>{l.day} 1 – 21</figcaption>
 </figure>
 
 <style>
@@ -74,7 +87,7 @@ const days = Array.from({ length: 21 }, (_, i) => i + 1);
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 14px 14px 8px;
+    padding: 14px;
   }
 
   svg {
@@ -86,6 +99,12 @@ const days = Array.from({ length: 21 }, (_, i) => i + 1);
   .axis {
     fill: var(--muted);
     font-size: 12px;
+  }
+
+  .row {
+    fill: var(--text);
+    font-size: 13px;
+    font-weight: 700;
   }
 
   .mid {
@@ -104,8 +123,17 @@ const days = Array.from({ length: 21 }, (_, i) => i + 1);
     fill: var(--gold);
   }
 
-  .po.final {
-    fill: color-mix(in srgb, var(--gold) 70%, white);
+  .track {
+    stroke: var(--border);
+    stroke-width: 2;
+  }
+
+  .eg {
+    fill: #b48cff;
+  }
+
+  .ek {
+    fill: #ff7a8a;
   }
 
   .juniors {
@@ -131,6 +159,10 @@ const days = Array.from({ length: 21 }, (_, i) => i + 1);
     font-weight: 700;
   }
 
+  .label.dark {
+    fill: #081018;
+  }
+
   .label.small {
     font-size: 11.5px;
   }
@@ -138,11 +170,5 @@ const days = Array.from({ length: 21 }, (_, i) => i + 1);
   .note {
     fill: var(--muted);
     font-size: 12px;
-  }
-
-  figcaption {
-    color: var(--muted);
-    font-size: 0.8rem;
-    text-align: right;
   }
 </style>

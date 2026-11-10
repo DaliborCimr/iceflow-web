@@ -173,12 +173,12 @@ notes:
     paragraphs:
       - >-
         Hráče, Flow ani Gold Pucks nelze koupit za peníze. Prémiová měna Stars se získává hraním -
-        za denní úkoly (8 denně, 168 za sezónu), sezónní úkoly (100 za sezónu), celoživotní
+        za denní úkoly (10 denně, až 210 za sezónu), sezónní úkoly (130 za sezónu), celoživotní
         achievementy (25 oblastí po 5 úrovních) a vstupy do Rapid ligy (1-5 hvězd, jedna reklama za
         vstup, nejvýše 10 denně).
       - >-
-        Za Stars nebo skutečné peníze lze získat kosmetické položky, například nový název, klubové
-        barvy nebo logo, a dva passy platné 21 dní. Ads Pass odstraní reklamy, ale denní limity
+        Za Stars lze získat nový název nebo klubové barvy; logo a dva passy platné 21 dní jdou
+        koupit za Stars i za skutečné peníze. Ads Pass odstraní reklamy, ale denní limity
         nemění. Sponsor Pass zvyšuje příjmy od sponzorů ve Flow i Gold Pucks o 20 %, což je skutečná
         ekonomická výhoda; obnovitelný příjem hvězd sám nestačí na to, aby byl aktivní každou
         sezónu. Ice Flow tedy není pay-to-win ve smyslu nákupu hráčů nebo síly, placení ale přináší

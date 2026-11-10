@@ -176,12 +176,12 @@ notes:
     paragraphs:
       - >-
         Players, Flow and Gold Pucks cannot be bought for money. The premium currency, Stars, is
-        earned in the game - through daily tasks (8 per day, 168 per season), season tasks (100 per
+        earned in the game - through daily tasks (10 per day, up to 210 per season), season tasks (130 per
         season), lifetime achievements (25 tracks with 5 levels each) and Rapid league entries
         (1-5 Stars each, one ad per entry, up to 10 per day).
       - >-
-        Stars, or real money, buy cosmetic items such as a new name, club colours or a logo, and two
-        passes valid for 21 days. The Ads Pass removes ads without changing any daily limits. The
+        Stars buy a new name or club colours; a logo and two passes valid for 21 days can be bought
+        with Stars or with real money. The Ads Pass removes ads without changing any daily limits. The
         Sponsor Pass increases sponsor income in Flow and Gold Pucks by 20 %, which is a real
         economic advantage; renewable Star income alone is not enough to keep it active every
         season. Ice Flow is therefore not pay-to-win in the sense of buying players or strength, but

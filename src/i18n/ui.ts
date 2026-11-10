@@ -46,6 +46,8 @@ const en = {
   'guide.title': 'Game guide',
   'guide.intro': 'How the game works behind the scenes - details the in-app help does not cover.',
   'guide.empty': 'Articles are on the way.',
+  'guide.basis':
+    'Game rules in this guide are taken from the in-app help and checked against the game server. Claims about real hockey link to their sources in the text.',
   'guide.onThisPage': 'On this page',
   'guide.prev': 'Previous',
   'guide.next': 'Next',
@@ -91,6 +93,8 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'guide.title': 'Průvodce hrou',
     'guide.intro': 'Jak hra funguje pod kapotou - podrobnosti, které nápověda v aplikaci nepokrývá.',
     'guide.empty': 'Články se připravují.',
+    'guide.basis':
+      'Herní pravidla v průvodci vycházejí z nápovědy v aplikaci a jsou ověřená proti hernímu serveru. Tvrzení o skutečném hokeji odkazují na své zdroje přímo v textu.',
     'guide.onThisPage': 'Na této stránce',
     'guide.prev': 'Předchozí',
     'guide.next': 'Další',
@@ -131,6 +135,8 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'guide.title': 'Spielanleitung',
     'guide.intro': 'Wie das Spiel hinter den Kulissen funktioniert - Details, die die Hilfe in der App nicht abdeckt.',
     'guide.empty': 'Artikel folgen in Kürze.',
+    'guide.basis':
+      'Die Spielregeln in dieser Anleitung stammen aus der Hilfe in der App und sind mit dem Spielserver abgeglichen. Aussagen über echtes Eishockey verlinken ihre Quellen direkt im Text.',
     'guide.onThisPage': 'Auf dieser Seite',
     'guide.prev': 'Zurück',
     'guide.next': 'Weiter',
@@ -171,6 +177,8 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'guide.title': 'Guide du jeu',
     'guide.intro': 'Comment le jeu fonctionne en coulisses - des détails que l’aide de l’application ne couvre pas.',
     'guide.empty': 'Les articles arrivent bientôt.',
+    'guide.basis':
+      'Les règles du jeu de ce guide proviennent de l’aide de l’application et sont vérifiées sur le serveur du jeu. Les affirmations sur le vrai hockey renvoient à leurs sources dans le texte.',
     'guide.onThisPage': 'Sur cette page',
     'guide.prev': 'Précédent',
     'guide.next': 'Suivant',
@@ -211,6 +219,8 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'guide.title': 'Guida al gioco',
     'guide.intro': 'Come funziona il gioco dietro le quinte - dettagli che l’aiuto nell’app non copre.',
     'guide.empty': 'Gli articoli sono in arrivo.',
+    'guide.basis':
+      'Le regole di gioco di questa guida provengono dall’aiuto nell’app e sono verificate sul server di gioco. Le affermazioni sull’hockey reale rimandano alle fonti nel testo.',
     'guide.onThisPage': 'In questa pagina',
     'guide.prev': 'Precedente',
     'guide.next': 'Successivo',
@@ -251,6 +261,8 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'guide.title': 'Spelguide',
     'guide.intro': 'Hur spelet fungerar bakom kulisserna - detaljer som hjälpen i appen inte täcker.',
     'guide.empty': 'Artiklar är på väg.',
+    'guide.basis':
+      'Spelreglerna i guiden kommer från hjälpen i appen och är kontrollerade mot spelservern. Påståenden om riktig hockey länkar till sina källor i texten.',
     'guide.onThisPage': 'På den här sidan',
     'guide.prev': 'Föregående',
     'guide.next': 'Nästa',
@@ -291,6 +303,8 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'guide.title': 'Peliopas',
     'guide.intro': 'Miten peli toimii kulissien takana - yksityiskohtia, joita sovelluksen ohje ei kata.',
     'guide.empty': 'Artikkelit ovat tulossa.',
+    'guide.basis':
+      'Oppaan pelisäännöt perustuvat sovelluksen ohjeeseen ja on tarkistettu pelipalvelimelta. Väitteet oikeasta jääkiekosta linkittävät lähteisiinsä tekstissä.',
     'guide.onThisPage': 'Tällä sivulla',
     'guide.prev': 'Edellinen',
     'guide.next': 'Seuraava',
@@ -331,6 +345,8 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'guide.title': 'Spillguide',
     'guide.intro': 'Hvordan spillet fungerer bak kulissene - detaljer som hjelpen i appen ikke dekker.',
     'guide.empty': 'Artikler kommer snart.',
+    'guide.basis':
+      'Spillreglene i guiden kommer fra hjelpen i appen og er kontrollert mot spillserveren. Påstander om ekte hockey lenker til kildene sine i teksten.',
     'guide.onThisPage': 'På denne siden',
     'guide.prev': 'Forrige',
     'guide.next': 'Neste',
@@ -371,6 +387,8 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'guide.title': 'Spilguide',
     'guide.intro': 'Hvordan spillet fungerer bag kulisserne - detaljer, som hjælpen i appen ikke dækker.',
     'guide.empty': 'Artikler er på vej.',
+    'guide.basis':
+      'Spillets regler i guiden kommer fra hjælpen i appen og er kontrolleret mod spilserveren. Påstande om rigtig hockey linker til deres kilder i teksten.',
     'guide.onThisPage': 'På denne side',
     'guide.prev': 'Forrige',
     'guide.next': 'Næste',
@@ -411,6 +429,8 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'guide.title': 'Руководство',
     'guide.intro': 'Как игра устроена изнутри - подробности, которых нет в справке приложения.',
     'guide.empty': 'Статьи скоро появятся.',
+    'guide.basis':
+      'Правила игры в руководстве взяты из справки приложения и сверены с игровым сервером. Утверждения о реальном хоккее ссылаются на источники прямо в тексте.',
     'guide.onThisPage': 'На этой странице',
     'guide.prev': 'Назад',
     'guide.next': 'Далее',
