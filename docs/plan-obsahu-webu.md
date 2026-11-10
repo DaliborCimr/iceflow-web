@@ -58,11 +58,24 @@ Zdrojem je stav repozitářů `iceflow-server`, `iceflow_mobile`, `hockey_gm` a
 
 ## 3. Obsah webu
 
-- [ ] **Screenshoty z aplikace.** Kluby nesmí pocházet z generátoru: připravit vlastní sadu
-      s pevnými názvy (IceFlow Tigers, IceFlow Wolves ...) úpravou dev seedu nebo přejmenováním klubů
-      v dev databázi. Postup: lokální server s rozjetou sezónou (`iceflow.dev.presimulate-to`) →
-      aplikace na emulátoru `Pixel_8` / `Pixel_9_Pro_XL` na šířku → `adb exec-out screencap -p` →
-      oříznutí a WebP do `src/assets/screens/<lang>/`. EN a CS; ostatní jazyky použijí EN.
+- [ ] **Screenshoty z aplikace - jen tam, kde text sám nestačí.** Kluby nesmí pocházet z generátoru
+      (vlastní sada s pevnými názvy IceFlow Tigers, IceFlow Wolves ... přes dev seed). Pořadí podle
+      přínosu:
+      1. **Živý zápas** (článek Zápas, úvodní stránka): hráči na ledě s energií a průběžné
+         statistiky - hlavní odlišnost hry, textem se popíše nejhůř.
+      2. **Gólová animace** jako krátké video nebo GIF (článek Zápas, Příběh).
+      3. **Karta taktiky** se seznamy hodí se / neutrální / nehodí se (článek Typy hráčů u tabulky
+         vhodnosti).
+      4. **Trénink s barvami vhodnosti** (článek Trénink) - barvy modrá / zelená / oranžová / červená
+         se slovy vysvětlují špatně.
+      5. **Karta hráče** se šipkami formy a předpokladů jako rozsah dvou šipek (článek Hráči).
+      6. **Junior s rozsahy a TRT** (článek Junioři).
+      7. **Příprava na zápas** s dílky důležitosti zápasu (článek Zápas).
+      8. Úvodní stránka: 2-3 záběry (domovská obrazovka, živý zápas, tým).
+      Nepotřebují je: Pravidla, Kalibrace, Zdroje, Sezóna (má časovou osu), Přestupy, Klub, Úkoly.
+      Postup: lokální server s rozjetou sezónou (`iceflow.dev.presimulate-to`) → emulátor `Pixel_8` /
+      `Pixel_9_Pro_XL` na šířku → `adb exec-out screencap -p` → oříznutí a WebP do
+      `src/assets/screens/<lang>/`. EN a CS; ostatní jazyky použijí EN.
 - [ ] **Překlady do zbylých 8 jazyků** (de, fr, it, sv, fi, no, da, ru): průvodce, Příběh, právní
       stránky. Do té doby se zobrazuje angličtina s upozorněním. Názvy typů hráčů zůstávají anglicky.
 - [ ] **Editor animací** - samostatný článek „Jak vznikají záběry zápasu“ (`iceflow_animation_editor`:
@@ -75,9 +88,8 @@ Zdrojem je stav repozitářů `iceflow-server`, `iceflow_mobile`, `hockey_gm` a
 
 ## 4. K ověření
 
-- [ ] **Čísla článků pravidel NHL.** PDF pravidel NHL je přes 10 MB a nešlo stáhnout; web zatím
-      odkazuje na pravidla NHL jako celek. Ověřit čísla (prodloužení 3 na 3, souběžné tresty 4 na 4,
-      odložené vyloučení, minimum tří hráčů, gól v přesilovce, bitka) a doplnit odkazy.
+- [x] **Čísla článků pravidel NHL** - doplněná z NHL Official Rules 2026-27 (84.1, 84.3, 84.4,
+      84.5, 15.1, 16.2, 19.1, 26.1, 46.14, 20).
 - [ ] **Rapid liga - průběh zápasů.** Nápověda v aplikaci: „všech šest zápasů se odehraje najednou“.
       Komentář v `RapidLeagueService.ENTRY_CUTOFF`: „čtyři zápasy živě jeden po druhém“. Zjistit, co
       platí, a sjednotit web, aplikaci i komentář.
@@ -93,11 +105,11 @@ uvedené v článku Pravidla.
 
 - [ ] Nápověda k achievementům (`rules.achievements.sport.body`) mluví o „three cups“ - ve hře nejsou
       poháry.
-- [ ] Sponzor se jmenuje jednou „Účast v zápase“ (`club.sponsor.*.MATCH_PRESENCE.title`) a jinde
-      „Přítomnost v zápase“ (`rules.sponsor.match.title`) - sjednotit.
-- [ ] Nápověda k Elite (`rules.elite.schedule.body`) říká „two team training sessions instead“ a že
-      Elite „nahrazuje ligové kolo“ - upravit podle skutečnosti (týmový trénink navíc, Elite je
-      součást kalendáře) a nezmiňovat „odpolední“ bloky.
+- [x] Název sponzora sjednocený (cs „Účast v zápase“, no a da „Kamptilstedeværelse“, ru „Присутствие
+      на матчах“) - upraveno v `iceflow_mobile`, necommitnuto.
+- [x] Nápověda k Elite (`rules.elite.schedule.body`) přepsaná ve všech 10 jazycích: Elite je součást
+      kalendáře s vlastními bloky, kdo nehraje, dostane týmový trénink navíc - upraveno
+      v `iceflow_mobile`, necommitnuto.
 - [ ] Nepoužívaný klíč `juniors.visibleOvr` („OVR range“) - smazat, pokud se nikde nezobrazuje.
 - [ ] `docs/challenges-store.md` v serveru uvádí zastaralé odměny (8 denně, 100 za sezónu); podle
       `ChallengeTaskCatalog.kt` je to 10 denně a 130 za sezónní úkoly.
