@@ -32,6 +32,29 @@ const textLang = isFallback ? 'en' : undefined;
       </div>
     </section>
 
+    <section class="container inner prose-block">
+      <h2>{d.storyTitle}</h2>
+      <Content />
+    </section>
+
+    <section class="container areas-wrap">
+      <div class="inner">
+        <h2>{d.areasTitle}</h2>
+        <p class="section-intro">{d.areasIntro}</p>
+      </div>
+      <ul class="areas">
+        {d.areas.map((a) => (
+          <li>
+            <h3>{a.title}</h3>
+            <p>{a.text}</p>
+            <ul class="facts">
+              {a.facts.map((f) => <li>{f}</li>)}
+            </ul>
+          </li>
+        ))}
+      </ul>
+    </section>
+
     <section class="container inner">
       <h2>{d.timelineTitle}</h2>
       <ol class="timeline">
@@ -52,8 +75,12 @@ const textLang = isFallback ? 'en' : undefined;
     </section>
 
     <section class="container inner closing">
-      <h2>{d.closingTitle}</h2>
-      <Content />
+      {d.notes.map((n) => (
+        <>
+          <h2>{n.title}</h2>
+          {n.paragraphs.map((p) => <p>{p}</p>)}
+        </>
+      ))}
     </section>
   </div>
 </Base>
@@ -205,12 +232,71 @@ const textLang = isFallback ? 'en' : undefined;
     color: var(--muted);
   }
 
-  .closing {
-    padding-bottom: 64px;
+  .prose-block :global(p),
+  .closing p {
+    font-size: 1.05rem;
+    margin: 0 0 1em;
   }
 
-  .closing :global(p) {
+  .prose-block :global(h3) {
+    font-size: 1.1rem;
+    margin: 1.6em 0 0.4em;
+  }
+
+  .section-intro {
+    color: var(--muted);
+    margin: -8px 0 20px;
+  }
+
+  .areas-wrap {
+    max-width: 1080px;
+  }
+
+  .areas-wrap .inner {
+    margin-inline: auto;
+    padding: 0;
+  }
+
+  .areas {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+  }
+
+  .areas > li {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+  }
+
+  .areas h3 {
+    margin: 0 0 6px;
+    color: var(--gold);
     font-size: 1.05rem;
+  }
+
+  .areas p {
+    margin: 0 0 10px;
+    color: var(--text);
+  }
+
+  .facts {
+    margin: 0;
+    padding-left: 18px;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .facts li + li {
+    margin-top: 4px;
+  }
+
+  .closing {
+    padding-bottom: 64px;
   }
 
   @media (max-width: 640px) {

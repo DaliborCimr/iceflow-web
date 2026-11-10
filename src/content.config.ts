@@ -22,8 +22,8 @@ const guide = defineCollection({
   }),
 });
 
-// The project story: lead, stats and milestones in frontmatter so the page can lay
-// them out; the Markdown body is the closing section under the timeline.
+// The project story. The Markdown body is the narrative; everything the page lays out
+// as cards (stats, game areas, timeline, closing notes) lives in frontmatter.
 const story = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/story' }),
   schema: z.object({
@@ -31,6 +31,10 @@ const story = defineCollection({
     description: z.string(),
     lead: z.string(),
     stats: z.array(z.object({ value: z.string(), label: z.string() })),
+    storyTitle: z.string(),
+    areasTitle: z.string(),
+    areasIntro: z.string(),
+    areas: z.array(z.object({ title: z.string(), text: z.string(), facts: z.array(z.string()) })),
     timelineTitle: z.string(),
     milestones: z.array(
       z.object({
@@ -41,7 +45,7 @@ const story = defineCollection({
         text: z.string(),
       }),
     ),
-    closingTitle: z.string(),
+    notes: z.array(z.object({ title: z.string(), paragraphs: z.array(z.string()) })),
   }),
 });
 

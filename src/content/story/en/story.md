@@ -1,114 +1,231 @@
 ---
 title: The story of IceFlow
-description: How one person built a deep online hockey manager in seven months - almost entirely through conversations with AI.
+description: How IceFlow, an online ice hockey manager for mobile, was designed and built by one developer working with AI between April and November 2026.
 lead: >-
-  IceFlow is a solo project. Apart from some Photoshop work on the graphics, about 99 % of it
-  was created through conversations with artificial intelligence - most of them on walks with a
-  baby stroller. It took no free time away, and still a complete product came out of it. The point
-  was to show what one person with the right knowledge can build today.
+  IceFlow is an online ice hockey management game for mobile, developed by a single person.
+  Except for part of the graphics, which was finished in Photoshop, roughly 99 % of the work - game
+  design, server, mobile app, tooling and texts - was produced in conversation with AI, largely
+  during walks with a baby stroller. The project is meant as a practical test of how far one
+  person with the relevant expertise can take a complex product with today's AI.
 stats:
   - value: '1'
     label: developer
   - value: '7'
-    label: months, April to November 2026
+    label: months of development, April - November 2026
   - value: '4'
-    label: repositories - engine, server, app, animation editor
+    label: codebases - engine prototype, server, mobile app, animation editor
   - value: '1,700+'
     label: commits
   - value: '~256,000'
     label: lines of code
   - value: '10'
-    label: languages
-timelineTitle: How the game grew
+    label: languages localised from the start
+storyTitle: How it was built
+areasTitle: What the game contains
+areasIntro: >-
+  An overview of the main systems as of November 2026. Numbers are the current game settings and
+  may change during balancing.
+areas:
+  - title: Live coaching
+    text: >-
+      Matches are simulated on the server and streamed to the app as they are played. The coach can
+      intervene at any point, not only between periods.
+    facts:
+      - Four full lines, a starting and backup goalie, two power-play and two penalty-kill units
+      - 6 offensive and 6 defensive tactics plus 5 risk levels, set per line
+      - Energy drains during a shift and recovers on the bench; accumulated fatigue limits starting energy
+      - Line changes, line mixing, goalie pull and special teams can be changed during play
+      - Delayed penalties, 3-on-3 overtime and empty net are modelled as real game states
+      - Match state is pushed from the server every second over SSE
+  - title: Match presentation
+    text: >-
+      Goals and selected chances are shown as animated highlights derived from the actual match
+      events. They are not a physical replay, but they keep the game context.
+    facts:
+      - All goals plus additional chances, spread evenly through the match
+      - Animation variant chosen by manpower situation (5v5, 6v5 empty net, 5v3 power play and others)
+      - Variants for goals with zero, one or two assists
+      - Clips are authored in a dedicated animation editor built for the project
+  - title: Players as long-term systems
+    text: >-
+      A player's value is not a single overall rating. Several layers develop at different rates
+      over a career, so two players with the same overall can differ substantially.
+    facts:
+      - Prospects enter at 17; their overall and potential are shown as ranges that scouting narrows
+      - Development from 18 through team and individual training, with lower gains on the farm team
+      - Experience stabilises performance and energy management; form reflects roughly the last 10-20 games
+      - Mentality grows with exposure to important matches; discipline affects penalties and fights
+      - Injury resistance declines with age and after serious injuries
+      - Veterans play more steadily but lose speed and stamina until they retire
+  - title: Club management
+    text: >-
+      Training, farm team, contracts, transfer market, facilities and finances are connected, so a
+      decision in one area has consequences in the others.
+    facts:
+      - The farm team plays its own competition alongside the first team
+      - Contracts up to 5 seasons; salary depends on rating, age and expected development, plus a signing bonus
+      - Transfer market with asking prices of 80-110 %, an 8-minute auction after the first bid and a 90-second soft close
+      - Two currencies - Flow for running the club, Gold Pucks for the market, scouting and juniors
+      - Two sponsor contracts with different risk profiles
+      - Arena and staff facilities (coaching, medical, scouting, front office, player development) with condition and repairs
+  - title: Season and competitions
+    text: >-
+      A season lasts 21 real days. The calendar is short, but every block of the day carries
+      decisions.
+    facts:
+      - 63 blocks per season - 21 days, three parts of each day
+      - 12-team leagues, everyone plays everyone four times - 44 league games
+      - Playoffs - quarter-finals to two wins, semi-final and final as single games
+      - Elite cup - 24 teams, 6 Swiss-system rounds, top 16 to a knockout stage, on the same calendar as the league
+      - Rapid league - 4 teams, round robin, played instantly, with no fatigue, injuries or effect on league statistics
+      - Match importance comes from the real table situation and can differ for each team
+  - title: Simulation calibration
+    text: >-
+      The match engine is calibrated against long-term real-world hockey averages and checked over
+      long simulated runs.
+    facts:
+      - Targets per team and game - about 29 shots on goal, 3.1 goals, 89.7 % save percentage, 2.7 penalties
+      - Micro tests for the overall curve, goalie impact, risk spread, crowd, form and fatigue
+      - 15-season runs check that development, mentality and discipline do not drift
+      - The same match is replayed under the same conditions from stored snapshots
+timelineTitle: Timeline
 milestones:
   - date: April 2026
     phase: idea
-    phaseLabel: Idea
-    title: Just talking to AI
+    phaseLabel: Concept
+    title: Concept in conversation
     text: >-
-      No code yet. Walks with the stroller turned into long conversations with AI about what a
-      mobile hockey manager should be: live coaching, players who develop over a career, a
-      persistent online world and a fair economy.
+      Design work starts without code: what a mobile hockey manager should offer, how live coaching
+      and long-term player development should work, and how the economy should stay balanced.
   - date: 27 April 2026
     phase: engine
-    phaseLabel: Match engine
+    phaseLabel: Engine prototype
     title: First match engine prototype
     text: >-
-      A Python prototype simulates a hockey game period by period: shifts, line changes, zone
-      play and goals. It becomes the lab where the rules of the game are tuned.
+      A Python prototype simulates matches period by period - shifts, line changes, zone play and
+      goals. It serves as the environment for tuning the game rules.
   - date: May 2026
     phase: engine
-    phaseLabel: Match engine
-    title: Depth in the simulation
+    phaseLabel: Engine prototype
+    title: Simulation depth
     text: >-
-      Advanced statistics, goalies, score-state effects and match form. The engine is refactored
-      and calibrated until the numbers start to look like real hockey.
+      Advanced statistics, goalie model, score-state effects and match form. The engine is
+      refactored and calibrated against real-world numbers.
   - date: Early June 2026
     phase: engine
-    phaseLabel: Match engine
-    title: General manager and economy
+    phaseLabel: Engine prototype
+    title: Management and economy model
     text: >-
-      The prototype grows a GM module: salaries, facility maintenance, match income, fatigue and
-      injuries, with a cash economy that has to hold up over many seasons.
+      The prototype gains a management module - salaries, facility maintenance, match income,
+      fatigue and injuries - and an economy tested over many seasons.
   - date: 10 June 2026
     phase: server
     phaseLabel: Server
-    title: The online server is born
+    title: Game server
     text: >-
-      The real game server starts in Kotlin and Quarkus with PostgreSQL: club generator, training
-      progression and, four days later, a full simulated league season.
+      Development of the production server starts in Kotlin and Quarkus with PostgreSQL - club
+      generator, training progression and, within four days, a fully simulated league season.
   - date: Late June 2026
     phase: mobile
     phaseLabel: Mobile app
-    title: The mobile app and the transfer market
+    title: Mobile app and transfer market
     text: >-
-      The Flutter app starts on 24 June, with translations into other languages just two days
-      later. On the server: junior scouting, the transfer market, Redis, facilities, and team
-      lines and tactics.
+      The Flutter app starts on 24 June and is localised two days later. The server adds junior
+      scouting, the transfer market, Redis, facilities, and lines and tactics.
   - date: July 2026
     phase: server
     phaseLabel: Server
-    title: The busiest month
+    title: Core systems
     text: >-
-      Around 600 commits across server and app. Playoffs, a real-time market pushed over SSE,
-      sponsors, nationalities, club logos and kit colours, the Elite cup, the arena, bot clubs and
-      the Python match form ported into the server engine.
+      The most intensive month, with around 600 commits across server and app - playoffs, a
+      real-time market over SSE, sponsors, nationalities, club logos and kit colours, the Elite cup,
+      the arena, bot clubs, and the prototype's match form ported into the server engine.
   - date: August 2026
     phase: animation
     phaseLabel: Animation
-    title: Live match and animations
+    title: Live match and animation editor
     text: >-
-      A live-match preview mode appears, followed by in-match changes to lineups, tactics and the
-      goalie. On 24 August a separate animation editor is born, and its goal celebrations land in
-      the app the same day.
+      A live-match mode with in-game changes to lineups, tactics and goalies. On 24 August a
+      separate animation editor is created; its goal animations are integrated into the app the
+      same day.
   - date: September 2026
     phase: server
     phaseLabel: Server
-    title: Making it hold together online
+    title: Online stability
     text: >-
-      One shared server clock, no club changes while its match is on the ice, a bot runner for
-      load, deadlock fixes, faster queries and the farm competition in the app.
+      A single authoritative server clock, locking clubs during their matches, load testing with a
+      bot runner, deadlock fixes, query optimisation, and the farm competition in the app.
   - date: October 2026
     phase: engine
-    phaseLabel: Match engine
-    title: Calibration, tutorial and fair monetisation
+    phaseLabel: Engine and economy
+    title: Calibration, onboarding and monetisation
     text: >-
-      The engine is recalibrated against NHL numbers and tactics follow a sourced charter. The
-      tutorial and registration arrive, then the Stars currency, daily and season tasks, the Rapid
-      league, the star store and 25 lifetime achievements.
+      Engine recalibration against NHL data and a documented tactics model. Registration and a
+      guided tutorial, then the Stars currency, daily and season tasks, the Rapid league, the store
+      and 25 lifetime achievements.
   - date: Early November 2026
     phase: launch
-    phaseLabel: Launch prep
-    title: Getting ready for launch
+    phaseLabel: Launch preparation
+    title: Preparing for launch
     text: >-
-      67 new live-match animations, player mentality, discipline and form, match importance from
-      the real table, Sign in with Google, a market benchmark against competitors, push
-      notifications - and this website.
-closingTitle: Fair by design
+      67 new live-match animations, mentality, discipline and form, match importance from the
+      table, Sign in with Google, a competitive market benchmark, push notifications and this
+      website.
+notes:
+  - title: Business model
+    paragraphs:
+      - >-
+        Players, Flow and Gold Pucks cannot be bought for money. The premium currency, Stars, is
+        earned in the game - through daily tasks (8 per day, 168 per season), season tasks (100 per
+        season), lifetime achievements (25 tracks with 5 levels each) and Rapid league entries
+        (1-5 Stars each, one ad per entry, up to 10 per day).
+      - >-
+        Stars, or real money, buy cosmetic items such as a new name, club colours or a logo, and two
+        passes valid for 21 days. The Ads Pass removes ads without changing any daily limits. The
+        Sponsor Pass increases sponsor income in Flow and Gold Pucks by 20 %, which is a real
+        economic advantage; renewable Star income alone is not enough to keep it active every
+        season. IceFlow is therefore not pay-to-win in the sense of buying players or strength, but
+        paying does give a moderate long-term economic benefit.
+      - >-
+        Because the game is developed by one person, its running costs are low, and it does not
+        need aggressive monetisation to be sustainable.
+  - title: Current status
+    paragraphs:
+      - >-
+        The technical foundation is ready for a closed or soft launch - Google sign-in, load testing
+        with 288 bot clubs, a server-authoritative live match and deterministic match replays. What
+        is still missing is evidence from real operation - reconnects, crash reports, retention and
+        how the economy behaves with real players. The next phase is therefore a soft launch,
+        telemetry and balancing rather than new features.
 ---
 
-IceFlow is deliberately designed **not to be hard pay-to-win**. Players and competitive
-currencies cannot be bought directly, and premium items can also be earned in the game.
+The idea for IceFlow started in April 2026, before any code was written. The first weeks were
+spent in conversation with AI, defining what the game should be: a mobile hockey manager where
+decisions continue during the match, players develop over whole careers, and the online world
+keeps running between sessions. Most of these conversations happened on walks with a baby
+stroller - time that would otherwise not have been used for development.
 
-That is possible because there is no big team to pay. A game made by one person does not have
-to squeeze its players - it only needs to be good enough that people enjoy coming back to it.
+The roles were split clearly from the start. The author acted as product owner and architect,
+deciding on game design, priorities and trade-offs, and reviewing results. AI wrote the
+implementation, tests, calibration experiments and documentation. A typical iteration was a
+written specification, an implementation, an automated test run and an evaluation of the results
+against the intended behaviour.
+
+### From prototype to online game
+
+The first working code, at the end of April, was a match engine prototype in Python. It served as
+a laboratory: shifts, line changes, zone play, goalies, form and economy were modelled and
+calibrated there before anything went into the real game. In June the production server was
+started in Kotlin with Quarkus, PostgreSQL and Redis, and two weeks later the mobile app in
+Flutter. Proven models from the prototype were then ported into the server engine.
+
+When the live match needed visual highlights, a separate animation editor was written in Python
+in August. The app uses its clips directly and picks a variant to match each event - the manpower
+situation and the number of assists.
+
+### Quality and verification
+
+With one developer there is no QA team, so verification is built into the project itself. The
+server has around 310 automated tests, the match engine is checked by calibration runs over
+thousands of matches and by multi-season simulations, and bot clubs fill the leagues and generate
+load. The goal is that every change can be verified objectively, not only by playing.
