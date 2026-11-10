@@ -1,0 +1,149 @@
+---
+title: Player types
+description: The thirteen player types, where they come from, what each is good at and which tactics suit them.
+group: ice
+order: 25
+icon: category
+---
+
+Every player in Ice Flow has a type. It is not a label on top of the attributes - it shapes them,
+decides which tactics a player suits and which attributes grow faster in training. This page explains
+where the types come from and what each one means.
+
+## Where the types come from
+
+The skater types are based on the player profiles that coaches and scouts use, as described by
+Identity Shift Hockey in *The 14 Hockey Player Archetypes* (see [Sources](../sources/)). Ice Flow uses
+ten of them - six for forwards and four for defensemen, two of the defensive profiles merged into one.
+The names are kept in English in every language, as in the app.
+
+<Callout type="note" title="A starting point, not a formula">
+  The article defines what each type of player does on the ice. How strongly that shows in the
+  game - in attributes, tactics and training - is Ice Flow's own design, tuned by calibration.
+</Callout>
+
+## Forwards
+
+<Rules>
+  <Rule icon="sports_hockey" title="Sniper">
+    Gets open and shoots first whenever he can. **Strong:** shooting, positioning, puck control.
+    **Weaker:** body checking, blocking. More technique than physique. The rarest forward type, as in
+    the source.
+  </Rule>
+  <Rule icon="sports_hockey" title="Playmaker">
+    Creates through passing and keeps the puck. **Strong:** passing, puck control, decisions.
+    **Weaker:** stick and body checking. More technique than physique.
+  </Rule>
+  <Rule icon="sports_hockey" title="Power forward">
+    Drives the net, protects the puck down low and plays physically. **Strong:** body checking,
+    shooting, positioning. **Weaker:** coverage, blocking. More physique than technique.
+  </Rule>
+  <Rule icon="sports_hockey" title="Two-way">
+    Plays a low-risk game at both ends, wins the puck back and keeps it. **Strong:** decisions,
+    positioning, puck control. **Weaker:** body checking, blocking.
+  </Rule>
+  <Rule icon="sports_hockey" title="Defensive">
+    His first job is not to get scored on; he plays it safe and shadows the opponent's best players.
+    **Strong:** decisions, coverage, blocking. **Weaker:** passing, skating.
+  </Rule>
+  <Rule icon="sports_hockey" title="Grinder">
+    Simple, reliable plays and physical pressure on defensemen down low. **Strong:** body checking,
+    stick checking, positioning. **Weaker:** coverage, decisions. More physique than technique.
+  </Rule>
+</Rules>
+
+## Defensemen
+
+<Rules>
+  <Rule icon="shield" title="Shutdown">
+    Takeaways, hits and puck recoveries; plays deep in his own zone and shuts down top players.
+    **Strong:** coverage, blocking, stick checking. **Weaker:** positioning, shooting. More physique
+    than technique.
+  </Rule>
+  <Rule icon="shield" title="Disruptor">
+    Takes more risks to create turnovers - pressure on the puck, closed passing lanes, denied
+    entries. **Strong:** stick checking, body checking, skating. **Weaker:** passing, shooting.
+  </Rule>
+  <Rule icon="shield" title="Puck-moving">
+    Pass first: makes the first breakout pass and starts the attack. **Strong:** decisions, passing,
+    skating. **Weaker:** body checking, shooting.
+  </Rule>
+  <Rule icon="shield" title="Offensive">
+    Shoots, joins the rush and acts as a fourth forward. **Strong:** shooting, puck control, passing.
+    **Weaker:** blocking, body checking. More technique than physique.
+  </Rule>
+</Rules>
+
+## Goalies
+
+Goalie types follow the goalie's own technical attributes.
+
+<Rules>
+  <Rule icon="sports_hockey" title="Butterfly">
+    **Strong:** positioning, puck tracking, blocker. **Weaker:** glove, skating.
+  </Rule>
+  <Rule icon="sports_hockey" title="Hybrid">
+    **Strong:** skating, reflexes, rebound control. **Weaker:** decisions, blocker. The most common
+    goalie type.
+  </Rule>
+  <Rule icon="sports_hockey" title="Athletic">
+    **Strong:** reflexes, puck tracking, glove. **Weaker:** blocker, positioning.
+  </Rule>
+</Rules>
+
+## What the type changes
+
+<Rules>
+  <Rule icon="tune" title="Attributes">
+    The attributes a type is built on sit above the player's level, the rest below. Two players of
+    the same level but different types are good at different things.
+  </Rule>
+  <Rule icon="palette" title="Training">
+    Attributes below the type's level train faster, those far above it barely move - the fit colours
+    in training show this. See [Training](../training/).
+  </Rule>
+  <Rule icon="route" title="Tactics">
+    Each tactic suits some types, leaves most as they are and does not suit a few.
+  </Rule>
+</Rules>
+
+## Which tactics suit which types
+
+These are the same three groups the app shows under every tactic.
+
+### Attack tactics
+
+<TacticFitTable side="attack" />
+
+### Defense tactics
+
+<TacticFitTable side="defense" />
+
+### How the table was made
+
+Every one of the 120 combinations of tactic and type was audited on its own. For each, the audit
+asked one question: *can this type of player do the job this system gives him?* The answer needed two
+documented pieces - what the system asks of the player, from coaching materials and analyses, and
+what defines the type, from the player profiles - and the reasoning that joins them.
+
+<Rules>
+  <Rule icon="check_circle" title="Suits">
+    The system's main job overlaps with what defines the type, or the type has a specific, documented
+    advantage in it.
+  </Rule>
+  <Rule icon="radio_button_unchecked" title="Neither">
+    The type can do the job like any player, or the evidence was not clear enough. Unclear cases get
+    no bonus and no penalty.
+  </Rule>
+  <Rule icon="cancel" title="Does not suit">
+    There is a concrete conflict between the system and what defines the type - for example a
+    dump-and-chase game takes the puck away from a playmaker.
+  </Rule>
+</Rules>
+
+<Callout type="note" title="Balance rules">
+  No tactic is unsuitable for more than three types. Fit is counted against an average player, so a
+  typical line is equal in every tactic and no tactic is best on its own - one unsuited player does
+  not break a system, but a line built for it gains an edge. A cell only changes with new evidence
+  about the player's role in the system.
+</Callout>

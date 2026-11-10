@@ -79,37 +79,40 @@ almost every goal is set up, short-handed goals are often a solo effort.
 
 ## When one team is stronger
 
-The stronger team should win more often, but not always. The table shows how the result changes as
-the gap in team strength grows. The gap is described in words because the underlying numbers are the
-engine's internal scale.
+The stronger team should win more often, but not always. In these matches **every attribute of every
+player on one team, goalies included, is higher by the given number of points** - on the same scale
+the app shows - and everything else is equal.
 
-| Stronger team | Wins | Goals for | Goals against | Shots for | Shots against | Weaker goalie's saves |
+<StrengthChart />
+
+| Attributes higher by | Wins | Goals for | Goals against | Shots for | Shots against | Weaker goalie's saves |
 |---|---|---|---|---|---|---|
-| Equal | 50.1 % | 3.09 | 3.08 | 29.6 | 29.5 | 89.6 % |
-| Slightly stronger | 68.1 % | 3.63 | 2.55 | 32.9 | 26.2 | 89.0 % |
-| Clearly stronger | 78.6 % | 4.01 | 2.20 | 34.8 | 24.4 | 88.6 % |
-| Much stronger | 85.4 % | 4.31 | 1.95 | 35.9 | 23.3 | 88.0 % |
-| Far stronger | 89.9 % | 4.58 | 1.73 | 36.6 | 22.6 | 87.6 % |
-| Another league | 99.9 % | 6.82 | 0.41 | 37.0 | 19.7 | 81.6 % |
+| 0 (equal) | 50.1 % | 3.09 | 3.08 | 29.6 | 29.5 | 89.6 % |
+| 5 | 68.1 % | 3.63 | 2.55 | 32.9 | 26.2 | 89.0 % |
+| 10 | 78.6 % | 4.01 | 2.20 | 34.8 | 24.4 | 88.6 % |
+| 15 | 85.4 % | 4.31 | 1.95 | 35.9 | 23.3 | 88.0 % |
+| 20 | 89.9 % | 4.58 | 1.73 | 36.6 | 22.6 | 87.6 % |
+| 50 | 99.9 % | 6.82 | 0.41 | 37.0 | 19.7 | 81.6 % |
 
 <Callout type="note" title="Upsets happen">
-  Even a clearly stronger team loses about one game in five, and a far stronger one about one in ten.
+  A team ten points better still loses about one game in five, and twenty points better about one in
+  ten.
   A better team also wins by outshooting the opponent, not only by scoring more from the same shots.
 </Callout>
 
 ## The same game at every level
 
 A league of weaker players has to play like a league of stronger ones - otherwise lower leagues
-would look different from top ones. Both teams' attributes are shifted down or up together.
+would look different from top ones. Here every attribute of both teams is 40 points lower or higher.
 
-| | Weaker league | Average league | Stronger league |
+| | Weaker league (-40) | Average league | Stronger league (+40) |
 |---|---|---|---|
 | Equal teams, wins | 50.6 % | 50.1 % | 48.9 % |
 | Goals per team | 3.09 | 3.09 | 3.05 |
 | Shots on goal per team | 29.6 | 29.6 | 29.5 |
 | Save percentage | 89.7 % | 89.7 % | 89.6 % |
 | Power-play success | 20.1 % | 20.2 % | 19.9 % |
-| A clearly stronger team wins | 78.8 % | 78.6 % | 78.3 % |
+| A team 10 points better wins | 78.8 % | 78.6 % | 78.3 % |
 
 The game plays the same way whatever the level of the league; only the gap between the two teams
 decides who is favoured.
@@ -118,7 +121,7 @@ decides who is favoured.
 
 - the weights and formulas of the engine,
 - the effect of individual tactics, player types and their combinations,
-- the internal scale of attributes and team strength.
+- how attributes are combined inside the engine.
 
 These are left out on purpose. The aim of this page is to show that the results are realistic and
 fair, not to give a recipe for gaming them.

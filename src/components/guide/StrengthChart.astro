@@ -1,0 +1,109 @@
+---
+// Win share of the stronger team by how many points higher every attribute of its players
+// is. Measured: calibration run of engine e60b4955 (2026-11-10), 40,000 matches per gap,
+// 80,000 for equal teams.
+import { defaultLocale, type Locale } from '../../i18n/ui';
+
+const data = [
+  { gap: 0, win: 50.1 },
+  { gap: 5, win: 68.1 },
+  { gap: 10, win: 78.6 },
+  { gap: 15, win: 85.4 },
+  { gap: 20, win: 89.9 },
+  { gap: 50, win: 99.9 },
+];
+
+const labels = {
+  en: {
+    title: 'How often the stronger team wins',
+    axis: 'every attribute higher by (points)',
+    wins: 'wins',
+  },
+  cs: {
+    title: 'Jak často vyhraje silnější tým',
+    axis: 'každý atribut vyšší o (body)',
+    wins: 'výhry',
+  },
+};
+const lang = Astro.params.lang as Locale;
+const l = labels[lang as keyof typeof labels] ?? labels[defaultLocale as 'en'];
+const fmt = (v: number) => v.toLocaleString(lang, { maximumFractionDigits: 1 });
+
+// Plot: bars on a 0-100 % scale; x 60..620, y 30 (100 %) .. 250 (0 %).
+const top = 30;
+const base = 250;
+const slot = 560 / data.length;
+const y = (v: number) => base - ((base - top) * v) / 100;
+---
+
+<figure class="chart">
+  <svg viewBox="0 0 640 300" role="img" aria-label={l.title}>
+    <title>{l.title}</title>
+    {[0, 25, 50, 75, 100].map((v) => (
+      <>
+        <line class="grid" x1="60" x2="620" y1={y(v)} y2={y(v)} />
+        <text class="axis end" x="52" y={y(v) + 4}>{v} %</text>
+      </>
+    ))}
+    {data.map((d, i) => {
+      const x = 60 + slot * i + slot * 0.2;
+      const w = slot * 0.6;
+      return (
+        <>
+          <rect class={d.gap === 0 ? 'bar even' : 'bar'} x={x} y={y(d.win)} width={w} height={base - y(d.win)} rx="4" />
+          <text class="value" x={x + w / 2} y={y(d.win) - 6}>{fmt(d.win)} %</text>
+          <text class="axis mid" x={x + w / 2} y={base + 18}>{d.gap === 0 ? '0' : `+${d.gap}`}</text>
+        </>
+      );
+    })}
+    <text class="axis mid" x="340" y="292">{l.axis}</text>
+  </svg>
+</figure>
+
+<style>
+  .chart {
+    margin: 1.2em 0 1.6em;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px;
+  }
+
+  svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .grid {
+    stroke: var(--border);
+  }
+
+  .bar {
+    fill: var(--accent);
+  }
+
+  .bar.even {
+    fill: var(--muted);
+  }
+
+  .axis {
+    fill: var(--muted);
+    font-size: 13px;
+  }
+
+  .value {
+    fill: var(--text);
+    font-size: 13px;
+    font-weight: 700;
+    text-anchor: middle;
+  }
+
+  .end {
+    text-anchor: end;
+  }
+
+  .mid {
+    text-anchor: middle;
+  }
+</style>

@@ -78,20 +78,23 @@ připravený skoro každý gól, gól v oslabení bývá často sólo.
 
 ## Když je jeden tým silnější
 
-Silnější tým má vyhrávat častěji, ale ne vždycky. Tabulka ukazuje, jak se výsledek mění s rostoucím
-rozdílem síly týmů. Rozdíl je popsaný slovy, protože čísla pod ním jsou vnitřní škálou enginu.
+Silnější tým má vyhrávat častěji, ale ne vždycky. V těchto zápasech má **každý atribut každého hráče
+jednoho týmu včetně brankářů vyšší o daný počet bodů** - na stejné stupnici, jakou ukazuje aplikace - a
+všechno ostatní je stejné.
 
-| Silnější tým | Výhry | Vstřelené góly | Obdržené góly | Střely | Střely soupeře | Zákroky slabšího brankáře |
+<StrengthChart />
+
+| Atributy vyšší o | Výhry | Vstřelené góly | Obdržené góly | Střely | Střely soupeře | Zákroky slabšího brankáře |
 |---|---|---|---|---|---|---|
-| Vyrovnané | 50,1 % | 3,09 | 3,08 | 29,6 | 29,5 | 89,6 % |
-| O něco silnější | 68,1 % | 3,63 | 2,55 | 32,9 | 26,2 | 89,0 % |
-| Zřetelně silnější | 78,6 % | 4,01 | 2,20 | 34,8 | 24,4 | 88,6 % |
-| Výrazně silnější | 85,4 % | 4,31 | 1,95 | 35,9 | 23,3 | 88,0 % |
-| Mnohem silnější | 89,9 % | 4,58 | 1,73 | 36,6 | 22,6 | 87,6 % |
-| Jiná liga | 99,9 % | 6,82 | 0,41 | 37,0 | 19,7 | 81,6 % |
+| 0 (vyrovnané) | 50,1 % | 3,09 | 3,08 | 29,6 | 29,5 | 89,6 % |
+| 5 | 68,1 % | 3,63 | 2,55 | 32,9 | 26,2 | 89,0 % |
+| 10 | 78,6 % | 4,01 | 2,20 | 34,8 | 24,4 | 88,6 % |
+| 15 | 85,4 % | 4,31 | 1,95 | 35,9 | 23,3 | 88,0 % |
+| 20 | 89,9 % | 4,58 | 1,73 | 36,6 | 22,6 | 87,6 % |
+| 50 | 99,9 % | 6,82 | 0,41 | 37,0 | 19,7 | 81,6 % |
 
 <Callout type="note" title="Překvapení se stávají">
-  I zřetelně silnější tým prohraje zhruba každý pátý zápas a mnohem silnější zhruba každý desátý.
+  Tým lepší o deset bodů pořád prohraje zhruba každý pátý zápas a o dvacet bodů zhruba každý desátý.
   Lepší tým navíc vyhrává tím, že soupeře přestřílí, ne jen tím, že ze stejného počtu střel dá víc
   gólů.
 </Callout>
@@ -99,16 +102,16 @@ rozdílem síly týmů. Rozdíl je popsaný slovy, protože čísla pod ním jso
 ## Stejná hra na každé úrovni
 
 Liga slabších hráčů musí hrát stejně jako liga silnějších - jinak by nižší ligy vypadaly jinak než
-ty nejvyšší. Atributy obou týmů se posunou společně dolů nebo nahoru.
+ty nejvyšší. Tady má každý atribut obou týmů o 40 bodů méně nebo víc.
 
-| | Slabší liga | Průměrná liga | Silnější liga |
+| | Slabší liga (-40) | Průměrná liga | Silnější liga (+40) |
 |---|---|---|---|
 | Stejné týmy, výhry | 50,6 % | 50,1 % | 48,9 % |
 | Góly na tým | 3,09 | 3,09 | 3,05 |
 | Střely na branku na tým | 29,6 | 29,6 | 29,5 |
 | Úspěšnost zákroků | 89,7 % | 89,7 % | 89,6 % |
 | Úspěšnost přesilovek | 20,1 % | 20,2 % | 19,9 % |
-| Zřetelně silnější tým vyhraje | 78,8 % | 78,6 % | 78,3 % |
+| Tým lepší o 10 bodů vyhraje | 78,8 % | 78,6 % | 78,3 % |
 
 Hra se hraje stejně, ať je liga jakkoli silná; o favoritovi rozhoduje jen rozdíl mezi oběma týmy.
 
@@ -116,7 +119,7 @@ Hra se hraje stejně, ať je liga jakkoli silná; o favoritovi rozhoduje jen roz
 
 - váhy a vzorce enginu,
 - vliv jednotlivých taktik, typů hráčů a jejich kombinací,
-- vnitřní škála atributů a síly týmů.
+- jak engine atributy uvnitř kombinuje.
 
 Tyto věci tu chybí záměrně. Cílem stránky je ukázat, že výsledky jsou realistické a férové, ne dát
 návod, jak je obejít.

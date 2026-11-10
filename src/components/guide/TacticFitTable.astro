@@ -1,0 +1,137 @@
+---
+// Which player types each tactic suits, leaves as they are or does not suit - the same three
+// groups the app shows under a tactic. Signs only, from the tactics charter
+// (iceflow-server docs/tactics.md, audit of 2026-10-27); the strengths stay in the engine.
+import { defaultLocale, type Locale } from '../../i18n/ui';
+
+interface Props {
+  side: 'attack' | 'defense';
+}
+
+const types = ['Sniper', 'Playmaker', 'Power forward', 'Two-way', 'Defensive', 'Grinder', 'Shutdown', 'Disruptor', 'Puck-moving', 'Offensive'];
+// + suits, - does not suit, 0 neither; in the order of `types`.
+const fits: Record<string, string> = {
+  'Quick Strike': '+++00000++',
+  'Stretch Counter': '+-+00000+0',
+  'Possession Cycle': '0++00+00++',
+  'Direct Pressure': '0-+00+00-0',
+  'Point & Traffic': '00+00+000+',
+  'Slot Overload': '+++0000000',
+  'Puck Hunt': '00++++-+0+',
+  'Strong-Side Lock': '000++0000+',
+  'Man Marking': '000++0++0-',
+  'Layered Zone': '0000+000++',
+  'Neutral Trap': '000++0++00',
+  'Low Collapse': '000++++-0-',
+};
+const attack = ['Quick Strike', 'Stretch Counter', 'Possession Cycle', 'Direct Pressure', 'Point & Traffic', 'Slot Overload'];
+const defense = ['Puck Hunt', 'Strong-Side Lock', 'Man Marking', 'Layered Zone', 'Neutral Trap', 'Low Collapse'];
+
+const labels = {
+  en: { tactic: 'Tactic', suits: 'suits', neutral: 'neither', not: 'does not suit', forwards: 'Forwards', defense: 'Defensemen' },
+  cs: { tactic: 'Taktika', suits: 'hodí se', neutral: 'neutrální', not: 'nehodí se', forwards: 'Útočníci', defense: 'Obránci' },
+};
+const l = labels[(Astro.params.lang as Locale) as keyof typeof labels] ?? labels[defaultLocale as 'en'];
+const rows = Astro.props.side === 'attack' ? attack : defense;
+const mark = { '+': '✓', '-': '✗', '0': '·' } as const;
+const cls = { '+': 'yes', '-': 'no', '0': 'zero' } as const;
+---
+
+<div class="wrap">
+  <table class="fit">
+    <thead>
+      <tr>
+        <th rowspan="2">{l.tactic}</th>
+        <th colspan="6" class="grp">{l.forwards}</th>
+        <th colspan="4" class="grp">{l.defense}</th>
+      </tr>
+      <tr>
+        {types.map((t) => <th class="type"><span>{t}</span></th>)}
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((tactic) => (
+        <tr>
+          <th scope="row">{tactic}</th>
+          {[...fits[tactic]].map((c, i) => (
+            <td class={cls[c as keyof typeof cls]} title={`${types[i]}: ${c === '+' ? l.suits : c === '-' ? l.not : l.neutral}`}>
+              {mark[c as keyof typeof mark]}
+            </td>
+          ))}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  <p class="legend">
+    <span class="yes">✓ {l.suits}</span>
+    <span class="zero">· {l.neutral}</span>
+    <span class="no">✗ {l.not}</span>
+  </p>
+</div>
+
+<style>
+  .wrap {
+    margin: 1em 0 1.6em;
+    overflow-x: auto;
+  }
+
+  .fit {
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    min-width: 560px;
+  }
+
+  th,
+  td {
+    border: 1px solid var(--border);
+    padding: 6px 8px;
+    text-align: center;
+  }
+
+  thead th {
+    background: var(--surface);
+    color: var(--text);
+    font-weight: 700;
+  }
+
+  .grp {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+  }
+
+  .type span {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    white-space: nowrap;
+    font-size: 0.82rem;
+  }
+
+  tbody th {
+    text-align: left;
+    white-space: nowrap;
+    color: var(--text);
+  }
+
+  .yes {
+    color: #3ccf91;
+    font-weight: 800;
+  }
+
+  .no {
+    color: #ff7a8a;
+    font-weight: 800;
+  }
+
+  .zero {
+    color: var(--muted);
+  }
+
+  .legend {
+    display: flex;
+    gap: 18px;
+    font-size: 0.85rem;
+    margin: 8px 0 0;
+  }
+</style>

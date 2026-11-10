@@ -5,6 +5,9 @@ import Rule from '../../../components/guide/Rule.astro';
 import Rules from '../../../components/guide/Rules.astro';
 import Callout from '../../../components/guide/Callout.astro';
 import ExperienceChart from '../../../components/guide/ExperienceChart.astro';
+import StrengthChart from '../../../components/guide/StrengthChart.astro';
+import SeasonTimeline from '../../../components/guide/SeasonTimeline.astro';
+import TacticFitTable from '../../../components/guide/TacticFitTable.astro';
 import { getGuide } from '../../../i18n/guide';
 import { locales, useTranslations, type Locale } from '../../../i18n/ui';
 
@@ -22,7 +25,7 @@ const t = useTranslations(lang);
 const { item } = Astro.props;
 const items = await getGuide(lang);
 const { Content, headings } = await render(item.entry);
-const components = { Rule, Rules, Callout, ExperienceChart };
+const components = { Rule, Rules, Callout, ExperienceChart, StrengthChart, SeasonTimeline, TacticFitTable };
 ---
 
 <GuideLayout
