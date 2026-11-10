@@ -1,7 +1,9 @@
 import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
 import { defaultLocale, type Locale } from './ui';
 
-type Localized<C extends 'legal' | 'guide'> = {
+type Doc = 'legal' | 'guide' | 'story';
+
+type Localized<C extends Doc> = {
   entry: CollectionEntry<C>;
   slug: string;
   // True when the requested language is missing and English is shown instead.
@@ -13,7 +15,7 @@ function split(id: string) {
   return { lang, slug: rest.join('/') };
 }
 
-export async function getLocalizedEntry<C extends 'legal' | 'guide'>(
+export async function getLocalizedEntry<C extends Doc>(
   collection: C,
   slug: string,
   lang: Locale,
@@ -28,7 +30,7 @@ export async function getLocalizedEntry<C extends 'legal' | 'guide'>(
 }
 
 // Every English slug in the collection, resolved to the requested language.
-export async function getLocalizedCollection<C extends 'legal' | 'guide'>(
+export async function getLocalizedCollection<C extends Doc>(
   collection: C,
   lang: Locale,
 ): Promise<Localized<C>[]> {

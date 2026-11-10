@@ -22,4 +22,27 @@ const guide = defineCollection({
   }),
 });
 
-export const collections = { legal, guide };
+// The project story: lead, stats and milestones in frontmatter so the page can lay
+// them out; the Markdown body is the closing section under the timeline.
+const story = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/story' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    lead: z.string(),
+    stats: z.array(z.object({ value: z.string(), label: z.string() })),
+    timelineTitle: z.string(),
+    milestones: z.array(
+      z.object({
+        date: z.string(),
+        phase: z.enum(['idea', 'engine', 'server', 'mobile', 'animation', 'launch']),
+        phaseLabel: z.string(),
+        title: z.string(),
+        text: z.string(),
+      }),
+    ),
+    closingTitle: z.string(),
+  }),
+});
+
+export const collections = { legal, guide, story };

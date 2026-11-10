@@ -22,6 +22,8 @@ export const languageNames: Record<Locale, { label: string; flag: string }> = {
 const en = {
   'nav.home': 'Home',
   'nav.guide': 'Game guide',
+  'nav.story': 'Story',
+  'story.title': 'The story of IceFlow',
   'nav.privacy': 'Privacy policy',
   'nav.terms': 'Terms of service',
   'nav.language': 'Language',
@@ -56,6 +58,8 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
   cs: {
     'nav.home': 'Domů',
     'nav.guide': 'Průvodce hrou',
+    'nav.story': 'Příběh',
+    'story.title': 'Příběh IceFlow',
     'nav.privacy': 'Ochrana soukromí',
     'nav.terms': 'Podmínky používání',
     'nav.language': 'Jazyk',
@@ -85,6 +89,8 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
   de: {
     'nav.home': 'Startseite',
     'nav.guide': 'Spielanleitung',
+    'nav.story': 'Geschichte',
+    'story.title': 'Die Geschichte von IceFlow',
     'nav.privacy': 'Datenschutz',
     'nav.terms': 'Nutzungsbedingungen',
     'nav.language': 'Sprache',
@@ -114,6 +120,8 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
   fr: {
     'nav.home': 'Accueil',
     'nav.guide': 'Guide du jeu',
+    'nav.story': 'Histoire',
+    'story.title': 'L’histoire d’IceFlow',
     'nav.privacy': 'Confidentialité',
     'nav.terms': 'Conditions d’utilisation',
     'nav.language': 'Langue',
@@ -143,6 +151,8 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
   it: {
     'nav.home': 'Home',
     'nav.guide': 'Guida al gioco',
+    'nav.story': 'Storia',
+    'story.title': 'La storia di IceFlow',
     'nav.privacy': 'Privacy',
     'nav.terms': 'Termini di servizio',
     'nav.language': 'Lingua',
@@ -172,6 +182,8 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
   sv: {
     'nav.home': 'Hem',
     'nav.guide': 'Spelguide',
+    'nav.story': 'Historia',
+    'story.title': 'Historien om IceFlow',
     'nav.privacy': 'Integritetspolicy',
     'nav.terms': 'Användarvillkor',
     'nav.language': 'Språk',
@@ -201,6 +213,8 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
   fi: {
     'nav.home': 'Etusivu',
     'nav.guide': 'Peliopas',
+    'nav.story': 'Tarina',
+    'story.title': 'IceFlow’n tarina',
     'nav.privacy': 'Tietosuojakäytäntö',
     'nav.terms': 'Käyttöehdot',
     'nav.language': 'Kieli',
@@ -230,6 +244,8 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
   no: {
     'nav.home': 'Hjem',
     'nav.guide': 'Spillguide',
+    'nav.story': 'Historie',
+    'story.title': 'Historien om IceFlow',
     'nav.privacy': 'Personvern',
     'nav.terms': 'Bruksvilkår',
     'nav.language': 'Språk',
@@ -259,6 +275,8 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
   da: {
     'nav.home': 'Forside',
     'nav.guide': 'Spilguide',
+    'nav.story': 'Historie',
+    'story.title': 'Historien om IceFlow',
     'nav.privacy': 'Privatlivspolitik',
     'nav.terms': 'Servicevilkår',
     'nav.language': 'Sprog',
@@ -288,6 +306,8 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
   ru: {
     'nav.home': 'Главная',
     'nav.guide': 'Руководство',
+    'nav.story': 'История',
+    'story.title': 'История IceFlow',
     'nav.privacy': 'Конфиденциальность',
     'nav.terms': 'Условия использования',
     'nav.language': 'Язык',
