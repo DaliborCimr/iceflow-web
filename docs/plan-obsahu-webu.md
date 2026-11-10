@@ -10,9 +10,10 @@ datu.
    výpočty, váhy, prahy, matice vhodnosti ani pořadí modifikátorů.
    - OVR je skrytý výpočet. Web mluví jen o ratingech, které aplikace ukazuje (ATT, DEF, PHY,
      GOA, EXP), o atributech, formě, energii, únavě a předpokladech.
-   - Zápas se popisuje jako **princip**: hra přechází mezi stavy (držení puku, postup, šance,
-     zákrok, přerušení), o přechodu rozhodují atributy hráčů na ledě, taktika, riziko, energie a
-     početní stav. Bez výčtu konkrétních stavů (pásma, buly, střela) a bez pravděpodobností.
+   - Zápas se popisuje jako **princip**: hra přechází mezi stavy a každý přechod je kalibrovaná
+     pravděpodobnost. Tu posouvá to, kdo je zrovna na ledě (atributy, energie, forma), s jakou
+     taktikou a rizikem a v jakém početním stavu. Bez výčtu konkrétních stavů (pásma, buly,
+     střela) a bez konkrétních hodnot pravděpodobností nebo velikosti posunů.
 2. **Každé tvrzení o realitě má zdroj.** Reálné hodnoty (NHL průměry, výzkum osobnosti, zranění,
    taktické systémy) se citují. U herních abstrakcí se píše, že ze zdroje je převzatý jen směr,
    ne čísla (jak to dělá specifikace formy).
