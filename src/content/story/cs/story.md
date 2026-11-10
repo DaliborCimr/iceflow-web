@@ -66,7 +66,7 @@ areas:
       - Smlouvy až na 5 sezón; plat podle ratingů, věku a očekávaného vývoje, k tomu podpisový bonus
       - Přestupový trh s vyvolávací cenou 80-110 %, 8minutovou aukcí po prvním příhozu a 90sekundovým prodloužením
       - Dvě měny - Flow na provoz klubu, Gold Pucks na trh, skauting a juniory
-      - Dvě sponzorské smlouvy s různým profilem rizika
+      - Jeden sponzor na peníze a jeden na gold pucky za sezónu, každý vybraný ze tří druhů nabídek
       - Aréna a zázemí pro trenéry, zdravotníky, skauting, vedení a rozvoj hráčů, se stavem a opravami
   - title: Sezóna a soutěže
     text: >-
@@ -75,7 +75,7 @@ areas:
       - 63 bloků za sezónu - 21 dní, každý rozdělený na tři části
       - Ligy po 12 týmech, každý s každým čtyřikrát - 44 ligových zápasů
       - Play-off - čtvrtfinále na dvě vítězství, semifinále a finále na jeden zápas
-      - Pohár Elite - 24 týmů, 6 kol švýcarským systémem, nejlepších 16 do vyřazovací části, ve stejném kalendáři jako liga
+      - Elite liga - 24 týmů, 6 kol švýcarským systémem, nejlepších 16 do vyřazovací části, ve stejném kalendáři jako liga
       - Rapid liga - 4 týmy, každý s každým, odehraje se okamžitě, bez únavy, zranění a vlivu na ligové statistiky
       - Důležitost zápasu vychází ze skutečné situace v tabulce a pro každý tým může být jiná
   - title: Kalibrace simulace
@@ -83,7 +83,7 @@ areas:
       Zápasový engine je kalibrovaný na dlouhodobé průměry skutečného hokeje a ověřovaný dlouhými
       simulacemi.
     facts:
-      - Cíle na tým a zápas - zhruba 29 střel na branku, 3,1 gólu, úspěšnost zákroků 89,7 %, 2,7 vyloučení
+      - Cíle na tým a zápas - zhruba 29 střel na branku, 3,1 gólu, úspěšnost zákroků 89,7 %, 2,8 přesilovky
       - Samostatné kontroly rozdílu síly týmů, vlivu brankáře, rizika, diváků, formy a únavy
       - Patnáctisezónní simulace hlídají, aby vývoj, mentalita a disciplína neujížděly
       - Stejný zápas se z uložených snapshotů přehraje za stejných podmínek
@@ -137,7 +137,7 @@ milestones:
     title: Základní systémy
     text: >-
       Nejintenzivnější měsíc s přibližně 600 commity na serveru a v aplikaci - play-off, trh
-      v reálném čase přes SSE, sponzoři, národnosti, klubová loga a barvy dresů, pohár Elite, aréna,
+      v reálném čase přes SSE, sponzoři, národnosti, klubová loga a barvy dresů, Elite liga, aréna,
       botí kluby a zápasová forma z prototypu přenesená do serverového enginu.
   - date: Srpen 2026
     phase: animation

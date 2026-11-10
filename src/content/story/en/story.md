@@ -66,7 +66,7 @@ areas:
       - Contracts up to 5 seasons; salary depends on ratings, age and expected development, plus a signing bonus
       - Transfer market with asking prices of 80-110 %, an 8-minute auction after the first bid and a 90-second soft close
       - Two currencies - Flow for running the club, Gold Pucks for the market, scouting and juniors
-      - Two sponsor contracts with different risk profiles
+      - One cash and one gold-puck sponsor a season, each chosen from three kinds of offer
       - Arena and staff facilities (coaching, medical, scouting, front office, player development) with condition and repairs
   - title: Season and competitions
     text: >-
@@ -76,7 +76,7 @@ areas:
       - 63 blocks per season - 21 days, three parts of each day
       - 12-team leagues, everyone plays everyone four times - 44 league games
       - Playoffs - quarter-finals to two wins, semi-final and final as single games
-      - Elite cup - 24 teams, 6 Swiss-system rounds, top 16 to a knockout stage, on the same calendar as the league
+      - Elite league - 24 teams, 6 Swiss-system rounds, top 16 to a knockout stage, on the same calendar as the league
       - Rapid league - 4 teams, round robin, played instantly, with no fatigue, injuries or effect on league statistics
       - Match importance comes from the real table situation and can differ for each team
   - title: Simulation calibration
@@ -84,7 +84,7 @@ areas:
       The match engine is calibrated against long-term real-world hockey averages and checked over
       long simulated runs.
     facts:
-      - Targets per team and game - about 29 shots on goal, 3.1 goals, 89.7 % save percentage, 2.7 penalties
+      - Targets per team and game - about 29 shots on goal, 3.1 goals, 89.7 % save percentage, 2.8 power plays
       - Separate checks for the gap in team strength, goalie impact, risk, crowd, form and fatigue
       - 15-season runs check that development, mentality and discipline do not drift
       - The same match is replayed under the same conditions from stored snapshots
@@ -138,7 +138,7 @@ milestones:
     title: Core systems
     text: >-
       The most intensive month, with around 600 commits across server and app - playoffs, a
-      real-time market over SSE, sponsors, nationalities, club logos and kit colours, the Elite cup,
+      real-time market over SSE, sponsors, nationalities, club logos and kit colours, the Elite league,
       the arena, bot clubs, and the prototype's match form ported into the server engine.
   - date: August 2026
     phase: animation
