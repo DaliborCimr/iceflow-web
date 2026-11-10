@@ -1,205 +1,114 @@
-# Plán obsahu webu IceFlow
+# Plán obsahu webu Ice Flow
 
-Stav: 10. 11. 2026. Plán pro sekce „Jak hra funguje“, „Kalibrace“ a doplňky. Zdrojem je stav
-repozitářů `iceflow-server`, `iceflow_mobile`, `hockey_gm` a `iceflow_animation_editor` k tomuto
-datu.
+Stav: 10. 11. 2026, větev `dev`. Hotové části jsou shrnuté v kap. 1, zbývající práce v kap. 2-6.
+Zdrojem je stav repozitářů `iceflow-server`, `iceflow_mobile`, `hockey_gm` a
+`iceflow_animation_editor` k tomuto datu.
 
 ## 0. Pravidla pro veškerý obsah
 
 1. **Jen to, co hráč vidí.** Popisují se obrazovky, hodnoty a rozhodnutí z aplikace. Žádné interní
    výpočty, váhy, prahy, matice vhodnosti ani pořadí modifikátorů.
-   - OVR je skrytý výpočet. Web mluví jen o ratingech, které aplikace ukazuje (ATT, DEF, PHY,
-     GOA, EXP), o atributech, formě, energii, únavě a předpokladech.
-   - Zápas se popisuje jako **princip**: hra přechází mezi stavy a každý přechod je kalibrovaná
-     pravděpodobnost. Tu posouvá to, kdo je zrovna na ledě (atributy, energie, forma), s jakou
-     taktikou a rizikem a v jakém početním stavu. Bez výčtu konkrétních stavů (pásma, buly,
-     střela) a bez konkrétních hodnot pravděpodobností nebo velikosti posunů.
-2. **Každé tvrzení o realitě má zdroj.** Reálné hodnoty (NHL průměry, výzkum osobnosti, zranění,
-   taktické systémy) se citují. U herních abstrakcí se píše, že ze zdroje je převzatý jen směr,
-   ne čísla (jak to dělá specifikace formy).
-3. **Kalibrace jako výsledky, ne recept.** Zveřejňují se cíle, naměřené hodnoty, velikost vzorku
-   a interval spolehlivosti, ne parametry enginu.
-4. **Čísla odpovídají současné verzi.** Každá stránka má datum a verzi enginu (hash z reportu).
-   Čísla se berou z aktuálního reportu, ne z paměti.
+   - OVR je skrytý výpočet. Web mluví o ratingech, které aplikace ukazuje (ATT, DEF, PHY, GOA, EXP),
+     o atributech, formě, energii, únavě a předpokladech.
+   - Síla týmu se popisuje pravdivě jako vyšší atributy („každý atribut vyšší o N bodů“), ne jako
+     skryté hodnocení.
+   - Zápas se popisuje jako princip: hra přechází mezi stavy a každý přechod je kalibrovaná
+     pravděpodobnost, kterou posouvá, kdo je na ledě, s jakou taktikou a rizikem, v jakém početním
+     stavu. Bez výčtu stavů (pásma, buly, střela) a bez hodnot pravděpodobností.
+2. **Pojmy a čísla jen ze hry.** Terminologie z aplikace (`iceflow_mobile` l10n, klíče `rules.*`,
+   `club.*`), čísla z kódu serveru - ne z prezentace ani z `docs/*.md`, které bývají zastaralé.
+   Nic nevymýšlet: žádné poháry (jsou jen ligy: liga, Elite liga, Rapid liga, farmářská liga),
+   sponzora si hráč jen vybírá, jednotně „play-off“ (ne „vyřazovací část“).
+3. **Každé tvrzení o realitě má zdroj přímo v textu** nebo v boxu „Zdroje k této části“ pod
+   kapitolou. U herních abstrakcí se píše, že ze zdroje je převzatý jen směr, ne čísla. Odkazy se
+   před zveřejněním ověřují (jen odpovídající; 403 = blokování robotů, ponechat).
+4. **Kalibrace jako výsledky, ne recept.** Cíle, naměřené hodnoty, velikost vzorku, verze enginu a
+   datum, ne parametry enginu.
+5. **Značka:** viditelně vždy „Ice Flow“ (dvě slova), plný název „Ice Flow: Hockey Manager“ tam, kde
+   se člověk s hrou setká poprvé (úvodní stránka, první zmínka na stránce Příběh). Konstanty jsou
+   v `src/brand.ts`.
+6. **Bez populistických formulací** („férová už od návrhu“ apod.) - věcný, objektivní tón.
 
-## 1. Oprava stávající stránky Příběh
+## 1. Hotovo
 
-Stránka zatím mluví o „celkovém hodnocení“ a „křivce OVR“, což je v rozporu s pravidlem 0.1.
-
-- [ ] Přepsat kartu „Hráč jako dlouhodobý systém“: junioři mají **rozsah ratingů a TRT**, ne OVR.
-- [ ] Přepsat kartu „Kalibrace simulace“: místo „křivka hodnocení“ → „rozdíl síly týmů“.
-- [ ] Ověřit čísla z prezentace proti aktuálnímu reportu (viz kap. 3), u každého uvést datum.
-
-## 2. Sekce „Jak hra funguje“ (průvodce)
-
-Zdroj textu: 336 klíčů `rules.*` v `iceflow_mobile/lib/src/l10n/iceflow_l10n_en.dart` (a `_cs`),
-zkontrolovaných proti serveru auditem `iceflow_mobile/docs/rules-help-audit-2026-10-23.md`. Pop-upy
-jsou krátké; web je rozvede do souvislého textu, přidá příklady a screenshot.
-
-Navržené články (`src/content/guide/<lang>/<slug>.md`) podle sekcí aplikace:
-
-| # | Článek | Zdrojové klíče `rules.*` | Doplňkový podklad |
-|---|---|---|---|
-| 1 | Sezóna a kalendář (21 dní, 63 bloků) | `league`, `schedule`, `section` | prezentace, sl. 9 |
-| 2 | Soutěže: liga, play-off, Elite, farma, Rapid | `league`, `playoff`, `elite`, `group`, `table`, `farm`, `challenges` | audit pravidel (postup do Elite) |
-| 3 | Živý zápas a koučování | `live`, `match`, `lines`, `tactics`, `report` | `docs/league-live-match.md`, `docs/manpower-plan.md` |
-| 4 | Formace, ice time a početní stavy | `lines`, `team` | `docs/manpower-plan.md` |
-| 5 | Taktiky a riziko | `tactics` | `docs/tactics.md` (popisy systémů + zdroje, bez matice) |
-| 6 | Příprava na zápas a skauting soupeře | `report`, klíče `preMatch`/`scout` | `docs/match-scouting.md` |
-| 7 | Hráč: atributy, ratingy, typy hráčů | `players`, `player` | archetypy podle Identity Shift Hockey |
-| 8 | Energie, únava, zranění | `player.energy/fatigue/injury` | specifikace formy (odolnost) |
-| 9 | Forma, zkušenosti, předpoklady, mentalita, disciplína | `form`, `predispositions` | `IceFlow_specifikace_formy_a_predpokladu_2026-11-02.md`, zadání Mentalita |
-| 10 | Důležitost zápasu | — | `docs/IceFlow_zadani_..._mentalita_a_vyznam_zapasu.md` (jen princip) |
-| 11 | Trénink týmový a individuální, boost | `training`, `teamTraining`, `individualTraining` | |
-| 12 | Junioři a skauting | `juniors` | audit (pevný rozsah 18letých) |
-| 13 | Smlouvy, platy, konec kariéry | `contract` | audit (prodlužování, termín 15. dne) |
-| 14 | Přestupový trh a aukce | `transfers`, `bid`, `sell` | audit (rychlý prodej 70 % × 75 %) |
-| 15 | Finance, Flow a Gold Pucks, sponzoři | `finance`, `sponsor`, `gpSponsor` | `docs/challenges-store.md` |
-| 16 | Zázemí klubu | `facilities`, `club` | |
-| 17 | Úkoly, achievementy, Stars a obchod | `challenges`, `achievements` | `docs/challenges-store.md`, prezentace, sl. 10-11 |
-| 18 | Historie a novinky | `history`, `news`, `overview` | |
-
-Postup pro každý článek: vytáhnout EN+CS klíče → ověřit proti auditu a kódu → napsat text →
-screenshot → kontrola, že článek neprozrazuje nic z pravidla 0.1.
-
-### Screenshoty
-
-- Aplikace má jen Android/iOS. K dispozici je Flutter a emulátory `Pixel_8` a `Pixel_9_Pro_XL`.
-- Postup: lokální server s dev seedem (`iceflow.dev.presimulate-to`, rozjetá sezóna se zápasy,
-  trhem a juniory) → aplikace na emulátoru na šířku → `adb exec-out screencap -p` → oříznutí a
-  WebP do `src/assets/screens/<lang>/`.
-- Pořídit EN a CS; ostatní jazyky použijí EN screenshot.
-- Kluby na screenech nesmí pocházet z generátoru. Pro focení připravit vlastní sadu s pevnými
-  názvy (IceFlow Tigers, IceFlow Wolves ...), aby screeny nevypadaly jako skutečné kluby nebo
-  hráči. Vyžaduje úpravu dev seedu nebo přejmenování klubů v dev databázi před focením.
-
-## 3. Sekce „Kalibrace“ (samostatná stránka)
-
-Zdroj: `iceflow-server/experiment-results/match-calibration/report-latest.md` a
-`src/test/kotlin/.../MatchCalibrationGuardrailTest.kt`. Nejnovější report v repozitáři je
-z 2. 10. 2026 (engine `d78a6762`, 10 000 zápasů na bod). Od té doby proběhly rekalibrace (taktiky
-27. 10., OVR křivka a riziko 28. 10., stamina 19. 10.), proto **report vygenerovat znovu** na
-aktuálním enginu a teprve ten publikovat.
-
-Co zveřejnit (herní výstupy):
-
-| Oblast | Metriky | Reálná reference |
+| Část | Stav | Kde |
 |---|---|---|
-| Zápas | góly, pokusy o střelu, střely na branku, úspěšnost zákroků na tým a zápas, po třetinách | NHL 2024/25 průměry ligy |
-| Výsledky | výhry vyrovnaných týmů, remízy po 60 min, prodloužení, nájezdy | NHL 2024/25 |
-| Početní stavy | přesilovky na zápas, úspěšnost přesilovek, góly v oslabení, 3 na 3 v prodloužení | NHL 2024/25 |
-| Vyloučení a bitky | menší tresty na zápas, souběžné 2+2, bitky | NHL 2024/25 (už v komentářích testu) |
-| Asistence | podíl gólů s 0/1/2 asistencemi při 5 na 5, v přesilovce, v oslabení | NHL 2024/25 |
-| Ice time | minuty na hráče podle formace | NHL průměry TOI |
-| Síla týmů | % výher a úspěšnost zákroků podle rozdílu síly týmů (bez slova OVR, osa „rozdíl síly“) | — (herní cíl) |
-| Nezávislost na úrovni | stejné statistiky při slabší a silnější lize | — (herní cíl) |
-| Domácí prostředí | výhra domácích | NHL home win % (`analyze-home-advantage.py`, `experiment-results/home-zone-*`) |
-| Dlouhodobý vývoj | vývoj hráčů a ekonomiky přes 15 sezón (stabilita, bez driftu) | — |
+| Kostra webu (Astro, 10 jazyků, přepínač, přesměrování podle jazyka) | hotovo | `src/i18n`, `src/pages` |
+| Úvodní stránka | hotovo, 10 jazyků | `src/pages/[lang]/index.astro`, `src/i18n/ui.ts` |
+| Příběh projektu (vznik, oblasti hry, časová osa, obchodní model, stav) | hotovo, EN + CS | `src/content/story` |
+| Průvodce jako dokumentace (postranní obsah, „Na této stránce“, drobečková navigace, předchozí/další, vyhledávání Pagefind, karty pravidel s ikonami jako v aplikaci) | hotovo | `src/layouts/GuideLayout.astro`, `src/components/guide` |
+| Články průvodce: Sezóna a soutěže, Pravidla, Zápas, Hráči, Typy hráčů, Trénink, Junioři, Přestupy a kádr, Klub a finance, Úkoly a Stars, Kalibrace, Zdroje | hotovo, EN + CS | `src/content/guide` |
+| Grafy: zkušenosti (EXP 0-200), výhry podle rozdílu atributů, časová osa sezóny s Elite, tabulka vhodnosti taktik | hotovo | `src/components/guide` |
+| Kalibrace z nového běhu (engine e60b4955, 10 000 zápasů na bod, 80 000 / 40 000) | hotovo | `calibration.mdx` |
+| Pravidla NHL / IIHF s odkazy na konkrétní články IIHF | hotovo (NHL bez čísel článků, viz kap. 4) | `rules.mdx` |
+| Kontrola všech čísel na webu proti kódu serveru | hotovo 10. 11. 2026 | - |
 
-Co nezveřejnit: hierarchii vlivů (atributy > taktiky > riziko > archetyp), efekty jednotlivých
-taktik a archetypů, matice, sweep parametrů, váhy.
+## 2. Nutné před vydáním do obchodu
 
-Formát: tabulka cíl / naměřeno / reference se zdrojem, velikost vzorku, 95% CI, verze enginu a
-datum. Graf „výhry podle rozdílu síly“ (data jsou v reportu).
+- [ ] **Ochrana soukromí - skutečný obsah.** Přihlášení přes Google (ID token), push tokeny, logy
+      HTTP provozu na serveru (tokeny se maskují), push notifikace (začátek zápasu, novinky, úkoly
+      dne, konec aukce, Rapid), později reklamy a platby. Při zapojení reklam souhlas podle
+      GDPR / UMP. Dnes je jen koncept: `src/content/legal/en/privacy.md`.
+- [ ] **Podmínky používání - skutečný obsah.** Účet, přijatelné chování, virtuální položky a nákupy,
+      dostupnost služby, odpovědnost. Dnes koncept: `src/content/legal/en/terms.md`.
+- [ ] **Smazání účtu.** Google Play vyžaduje veřejnou URL s postupem smazání účtu a dat. Funkce
+      smazání účtu zatím **chybí v aplikaci i na serveru** - nejdřív ji doplnit tam, pak stránka na
+      webu.
+- [ ] **Kontakt a podpora.** Stránka s kontaktem pro hráče a pro žádosti o data.
 
-**Co chybí:** reálné reference jsou zatím jen v komentářích kódu (např. „NHL 2024/25: 7 895
-menších trestů hráčů a 267 trestů lavičky v 1 305 zápasech“). Je potřeba je dohledat a citovat
-(NHL.com Stats, Hockey-Reference) s přesnou sezónou a datem stažení.
+## 3. Obsah webu
 
-## 3b. Pravidla hry (samostatný článek průvodce)
+- [ ] **Screenshoty z aplikace.** Kluby nesmí pocházet z generátoru: připravit vlastní sadu
+      s pevnými názvy (IceFlow Tigers, IceFlow Wolves ...) úpravou dev seedu nebo přejmenováním klubů
+      v dev databázi. Postup: lokální server s rozjetou sezónou (`iceflow.dev.presimulate-to`) →
+      aplikace na emulátoru `Pixel_8` / `Pixel_9_Pro_XL` na šířku → `adb exec-out screencap -p` →
+      oříznutí a WebP do `src/assets/screens/<lang>/`. EN a CS; ostatní jazyky použijí EN.
+- [ ] **Překlady do zbylých 8 jazyků** (de, fr, it, sv, fi, no, da, ru): průvodce, Příběh, právní
+      stránky. Do té doby se zobrazuje angličtina s upozorněním. Názvy typů hráčů zůstávají anglicky.
+- [ ] **Editor animací** - samostatný článek „Jak vznikají záběry zápasu“ (`iceflow_animation_editor`:
+      schema v31, fyzika střel, odmítání nemožných konců, bránění).
+- [ ] **Technický článek / devlog** - zátěžové testy s 288 botími kluby, kickoff, Redis 1 s, SSE
+      (`iceflow-server/docs/benchmarks`, `iceflow_infrastructure_sizing.md`,
+      `docs/sse-compression-and-proxies.md`), determinismus a přehrávání zápasů.
+- [ ] **Push notifikace** v průvodci - co a kdy aplikace posílá.
+- [ ] **FAQ**, **press kit** (logo, screenshoty, krátký popis, plný název), **changelog**.
 
-Hra kombinuje pravidla NHL a IIHF. Článek má u každého pravidla říct, podle koho je, a odkázat
-na konkrétní článek pravidel (NHL Official Rules 2025-26, IIHF Official Rule Book 2023-2026).
-Stav podle kódu serveru (`match/service/MatchSimulationConfig.kt`, `MatchSimulator.kt`,
-`MatchEngineMath.kt`, `season/simulation/LeagueStandings.kt`):
+## 4. K ověření
 
-| Pravidlo | Ve hře | Podle | V kódu |
-|---|---|---|---|
-| Hrací doba | 3 × 20 min | obojí | `PERIOD_SECONDS = 1200` |
-| Body v tabulce | výhra 3, výhra po prodl./nájezdech 2, prohra po prodl./nájezdech 1 | IIHF (NHL dává 2-2-1) | `LeagueStandings.applyResult` |
-| Prodloužení v základní části | 5 min, 3 na 3, náhlá smrt | NHL (3 na 3) | `overtimeSkaters = 3`, `300 s` |
-| Vyloučení v prodloužení | 3 na 3 → 4 na 3 → 5 na 3 | NHL pravidlo 84.3 | `MatchEngineMath.kt:181` |
-| Nájezdy | 5 sérií, pak náhlá smrt | IIHF (NHL má 3) | `shootoutRegulationRounds = 5` |
-| Prodloužení ve vyřazovací části | 20min třetiny do gólu, bez nájezdů | NHL play-off | `PLAYOFF_OVERTIME_PERIOD_SECONDS = 1200` |
-| Souběžné menší tresty při plném počtu | hraje se 4 na 4 | NHL (IIHF zůstává 5 na 5) | `coincidentalMinorsPlayFourOnFour = true` |
-| Odložené vyloučení | hra pokračuje do dotyku, šestý hráč místo brankáře | obojí | `delayedPenalties = true`, NHL 15.4 |
-| Nejméně 3 hráči v poli | další trest čeká | NHL 16.3 | `MatchEngineMath.kt:154` |
-| Konec trestu po gólu | jen u gólu v přesilovce | NHL | `MatchSimulator.kt:1175` |
-| Druh trestů | menší, souběžné, 5 min za bitku, 5 min + do konce zápasu | obojí | `PenaltyKind` |
-| Kontumace | 5:0 | IIHF | `MatchSimulationService.kt:981` |
-| Čisté konto | jen brankář, který odchytal celý zápas sám | NHL | `MatchSimulationService.kt:985` |
-| Pořadí při rovnosti bodů | rozdíl skóre, pak vzájemné zápasy | ověřit proti NHL i IIHF | `LeagueStandings.rank` |
+- [ ] **Čísla článků pravidel NHL.** PDF pravidel NHL je přes 10 MB a nešlo stáhnout; web zatím
+      odkazuje na pravidla NHL jako celek. Ověřit čísla (prodloužení 3 na 3, souběžné tresty 4 na 4,
+      odložené vyloučení, minimum tří hráčů, gól v přesilovce, bitka) a doplnit odkazy.
+- [ ] **Rapid liga - průběh zápasů.** Nápověda v aplikaci: „všech šest zápasů se odehraje najednou“.
+      Komentář v `RapidLeagueService.ENTRY_CUTOFF`: „čtyři zápasy živě jeden po druhém“. Zjistit, co
+      platí, a sjednotit web, aplikaci i komentář.
+- [ ] **Drobnosti z nápovědy, které nebyly dohledané v kódu:** 2 až 6 picků zdarma za sezónu podle
+      amatérského skautingu, postup 8 týmů do play-off ligy, boost pomáhá až od únavy 6.
+- [ ] **Elite a trénink:** web podle upřesnění autora říká „klub, který v bloku Elite nehraje,
+      dostane týmový trénink navíc“; v kódu nedohledáno, nápověda v aplikaci říká něco jiného (kap. 5).
 
-Úkoly:
+Rozhodnuto: **prodloužení v play-off 3 na 3 po 20 minutách** je záměr kvůli zrychlení hry; je to
+uvedené v článku Pravidla.
 
-- [ ] Ověřit každý řádek proti aktuálnímu textu pravidel a doplnit číslo článku (NHL i IIHF).
-- [ ] Ověřit, které herní situace engine jako pravidla vůbec nemodeluje (např. zakázané uvolnění,
-      postavení mimo hru) a v článku to napsat otevřeně: jsou součástí abstrakce, ne samostatné
-      pravidlo.
-- [ ] Doplnit formáty soutěží: play-off ligy (čtvrtfinále na dvě výhry, dál jeden zápas), Elite a
-      farma (všechna kola na jeden zápas), Rapid (každý s každým, pořadí podle rozdílu skóre a
-      vstřelených gólů).
+## 5. Nesoulady k opravě v aplikaci (mimo web)
 
-## 4. Rešerše a zdroje
+- [ ] Nápověda k achievementům (`rules.achievements.sport.body`) mluví o „three cups“ - ve hře nejsou
+      poháry.
+- [ ] Sponzor se jmenuje jednou „Účast v zápase“ (`club.sponsor.*.MATCH_PRESENCE.title`) a jinde
+      „Přítomnost v zápase“ (`rules.sponsor.match.title`) - sjednotit.
+- [ ] Nápověda k Elite (`rules.elite.schedule.body`) říká „two team training sessions instead“ a že
+      Elite „nahrazuje ligové kolo“ - upravit podle skutečnosti (týmový trénink navíc, Elite je
+      součást kalendáře) a nezmiňovat „odpolední“ bloky.
+- [ ] Nepoužívaný klíč `juniors.visibleOvr` („OVR range“) - smazat, pokud se nikde nezobrazuje.
+- [ ] `docs/challenges-store.md` v serveru uvádí zastaralé odměny (8 denně, 100 za sezónu); podle
+      `ChallengeTaskCatalog.kt` je to 10 denně a 130 za sezónní úkoly.
 
-Výzkum je v repozitářích, ale roztroušený. Vytvořit stránku **Zdroje** (a odkazy z článků):
+## 6. Značka a nasazení
 
-- **Taktiky:** registr 13 zdrojů v `docs/tactics-audit-2026-10-27.md` (NHL.com, USA Hockey
-  handbook, Barry Smith / left wing lock, Sound of Hockey o systému Hakstola, icehockeysystems.com
-  ...). Na web jen popis systémů a citace, ne vhodnost archetypů.
-- **Typy hráčů:** Identity Shift Hockey, 14 archetypů (mapování 10 herních typů je v
-  `docs/tactics.md`, kap. 4).
-- **Předpoklady, forma, zranění:** `IceFlow_specifikace_formy_a_predpokladu_2026-11-02.md`, kap.
-  10: Roberts & DelVecchio (2000), meta-analýza 2014, Gupta & McCarthy (2022), Safe2Play (2024),
-  Grossman et al. (2022), meta-analýza motivace 2026, výzkum brankářských sérií („hot goalie“
-  bez podpory; chybí přesná citace).
-- **Kalibrace zápasu:** NHL 2024/25 (dohledat, viz kap. 3).
-- **Úkol:** každý zdroj ověřit (odkaz funguje, rok, autor), sjednotit citační formát, uvést, co se
-  ze zdroje převzalo (směr vs. číslo).
-
-## 5. Co je v repozitářích a hodí se na web
-
-Témata, která zatím nejsou v plánu ani na stránce Příběh:
-
-1. **Botí kluby.** Ligy doplňují boti, kteří hrají, nakupují a prodávají podle stejných pravidel.
-   Hráč by to měl vědět (transparentnost); Rapid liga to už zmiňuje.
-2. **Párování lig podle síly.** Jen co do zařazení vstupuje (síla týmu, úroveň ligy, volná místa,
-   boti jako doplnění), bez vzorců a bez konkrétních rozsahů.
-3. **Zátěžové testy a technika.** `docs/benchmarks/` (288 botích klubů, kickoff, Redis 1 s, SSE),
-   `iceflow_infrastructure_sizing.md`, `docs/sse-compression-and-proxies.md`. Vhodné jako technický
-   článek nebo devlog.
-4. **Determinismus a přehrávání zápasů.** Stejný zápas za stejných podmínek dává stejný výsledek
-   (snapshoty, `experiment-results/match-replays/`). Argument férovosti simulace.
-5. **Editor animací.** `iceflow_animation_editor` (schema v31, fyzika střel, odmítání nemožných
-   konců, validace bránění). Samostatný článek „Jak vznikají highlighty“.
-6. **Kontrola nápovědy proti kódu.** Jedna věta do sekce o kvalitě na stránce Příběh: texty
-   v aplikaci se pravidelně porovnávají s tím, co server skutečně dělá
-   (`rules-help-audit-2026-10-23.md` našel a opravil 14 nesouladů ve všech 10 jazycích).
-7. **Push notifikace.** Co a kdy aplikace posílá (začátek zápasu, novinky, úkoly dne, konec aukce,
-   Rapid). Patří do nápovědy i do Ochrany soukromí.
-
-Povinné nebo skoro povinné stránky, které chybí:
-
-8. **Smazání účtu.** Google Play vyžaduje veřejnou URL s postupem smazání účtu a dat. V aplikaci
-    ani na serveru jsem funkci smazání účtu nenašel.
-9. **Ochrana soukromí - skutečný obsah.** Přihlášení přes Google (ID token), push tokeny, logy
-    HTTP provozu (tokeny se maskují), reklamy (zatím testovací dialog, SDK ještě není), platby.
-    Při zapojení reklam bude potřeba souhlas (GDPR/UMP).
-10. **Kontakt a podpora**, **FAQ**, **press kit** (logo, screenshoty, krátký popis), **changelog**.
-
-## 6. Nesoulady k opravě v aplikaci (mimo web)
-
-- `rules.challenges.rapidOpponents.body` zmiňuje OVR („at most 6 apart“), přestože OVR v aplikaci
-  není vidět.
-- Klíč `juniors.visibleOvr` („OVR range“) - ověřit, zda se ještě zobrazuje.
-
-## 7. Pořadí prací
-
-1. Kap. 1 - oprava stránky Příběh (malá, hned).
-2. Kap. 4 - stránka Zdroje z toho, co už je v repozitářích, + dohledání NHL referencí.
-   Kap. 3b - článek Pravidla (ověření proti pravidlům NHL a IIHF).
-3. Kap. 3 - nový kalibrační běh na aktuálním enginu a stránka Kalibrace.
-4. Kap. 2 - články průvodce po skupinách (zápas a taktika → hráč → klub → soutěže → ekonomika),
-   screenshoty průběžně.
-5. Kap. 5 - smazání účtu a Ochrana soukromí dřív, než aplikace půjde do obchodu; ostatní průběžně.
-6. Překlady do zbylých 8 jazyků až po ustálení EN a CS.
+- [ ] **Logo** s dominantním ICE FLOW a malým podtitulem HOCKEY MANAGER (grafika autora).
+- [ ] **Řádek © v patičce** - rozhodnout držitele (jméno autora, nebo vývojářská značka, např.
+      CimulApps); dnes „© 2026 Ice Flow“.
+- [ ] **Ochranná známka** ICE FLOW - až u veřejné bety; předtím dokončit rešerši dvou evropských
+      známek ICEFLOWER.
+- [ ] **Doména na Cloudflare** a nasazení (Cloudflare Pages). Potom nastavit `site`
+      v `astro.config.ts`, mapu webu, `hreflang` odkazy mezi jazyky, `robots.txt` a náhledový
+      obrázek pro sdílení (Open Graph).
