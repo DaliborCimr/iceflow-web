@@ -48,10 +48,10 @@ areas:
       - Záběry vznikají ve vlastním editoru animací vytvořeném pro tento projekt
   - title: Hráč jako dlouhodobý systém
     text: >-
-      Hodnotu hráče neurčuje jediné celkové hodnocení. Několik vrstev se během kariéry vyvíjí
-      různým tempem, takže dva hráči se stejným hodnocením se mohou výrazně lišit.
+      Hodnotu hráče neurčuje jediné číslo. Ratingy, zkušenosti, forma a předpoklady se během
+      kariéry vyvíjejí různým tempem, takže dva hráči se stejnými ratingy se mohou výrazně lišit.
     facts:
-      - Junioři přicházejí v 17 letech; hodnocení a předpoklady se zobrazují jako rozsah, který skauting zpřesňuje
+      - Junioři se skautují v 17 letech; ratingy a předpoklady (TRT) se zobrazují jako rozsah, který skautské reporty zpřesňují
       - Vývoj od 18 let přes týmový a individuální trénink, na farmě s menšími přírůstky
       - Zkušenosti stabilizují výkon a hospodaření s energií; forma odráží zhruba posledních 10-20 zápasů
       - Mentalita roste s vystavením důležitým zápasům; disciplína ovlivňuje vyloučení a bitky
@@ -63,7 +63,7 @@ areas:
       v jedné oblasti má důsledky v ostatních.
     facts:
       - Farma hraje vlastní soutěž souběžně s prvním týmem
-      - Smlouvy až na 5 sezón; plat podle hodnocení, věku a očekávaného vývoje, k tomu podpisový bonus
+      - Smlouvy až na 5 sezón; plat podle ratingů, věku a očekávaného vývoje, k tomu podpisový bonus
       - Přestupový trh s vyvolávací cenou 80-110 %, 8minutovou aukcí po prvním příhozu a 90sekundovým prodloužením
       - Dvě měny - Flow na provoz klubu, Gold Pucks na trh, skauting a juniory
       - Dvě sponzorské smlouvy s různým profilem rizika
@@ -84,7 +84,7 @@ areas:
       simulacemi.
     facts:
       - Cíle na tým a zápas - zhruba 29 střel na branku, 3,1 gólu, úspěšnost zákroků 89,7 %, 2,7 vyloučení
-      - Dílčí testy křivky hodnocení, vlivu brankáře, rizika, diváků, formy a únavy
+      - Samostatné kontroly rozdílu síly týmů, vlivu brankáře, rizika, diváků, formy a únavy
       - Patnáctisezónní simulace hlídají, aby vývoj, mentalita a disciplína neujížděly
       - Stejný zápas se z uložených snapshotů přehraje za stejných podmínek
 timelineTitle: Časová osa
@@ -224,4 +224,5 @@ počtu asistencí.
 Jeden vývojář nemá k dispozici QA tým, proto je ověřování součástí samotného projektu. Server má
 kolem 310 automatických testů, zápasový engine se kontroluje kalibračními běhy přes tisíce zápasů
 a vícesezónními simulacemi a botí kluby zaplňují ligy a vytvářejí zátěž. Cílem je, aby šla každá
-změna ověřit objektivně, nejen hraním.
+změna ověřit objektivně, nejen hraním. Texty nápovědy v aplikaci se navíc porovnávají s tím, co
+server skutečně dělá - audit v říjnu 2026 našel a opravil 14 nesouladů ve všech deseti jazycích.

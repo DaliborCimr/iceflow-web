@@ -48,10 +48,10 @@ areas:
       - Clips are authored in a dedicated animation editor built for the project
   - title: Players as long-term systems
     text: >-
-      A player's value is not a single overall rating. Several layers develop at different rates
-      over a career, so two players with the same overall can differ substantially.
+      A player's value is not a single number. Ratings, experience, form and traits develop at
+      different rates over a career, so two players with the same ratings can differ substantially.
     facts:
-      - Prospects enter at 17; their overall and potential are shown as ranges that scouting narrows
+      - Prospects are scouted at 17; their ratings and traits (TRT) are shown as ranges that scouting reports narrow
       - Development from 18 through team and individual training, with lower gains on the farm team
       - Experience stabilises performance and energy management; form reflects roughly the last 10-20 games
       - Mentality grows with exposure to important matches; discipline affects penalties and fights
@@ -63,7 +63,7 @@ areas:
       decision in one area has consequences in the others.
     facts:
       - The farm team plays its own competition alongside the first team
-      - Contracts up to 5 seasons; salary depends on rating, age and expected development, plus a signing bonus
+      - Contracts up to 5 seasons; salary depends on ratings, age and expected development, plus a signing bonus
       - Transfer market with asking prices of 80-110 %, an 8-minute auction after the first bid and a 90-second soft close
       - Two currencies - Flow for running the club, Gold Pucks for the market, scouting and juniors
       - Two sponsor contracts with different risk profiles
@@ -85,7 +85,7 @@ areas:
       long simulated runs.
     facts:
       - Targets per team and game - about 29 shots on goal, 3.1 goals, 89.7 % save percentage, 2.7 penalties
-      - Micro tests for the overall curve, goalie impact, risk spread, crowd, form and fatigue
+      - Separate checks for the gap in team strength, goalie impact, risk, crowd, form and fatigue
       - 15-season runs check that development, mentality and discipline do not drift
       - The same match is replayed under the same conditions from stored snapshots
 timelineTitle: Timeline
@@ -228,4 +228,6 @@ situation and the number of assists.
 With one developer there is no QA team, so verification is built into the project itself. The
 server has around 310 automated tests, the match engine is checked by calibration runs over
 thousands of matches and by multi-season simulations, and bot clubs fill the leagues and generate
-load. The goal is that every change can be verified objectively, not only by playing.
+load. The help texts in the app are also checked against what the server actually does - the
+audit in October 2026 found and corrected 14 mismatches across all ten languages. The goal is that
+every change can be verified objectively, not only by playing.
