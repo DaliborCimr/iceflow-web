@@ -76,7 +76,7 @@ areas:
       - 63 blocks per season - 21 days, three parts of each day
       - 12-team leagues, everyone plays everyone four times - 44 league games
       - Playoffs - quarter-finals to two wins, semi-final and final as single games
-      - Elite league - 24 teams, 6 Swiss-system rounds, top 16 to a knockout stage, on the same calendar as the league
+      - Elite league - 24 teams, 6 Swiss-system rounds, top 16 to the playoff, on the same calendar as the league
       - Rapid league - 4 teams, round robin, played instantly, with no fatigue, injuries or effect on league statistics
       - Match importance comes from the real table situation and can differ for each team
   - title: Simulation calibration

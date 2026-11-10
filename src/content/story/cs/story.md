@@ -75,7 +75,7 @@ areas:
       - 63 bloků za sezónu - 21 dní, každý rozdělený na tři části
       - Ligy po 12 týmech, každý s každým čtyřikrát - 44 ligových zápasů
       - Play-off - čtvrtfinále na dvě vítězství, semifinále a finále na jeden zápas
-      - Elite liga - 24 týmů, 6 kol švýcarským systémem, nejlepších 16 do vyřazovací části, ve stejném kalendáři jako liga
+      - Elite liga - 24 týmů, 6 kol švýcarským systémem, nejlepších 16 do play-off, ve stejném kalendáři jako liga
       - Rapid liga - 4 týmy, každý s každým, odehraje se okamžitě, bez únavy, zranění a vlivu na ligové statistiky
       - Důležitost zápasu vychází ze skutečné situace v tabulce a pro každý tým může být jiná
   - title: Kalibrace simulace
