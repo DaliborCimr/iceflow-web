@@ -1,0 +1,26 @@
+---
+// A group of Rule cards: one column for reading order, two on wide screens when `columns`.
+interface Props {
+  columns?: boolean;
+}
+
+const { columns = false } = Astro.props;
+---
+
+<div class:list={['rules', { columns }]}>
+  <slot />
+</div>
+
+<style>
+  .rules {
+    display: grid;
+    gap: 10px;
+    margin: 1em 0 1.6em;
+  }
+
+  @media (min-width: 900px) {
+    .rules.columns {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

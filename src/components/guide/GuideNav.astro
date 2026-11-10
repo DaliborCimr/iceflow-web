@@ -1,0 +1,88 @@
+---
+// The guide's table of contents: articles by group, each with the app's icon.
+import Icon from '../Icon.astro';
+import { guideGroups, type GuideItem } from '../../i18n/guide';
+import { useTranslations, type Locale, type UiKey } from '../../i18n/ui';
+
+interface Props {
+  lang: Locale;
+  items: GuideItem[];
+  current?: string;
+}
+
+const { lang, items, current } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<nav class="guide-nav" aria-label={t('guide.contents')}>
+  {guideGroups.map((group) => {
+    const inGroup = items.filter((i) => i.entry.data.group === group);
+    return inGroup.length > 0 && (
+      <div class="group">
+        <p class="group-title">{t(`guide.group.${group}` as UiKey)}</p>
+        <ul>
+          {inGroup.map((item) => (
+            <li>
+              <a
+                href={`/${lang}/guide/${item.slug}/`}
+                aria-current={item.slug === current ? 'page' : undefined}
+              >
+                <Icon name={item.entry.data.icon} size={18} />
+                <span lang={item.isFallback ? 'en' : undefined}>{item.entry.data.title}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  })}
+</nav>
+
+<style>
+  .group + .group {
+    margin-top: 18px;
+  }
+
+  .group-title {
+    margin: 0 0 6px;
+    padding-left: 10px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 10px;
+    border-radius: 7px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.95rem;
+    line-height: 1.3;
+  }
+
+  a:hover {
+    color: var(--text);
+    background: var(--surface);
+  }
+
+  a[aria-current='page'] {
+    color: var(--text);
+    background: var(--accent-strong);
+  }
+
+  a :global(svg) {
+    flex: none;
+    color: var(--accent);
+  }
+</style>

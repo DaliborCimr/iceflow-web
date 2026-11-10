@@ -1,0 +1,33 @@
+---
+// Material Symbols Rounded - the same icon family the mobile app uses (Icons.*_rounded).
+// Read from the package at build time and inlined, so no icon font is loaded.
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+
+interface Props {
+  name: string;
+  size?: number;
+  class?: string;
+}
+
+const { name, size = 20, class: className } = Astro.props;
+const file = join(process.cwd(), 'node_modules/@material-symbols/svg-400/rounded', `${name}.svg`);
+let svg: string;
+try {
+  svg = readFileSync(file, 'utf8');
+} catch {
+  throw new Error(`Unknown icon "${name}" (${file})`);
+}
+const body = svg.replace(/^<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '');
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 -960 960 960"
+  width={size}
+  height={size}
+  fill="currentColor"
+  aria-hidden="true"
+  class={className}
+  set:html={body}
+/>

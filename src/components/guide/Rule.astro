@@ -1,0 +1,69 @@
+---
+// One rule, drawn like the entries of the app's info pop-ups: an icon in a cyan box,
+// a bold title and a short explanation.
+import Icon from '../Icon.astro';
+
+interface Props {
+  icon: string;
+  title: string;
+}
+
+const { icon, title } = Astro.props;
+---
+
+<div class="rule">
+  <span class="badge"><Icon name={icon} size={18} /></span>
+  <div class="text">
+    <p class="title">{title}</p>
+    <div class="body"><slot /></div>
+  </div>
+</div>
+
+<style>
+  .rule {
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    gap: 12px;
+    align-items: start;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+  }
+
+  .badge {
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border-radius: 9px;
+    border: 1px solid var(--accent);
+    background: color-mix(in srgb, var(--accent) 16%, transparent);
+    color: var(--text);
+  }
+
+  .title {
+    margin: 0 0 2px;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.35;
+  }
+
+  .body {
+    color: var(--muted);
+    font-size: 0.96rem;
+    line-height: 1.55;
+  }
+
+  .body :global(p) {
+    margin: 0;
+  }
+
+  .body :global(p + p) {
+    margin-top: 0.5em;
+  }
+
+  .body :global(strong) {
+    color: var(--text);
+  }
+</style>

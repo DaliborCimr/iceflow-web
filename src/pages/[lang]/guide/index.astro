@@ -1,58 +1,96 @@
 ---
-import Base from '../../../layouts/Base.astro';
-import { getLocalizedCollection } from '../../../i18n/content';
-import { localePaths, useTranslations, type Locale } from '../../../i18n/ui';
+import GuideLayout from '../../../layouts/GuideLayout.astro';
+import Icon from '../../../components/Icon.astro';
+import { getGuide, guideGroups } from '../../../i18n/guide';
+import { localePaths, useTranslations, type Locale, type UiKey } from '../../../i18n/ui';
 
 export const getStaticPaths = localePaths;
 
 const lang = Astro.params.lang as Locale;
 const t = useTranslations(lang);
-const articles = (await getLocalizedCollection('guide', lang)).sort(
-  (a, b) => a.entry.data.order - b.entry.data.order,
-);
+const items = await getGuide(lang);
 ---
 
-<Base lang={lang} title={t('guide.title')} description={t('guide.intro')}>
-  <section class="container prose">
-    <h1>{t('guide.title')}</h1>
-    <p class="meta">{t('guide.intro')}</p>
-    {articles.length === 0 ? (
-      <p>{t('guide.empty')}</p>
-    ) : (
-      <ul class="list">
-        {articles.map(({ entry, slug, isFallback }) => (
-          <li lang={isFallback ? 'en' : undefined}>
-            <a href={`/${lang}/guide/${slug}/`}>{entry.data.title}</a>
-            <p>{entry.data.description}</p>
-          </li>
-        ))}
-      </ul>
-    )}
-  </section>
-</Base>
+<GuideLayout lang={lang} title={t('guide.title')} description={t('guide.intro')} items={items}>
+  <h1>{t('guide.title')}</h1>
+  <p class="lead">{t('guide.intro')}</p>
+
+  {guideGroups.map((group) => {
+    const inGroup = items.filter((i) => i.entry.data.group === group);
+    return inGroup.length > 0 && (
+      <section class="group">
+        <h2>{t(`guide.group.${group}` as UiKey)}</h2>
+        <ul class="cards">
+          {inGroup.map(({ entry, slug, isFallback }) => (
+            <li>
+              <a href={`/${lang}/guide/${slug}/`} lang={isFallback ? 'en' : undefined}>
+                <span class="badge"><Icon name={entry.data.icon} size={22} /></span>
+                <span class="text">
+                  <strong>{entry.data.title}</strong>
+                  <span>{entry.data.description}</span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    );
+  })}
+</GuideLayout>
 
 <style>
-  .list {
+  .group h2 {
+    margin: 32px 0 12px;
+    font-size: 1.1rem;
+  }
+
+  .cards {
     list-style: none;
+    margin: 0;
     padding: 0;
     display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 12px;
   }
 
-  .list li {
+  .cards a {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 12px;
+    height: 100%;
+    padding: 14px 16px;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 14px 18px;
-  }
-
-  .list a {
-    font-weight: 700;
-    font-size: 1.05rem;
-  }
-
-  .list p {
-    margin: 4px 0 0;
+    text-decoration: none;
     color: var(--muted);
+    font-size: 0.92rem;
+    line-height: 1.45;
+  }
+
+  .cards a:hover {
+    border-color: var(--accent);
+  }
+
+  .badge {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    border: 1px solid var(--accent);
+    background: color-mix(in srgb, var(--accent) 16%, transparent);
+    color: var(--text);
+  }
+
+  .text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  strong {
+    color: var(--text);
+    font-size: 1rem;
   }
 </style>

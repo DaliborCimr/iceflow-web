@@ -1,7 +1,9 @@
 import { defineConfig } from 'astro/config';
+import mdx from '@astrojs/mdx';
 import { defaultLocale, locales } from './src/i18n/locales';
 
 export default defineConfig({
+  integrations: [mdx()],
   // Set once the Cloudflare domain exists (canonical and hreflang URLs).
   // site: 'https://iceflow.example',
   i18n: {

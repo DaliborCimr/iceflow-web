@@ -1,0 +1,122 @@
+---
+title: Kalibrace
+description: Jak se zápasový engine ověřuje proti skutečnému hokeji - naměřená čísla, ne recept.
+group: more
+order: 20
+icon: query_stats
+---
+
+Simulace je tak věrohodná, jak věrohodné jsou její výsledky. Zápasový engine se proto po každé změně
+pustí na desítky tisíc zápasů a výsledky se porovnají se skutečnými průměry NHL. Tato stránka ukazuje
+právě tyto výsledky. Neukazuje, jak k nim engine dochází - váhy, prahy a vnitřní vzorce zůstávají
+neveřejné, aby se hra vyhrávala hokejovými rozhodnutími, ne zpětným rozborem.
+
+<Callout type="note" title="Měření">
+  Verze enginu e60b4955, změřeno 10. listopadu 2026. Dva vyrovnané týmy s výchozí taktikou: 80 000
+  zápasů. Každý rozdíl síly: 40 000 zápasů. Referencí je základní část NHL 2024/25 (Hockey-Reference,
+  viz [Zdroje](../sources/)).
+</Callout>
+
+## Běžný zápas
+
+Dva vyrovnané týmy, na tým a zápas.
+
+| | IceFlow | NHL 2024/25 |
+|---|---|---|
+| Góly | 3,09 | 3,01 |
+| Střely na branku | 29,6 | 28,1 |
+| Úspěšnost zákroků | 89,7 % | 90,0 % |
+| Přesilovky | 2,80 | 2,71 |
+| Úspěšnost přesilovek | 20,2 % | 21,6 % |
+| Pokusy o střelu | 58,1 | - |
+| Góly po třetinách | 1,00 / 1,00 / 0,99 | - |
+
+<Callout type="tip" title="Co čísla říkají">
+  Běžný zápas IceFlow vypadá jako běžný zápas NHL: zhruba tři góly na tým, necelých třicet střel,
+  brankář chytí devět střel z deseti a z přesilovky padne gól zhruba v každém pátém případě. Góly
+  jsou rovnoměrně rozložené do všech tří třetin.
+</Callout>
+
+## Jak zápasy končí
+
+| | IceFlow |
+|---|---|
+| Výhry prvního ze dvou stejných týmů | 50,1 % ± 0,35 |
+| Nerozhodně po 60 minutách | 16,8 % zápasů |
+| Rozhodnuto v prodloužení | 12,0 % zápasů |
+| Rozhodnuto v nájezdech | 4,8 % zápasů |
+
+Dva stejné týmy vyhrávají v rámci statistické odchylky stejně často - to je první kontrola, že engine
+žádnou stranu nezvýhodňuje.
+
+## Tresty a speciální formace
+
+| Na tým a zápas | IceFlow |
+|---|---|
+| Menší tresty | 3,18 |
+| Souběžné menší tresty (na zápas) | 0,36 |
+| Bitky (na zápas) | 0,24 |
+| Velké tresty (na zápas) | 0,02 |
+| Góly v oslabení na jedno oslabení | 2,2 % |
+
+## Kdo střílí a nahrává
+
+Podíl gólů bez asistence, s jednou nebo dvěma asistencemi závisí na početním stavu - v přesilovce je
+připravený skoro každý gól, gól v oslabení bývá často sólo.
+
+| | Bez asistence | Jedna asistence | Dvě asistence |
+|---|---|---|---|
+| Plný počet | 6,0 % | 20,1 % | 74,0 % |
+| Přesilovka | 0,9 % | 6,1 % | 93,0 % |
+| Oslabení | 22,8 % | 44,8 % | 32,4 % |
+
+## Čas na ledě podle formací
+
+| | 1. formace | 2. formace | 3. formace | 4. formace |
+|---|---|---|---|---|
+| Minuty na hráče | 18,1 | 15,9 | 13,7 | 11,5 |
+
+## Když je jeden tým silnější
+
+Silnější tým má vyhrávat častěji, ale ne vždycky. Tabulka ukazuje, jak se výsledek mění s rostoucím
+rozdílem síly týmů. Rozdíl je popsaný slovy, protože čísla pod ním jsou vnitřní škálou enginu.
+
+| Silnější tým | Výhry | Vstřelené góly | Obdržené góly | Střely | Střely soupeře | Zákroky slabšího brankáře |
+|---|---|---|---|---|---|---|
+| Vyrovnané | 50,1 % | 3,09 | 3,08 | 29,6 | 29,5 | 89,6 % |
+| O něco silnější | 68,1 % | 3,63 | 2,55 | 32,9 | 26,2 | 89,0 % |
+| Zřetelně silnější | 78,6 % | 4,01 | 2,20 | 34,8 | 24,4 | 88,6 % |
+| Výrazně silnější | 85,4 % | 4,31 | 1,95 | 35,9 | 23,3 | 88,0 % |
+| Mnohem silnější | 89,9 % | 4,58 | 1,73 | 36,6 | 22,6 | 87,6 % |
+| Jiná liga | 99,9 % | 6,82 | 0,41 | 37,0 | 19,7 | 81,6 % |
+
+<Callout type="note" title="Překvapení se stávají">
+  I zřetelně silnější tým prohraje zhruba každý pátý zápas a mnohem silnější zhruba každý desátý.
+  Lepší tým navíc vyhrává tím, že soupeře přestřílí, ne jen tím, že ze stejného počtu střel dá víc
+  gólů.
+</Callout>
+
+## Stejná hra na každé úrovni
+
+Liga slabších hráčů musí hrát stejně jako liga silnějších - jinak by nižší ligy vypadaly jinak než
+ty nejvyšší. Atributy obou týmů se posunou společně dolů nebo nahoru.
+
+| | Slabší liga | Průměrná liga | Silnější liga |
+|---|---|---|---|
+| Stejné týmy, výhry | 50,6 % | 50,1 % | 48,9 % |
+| Góly na tým | 3,09 | 3,09 | 3,05 |
+| Střely na branku na tým | 29,6 | 29,6 | 29,5 |
+| Úspěšnost zákroků | 89,7 % | 89,7 % | 89,6 % |
+| Úspěšnost přesilovek | 20,1 % | 20,2 % | 19,9 % |
+| Zřetelně silnější tým vyhraje | 78,8 % | 78,6 % | 78,3 % |
+
+Hra se hraje stejně, ať je liga jakkoli silná; o favoritovi rozhoduje jen rozdíl mezi oběma týmy.
+
+## Co tu není
+
+- váhy a vzorce enginu,
+- vliv jednotlivých taktik, typů hráčů a jejich kombinací,
+- vnitřní škála atributů a síly týmů.
+
+Tyto věci tu chybí záměrně. Cílem stránky je ukázat, že výsledky jsou realistické a férové, ne dát
+návod, jak je obejít.

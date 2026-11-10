@@ -14,11 +14,15 @@ const legal = defineCollection({
 });
 
 const guide = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/guide' }),
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/guide' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
+    // Sidebar group (labels in ui.ts 'guide.group.*') and position within the whole guide.
+    group: z.enum(['basics', 'ice', 'club', 'more']),
     order: z.number().default(100),
+    // Material Symbols Rounded name, matching the app's icon for that section.
+    icon: z.string(),
   }),
 });
 

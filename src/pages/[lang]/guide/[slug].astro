@@ -1,16 +1,17 @@
 ---
 import { render } from 'astro:content';
-import Base from '../../../layouts/Base.astro';
-import { getLocalizedCollection } from '../../../i18n/content';
+import GuideLayout from '../../../layouts/GuideLayout.astro';
+import Rule from '../../../components/guide/Rule.astro';
+import Rules from '../../../components/guide/Rules.astro';
+import Callout from '../../../components/guide/Callout.astro';
+import ExperienceChart from '../../../components/guide/ExperienceChart.astro';
+import { getGuide } from '../../../i18n/guide';
 import { locales, useTranslations, type Locale } from '../../../i18n/ui';
 
 export async function getStaticPaths() {
   const paths = await Promise.all(
     locales.map(async (lang) =>
-      (await getLocalizedCollection('guide', lang)).map((item) => ({
-        params: { lang, slug: item.slug },
-        props: item,
-      })),
+      (await getGuide(lang)).map((item) => ({ params: { lang, slug: item.slug }, props: { item } })),
     ),
   );
   return paths.flat();
@@ -18,17 +19,24 @@ export async function getStaticPaths() {
 
 const lang = Astro.params.lang as Locale;
 const t = useTranslations(lang);
-const { entry, isFallback } = Astro.props;
-const { Content } = await render(entry);
+const { item } = Astro.props;
+const items = await getGuide(lang);
+const { Content, headings } = await render(item.entry);
+const components = { Rule, Rules, Callout, ExperienceChart };
 ---
 
-<Base lang={lang} title={entry.data.title} description={entry.data.description}>
-  <article class="container prose">
-    <p class="meta"><a href={`/${lang}/guide/`}>← {t('guide.title')}</a></p>
-    {isFallback && <p class="notice">{t('legal.fallbackNotice')}</p>}
-    <div lang={isFallback ? 'en' : undefined}>
-      <h1>{entry.data.title}</h1>
-      <Content />
-    </div>
-  </article>
-</Base>
+<GuideLayout
+  lang={lang}
+  title={item.entry.data.title}
+  description={item.entry.data.description}
+  items={items}
+  current={item}
+  headings={headings}
+>
+  {item.isFallback && <p class="notice">{t('legal.fallbackNotice')}</p>}
+  <div lang={item.isFallback ? 'en' : undefined} class="doc">
+    <h1>{item.entry.data.title}</h1>
+    <p class="lead">{item.entry.data.description}</p>
+    <Content components={components} />
+  </div>
+</GuideLayout>

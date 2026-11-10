@@ -1,0 +1,195 @@
+---
+title: Players
+description: What makes a player good, why experience matters so much, and how players develop and age.
+group: ice
+order: 20
+icon: badge
+---
+
+A player in IceFlow is more than one number. His attributes say what he can do, his experience how
+reliably he does it, his form how he has been playing lately, and his traits how he develops over a
+career. This page goes through them in that order.
+
+## Attributes and ratings
+
+<Rules>
+  <Rule icon="tune" title="Technical attributes">
+    Shooting, passing, puck control, decisions, positioning, coverage, stick checking, body
+    checking, blocking and skating. They decide how a player handles play with and without the puck.
+  </Rule>
+  <Rule icon="fitness_center" title="Physical attributes">
+    Speed, strength and stamina. Who gets to the puck first, who wins a battle along the boards and
+    how fast a player tires.
+  </Rule>
+  <Rule icon="sports_hockey" title="Goalies">
+    Goalies have their own technical attributes: reflexes, puck tracking, rebound control, glove and
+    blocker.
+  </Rule>
+  <Rule icon="star" title="Ratings">
+    The app sums the attributes up as ratings for attack (ATT), defence (DEF), physical strength
+    (PHY) and goalkeeping (GOA), with experience (EXP) next to them.
+  </Rule>
+</Rules>
+
+## Player types
+
+Every player has a type, and the type shapes the whole player.
+
+| Position | Types |
+|---|---|
+| Forwards | Sniper, Playmaker, Power forward, Two-way, Defensive, Grinder |
+| Defensemen | Shutdown, Disruptor, Puck-moving, Offensive |
+| Goalies | Butterfly, Hybrid, Athletic |
+
+<Rules>
+  <Rule icon="category" title="How attributes are spread">
+    The attributes a type is built on sit above the player's level, the rest below - a sniper is
+    high in shooting, a playmaker in passing and decisions.
+  </Rule>
+  <Rule icon="balance" title="Technique and physique">
+    A sniper, playmaker or offensive defenseman has more technique and less physique; a power
+    forward, grinder or shutdown defenseman the other way round.
+  </Rule>
+  <Rule icon="route" title="Tactics and training">
+    The type decides which tactics suit the player, and in training the attributes below the type's
+    level grow faster.
+  </Rule>
+</Rules>
+
+The types follow the player profiles coaches use (see [Sources](../sources/)).
+
+## Experience: how reliably a player plays
+
+Experience is one of the things that set IceFlow apart, so it deserves more than a line.
+
+### Every game is a different day
+
+Real players do not play at exactly the same level every night. In IceFlow every player has his
+**day** in every match: before the game his skills shift a little up or down for that game only.
+Experience decides how big that shift can be.
+
+- A player **with little experience** can have a great night, but also a very poor one - and his
+  bad nights go deeper than his good nights go high.
+- A **veteran** plays close to his real level almost every game. He rarely surprises, in either
+  direction.
+- For everyone, most games are close to the usual level; the extremes are rare, but they happen.
+
+<ExperienceChart />
+
+The chart is drawn from the game's own model. It shows the shape only - how the range narrows and
+how it is lopsided for young players - not the size of the effect.
+
+<Callout type="note" title="Professionalism decides the direction, not the size">
+  A professional player is a little more likely to have a good day than a bad one. How far the day
+  can swing is still a matter of experience.
+</Callout>
+
+### What else experience does
+
+<Rules>
+  <Rule icon="battery_charging_full" title="Saves energy">
+    An experienced player spends a little less energy on the same shift than the opponents on the
+    ice with him.
+  </Rule>
+  <Rule icon="gavel" title="Fewer penalties">
+    Experience is part of what keeps a player out of the penalty box, together with his decisions
+    and discipline.
+  </Rule>
+  <Rule icon="trending_up" title="Fair form">
+    Form judges a player against what a player of his experience usually delivers, so a young
+    player is not marked down just for being less steady.
+  </Rule>
+  <Rule icon="school" title="How it grows">
+    Experience grows with every game played, fastest for young players.
+  </Rule>
+</Rules>
+
+### What it means for you
+
+- For a **playoff run** or a tight game, a line of experienced players is the safer choice: you know
+  what you will get.
+- A **young, talented** line can win you a game on its own - and lose you one. Give it games where a
+  bad night does not cost much, and it gains the experience it needs.
+- When you compare two players with similar ratings, look at **EXP**: the more experienced one will
+  deliver those ratings more often.
+
+<Callout type="note" title="Where this comes from">
+  That young players are less consistent and veterans steadier is a common observation in hockey,
+  but there is little published research that measures game-to-game variation by experience. The
+  model is therefore a design decision of the game, built and calibrated in its match engine.
+</Callout>
+
+## Form
+
+<Rules>
+  <Rule icon="trending_up" title="Form">
+    A bonus or penalty of up to ±2 on the attributes, from how a player has played over roughly his
+    last 10-20 games compared with what was expected of him. It is not a swing from one game to the
+    next - that is the day, above.
+  </Rule>
+  <Rule icon="arrow_outward" title="The arrow">
+    Blue up is the best form, green up-right good, white right average, orange down-right poor and
+    red down the worst.
+  </Rule>
+</Rules>
+
+## Traits
+
+Five traits describe what kind of person and athlete the player is. They change slowly or not at all.
+
+<Rules columns>
+  <Rule icon="diamond" title="Talent">
+    How fast and how far he develops technically.
+  </Rule>
+  <Rule icon="workspace_premium" title="Professionalism">
+    How he prepares - it shows in physical training, recovery and how long he keeps his fitness as
+    he gets older.
+  </Rule>
+  <Rule icon="healing" title="Injury resistance">
+    How easily he gets hurt. It drops with age and after serious injuries.
+  </Rule>
+  <Rule icon="gavel" title="Discipline">
+    How often he takes a penalty and how easily he gets drawn into a fight.
+  </Rule>
+  <Rule icon="psychology" title="Mentality">
+    How he handles pressure in big, tense moments. It can grow over a career from games played
+    under pressure.
+  </Rule>
+  <Rule icon="unfold_more" title="Only an estimate">
+    The club knows a range: two arrows show the lowest and highest possible level. Professional
+    scouting narrows it for your own players over time.
+  </Rule>
+</Rules>
+
+Traits are game abstractions. From research the game takes only the direction - for example that
+personality becomes more stable with age, or that a previous injury raises the risk of another - not
+the numbers (see [Sources](../sources/)).
+
+## Energy, fatigue and injuries
+
+<Rules>
+  <Rule icon="battery_charging_full" title="Energy">
+    Drops during a game and comes back on the bench. A player low on energy plays worse.
+  </Rule>
+  <Rule icon="bedtime" title="Fatigue">
+    Builds up with games and hard training and caps the energy he starts a game with. It goes down
+    with rest - by 5 when the afternoon and the evening begin and by 10 overnight.
+  </Rule>
+  <Rule icon="local_hospital" title="Injuries">
+    An injured player misses games and training for the blocks the injury lasts; better medical
+    staff shorten it. At kickoff the best healthy reserve takes his place.
+  </Rule>
+  <Rule icon="smart_display" title="Shorter recovery">
+    Once per game day each injured player can watch an ad to cut his recovery by one block.
+  </Rule>
+</Rules>
+
+## Development and age
+
+Players improve through training and games - young ones fastest, and more slowly the closer they get
+to their potential. From around thirty the body fades on its own: speed first, stamina from the
+mid-thirties. Experience keeps veterans steady until they retire.
+
+This follows the shape of real careers: research on NHL players puts the scoring peak at about 27-28
+for forwards and 28-29 for defensemen, with near-peak performance over a wide range of ages (Brander,
+Egan and Yeung, 2014; see [Sources](../sources/)).

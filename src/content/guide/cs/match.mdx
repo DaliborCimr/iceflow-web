@@ -1,0 +1,139 @@
+---
+title: Zápas a živé koučování
+description: Jak se zápas simuluje, co dělají formace, taktiky a riziko a co jde měnit během hry.
+group: ice
+order: 10
+icon: sports_hockey
+---
+
+Každý zápas se odehrává na serveru v reálném čase a přenáší se do telefonu. Nesleduješ jen výsledek
+- během hry můžeš koučovat.
+
+## Jak se zápas simuluje
+
+Hra přechází z jedné situace do další: tým získá puk, posune ho dopředu, vznikne šance, brankář
+zasáhne nebo se hra přeruší. O každém takovém okamžiku rozhoduje **kalibrovaná pravděpodobnost** a
+tu posouvá to, co je zrovna na ledě.
+
+<Rules columns>
+  <Rule icon="groups" title="Kdo je na ledě">
+    Atributy hráčů, jejich energie a forma a to, jak se hodí k taktice.
+  </Rule>
+  <Rule icon="route" title="Jak hrají">
+    Útočná a obranná taktika každé formace a její úroveň rizika.
+  </Rule>
+  <Rule icon="exposure" title="Početní stav">
+    Plný počet, přesilovka, oslabení, 4 na 4, prázdná branka.
+  </Rule>
+  <Rule icon="psychology" title="Co je ve hře">
+    V důležitých zápasech má ve vypjatých chvílích větší váhu mentalita hráčů.
+  </Rule>
+</Rules>
+
+Stejný zápas za stejných podmínek dá stejný výsledek, takže každý zápas jde přehrát a zkontrolovat.
+Jak jsou pravděpodobnosti naladěné proti skutečnému hokeji, ukazuje stránka
+[Kalibrace](../calibration/).
+
+## Tvoje formace
+
+<Rules>
+  <Rule icon="sports_hockey" title="Čtyři formace">
+    Každá má tři útočníky a dva obránce. Podíl ice timu určuje, jak často formace hraje; střídání se
+    řídí energií hráčů, protože unavený hráč ztrácí energii rychleji a hraje hůř.
+  </Rule>
+  <Rule icon="shield_person" title="Brankáři">
+    Chytá základní brankář; náhradník nastoupí, když se zraní. Únava brankáře se přenáší ze zápasu do
+    zápasu.
+  </Rule>
+  <Rule icon="add_circle" title="Přesilovka: PP1 a PP2">
+    Dvě pětky - tři útočníci, obránce a volné místo. Na led jde pětka s nejvíc energie. Proti dvěma
+    trestům hraje celá; při 4 na 3 jeden hráč vynechá.
+  </Rule>
+  <Rule icon="do_not_disturb_on" title="Oslabení: PK1 a PK2">
+    Dvě čtveřice - dva útočníci a dva obránci. Při oslabení o dva hrají oba obránci a první útočník.
+  </Rule>
+  <Rule icon="unfold_less" title="4 na 4 a 3 na 3">
+    Když jsou oslabené obě strany, formace se zmenší na dva obránce a dva útočníky, nebo dva útočníky
+    a obránce.
+  </Rule>
+</Rules>
+
+## Taktiky
+
+Každá formace má **útočnou taktiku** - jak hraje s pukem - a **obrannou taktiku** - jak hraje bez
+něj. Vycházejí ze skutečných systémů z trenérských materiálů (viz [Zdroje](../sources/)).
+
+| Útok | Co formace dělá |
+|---|---|
+| Quick Strike | Rychlé podpořené vyjetí a útok dřív, než se obrana zformuje |
+| Stretch Counter | Dlouhé přihrávky na vysunuté útočníky a hned protiútok |
+| Possession Cycle | Drží puk v pohybu podél mantinelu a za brankou |
+| Direct Pressure | Nahodí puk a získá ho zpět forčekingem a fyzickou hrou |
+| Point & Traffic | Střely od modré s cloněním, tečemi a dorážkami |
+| Slot Overload | Rychlé rotace a krátké přihrávky do slotu |
+
+| Obrana | Co formace dělá |
+|---|---|
+| Puck Hunt | Napadá hráče s pukem ve všech pásmech |
+| Strong-Side Lock | Vytlačí puk k jednomu mantinelu a uzavře ho |
+| Man Marking | Těsně brání jednotlivé soupeře |
+| Layered Zone | Kompaktní vrstvy chrání nebezpečná místa |
+| Neutral Trap | Uzavře střed středního pásma a nutí soupeře nahazovat |
+| Low Collapse | Brání blízko branky a chrání slot |
+
+<Callout type="tip" title="Žádná taktika není nejlepší sama o sobě">
+  Každá taktika některým typům hráčů sedí a několika nesedí - popis v aplikaci je vypisuje. Vhodnost
+  se měří proti průměrnému hráči, takže běžná formace je ve všech taktikách stejná. Taktika se
+  vyplatí, když má tvoje formace víc hráčů, kterým sedí, než je obvyklé.
+</Callout>
+
+## Riziko a ice time
+
+<Rules>
+  <Rule icon="speed" title="Úroveň rizika">
+    Od Betonové obrany přes Kontrolu a Vyvážené po Presink a Vabank. Čím víc formace riskuje, tím víc
+    tlačí dopředu a střílí - a tím víc šancí soupeři dovolí. Opatrná formace drží puk a hraje
+    bezpečně.
+  </Rule>
+  <Rule icon="pie_chart" title="Předvolby ice timu">
+    Předvolba rozdělí čas na ledě mezi tvé čtyři formace. Proti které soupeřově formaci tvoje
+    nastoupí, nevybíráš.
+  </Rule>
+</Rules>
+
+## Před zápasem
+
+<Rules>
+  <Rule icon="search" title="Skauting soupeře">
+    Jednou na zápas. Ukáže sílu soupeřových uložených formací a report z až pěti posledních zápasů.
+    Soupeř může sestavu před začátkem ještě změnit.
+  </Rule>
+  <Rule icon="military_tech" title="Bonus za přípravu">
+    Skauting dá tvému týmu na ten zápas i malý bonus, který roste s profesionálním skautingem.
+  </Rule>
+  <Rule icon="signal_cellular_alt" title="Důležitost zápasu">
+    Jeden dílek u běžného ligového zápasu, víc v boji o play-off nebo lepší nasazení, všech pět
+    v play-off. Pro každý tým může být jiná. Čím vyšší, tím víc ve vypjatých chvílích rozhoduje
+    mentalita.
+  </Rule>
+</Rules>
+
+## Během zápasu
+
+<Rules>
+  <Rule icon="visibility" title="Co vidíš">
+    Kdo je na ledě a energii každého hráče, góly, tresty a zranění tak, jak se stanou, a průběžné
+    statistiky.
+  </Rule>
+  <Rule icon="edit" title="Co můžeš měnit">
+    Sestavu a taktiku. Uložená změna platí od chvíle, kdy začne působit, až do konce.
+  </Rule>
+  <Rule icon="sports" title="Odvolání brankáře">
+    V posledních pěti minutách třetí třetiny můžeš při prohrávání odvolat brankáře a hrát s hráčem
+    navíc.
+  </Rule>
+  <Rule icon="movie" title="Záběry">
+    Góly a vybrané šance se zobrazují jako animace vybrané podle skutečné události - početního stavu
+    a počtu asistencí.
+  </Rule>
+</Rules>

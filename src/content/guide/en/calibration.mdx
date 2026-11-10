@@ -1,0 +1,124 @@
+---
+title: Calibration
+description: How the match engine is checked against real hockey - the measured numbers, not the recipe.
+group: more
+order: 20
+icon: query_stats
+---
+
+A simulation is only as believable as its results. The match engine is therefore run on tens of
+thousands of matches after every change, and the results are compared with real NHL averages. This
+page shows those results. It does not show how the engine gets there - weights, thresholds and
+internal formulas stay private, so that the game is won by hockey decisions, not by reverse
+engineering.
+
+<Callout type="note" title="Measurement">
+  Engine version e60b4955, measured on 10 November 2026. Two evenly matched teams with default
+  tactics: 80,000 matches. Every strength gap: 40,000 matches. The reference is the NHL 2024/25
+  regular season (Hockey-Reference, see [Sources](../sources/)).
+</Callout>
+
+## An ordinary game
+
+Two evenly matched teams, per team and game.
+
+| | IceFlow | NHL 2024/25 |
+|---|---|---|
+| Goals | 3.09 | 3.01 |
+| Shots on goal | 29.6 | 28.1 |
+| Save percentage | 89.7 % | 90.0 % |
+| Power plays | 2.80 | 2.71 |
+| Power-play success | 20.2 % | 21.6 % |
+| Shot attempts | 58.1 | - |
+| Goals by period | 1.00 / 1.00 / 0.99 | - |
+
+<Callout type="tip" title="What the numbers say">
+  An ordinary IceFlow game looks like an ordinary NHL game: about three goals a team, just under
+  thirty shots, a goalie stopping nine shots in ten and a power-play goal in roughly every fifth
+  chance. Goals are spread evenly across the three periods.
+</Callout>
+
+## How games end
+
+| | IceFlow |
+|---|---|
+| Wins of the first of two equal teams | 50.1 % ± 0.35 |
+| Level after 60 minutes | 16.8 % of games |
+| Decided in overtime | 12.0 % of games |
+| Decided in a shootout | 4.8 % of games |
+
+Two equal teams win equally often within the statistical margin - the first check that nothing in the
+engine favours one side.
+
+## Penalties and special teams
+
+| Per team and game | IceFlow |
+|---|---|
+| Minor penalties | 3.18 |
+| Coincidental minors (per game) | 0.36 |
+| Fights (per game) | 0.24 |
+| Major penalties (per game) | 0.02 |
+| Short-handed goals per penalty kill | 2.2 % |
+
+## Who scores and assists
+
+The share of goals with no, one or two assists depends on the manpower situation - on the power play
+almost every goal is set up, short-handed goals are often a solo effort.
+
+| | No assist | One assist | Two assists |
+|---|---|---|---|
+| Even strength | 6.0 % | 20.1 % | 74.0 % |
+| Power play | 0.9 % | 6.1 % | 93.0 % |
+| Short-handed | 22.8 % | 44.8 % | 32.4 % |
+
+## Ice time by line
+
+| | Line 1 | Line 2 | Line 3 | Line 4 |
+|---|---|---|---|---|
+| Minutes per skater | 18.1 | 15.9 | 13.7 | 11.5 |
+
+## When one team is stronger
+
+The stronger team should win more often, but not always. The table shows how the result changes as
+the gap in team strength grows. The gap is described in words because the underlying numbers are the
+engine's internal scale.
+
+| Stronger team | Wins | Goals for | Goals against | Shots for | Shots against | Weaker goalie's saves |
+|---|---|---|---|---|---|---|
+| Equal | 50.1 % | 3.09 | 3.08 | 29.6 | 29.5 | 89.6 % |
+| Slightly stronger | 68.1 % | 3.63 | 2.55 | 32.9 | 26.2 | 89.0 % |
+| Clearly stronger | 78.6 % | 4.01 | 2.20 | 34.8 | 24.4 | 88.6 % |
+| Much stronger | 85.4 % | 4.31 | 1.95 | 35.9 | 23.3 | 88.0 % |
+| Far stronger | 89.9 % | 4.58 | 1.73 | 36.6 | 22.6 | 87.6 % |
+| Another league | 99.9 % | 6.82 | 0.41 | 37.0 | 19.7 | 81.6 % |
+
+<Callout type="note" title="Upsets happen">
+  Even a clearly stronger team loses about one game in five, and a far stronger one about one in ten.
+  A better team also wins by outshooting the opponent, not only by scoring more from the same shots.
+</Callout>
+
+## The same game at every level
+
+A league of weaker players has to play like a league of stronger ones - otherwise lower leagues
+would look different from top ones. Both teams' attributes are shifted down or up together.
+
+| | Weaker league | Average league | Stronger league |
+|---|---|---|---|
+| Equal teams, wins | 50.6 % | 50.1 % | 48.9 % |
+| Goals per team | 3.09 | 3.09 | 3.05 |
+| Shots on goal per team | 29.6 | 29.6 | 29.5 |
+| Save percentage | 89.7 % | 89.7 % | 89.6 % |
+| Power-play success | 20.1 % | 20.2 % | 19.9 % |
+| A clearly stronger team wins | 78.8 % | 78.6 % | 78.3 % |
+
+The game plays the same way whatever the level of the league; only the gap between the two teams
+decides who is favoured.
+
+## What is not shown here
+
+- the weights and formulas of the engine,
+- the effect of individual tactics, player types and their combinations,
+- the internal scale of attributes and team strength.
+
+These are left out on purpose. The aim of this page is to show that the results are realistic and
+fair, not to give a recipe for gaming them.

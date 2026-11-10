@@ -1,0 +1,69 @@
+---
+// Full-text search over the guide (Pagefind). The index is built after `astro build`, so the
+// box stays hidden in `astro dev`, where /pagefind/ does not exist.
+import { useTranslations, type Locale } from '../../i18n/ui';
+
+interface Props {
+  lang: Locale;
+}
+
+const t = useTranslations(Astro.props.lang);
+---
+
+<div class="guide-search" data-placeholder={t('guide.search')} hidden></div>
+
+<script is:inline>
+  (async () => {
+    const boxes = document.querySelectorAll('.guide-search');
+    if (!boxes.length) return;
+    try {
+      const ok = await fetch('/pagefind/pagefind-ui.js', { method: 'HEAD' });
+      if (!ok.ok) return;
+    } catch {
+      return;
+    }
+    const css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = '/pagefind/pagefind-ui.css';
+    document.head.append(css);
+    const js = document.createElement('script');
+    js.src = '/pagefind/pagefind-ui.js';
+    js.onload = () => {
+      boxes.forEach((el, i) => {
+        el.id ||= `guide-search-${i}`;
+        el.hidden = false;
+        new PagefindUI({
+          element: `#${el.id}`,
+          showImages: false,
+          resetStyles: false,
+          translations: { placeholder: el.dataset.placeholder },
+        });
+      });
+    };
+    document.head.append(js);
+  })();
+</script>
+
+<style is:global>
+  .guide-search {
+    margin-bottom: 16px;
+    --pagefind-ui-scale: 0.8;
+    --pagefind-ui-primary: var(--accent);
+    --pagefind-ui-text: var(--text);
+    --pagefind-ui-background: var(--surface);
+    --pagefind-ui-border: var(--border);
+    --pagefind-ui-tag: var(--surface-2);
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: 8px;
+    --pagefind-ui-font: inherit;
+  }
+
+  .guide-search .pagefind-ui__result-link {
+    color: var(--accent);
+  }
+
+  .guide-search mark {
+    background: color-mix(in srgb, var(--gold) 35%, transparent);
+    color: var(--text);
+  }
+</style>
