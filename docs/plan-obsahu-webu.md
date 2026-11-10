@@ -68,7 +68,9 @@ screenshot → kontrola, že článek neprozrazuje nic z pravidla 0.1.
   trhem a juniory) → aplikace na emulátoru na šířku → `adb exec-out screencap -p` → oříznutí a
   WebP do `src/assets/screens/<lang>/`.
 - Pořídit EN a CS; ostatní jazyky použijí EN screenshot.
-- Pozor na skutečná jména hráčů a manažerů: na screenech jen botí kluby z dev seedu.
+- Kluby na screenech nesmí pocházet z generátoru. Pro focení připravit vlastní sadu s pevnými
+  názvy (IceFlow Tigers, IceFlow Wolves ...), aby screeny nevypadaly jako skutečné kluby nebo
+  hráči. Vyžaduje úpravu dev seedu nebo přejmenování klubů v dev databázi před focením.
 
 ## 3. Sekce „Kalibrace“ (samostatná stránka)
 
@@ -103,6 +105,40 @@ datum. Graf „výhry podle rozdílu síly“ (data jsou v reportu).
 menších trestů hráčů a 267 trestů lavičky v 1 305 zápasech“). Je potřeba je dohledat a citovat
 (NHL.com Stats, Hockey-Reference) s přesnou sezónou a datem stažení.
 
+## 3b. Pravidla hry (samostatný článek průvodce)
+
+Hra kombinuje pravidla NHL a IIHF. Článek má u každého pravidla říct, podle koho je, a odkázat
+na konkrétní článek pravidel (NHL Official Rules 2025-26, IIHF Official Rule Book 2023-2026).
+Stav podle kódu serveru (`match/service/MatchSimulationConfig.kt`, `MatchSimulator.kt`,
+`MatchEngineMath.kt`, `season/simulation/LeagueStandings.kt`):
+
+| Pravidlo | Ve hře | Podle | V kódu |
+|---|---|---|---|
+| Hrací doba | 3 × 20 min | obojí | `PERIOD_SECONDS = 1200` |
+| Body v tabulce | výhra 3, výhra po prodl./nájezdech 2, prohra po prodl./nájezdech 1 | IIHF (NHL dává 2-2-1) | `LeagueStandings.applyResult` |
+| Prodloužení v základní části | 5 min, 3 na 3, náhlá smrt | NHL (3 na 3) | `overtimeSkaters = 3`, `300 s` |
+| Vyloučení v prodloužení | 3 na 3 → 4 na 3 → 5 na 3 | NHL pravidlo 84.3 | `MatchEngineMath.kt:181` |
+| Nájezdy | 5 sérií, pak náhlá smrt | IIHF (NHL má 3) | `shootoutRegulationRounds = 5` |
+| Prodloužení ve vyřazovací části | 20min třetiny do gólu, bez nájezdů | NHL play-off | `PLAYOFF_OVERTIME_PERIOD_SECONDS = 1200` |
+| Souběžné menší tresty při plném počtu | hraje se 4 na 4 | NHL (IIHF zůstává 5 na 5) | `coincidentalMinorsPlayFourOnFour = true` |
+| Odložené vyloučení | hra pokračuje do dotyku, šestý hráč místo brankáře | obojí | `delayedPenalties = true`, NHL 15.4 |
+| Nejméně 3 hráči v poli | další trest čeká | NHL 16.3 | `MatchEngineMath.kt:154` |
+| Konec trestu po gólu | jen u gólu v přesilovce | NHL | `MatchSimulator.kt:1175` |
+| Druh trestů | menší, souběžné, 5 min za bitku, 5 min + do konce zápasu | obojí | `PenaltyKind` |
+| Kontumace | 5:0 | IIHF | `MatchSimulationService.kt:981` |
+| Čisté konto | jen brankář, který odchytal celý zápas sám | NHL | `MatchSimulationService.kt:985` |
+| Pořadí při rovnosti bodů | rozdíl skóre, pak vzájemné zápasy | ověřit proti NHL i IIHF | `LeagueStandings.rank` |
+
+Úkoly:
+
+- [ ] Ověřit každý řádek proti aktuálnímu textu pravidel a doplnit číslo článku (NHL i IIHF).
+- [ ] Ověřit, které herní situace engine jako pravidla vůbec nemodeluje (např. zakázané uvolnění,
+      postavení mimo hru) a v článku to napsat otevřeně: jsou součástí abstrakce, ne samostatné
+      pravidlo.
+- [ ] Doplnit formáty soutěží: play-off ligy (čtvrtfinále na dvě výhry, dál jeden zápas), Elite a
+      farma (všechna kola na jeden zápas), Rapid (každý s každým, pořadí podle rozdílu skóre a
+      vstřelených gólů).
+
 ## 4. Rešerše a zdroje
 
 Výzkum je v repozitářích, ale roztroušený. Vytvořit stránku **Zdroje** (a odkazy z článků):
@@ -126,31 +162,29 @@ Témata, která zatím nejsou v plánu ani na stránce Příběh:
 
 1. **Botí kluby.** Ligy doplňují boti, kteří hrají, nakupují a prodávají podle stejných pravidel.
    Hráč by to měl vědět (transparentnost); Rapid liga to už zmiňuje.
-2. **Párování lig podle síly.** Liga drží týmy s malým rozdílem síly (Rapid ±6). Popsat princip
-   bez OVR.
+2. **Párování lig podle síly.** Jen co do zařazení vstupuje (síla týmu, úroveň ligy, volná místa,
+   boti jako doplnění), bez vzorců a bez konkrétních rozsahů.
 3. **Zátěžové testy a technika.** `docs/benchmarks/` (288 botích klubů, kickoff, Redis 1 s, SSE),
    `iceflow_infrastructure_sizing.md`, `docs/sse-compression-and-proxies.md`. Vhodné jako technický
    článek nebo devlog.
 4. **Determinismus a přehrávání zápasů.** Stejný zápas za stejných podmínek dává stejný výsledek
    (snapshoty, `experiment-results/match-replays/`). Argument férovosti simulace.
-5. **Ekonomické simulace.** `experiment-results/gp-calibration-report.md` (8 sezón, 144 klubů),
-   `presim-comparison.md`. Ukázat, že ekonomika se ladila na dlouhém horizontu (jen závěry).
-6. **Editor animací.** `iceflow_animation_editor` (schema v31, fyzika střel, odmítání nemožných
+5. **Editor animací.** `iceflow_animation_editor` (schema v31, fyzika střel, odmítání nemožných
    konců, validace bránění). Samostatný článek „Jak vznikají highlighty“.
-7. **Audit nápovědy.** Proces, kdy se texty v aplikaci kontrolují proti kódu
-   (`rules-help-audit-2026-10-23.md`). Patří do článku o kvalitě.
-8. **Tutoriál a bezpečnost úvodních přestupů.** `docs/tutorial-transfer-security.md`.
-9. **Push notifikace.** Co a kdy aplikace posílá (kickoff, novinky, konec aukce, Rapid). Patří do
-   nápovědy i do Ochrany soukromí.
+6. **Kontrola nápovědy proti kódu.** Jedna věta do sekce o kvalitě na stránce Příběh: texty
+   v aplikaci se pravidelně porovnávají s tím, co server skutečně dělá
+   (`rules-help-audit-2026-10-23.md` našel a opravil 14 nesouladů ve všech 10 jazycích).
+7. **Push notifikace.** Co a kdy aplikace posílá (začátek zápasu, novinky, úkoly dne, konec aukce,
+   Rapid). Patří do nápovědy i do Ochrany soukromí.
 
 Povinné nebo skoro povinné stránky, které chybí:
 
-10. **Smazání účtu.** Google Play vyžaduje veřejnou URL s postupem smazání účtu a dat. V aplikaci
+8. **Smazání účtu.** Google Play vyžaduje veřejnou URL s postupem smazání účtu a dat. V aplikaci
     ani na serveru jsem funkci smazání účtu nenašel.
-11. **Ochrana soukromí - skutečný obsah.** Přihlášení přes Google (ID token), push tokeny, logy
+9. **Ochrana soukromí - skutečný obsah.** Přihlášení přes Google (ID token), push tokeny, logy
     HTTP provozu (tokeny se maskují), reklamy (zatím testovací dialog, SDK ještě není), platby.
     Při zapojení reklam bude potřeba souhlas (GDPR/UMP).
-12. **Kontakt a podpora**, **FAQ**, **press kit** (logo, screenshoty, krátký popis), **changelog**.
+10. **Kontakt a podpora**, **FAQ**, **press kit** (logo, screenshoty, krátký popis), **changelog**.
 
 ## 6. Nesoulady k opravě v aplikaci (mimo web)
 
@@ -162,6 +196,7 @@ Povinné nebo skoro povinné stránky, které chybí:
 
 1. Kap. 1 - oprava stránky Příběh (malá, hned).
 2. Kap. 4 - stránka Zdroje z toho, co už je v repozitářích, + dohledání NHL referencí.
+   Kap. 3b - článek Pravidla (ověření proti pravidlům NHL a IIHF).
 3. Kap. 3 - nový kalibrační běh na aktuálním enginu a stránka Kalibrace.
 4. Kap. 2 - články průvodce po skupinách (zápas a taktika → hráč → klub → soutěže → ekonomika),
    screenshoty průběžně.
