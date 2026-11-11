@@ -93,7 +93,7 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'nav.language': 'Jazyk',
     'home.title': 'Manažerská hra o ledním hokeji',
     'home.tagline':
-      'Veď vlastní hokejový klub: sestav kádr, nastav taktiku, vychovej juniory a proveď tým živými zápasy, ligou i Elite.',
+      'Veď vlastní hokejový klub: sestav kádr, nastav taktiku, vychovej juniory a proveď tým živými zápasy, klasickou ligou i elitní.',
     'home.featuresTitle': 'Co v Ice Flow děláš',
     'home.trailer': 'Trailer',
     'home.ctaGuide': 'Otevřít průvodce hrou',
