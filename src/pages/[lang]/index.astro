@@ -4,6 +4,8 @@ import Base from '../../layouts/Base.astro';
 import logo from '../../assets/branding/logo.png';
 import { localePaths, useTranslations, type Locale, type UiKey } from '../../i18n/ui';
 import { fullName } from '../../brand';
+import Screenshot from '../../components/guide/Screenshot.astro';
+import Clip from '../../components/guide/Clip.astro';
 
 export const getStaticPaths = localePaths;
 
@@ -21,6 +23,15 @@ const features = ['club', 'team', 'match', 'transfers', 'juniors', 'leagues'] as
         <p class="subtitle">{t('home.title')}</p>
         <p class="tagline">{t('home.tagline')}</p>
       </div>
+    </div>
+  </section>
+
+  <section class="container shots">
+    <h2>{t('home.shotsTitle')}</h2>
+    <Screenshot name="home" alt={t('home.shot.home')} caption={t('home.shot.home')} />
+    <div class="pair">
+      <Screenshot name="live-match" alt={t('home.shot.live')} caption={t('home.shot.live')} />
+      <Clip src="goal-highlight.mp4" poster="highlight" label={t('home.shot.highlight')} caption={t('home.shot.highlight')} />
     </div>
   </section>
 
@@ -77,8 +88,22 @@ const features = ['club', 'team', 'match', 'transfers', 'juniors', 'leagues'] as
     max-width: 52ch;
   }
 
+  .shots {
+    padding-top: 40px;
+  }
+
+  .shots h2 {
+    margin: 0 0 4px;
+  }
+
+  .pair {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 0 20px;
+  }
+
   .features {
-    padding-block: 40px 64px;
+    padding-block: 24px 64px;
   }
 
   .grid {

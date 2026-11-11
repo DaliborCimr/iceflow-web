@@ -1,6 +1,7 @@
 ---
 import GuideLayout from '../../../layouts/GuideLayout.astro';
 import Icon from '../../../components/Icon.astro';
+import Screenshot from '../../../components/guide/Screenshot.astro';
 import { getGuide, guideGroups } from '../../../i18n/guide';
 import { localePaths, useTranslations, type Locale, type UiKey } from '../../../i18n/ui';
 
@@ -14,6 +15,7 @@ const items = await getGuide(lang);
 <GuideLayout lang={lang} title={t('guide.title')} description={t('guide.intro')} items={items}>
   <h1>{t('guide.title')}</h1>
   <p class="lead">{t('guide.intro')}</p>
+  <Screenshot name="help-popup" alt={t('guide.helpShot')} caption={t('guide.helpShot')} />
 
   {guideGroups.map((group) => {
     const inGroup = items.filter((i) => i.entry.data.group === group);

@@ -9,6 +9,8 @@ import StrengthChart from '../../../components/guide/StrengthChart.astro';
 import SeasonTimeline from '../../../components/guide/SeasonTimeline.astro';
 import TacticFitTable from '../../../components/guide/TacticFitTable.astro';
 import Sources from '../../../components/guide/Sources.astro';
+import Screenshot from '../../../components/guide/Screenshot.astro';
+import Clip from '../../../components/guide/Clip.astro';
 import { getGuide } from '../../../i18n/guide';
 import { locales, useTranslations, type Locale } from '../../../i18n/ui';
 
@@ -26,7 +28,7 @@ const t = useTranslations(lang);
 const { item } = Astro.props;
 const items = await getGuide(lang);
 const { Content, headings } = await render(item.entry);
-const components = { Rule, Rules, Callout, ExperienceChart, StrengthChart, SeasonTimeline, TacticFitTable, Sources };
+const components = { Rule, Rules, Callout, ExperienceChart, StrengthChart, SeasonTimeline, TacticFitTable, Sources, Screenshot, Clip };
 ---
 
 <GuideLayout

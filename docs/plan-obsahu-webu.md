@@ -58,24 +58,18 @@ Zdrojem je stav repozitářů `iceflow-server`, `iceflow_mobile`, `hockey_gm` a
 
 ## 3. Obsah webu
 
-- [ ] **Screenshoty z aplikace - jen tam, kde text sám nestačí.** Kluby nesmí pocházet z generátoru
-      (vlastní sada s pevnými názvy IceFlow Tigers, IceFlow Wolves ... přes dev seed). Pořadí podle
-      přínosu:
-      1. **Živý zápas** (článek Zápas, úvodní stránka): hráči na ledě s energií a průběžné
-         statistiky - hlavní odlišnost hry, textem se popíše nejhůř.
-      2. **Gólová animace** jako krátké video nebo GIF (článek Zápas, Příběh).
-      3. **Karta taktiky** se seznamy hodí se / neutrální / nehodí se (článek Typy hráčů u tabulky
-         vhodnosti).
-      4. **Trénink s barvami vhodnosti** (článek Trénink) - barvy modrá / zelená / oranžová / červená
-         se slovy vysvětlují špatně.
-      5. **Karta hráče** se šipkami formy a předpokladů jako rozsah dvou šipek (článek Hráči).
-      6. **Junior s rozsahy a TRT** (článek Junioři).
-      7. **Příprava na zápas** s dílky důležitosti zápasu (článek Zápas).
-      8. Úvodní stránka: 2-3 záběry (domovská obrazovka, živý zápas, tým).
+- [x] **Screenshoty z aplikace** (src/assets/screens/<jazyk>/, en + cs; video public/media). Svět pro
+      snímky: databáze iceflow_screens, kluby „IceFlow <přezdívka podle loga>“ s ručně vybranými
+      barvami, hráči „Name Surname“. Hotovo: živý zápas a video gólu (Zápas, úvodní stránka),
+      karta taktiky (Typy hráčů), karta hráče a předpoklady (Hráči), junioři (Junioři), příprava
+      s důležitostí zápasu (Zápas), domovská obrazovka (úvodní stránka), nápověda (i) (rozcestník
+      průvodce).
       Nepotřebují je: Pravidla, Kalibrace, Zdroje, Sezóna (má časovou osu), Přestupy, Klub, Úkoly.
       Postup: lokální server s rozjetou sezónou (`iceflow.dev.presimulate-to`) → emulátor `Pixel_8` /
-      `Pixel_9_Pro_XL` na šířku → `adb exec-out screencap -p` → oříznutí a WebP do
+      `Pixel_9_Pro_XL` na šířku → `adb shell screencap` do souboru a `adb pull` → oříznutí a WebP do
       `src/assets/screens/<lang>/`. EN a CS; ostatní jazyky použijí EN.
+- [ ] **Trénink s barvami vhodnosti** - ve světě pro snímky vycházely všechny šipky zeleně; nafotit,
+      až bude formace se smíšenou vhodností.
 - [ ] **Překlady do zbylých 8 jazyků** (de, fr, it, sv, fi, no, da, ru): průvodce, Příběh, právní
       stránky. Do té doby se zobrazuje angličtina s upozorněním. Názvy typů hráčů zůstávají anglicky.
 - [ ] **Editor animací** - samostatný článek „Jak vznikají záběry zápasu“ (`iceflow_animation_editor`:
