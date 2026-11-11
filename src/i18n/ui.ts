@@ -29,7 +29,7 @@ const en = {
   'nav.language': 'Language',
   'home.title': 'Ice hockey management game',
   'home.tagline':
-    'Run your own hockey club: build the roster, set the tactics, develop juniors and lead your team through live matches, the league and Elite.',
+    'Run your own hockey club: build the roster, set the tactics, develop juniors and lead your team through live matches, the classic league and the elite one.',
   'home.featuresTitle': 'What you do in Ice Flow',
   'home.trailer': 'Trailer',
   'home.ctaGuide': 'Explore the game guide',
@@ -152,7 +152,7 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'nav.language': 'Sprache',
     'home.title': 'Eishockey-Managerspiel',
     'home.tagline':
-      'Führe deinen eigenen Eishockeyclub: Stelle den Kader zusammen, lege die Taktik fest, fördere Junioren und führe dein Team durch Live-Spiele, die Liga und Elite.',
+      'Führe deinen eigenen Eishockeyclub: Stelle den Kader zusammen, lege die Taktik fest, fördere Junioren und führe dein Team durch Live-Spiele, die klassische Liga und die Eliteliga.',
     'home.featuresTitle': 'Was du in Ice Flow tust',
     'home.trailer': 'Trailer',
     'home.ctaGuide': 'Zum Spielguide',
@@ -211,7 +211,7 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'nav.language': 'Langue',
     'home.title': 'Jeu de gestion de hockey sur glace',
     'home.tagline':
-      'Dirigez votre propre club de hockey : composez l’effectif, fixez la tactique, formez les juniors et menez votre équipe à travers les matchs en direct, le championnat et l’Elite.',
+      'Dirigez votre propre club de hockey : composez l’effectif, fixez la tactique, formez les juniors et menez votre équipe à travers les matchs en direct, le championnat classique comme le championnat d’élite.',
     'home.featuresTitle': 'Ce que vous faites dans Ice Flow',
     'home.trailer': 'Bande-annonce',
     'home.ctaGuide': 'Découvrir le guide du jeu',
@@ -270,7 +270,7 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'nav.language': 'Lingua',
     'home.title': 'Gioco manageriale di hockey su ghiaccio',
     'home.tagline':
-      'Gestisci il tuo club di hockey: costruisci la rosa, imposta la tattica, fai crescere i giovani e guida la squadra in partite dal vivo, campionato ed Elite.',
+      'Gestisci il tuo club di hockey: costruisci la rosa, imposta la tattica, fai crescere i giovani e guida la squadra in partite dal vivo, nel campionato classico e in quello d’élite.',
     'home.featuresTitle': 'Cosa fai in Ice Flow',
     'home.trailer': 'Trailer',
     'home.ctaGuide': 'Scopri la guida al gioco',
@@ -329,7 +329,7 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'nav.language': 'Språk',
     'home.title': 'Managerspel om ishockey',
     'home.tagline':
-      'Driv din egen hockeyklubb: bygg truppen, lägg upp taktiken, utveckla juniorer och led laget genom livematcher, ligan och Elite.',
+      'Driv din egen hockeyklubb: bygg truppen, lägg upp taktiken, utveckla juniorer och led laget genom livematcher, den vanliga ligan och elitligan.',
     'home.featuresTitle': 'Vad du gör i Ice Flow',
     'home.trailer': 'Trailer',
     'home.ctaGuide': 'Utforska spelguiden',
@@ -388,7 +388,7 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'nav.language': 'Kieli',
     'home.title': 'Jääkiekon manageripeli',
     'home.tagline':
-      'Johda omaa jääkiekkoseuraasi: kokoa joukkue, laadi taktiikka, kehitä junioreita ja vie joukkueesi live-otteluiden, sarjan ja Eliten läpi.',
+      'Johda omaa jääkiekkoseuraasi: kokoa joukkue, laadi taktiikka, kehitä junioreita ja vie joukkueesi live-otteluiden, tavallisen sarjan ja eliittisarjan läpi.',
     'home.featuresTitle': 'Mitä teet Ice Flow’ssa',
     'home.trailer': 'Traileri',
     'home.ctaGuide': 'Tutustu peliohjeeseen',
@@ -447,7 +447,7 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'nav.language': 'Språk',
     'home.title': 'Managerspill om ishockey',
     'home.tagline':
-      'Driv din egen hockeyklubb: bygg stallen, legg taktikken, utvikle juniorer og led laget gjennom direktesendte kamper, ligaen og Elite.',
+      'Driv din egen hockeyklubb: bygg stallen, legg taktikken, utvikle juniorer og led laget gjennom direktesendte kamper, den vanlige ligaen og eliteligaen.',
     'home.featuresTitle': 'Hva du gjør i Ice Flow',
     'home.trailer': 'Trailer',
     'home.ctaGuide': 'Utforsk spillguiden',
@@ -506,7 +506,7 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'nav.language': 'Sprog',
     'home.title': 'Managerspil om ishockey',
     'home.tagline':
-      'Styr din egen hockeyklub: byg truppen, læg taktikken, udvikl juniorer og før holdet gennem livekampe, ligaen og Elite.',
+      'Styr din egen hockeyklub: byg truppen, læg taktikken, udvikl juniorer og før holdet gennem livekampe, den almindelige liga og eliteligaen.',
     'home.featuresTitle': 'Hvad du laver i Ice Flow',
     'home.trailer': 'Trailer',
     'home.ctaGuide': 'Udforsk spilguiden',
@@ -565,7 +565,7 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'nav.language': 'Язык',
     'home.title': 'Хоккейный менеджер',
     'home.tagline':
-      'Управляйте собственным хоккейным клубом: собирайте состав, выбирайте тактику, растите юниоров и ведите команду через живые матчи, лигу и Elite.',
+      'Управляйте собственным хоккейным клубом: собирайте состав, выбирайте тактику, растите юниоров и ведите команду через живые матчи, обычную лигу и элитную.',
     'home.featuresTitle': 'Чем вы занимаетесь в Ice Flow',
     'home.trailer': 'Трейлер',
     'home.ctaGuide': 'Открыть руководство по игре',
