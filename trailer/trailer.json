@@ -4,7 +4,6 @@
   "height": 1080,
   "fps": 30,
   "transition": 0.5,
-  "audio": false,
   "fonts": [
     "fonts/OpenSans-SemiBold.ttf",
     "C:/Windows/Fonts/seguisb.ttf",
@@ -12,18 +11,28 @@
     "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
   ],
   "segments": [
-    { "type": "title", "text": "EVERY DECISION MATTERS", "duration": 2.6, "reveal": 1.2 },
-    { "type": "clip", "path": "assets/player-swap.mp4", "start": 2.45, "end": 4.45 },
-    { "type": "clip", "path": "assets/goal-highlight.mp4", "start": 6.0, "end": 8.2 },
-    { "type": "title", "text": "ARE YOU READY?", "duration": 2.4, "reveal": 1.0 },
-    { "type": "clip", "path": "assets/subtle_contract_pen_animation.mp4", "speed": 2 },
+    { "type": "title", "text": "BUILD YOUR SQUAD", "duration": 2.2, "reveal": 1.0 },
+    { "type": "clip", "path": "assets/team-controls.mp4", "taps": "assets/team-controls.taps.json", "start": 2.4, "end": 4.6 },
+
+    { "type": "title", "text": "LEAD YOUR TEAM", "duration": 2.2, "reveal": 1.0 },
+    { "type": "clip", "path": "assets/player-swap.mp4", "taps": "assets/player-swap.taps.json", "start": 0.6, "end": 4.6, "speed": 1.6 },
+    { "type": "clip", "path": "assets/goal-highlight.mp4", "start": 5.9, "end": 8.05 },
+
+    { "type": "title", "text": "DRAFT TALENTS", "duration": 2.2, "reveal": 1.0 },
+    { "type": "clip", "path": "assets/junior-draft.mp4", "taps": "assets/junior-draft.taps.json", "start": 0.7, "speed": 1.5, "hold": 0.8 },
+
+    { "type": "title", "text": "EVERY DECISION MATTERS", "duration": 2.4, "reveal": 1.1 },
+    { "type": "clip", "path": "assets/subtle_contract_pen_animation.mp4", "speed": 2, "end": 3.6 },
     {
       "type": "logo_zoom",
+      "transition": 0,
       "path": "assets/subtle_contract_pen_animation.mp4",
+      "from": 3.6,
+      "speed": 2,
       "box": [967, 55, 1230, 262],
       "logo": "../src/assets/branding/logo_name.png",
-      "duration": 3.0,
-      "zoom": 2.2,
+      "duration": 3.2,
+      "zoom": 2.4,
       "margin": 1.5
     }
   ]

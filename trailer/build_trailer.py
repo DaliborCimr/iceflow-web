@@ -1,15 +1,26 @@
 """Builds the Ice Flow trailer from trailer.json.
 
-The timeline is data: a list of segments played in order, joined by a short crossfade.
-  - "title": a text card drawn here (dark background with soft light rays, the text revealed
-    left to right in the brand blue), silent.
-  - "clip":  a video file, scaled and padded to the output size; optional start/end cut and speed.
-  - "logo_zoom": the camera flies into the logo in the background of a clip's last frame, the
-    sharp logo artwork fading in over it.
-The trailer is silent unless trailer.json sets "audio": true (then the clips keep their sound).
+The timeline is data: a list of segments played in order. Each is joined to the one before by a
+crossfade - the global "transition", or the segment's own "transition" (0 = a straight cut).
 
-Adding to the trailer means adding a segment to trailer.json and running the script again; the
-same inputs always give the same video (the light rays come from a fixed seed).
+  - "title"     a text card drawn here: dark background with soft light rays, the text revealed
+                left to right in the brand blue.
+                  text, duration, reveal (seconds the reveal takes)
+  - "clip"      a video file, scaled into the frame (letterboxed when its shape differs).
+                  path, start / end (seconds of the source), speed (2 = twice as fast),
+                  hold (seconds the last frame stays),
+                  taps (a .taps.json written while recording: where and when the screen was
+                  touched - drawn as a touch marker, since a screen recording shows no finger)
+  - "logo_zoom" the camera flies into the logo in a clip's background while the clip keeps
+                playing; the sharp logo artwork fades in exactly over it and the room behind
+                darkens away. With "transition": 0 and "from" where the clip before it ended, the
+                footage runs on without a seam.
+                  path, from (seconds of the source), speed, box (the logo in the source's
+                  pixels: [x0, y0, x1, y1]), logo (transparent PNG), duration, zoom (seconds the
+                  camera moves), margin (room left around the logo at the end)
+
+The trailer is silent. Adding to it means adding a segment to trailer.json and running the
+script again; the same inputs always give the same video (the light rays come from a fixed seed).
 
 Source clips live in assets/ and the result in out/ - both stay out of git (see .gitignore);
 only this script and the timeline are versioned.
@@ -29,6 +40,7 @@ import sys
 import tempfile
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Iterator
 
 from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageFont
 
@@ -39,6 +51,7 @@ BLUE_DEEP = (8, 104, 168)
 BLUE_LIGHT = (24, 176, 245)
 BACKGROUND = (3, 6, 12)
 RAY_COLOR = (20, 60, 120)
+LETTERBOX = (5, 10, 15)  # the app's own background behind a phone-shaped recording
 
 
 def ffmpeg_exe() -> str:
@@ -55,19 +68,23 @@ def run(args: list[str]) -> None:
     subprocess.run(args, check=True)
 
 
-def probe_has_audio(ffmpeg: str, path: Path) -> bool:
+def probe(ffmpeg: str, path: Path) -> tuple[float, int, int]:
+    """Duration in seconds and the video's width and height."""
     out = subprocess.run([ffmpeg, "-hide_banner", "-i", str(path)], capture_output=True, text=True).stderr
-    return "Audio:" in out
-
-
-def probe_duration(ffmpeg: str, path: Path) -> float:
-    out = subprocess.run([ffmpeg, "-hide_banner", "-i", str(path)], capture_output=True, text=True).stderr
+    duration, size = None, None
     for line in out.splitlines():
         line = line.strip()
         if line.startswith("Duration:"):
             h, m, s = line.split(",")[0].split()[1].split(":")
-            return int(h) * 3600 + int(m) * 60 + float(s)
-    raise RuntimeError(f"No duration for {path}")
+            duration = int(h) * 3600 + int(m) * 60 + float(s)
+        if "Video:" in line and size is None:
+            for token in line.replace(",", " ").split():
+                if "x" in token and token.split("x")[0].isdigit() and token.split("x")[1].isdigit():
+                    size = tuple(int(v) for v in token.split("x"))
+                    break
+    if duration is None or size is None:
+        raise RuntimeError(f"Cannot read {path}")
+    return duration, size[0], size[1]
 
 
 @dataclass
@@ -86,6 +103,62 @@ def pick_font(candidates: list[str]) -> Path:
         if path.exists():
             return path
     raise FileNotFoundError("None of the fonts in trailer.json exists: " + ", ".join(candidates))
+
+
+def ease(t: float) -> float:
+    t = min(1.0, max(0.0, t))
+    return 1 - (1 - t) ** 3
+
+
+def ease_in_out(t: float) -> float:
+    t = min(1.0, max(0.0, t))
+    return t * t * (3 - 2 * t)
+
+
+class Encoder:
+    """Frames in, an mp4 out (silent, constant frame rate)."""
+
+    def __init__(self, ffmpeg: str, settings: Settings, out: Path):
+        self.proc = subprocess.Popen(
+            [ffmpeg, "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24",
+             "-s", f"{settings.width}x{settings.height}", "-r", str(settings.fps), "-i", "-",
+             "-c:v", "libx264", "-crf", "16", "-preset", "slow", "-pix_fmt", "yuv420p", str(out)],
+            stdin=subprocess.PIPE,
+        )
+
+    def write(self, frame: Image.Image) -> None:
+        self.proc.stdin.write(frame.tobytes())
+
+    def close(self) -> None:
+        self.proc.stdin.close()
+        if self.proc.wait() != 0:
+            raise RuntimeError("ffmpeg failed while encoding")
+
+
+def source_frames(ffmpeg: str, src: Path, fps: int, start: float, end: float | None, speed: float) -> Iterator[Image.Image]:
+    """The source's frames at its own size, cut and sped up, at the output frame rate.
+
+    ffmpeg only cuts (-ss / -t) and makes the frame rate constant; speeding up is done here by
+    taking every speed-th frame. Piped out as raw frames, ffmpeg 4.2 filled both a trim filter's
+    cut-off start and a setpts speed-up back in with copies.
+    """
+    _, w, h = probe(ffmpeg, src)
+    args = [ffmpeg, "-loglevel", "error", "-ss", f"{start:.3f}", "-i", str(src)]
+    if end is not None:
+        args += ["-t", f"{float(end) - start:.3f}"]
+    args += ["-vf", f"fps={fps},format=rgb24", "-f", "rawvideo", "-"]
+    proc = subprocess.Popen(args, stdout=subprocess.PIPE)
+    size = w * h * 3
+    index, wanted = 0, 0.0
+    while True:
+        data = proc.stdout.read(size)
+        if len(data) < size:
+            break
+        while index >= round(wanted):
+            yield Image.frombytes("RGB", (w, h), data)
+            wanted += speed
+        index += 1
+    proc.wait()
 
 
 # ---- Title card ---------------------------------------------------------------------------------
@@ -137,11 +210,6 @@ def text_layers(text: str, settings: Settings) -> tuple[Image.Image, Image.Image
     return Image.composite(gradient, Image.new("RGB", (width, height)), mask), mask, glow, box
 
 
-def ease(t: float) -> float:
-    t = min(1.0, max(0.0, t))
-    return 1 - (1 - t) ** 3
-
-
 def render_title(segment: dict, settings: Settings, ffmpeg: str, out: Path) -> None:
     width, height, fps = settings.width, settings.height, settings.fps
     duration = float(segment.get("duration", 3.0))
@@ -149,17 +217,10 @@ def render_title(segment: dict, settings: Settings, ffmpeg: str, out: Path) -> N
     rays = light_rays(width, height)
     filled, mask, glow, box = text_layers(segment["text"], settings)
     glow_rgb = Image.new("RGB", (width, height), BLUE_LIGHT)
-    frames = int(round(duration * fps))
     soft = max(4, int(width * 0.04))
-
-    proc = subprocess.Popen(
-        [ffmpeg, "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{width}x{height}",
-         "-r", str(fps), "-i", "-", "-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo", "-shortest",
-         "-c:v", "libx264", "-crf", "16", "-preset", "slow", "-pix_fmt", "yuv420p",
-         "-c:a", "aac", "-b:a", "192k", str(out)],
-        stdin=subprocess.PIPE,
-    )
-    for i in range(frames):
+    wipe = ImageChops.invert(Image.linear_gradient("L").rotate(90, expand=True).resize((soft, height)))
+    encoder = Encoder(ffmpeg, settings, out)
+    for i in range(int(round(duration * fps))):
         t = i / fps
         # Background drifts slowly sideways and fades in over the first half second.
         drift = int((width * 0.08) * t / duration)
@@ -167,160 +228,146 @@ def render_title(segment: dict, settings: Settings, ffmpeg: str, out: Path) -> N
         frame = Image.blend(Image.new("RGB", (width, height), BACKGROUND), frame, ease(t / 0.5))
         # Left-to-right wipe with a soft edge over the reveal time.
         edge = box[0] + (box[2] - box[0] + soft) * ease(t / reveal)
-        wipe = Image.linear_gradient("L").rotate(90, expand=True).resize((soft, height))
         wipe_mask = Image.new("L", (width, height), 0)
         wipe_mask.paste(255, (0, 0, max(0, int(edge - soft)), height))
-        wipe_mask.paste(ImageChops.invert(wipe), (int(edge - soft), 0))
-        text_mask = ImageChops.multiply(mask, wipe_mask)
-        glow_mask = ImageChops.multiply(glow, wipe_mask)
-        frame = Image.composite(glow_rgb, frame, glow_mask)
-        frame = Image.composite(filled, frame, text_mask)
-        proc.stdin.write(frame.tobytes())
-    proc.stdin.close()
-    if proc.wait() != 0:
-        raise RuntimeError("ffmpeg failed while encoding the title")
+        wipe_mask.paste(wipe, (int(edge - soft), 0))
+        frame = Image.composite(glow_rgb, frame, ImageChops.multiply(glow, wipe_mask))
+        frame = Image.composite(filled, frame, ImageChops.multiply(mask, wipe_mask))
+        encoder.write(frame)
+    encoder.close()
 
 
 # ---- Clip ---------------------------------------------------------------------------------------
+
+
+def load_taps(segment: dict) -> list[dict]:
+    taps = segment.get("taps", [])
+    if isinstance(taps, str):
+        taps = json.loads((HERE / taps).read_text(encoding="utf-8"))
+    return taps
+
+
+def draw_touch(frame: Image.Image, x: float, y: float, age: float, scale: float) -> None:
+    """A finger's touch: a filled dot that appears at once and a ring that widens and fades."""
+    if age < 0 or age > 0.6:
+        return
+    overlay = Image.new("RGBA", frame.size, (0, 0, 0, 0))
+    draw = ImageDraw.Draw(overlay)
+    dot = 22 * scale
+    dot_alpha = int(200 * (1 - ease_in_out(max(0.0, age - 0.25) / 0.35)))
+    draw.ellipse((x - dot, y - dot, x + dot, y + dot), fill=(255, 255, 255, dot_alpha))
+    ring = (22 + 70 * ease(age / 0.6)) * scale
+    ring_alpha = int(220 * (1 - age / 0.6))
+    draw.ellipse((x - ring, y - ring, x + ring, y + ring), outline=(255, 255, 255, ring_alpha), width=max(2, int(4 * scale)))
+    frame.paste(Image.alpha_composite(frame.convert("RGBA"), overlay).convert("RGB"))
+
+
+def fit(frame: Image.Image, settings: Settings) -> tuple[Image.Image, float, float, float]:
+    """The source frame scaled into the output, letterboxed; also the scale and offsets used."""
+    w, h = settings.width, settings.height
+    scale = min(w / frame.width, h / frame.height)
+    size = (round(frame.width * scale), round(frame.height * scale))
+    canvas = Image.new("RGB", (w, h), LETTERBOX)
+    ox, oy = (w - size[0]) // 2, (h - size[1]) // 2
+    canvas.paste(frame.resize(size, Image.LANCZOS), (ox, oy))
+    return canvas, scale, ox, oy
 
 
 def render_clip(segment: dict, settings: Settings, ffmpeg: str, out: Path) -> None:
     src = (HERE / segment["path"]).resolve()
     if not src.exists():
         raise FileNotFoundError(f"Clip not found: {src} (source clips go to trailer/assets/)")
-    w, h, fps = settings.width, settings.height, settings.fps
-    # Optional cut (start/end, seconds of the source) and speed (2 = twice as fast).
+    start = float(segment.get("start", 0))
+    end = segment.get("end")
     speed = float(segment.get("speed", 1.0))
-    # fps first: screen recordings have a variable frame rate, and trimming them before they are
-    # made constant left the cut at its full length.
-    cut = f"trim=start={segment.get('start', 0)}:end={segment.get('end', 1e9)}," if ("start" in segment or "end" in segment) else ""
-    vf = (f"fps={fps},{cut}setpts=(PTS-STARTPTS)/{speed},fps={fps},"
-          f"scale={w}:{h}:force_original_aspect_ratio=decrease:flags=lanczos,pad={w}:{h}:(ow-iw)/2:(oh-ih)/2,format=yuv420p")
-    args = [ffmpeg, "-y", "-loglevel", "error", "-i", str(src)]
-    if probe_has_audio(ffmpeg, src):
-        af = "aresample=48000,aformat=channel_layouts=stereo"
-        if speed != 1.0:
-            af = f"atempo={speed}," + af
-        af = "asetpts=PTS-STARTPTS," + af
-        if "start" in segment or "end" in segment:
-            af = f"atrim=start={segment.get('start', 0)}:end={segment.get('end', 1e9)}," + af
-        args += ["-vf", vf, "-af", af]
-    else:
-        args += ["-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo", "-vf", vf]
-    # The cut's own length caps every stream: -shortest does not stop the silent track that ffmpeg
-    # 4.2 runs beside a filtered video, and the part came out as long as its whole source.
-    source_end = min(float(segment.get("end", 1e9)), probe_duration(ffmpeg, src))
-    length = (source_end - float(segment.get("start", 0))) / speed
-    args += ["-t", f"{length:.3f}", "-c:v", "libx264", "-crf", "16", "-preset", "slow", "-c:a", "aac", "-b:a", "192k", str(out)]
-    run(args)
+    taps = load_taps(segment)
+    encoder = Encoder(ffmpeg, settings, out)
+    frame = None
+    for i, raw in enumerate(source_frames(ffmpeg, src, settings.fps, start, end, speed)):
+        frame, scale, ox, oy = fit(raw, settings)
+        t_source = start + i / settings.fps * speed
+        for tap in taps:
+            draw_touch(frame, ox + tap["x"] * scale, oy + tap["y"] * scale, (t_source - tap["t"]) / speed, scale * settings.height / 1080)
+        encoder.write(frame)
+    # A screen recording stops when the screen stops changing; "hold" keeps its last picture.
+    for _ in range(int(round(float(segment.get("hold", 0)) * settings.fps))):
+        encoder.write(frame)
+    encoder.close()
 
 
 # ---- Logo zoom ----------------------------------------------------------------------------------
 
 
-def ease_in_out(t: float) -> float:
-    t = min(1.0, max(0.0, t))
-    return t * t * (3 - 2 * t)
-
-
 def render_logo_zoom(segment: dict, settings: Settings, ffmpeg: str, out: Path) -> None:
-    """The camera flies from the whole last frame of a clip into the logo in its background.
-
-    The clip's own pixels go soft that close, so the sharp logo artwork (`logo`, a transparent PNG)
-    is laid exactly over the logo in the frame and fades in while the camera closes in; the room
-    behind it darkens away, leaving the clean logo.
-      box     - the logo's outline in the clip's own pixels [x0, y0, x1, y1]
-      margin  - how much room is left around the logo at the end (1.0 = edge to edge)
-    """
     w, h, fps = settings.width, settings.height, settings.fps
     src = (HERE / segment["path"]).resolve()
     duration = float(segment.get("duration", 3.0))
     zoom_time = float(segment.get("zoom", duration * 0.75))
     margin = float(segment.get("margin", 1.6))
-    with tempfile.TemporaryDirectory() as tmp:
-        still = Path(tmp) / "last.png"
-        run([ffmpeg, "-y", "-loglevel", "error", "-sseof", "-0.1", "-i", str(src), "-frames:v", "1", str(still)])
-        base = Image.open(still).convert("RGB")
-    bw, bh = base.size
     x0, y0, x1, y1 = segment["box"]
     logo = Image.open(HERE / segment["logo"]).convert("RGBA")
     logo = logo.crop(logo.getbbox())
+    footage = list(source_frames(ffmpeg, src, fps, float(segment.get("from", 0)), None, float(segment.get("speed", 1.0))))
+    if not footage:
+        raise RuntimeError(f"No footage left in {src} after {segment.get('from', 0)} s")
+    bw, bh = footage[0].size
 
-    # Camera rectangles in the clip's pixels, both of the output's aspect ratio.
+    # Camera rectangles in the source's pixels, both of the output's aspect ratio. The first one
+    # is the whole frame as the clip before showed it, so a straight cut into this has no seam.
     aspect = w / h
-    start = (0.0, 0.0, float(bw), float(bh))
+    first_h = bh if bw / bh >= aspect else bw / aspect
+    first = ((bw - first_h * aspect) / 2, (bh - first_h) / 2, (bw + first_h * aspect) / 2, (bh + first_h) / 2)
     cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
     end_h = max((y1 - y0), (x1 - x0) / aspect) * margin
-    end_w = end_h * aspect
-    end = (cx - end_w / 2, cy - end_h / 2, cx + end_w / 2, cy + end_h / 2)
+    last = (cx - end_h * aspect / 2, cy - end_h / 2, cx + end_h * aspect / 2, cy + end_h / 2)
     dark = Image.new("RGB", (w, h), BACKGROUND)
 
-    proc = subprocess.Popen(
-        [ffmpeg, "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{w}x{h}", "-r", str(fps),
-         "-i", "-", "-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo", "-shortest",
-         "-c:v", "libx264", "-crf", "16", "-preset", "slow", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", str(out)],
-        stdin=subprocess.PIPE,
-    )
-    frames = int(round(duration * fps))
-    for i in range(frames):
+    encoder = Encoder(ffmpeg, settings, out)
+    for i in range(int(round(duration * fps))):
+        base = footage[min(i, len(footage) - 1)]  # the footage plays on, then holds its last frame
         p = ease_in_out(i / fps / zoom_time)
-        cam = tuple(start[k] + (end[k] - start[k]) * p for k in range(4))
+        cam = tuple(first[k] + (last[k] - first[k]) * p for k in range(4))
         frame = base.transform((w, h), Image.EXTENT, cam, resample=Image.BICUBIC)
         # The room fades to the trailer's dark as the camera arrives.
-        frame = Image.blend(frame, dark, ease_in_out((p - 0.55) / 0.45) * 0.92)
+        frame = Image.blend(frame, dark, ease_in_out((p - 0.5) / 0.5) * 0.92)
         # The sharp logo, placed where the frame's own logo is, fading in over the second half.
-        alpha = ease_in_out((p - 0.35) / 0.55)
+        alpha = ease_in_out((p - 0.3) / 0.6)
         if alpha > 0:
-            sx = w / (cam[2] - cam[0])
-            sy = h / (cam[3] - cam[1])
+            sx, sy = w / (cam[2] - cam[0]), h / (cam[3] - cam[1])
             lx0, ly0 = (x0 - cam[0]) * sx, (y0 - cam[1]) * sy
             lw, lh = (x1 - x0) * sx, (y1 - y0) * sy
             scale = min(lw / logo.width, lh / logo.height)
             size = (max(1, int(logo.width * scale)), max(1, int(logo.height * scale)))
             sharp = logo.resize(size, Image.LANCZOS)
-            pos = (int(lx0 + (lw - size[0]) / 2), int(ly0 + (lh - size[1]) / 2))
             layer = Image.new("RGBA", (w, h), (0, 0, 0, 0))
-            layer.paste(sharp, pos, sharp)
+            layer.paste(sharp, (int(lx0 + (lw - size[0]) / 2), int(ly0 + (lh - size[1]) / 2)), sharp)
             layer.putalpha(layer.getchannel("A").point(lambda v: int(v * alpha)))
             frame = Image.alpha_composite(frame.convert("RGBA"), layer).convert("RGB")
-        proc.stdin.write(frame.tobytes())
-    proc.stdin.close()
-    if proc.wait() != 0:
-        raise RuntimeError("ffmpeg failed while encoding the logo zoom")
+        encoder.write(frame)
+    encoder.close()
 
 
 # ---- Assembly -----------------------------------------------------------------------------------
 
 
-def join(parts: list[Path], transition: float, settings: Settings, ffmpeg: str, out: Path, audio: bool) -> None:
-    """Crossfades every part into the next - the picture, and the sound too when `audio` is on."""
-    durations = [probe_duration(ffmpeg, p) for p in parts]
-    width, height, fps = settings.width, settings.height, settings.fps
+def join(parts: list[Path], transitions: list[float], settings: Settings, ffmpeg: str, out: Path) -> None:
+    """Lays every part over a black canvas at its start; each fades in over the one before it
+    for its transition (0 = a cut). Overlay + an alpha fade rather than xfade, so ffmpeg older
+    than 4.3 (the one bundled with imageio-ffmpeg for Python 3.8) works too."""
+    durations = [probe(ffmpeg, p)[0] for p in parts]
     starts = [0.0]
-    for d in durations[:-1]:
-        starts.append(starts[-1] + d - transition)
+    for i in range(1, len(parts)):
+        starts.append(starts[-1] + durations[i - 1] - transitions[i])
     total = starts[-1] + durations[-1]
     args = [ffmpeg, "-y", "-loglevel", "error"]
     for p in parts:
         args += ["-i", str(p)]
-    # Picture: every part laid over a black canvas at its start time, each after the first fading
-    # in over the one before it. Built from overlay + an alpha fade rather than xfade, so ffmpeg
-    # older than 4.3 (the one bundled with imageio-ffmpeg for Python 3.8) works too.
-    chains = [f"color=c=black:s={width}x{height}:r={fps}:d={total:.3f}[c0]"]
-    v_prev = "c0"
+    chains = [f"color=c=black:s={settings.width}x{settings.height}:r={settings.fps}:d={total:.3f}[c0]"]
     for i, start in enumerate(starts):
-        fade = f",fade=t=in:st=0:d={transition}:alpha=1" if i > 0 else ""
+        fade = f",fade=t=in:st=0:d={transitions[i]}:alpha=1" if i > 0 and transitions[i] > 0 else ""
         chains.append(f"[{i}:v]format=yuva420p{fade},setpts=PTS-STARTPTS+{start:.3f}/TB[p{i}]")
-        chains.append(f"[{v_prev}][p{i}]overlay=eof_action=pass:format=auto[c{i + 1}]")
-        v_prev = f"c{i + 1}"
-    sound = ["-an"]
-    if audio:
-        a_prev = "0:a"
-        for i in range(1, len(parts)):
-            chains.append(f"[{a_prev}][{i}:a]acrossfade=d={transition}[a{i}]")
-            a_prev = f"a{i}"
-        sound = ["-map", f"[{a_prev}]", "-c:a", "aac", "-b:a", "192k"]
-    args += ["-filter_complex", ";".join(chains), "-map", f"[{v_prev}]", *sound,
+        chains.append(f"[c{i}][p{i}]overlay=eof_action=pass:format=auto[c{i + 1}]")
+    args += ["-filter_complex", ";".join(chains), "-map", f"[c{len(parts)}]", "-an",
              "-c:v", "libx264", "-crf", "18", "-preset", "slow", "-pix_fmt", "yuv420p",
              "-movflags", "+faststart", str(out)]
     run(args)
@@ -338,22 +385,20 @@ def main() -> None:
     ffmpeg = ffmpeg_exe()
     out = HERE / config.get("output", "out/trailer.mp4")
     out.parent.mkdir(parents=True, exist_ok=True)
+    renderers = {"title": render_title, "clip": render_clip, "logo_zoom": render_logo_zoom}
+    default_transition = float(config.get("transition", 0.5))
     with tempfile.TemporaryDirectory() as tmp:
-        parts = []
+        parts, transitions = [], []
         for index, segment in enumerate(config["segments"]):
             part = Path(tmp) / f"part{index:02d}.mp4"
             kind = segment["type"]
             print(f"[{index + 1}/{len(config['segments'])}] {kind}: {segment.get('text') or segment.get('path')}")
-            if kind == "title":
-                render_title(segment, settings, ffmpeg, part)
-            elif kind == "clip":
-                render_clip(segment, settings, ffmpeg, part)
-            elif kind == "logo_zoom":
-                render_logo_zoom(segment, settings, ffmpeg, part)
-            else:
+            if kind not in renderers:
                 raise ValueError(f"Unknown segment type {kind!r}")
+            renderers[kind](segment, settings, ffmpeg, part)
             parts.append(part)
-        join(parts, float(config.get("transition", 0.6)), settings, ffmpeg, out, bool(config.get("audio", False)))
+            transitions.append(float(segment.get("transition", default_transition)) if index > 0 else 0.0)
+        join(parts, transitions, settings, ffmpeg, out)
     print(f"Done: {out}")
 
 
