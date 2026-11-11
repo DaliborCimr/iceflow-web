@@ -1,4 +1,5 @@
 ---
+import { url, stripBase } from '../url';
 import { languageNames, locales, useTranslations, type Locale } from '../i18n/ui';
 
 interface Props {
@@ -8,7 +9,7 @@ interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 // Same page in another language: swap the leading /<lang>/ segment.
-const rest = Astro.url.pathname.replace(/^\/[^/]+/, '');
+const rest = stripBase(Astro.url.pathname).replace(/^\/[^/]+/, '');
 const current = languageNames[lang];
 ---
 
@@ -21,7 +22,7 @@ const current = languageNames[lang];
     {locales.map((code) => (
       <li>
         <a
-          href={`/${code}${rest || '/'}`}
+          href={url(`/${code}${rest || '/'}`)}
           hreflang={code}
           lang={code}
           aria-current={code === lang ? 'true' : undefined}

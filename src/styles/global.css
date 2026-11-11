@@ -108,6 +108,21 @@ img {
   color: var(--muted);
 }
 
+/* Values stay on one line ("50,1 %" never leaves its % behind); only the first column, which holds
+   the row's label, and the headers wrap - balanced, so no single short word ends up alone. */
+.prose .num td:not(:first-child),
+.prose-doc .num td:not(:first-child) {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.prose th,
+.prose-doc th,
+.prose td:first-child,
+.prose-doc td:first-child {
+  text-wrap: balance;
+}
+
 .prose td:first-child,
 .prose-doc td:first-child {
   color: var(--text);

@@ -1,4 +1,5 @@
 ---
+import { url } from '../../url';
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
@@ -43,11 +44,11 @@ const chips = [
         <h1>{fullName}</h1>
         <p class="tagline">{t('home.tagline')}</p>
         <div class="actions">
-          <a class="btn primary" href={`/${lang}/guide/`}>
+          <a class="btn primary" href={url(`/${lang}/guide/`)}>
             {t('home.ctaGuide')}
             <Icon name="arrow_forward" size={18} />
           </a>
-          <a class="btn ghost" href={`/${lang}/story/`}>{t('home.ctaStory')}</a>
+          <a class="btn ghost" href={url(`/${lang}/story/`)}>{t('home.ctaStory')}</a>
         </div>
         <ul class="chips">
           {chips.map((c) => (
@@ -98,7 +99,7 @@ const chips = [
   <section class="container more">
     <h2>{t('home.moreTitle')}</h2>
     <div class="links">
-      <a href={`/${lang}/guide/`}>
+      <a href={url(`/${lang}/guide/`)}>
         <span class="icon"><Icon name="menu_book" size={24} /></span>
         <span>
           <strong>{t('nav.guide')}</strong>
@@ -106,7 +107,7 @@ const chips = [
         </span>
         <Icon name="arrow_forward" size={20} class="arrow" />
       </a>
-      <a href={`/${lang}/story/`}>
+      <a href={url(`/${lang}/story/`)}>
         <span class="icon"><Icon name="auto_stories" size={24} /></span>
         <span>
           <strong>{t('nav.story')}</strong>

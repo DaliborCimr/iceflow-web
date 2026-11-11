@@ -4,8 +4,10 @@ import { defaultLocale, locales } from './src/i18n/locales';
 
 export default defineConfig({
   integrations: [mdx()],
-  // Set once the Cloudflare domain exists (canonical and hreflang URLs).
-  // site: 'https://iceflow.example',
+  // Both come from the build environment: the GitHub Pages workflow serves the site under
+  // /iceflow-web/; a local build and the future Cloudflare domain serve it from the root.
+  site: process.env.SITE_URL || undefined,
+  base: process.env.BASE_PATH || '/',
   i18n: {
     locales: [...locales],
     defaultLocale,

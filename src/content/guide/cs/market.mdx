@@ -27,7 +27,7 @@ Na přestupovém trhu se všechno platí **gold pucky** a aukce běží v reáln
 
 Nabídka nemá odpočet, dokud nikdo nepřihodí. **První příhoz spustí osmiminutovou aukci** a nejvyšší
 příhoz na konci hráče kupuje. Příhoz v posledních 90 sekundách aukci prodlouží tak, aby zbývalo 90
-sekund.
+sekund. <TestOnly />
 
 <Callout type="note">
   Přihazovat jde jen tam, kde má kádr na daném postu místo, a místo se počítá jako obsazené už od
@@ -42,7 +42,11 @@ sekund.
     Klub může mít najednou nabídnuté nejvýše tři hráče. Nabízený hráč nehraje za žádný z tvých týmů. Stáhnout ho jde, jen dokud nikdo nepřihodil.
   </Rule>
   <Rule icon="flash_on" title="Rychlý prodej">
-    Uzavře se hned za 70 % referenční hodnoty hráče. Nejde vrátit.
+    Uzavře se hned za 70 % referenční hodnoty hráče a nejde vrátit. Předčasné ukončení smlouvy stojí
+    odstupné ve Flow, zaplacené hned: dvě třetiny toho, co smlouva ještě dluží - zbytek této sezóny a
+    všechny další sezóny - u hráče mladšího 26 let jedna třetina. U hráče, který oznámil konec
+    kariéry, se počítá jen tato sezóna. Když na odstupné nemáš dost Flow, rychlý prodej nejde. Prodej
+    v aukci odstupné nestojí.
   </Rule>
   <Rule icon="percent" title="Kolik dostaneš">
     Prodávající klub dostane 75 % prodejní ceny - u rychlého prodeje je to zhruba 52,5 % referenční

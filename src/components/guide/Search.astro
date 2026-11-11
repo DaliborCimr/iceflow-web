@@ -12,28 +12,29 @@ const t = useTranslations(Astro.props.lang);
 
 <div class="guide-search" data-placeholder={t('guide.search')} hidden></div>
 
-<script is:inline>
+<script is:inline define:vars={{ base: import.meta.env.BASE_URL.replace(/\/?$/, '/') }}>
   (async () => {
     const boxes = document.querySelectorAll('.guide-search');
     if (!boxes.length) return;
     try {
-      const ok = await fetch('/pagefind/pagefind-ui.js', { method: 'HEAD' });
+      const ok = await fetch(`${base}pagefind/pagefind-ui.js`, { method: 'HEAD' });
       if (!ok.ok) return;
     } catch {
       return;
     }
     const css = document.createElement('link');
     css.rel = 'stylesheet';
-    css.href = '/pagefind/pagefind-ui.css';
+    css.href = `${base}pagefind/pagefind-ui.css`;
     document.head.append(css);
     const js = document.createElement('script');
-    js.src = '/pagefind/pagefind-ui.js';
+    js.src = `${base}pagefind/pagefind-ui.js`;
     js.onload = () => {
       boxes.forEach((el, i) => {
         el.id ||= `guide-search-${i}`;
         el.hidden = false;
         new PagefindUI({
           element: `#${el.id}`,
+          baseUrl: base,
           showImages: false,
           resetStyles: false,
           translations: { placeholder: el.dataset.placeholder },

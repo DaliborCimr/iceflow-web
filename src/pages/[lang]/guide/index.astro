@@ -1,4 +1,5 @@
 ---
+import { url } from '../../../url';
 import GuideLayout from '../../../layouts/GuideLayout.astro';
 import Icon from '../../../components/Icon.astro';
 import Screenshot from '../../../components/guide/Screenshot.astro';
@@ -25,7 +26,7 @@ const items = await getGuide(lang);
         <ul class="cards">
           {inGroup.map(({ entry, slug, isFallback }) => (
             <li>
-              <a href={`/${lang}/guide/${slug}/`} lang={isFallback ? 'en' : undefined}>
+              <a href={url(`/${lang}/guide/${slug}/`)} lang={isFallback ? 'en' : undefined}>
                 <span class="badge"><Icon name={entry.data.icon} size={22} /></span>
                 <span class="text">
                   <strong>{entry.data.title}</strong>

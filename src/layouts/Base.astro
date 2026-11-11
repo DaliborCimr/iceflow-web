@@ -1,4 +1,5 @@
 ---
+import { url } from '../url';
 import '../styles/global.css';
 import { Image } from 'astro:assets';
 import wordmark from '../assets/branding/name_trimmed.png';
@@ -18,12 +19,12 @@ const t = useTranslations(lang);
 const pageTitle = title === fullName ? fullName : `${title} | ${brand}`;
 const path = Astro.url.pathname;
 const nav = [
-  { href: `/${lang}/`, label: t('nav.home') },
-  { href: `/${lang}/guide/`, label: t('nav.guide') },
-  { href: `/${lang}/story/`, label: t('nav.story') },
+  { href: url(`/${lang}/`), label: t('nav.home') },
+  { href: url(`/${lang}/guide/`), label: t('nav.guide') },
+  { href: url(`/${lang}/story/`), label: t('nav.story') },
 ];
 const isActive = (href: string) =>
-  href === `/${lang}/` ? path === href : path.startsWith(href);
+  href === url(`/${lang}/`) ? path === href : path.startsWith(href);
 ---
 
 <!doctype html>
@@ -32,14 +33,14 @@ const isActive = (href: string) =>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#081018" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type="image/png" href={url('/favicon.png')} />
     <title>{pageTitle}</title>
     {description && <meta name="description" content={description} />}
   </head>
   <body>
     <header class="site-header">
       <div class="container bar">
-        <a href={`/${lang}/`} class="brand" aria-label={brand}>
+        <a href={url(`/${lang}/`)} class="brand" aria-label={brand}>
           <Image src={wordmark} alt={brand} width={160} loading="eager" />
         </a>
         <nav class="nav">
@@ -61,8 +62,8 @@ const isActive = (href: string) =>
       <div class="container footer-inner">
         <span>© {new Date().getFullYear()} {brand}. {t('footer.rights')}</span>
         <span class="links">
-          <a href={`/${lang}/privacy/`}>{t('nav.privacy')}</a>
-          <a href={`/${lang}/terms/`}>{t('nav.terms')}</a>
+          <a href={url(`/${lang}/privacy/`)}>{t('nav.privacy')}</a>
+          <a href={url(`/${lang}/terms/`)}>{t('nav.terms')}</a>
         </span>
       </div>
     </footer>

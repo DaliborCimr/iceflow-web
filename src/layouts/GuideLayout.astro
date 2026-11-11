@@ -1,4 +1,5 @@
 ---
+import { url } from '../url';
 // Documentation layout: guide contents on the left (a drawer on phones), the article in the
 // middle, "on this page" on the right, previous/next at the bottom.
 import Base from './Base.astro';
@@ -47,7 +48,7 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
 
     <article class="content prose-doc" data-pagefind-body>
       <nav class="crumbs" aria-label="Breadcrumb" data-pagefind-ignore>
-        <a href={`/${lang}/guide/`}>{t('nav.guide')}</a>
+        <a href={url(`/${lang}/guide/`)}>{t('nav.guide')}</a>
         {current && (
           <>
             <span aria-hidden="true">›</span>
@@ -62,13 +63,13 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
       {(prev || next) && (
         <nav class="pager" data-pagefind-ignore>
           {prev ? (
-            <a class="prev" href={`/${lang}/guide/${prev.slug}/`}>
+            <a class="prev" href={url(`/${lang}/guide/${prev.slug}/`)}>
               <small>{t('guide.prev')}</small>
               <span>{prev.entry.data.title}</span>
             </a>
           ) : <span />}
           {next && (
-            <a class="next" href={`/${lang}/guide/${next.slug}/`}>
+            <a class="next" href={url(`/${lang}/guide/${next.slug}/`)}>
               <small>{t('guide.next')}</small>
               <span>{next.entry.data.title}</span>
             </a>

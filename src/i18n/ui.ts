@@ -62,6 +62,8 @@ const en = {
   'guide.empty': 'Articles are on the way.',
   'guide.basis':
     'Game rules in this guide are taken from the in-app help and checked against the game server. Claims about real hockey link to their sources in the text.',
+  'guide.testBadge': 'Test version',
+  'guide.testNote': 'Applies to the current test version; it may change for the release.',
   'guide.onThisPage': 'On this page',
   'guide.prev': 'Previous',
   'guide.next': 'Next',
@@ -123,6 +125,8 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'guide.empty': 'Články se připravují.',
     'guide.basis':
       'Herní pravidla v průvodci vycházejí z nápovědy v aplikaci a jsou ověřená proti hernímu serveru. Tvrzení o skutečném hokeji odkazují na své zdroje přímo v textu.',
+    'guide.testBadge': 'Testovací verze',
+    'guide.testNote': 'Platí pro současnou testovací verzi; do vydání se může změnit.',
     'guide.onThisPage': 'Na této stránce',
     'guide.prev': 'Předchozí',
     'guide.next': 'Další',
@@ -179,6 +183,8 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'guide.empty': 'Artikel folgen in Kürze.',
     'guide.basis':
       'Die Spielregeln in dieser Anleitung stammen aus der Hilfe in der App und sind mit dem Spielserver abgeglichen. Aussagen über echtes Eishockey verlinken ihre Quellen direkt im Text.',
+    'guide.testBadge': 'Testversion',
+    'guide.testNote': 'Gilt für die aktuelle Testversion; bis zur Veröffentlichung kann sich das ändern.',
     'guide.onThisPage': 'Auf dieser Seite',
     'guide.prev': 'Zurück',
     'guide.next': 'Weiter',
@@ -235,6 +241,8 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'guide.empty': 'Les articles arrivent bientôt.',
     'guide.basis':
       'Les règles du jeu de ce guide proviennent de l’aide de l’application et sont vérifiées sur le serveur du jeu. Les affirmations sur le vrai hockey renvoient à leurs sources dans le texte.',
+    'guide.testBadge': 'Version de test',
+    'guide.testNote': 'S’applique à la version de test actuelle ; peut changer d’ici la sortie.',
     'guide.onThisPage': 'Sur cette page',
     'guide.prev': 'Précédent',
     'guide.next': 'Suivant',
@@ -291,6 +299,8 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'guide.empty': 'Gli articoli sono in arrivo.',
     'guide.basis':
       'Le regole di gioco di questa guida provengono dall’aiuto nell’app e sono verificate sul server di gioco. Le affermazioni sull’hockey reale rimandano alle fonti nel testo.',
+    'guide.testBadge': 'Versione di prova',
+    'guide.testNote': 'Vale per l’attuale versione di prova; può cambiare prima del rilascio.',
     'guide.onThisPage': 'In questa pagina',
     'guide.prev': 'Precedente',
     'guide.next': 'Successivo',
@@ -347,6 +357,8 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'guide.empty': 'Artiklar är på väg.',
     'guide.basis':
       'Spelreglerna i guiden kommer från hjälpen i appen och är kontrollerade mot spelservern. Påståenden om riktig hockey länkar till sina källor i texten.',
+    'guide.testBadge': 'Testversion',
+    'guide.testNote': 'Gäller den nuvarande testversionen; kan ändras till lanseringen.',
     'guide.onThisPage': 'På den här sidan',
     'guide.prev': 'Föregående',
     'guide.next': 'Nästa',
@@ -403,6 +415,8 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'guide.empty': 'Artikkelit ovat tulossa.',
     'guide.basis':
       'Oppaan pelisäännöt perustuvat sovelluksen ohjeeseen ja on tarkistettu pelipalvelimelta. Väitteet oikeasta jääkiekosta linkittävät lähteisiinsä tekstissä.',
+    'guide.testBadge': 'Testiversio',
+    'guide.testNote': 'Koskee nykyistä testiversiota; voi muuttua julkaisuun mennessä.',
     'guide.onThisPage': 'Tällä sivulla',
     'guide.prev': 'Edellinen',
     'guide.next': 'Seuraava',
@@ -459,6 +473,8 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'guide.empty': 'Artikler kommer snart.',
     'guide.basis':
       'Spillreglene i guiden kommer fra hjelpen i appen og er kontrollert mot spillserveren. Påstander om ekte hockey lenker til kildene sine i teksten.',
+    'guide.testBadge': 'Testversjon',
+    'guide.testNote': 'Gjelder den nåværende testversjonen; kan endres før lansering.',
     'guide.onThisPage': 'På denne siden',
     'guide.prev': 'Forrige',
     'guide.next': 'Neste',
@@ -515,6 +531,8 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'guide.empty': 'Artikler er på vej.',
     'guide.basis':
       'Spillets regler i guiden kommer fra hjælpen i appen og er kontrolleret mod spilserveren. Påstande om rigtig hockey linker til deres kilder i teksten.',
+    'guide.testBadge': 'Testversion',
+    'guide.testNote': 'Gælder den nuværende testversion; kan ændres inden udgivelsen.',
     'guide.onThisPage': 'På denne side',
     'guide.prev': 'Forrige',
     'guide.next': 'Næste',
@@ -571,6 +589,8 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'guide.empty': 'Статьи скоро появятся.',
     'guide.basis':
       'Правила игры в руководстве взяты из справки приложения и сверены с игровым сервером. Утверждения о реальном хоккее ссылаются на источники прямо в тексте.',
+    'guide.testBadge': 'Тестовая версия',
+    'guide.testNote': 'Действует в текущей тестовой версии; к релизу может измениться.',
     'guide.onThisPage': 'На этой странице',
     'guide.prev': 'Назад',
     'guide.next': 'Далее',

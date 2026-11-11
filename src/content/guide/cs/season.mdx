@@ -81,9 +81,11 @@ Elite je liga nejlepších klubů, která se hraje souběžně s tvou ligou.
 
 <Rules>
   <Rule icon="how_to_reg" title="Kdo postoupí">
-    Přednost mají manažerské kluby, které ve své lize došly do semifinále. Volná místa dostanou
-    manažerské kluby z pátých míst a stálé botí kluby podobné síly. Elite se losuje na další sezónu
-    v plných skupinách po 24; když způsobilých klubů není dost, skupina nevznikne.
+    Místo má každý manažerský klub, který ve své lize došel do semifinále. Elite se losuje na další
+    sezónu ve skupinách po 24 a volná místa se doplní v tomto pořadí: manažerské kluby z pátého
+    místa, potom stálé botí kluby, které došly do semifinále ve své lize - nejdřív ty, které jsou
+    silou nejblíž manažerským klubům - a teprve potom další manažerské kluby podle tabulky. Stálých
+    botů je vždy dost, takže semifinalista o místo nikdy nepřijde.
   </Rule>
   <Rule icon="grid_view" title="Skupina: 6 kol švýcarským systémem">
     Pokaždé proti klubu s podobnou bilancí a nikdy dvakrát proti stejnému - tak funguje
@@ -102,9 +104,53 @@ Elite je liga nejlepších klubů, která se hraje souběžně s tvou ligou.
 ## Farma
 
 Farma hraje ve stejnou dobu jako první tým, ve vlastní lize s vlastní tabulkou a play-off (nejlepších
-osm, každé kolo na jeden zápas). Za farmu hraje, koho první tým nenasadí. Výsledky farmy se s prvním
-týmem nikdy nemíchají a do Elite nekvalifikují. Víc v článcích [Trénink](../training/) a
-[Hráči](../player/).
+osm, každé kolo na jeden zápas). Výsledky farmy se s prvním týmem nikdy nemíchají a do Elite
+nekvalifikují.
+
+<Rules>
+  <Rule icon="groups" title="Kdo hraje za farmu">
+    Kdokoli, koho první tým nenasadí - sestavu farmy nikdy nevybíráš, jen určuješ, kdo vynechá. Hráče
+    můžeš vyřadit z obou zápasů, třeba aby místo toho trénoval individuálně. Hráč na přestupovém trhu
+    nehraje za žádný tým.
+  </Rule>
+  <Rule icon="person_add" title="Vypůjčení hráči">
+    Když farmě chybí hráči na některém postu, vypůjčí si výplňové hráče, kteří jsou výrazně slabší
+    než její liga. Širší kádr znamená, že místo nich hrají tvoji mladí - a rozvíjejí se.
+  </Rule>
+  <Rule icon="trending_up" title="Rozvoj">
+    Zápas farmy rozvíjí hráče, kteří ho hrají, ale méně, než by je rozvinul stejný zápas v prvním
+    týmu.
+  </Rule>
+</Rules>
+
+### Kdo smí hrát play-off
+
+Místo v play-off se získává v základní části: hráč potřebuje **šest zápasů základní části**. Stejné
+pravidlo platí pro play-off prvního týmu i farmy, zápasy se ale počítají jinak.
+
+<Rules>
+  <Rule icon="sports_hockey" title="První tým">
+    Počítá se každý zápas základní části včetně zápasů farmy - hráč, který odehrál sezónu na farmě,
+    smí hrát play-off prvního týmu.
+  </Rule>
+  <Rule icon="shield" title="Farma">
+    Počítají se jen zápasy farmy. Zápas prvního týmu se farmě do šesti nikdy nezapočítá, takže farmu
+    nejde na play-off posílit shora.
+  </Rule>
+  <Rule icon="healing" title="Zranění">
+    Zápas zmeškaný kvůli zranění se počítá jako odehraný - za blok, kdy byl hráč zraněný, ne za
+    dřívější zápas téhož dne, který odehrát mohl.
+  </Rule>
+  <Rule icon="rule" title="Dvě výjimky">
+    Každý tým smí v jednom zápase nasadit ještě dva hráče, kteří se nekvalifikovali. V prvním týmu
+    jdou výjimky nejdřív na brankáře; nad dvě dostane místo nezpůsobilého hráče nejlepší způsobilý
+    náhradník, jinak formace hraje bez jednoho hráče. Na farmě jdou výjimky nejdřív na posty, kam by
+    si jinak musela hráče půjčit, a pak na nejlepšího zbývajícího hráče.
+  </Rule>
+</Rules>
+
+Obrazovka farmy ukazuje u každého hráče jeho počet, třeba 4/6. Víc v článcích [Trénink](../training/)
+a [Hráči](../player/).
 
 ## Rapid liga
 
@@ -113,10 +159,10 @@ Rapid liga je rychlý turnaj čtyř týmů o hvězdy, který stojí mimo kalend�
 <Rules>
   <Rule icon="smart_display" title="Vstup">
     Jedna reklama na vstup (s Ads Passem žádná), nejvýše deset denně. Do ligy se dostanou týmy
-    podobné síly; pokud se čtyři nesejdou během několika minut, doplní ji boti.
+    podobné síly; pokud se čtyři nesejdou během několika minut, doplní ji boti. <TestOnly />
   </Rule>
   <Rule icon="bolt" title="Odehraje se hned">
-    Všech šest zápasů proběhne okamžitě, každý s každým, bez domácího prostředí.
+    Všech šest zápasů proběhne okamžitě, každý s každým, bez domácího prostředí. <TestOnly />
   </Rule>
   <Rule icon="balance" title="Nic ze sezóny se nepočítá">
     Hraje tvoje aktuální sestava a taktika, ale všichni jsou stejně odpočatí, forma a mentalita

@@ -3,6 +3,7 @@
 // src/assets/screens as its poster so something shows before it loads. It plays by itself while
 // at least half of it is on screen and pauses when scrolled away; reduced motion leaves it paused.
 import { getImage } from 'astro:assets';
+import { url } from '../../url';
 import type { ImageMetadata } from 'astro';
 
 interface Props {
@@ -20,7 +21,7 @@ const posterImage = await getImage({ src: still.default, width: 1200 });
 ---
 
 <figure class="clip">
-  <video src={`/media/${src}`} poster={posterImage.src} aria-label={label} controls muted loop playsinline preload="none" data-autoplay></video>
+  <video src={url(`/media/${src}`)} poster={posterImage.src} aria-label={label} controls muted loop playsinline preload="none" data-autoplay></video>
   {caption && <figcaption>{caption}</figcaption>}
 </figure>
 

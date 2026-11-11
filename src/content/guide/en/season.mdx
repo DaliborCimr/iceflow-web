@@ -81,9 +81,11 @@ Elite is the league of the best clubs, played alongside your own league.
 
 <Rules>
   <Rule icon="how_to_reg" title="Who qualifies">
-    Managed clubs that reached the semifinal of their league come first. Free places go to
-    fifth-placed managed clubs and to permanent bot clubs of similar strength. Elite is drawn for the
-    next season in full groups of 24; without enough eligible clubs there is no group.
+    Every managed club that reached the semifinal of its league gets a place. Elite is drawn for the
+    next season in groups of 24, and the free places are filled in this order: fifth-placed managed
+    clubs, then permanent bot clubs that reached a semifinal in their own league - those closest in
+    strength to the managed clubs first - and only then other managed clubs by their table. There are
+    always enough permanent bots, so a semifinalist never misses out.
   </Rule>
   <Rule icon="grid_view" title="Group stage: 6 Swiss-system rounds">
     Each round against a club with a similar record and never the same one twice - the
@@ -104,9 +106,53 @@ Elite is the league of the best clubs, played alongside your own league.
 ## Farm
 
 Your farm team plays at the same time as the first team, in its own league with its own table and
-playoff (top eight, every round one game). Whoever the first team does not dress plays for the farm.
-Farm results never mix with the first team's and do not qualify for Elite. More in
-[Training](../training/) and [Players](../player/).
+playoff (top eight, every round one game). Farm results never mix with the first team's and do not
+qualify for Elite.
+
+<Rules>
+  <Rule icon="groups" title="Who plays for the farm">
+    Whoever the first team does not dress - you never pick the farm's lineup, only who is left out.
+    You can keep a player out of both games, for instance so that he trains individually instead.
+    A player listed on the transfer market plays for neither team.
+  </Rule>
+  <Rule icon="person_add" title="Borrowed players">
+    Where the farm is short at a position, it borrows make-weight players who are clearly weaker
+    than its league. A wider squad means your own young players play instead - and develop.
+  </Rule>
+  <Rule icon="trending_up" title="Development">
+    A farm game develops the players who play it, but less than the same game in the first team
+    would.
+  </Rule>
+</Rules>
+
+### Who may play in a playoff
+
+A playoff place is earned in the group stage: a player needs **six group-stage games**. The same
+rule applies to the first team's playoff and to the farm's, but the games count differently.
+
+<Rules>
+  <Rule icon="sports_hockey" title="First team">
+    Every group-stage game counts, farm games included - a player who spent the season on the farm
+    may play in the first team's playoff.
+  </Rule>
+  <Rule icon="shield" title="Farm">
+    Only farm games count. A first-team game never counts towards the farm's six, so the farm cannot
+    be reinforced from above for its playoff.
+  </Rule>
+  <Rule icon="healing" title="Injury">
+    A game missed through injury counts as played - for the block he was injured in, not for a game
+    earlier that day he could have played.
+  </Rule>
+  <Rule icon="rule" title="Two exceptions">
+    Each team may still dress two players who have not qualified, per game. In the first team they go
+    to the goalies first; past the two, an ineligible player's place goes to the best eligible
+    reserve, or the line plays a man short. On the farm they go first to positions it would
+    otherwise have to borrow for, then to the best player left.
+  </Rule>
+</Rules>
+
+The farm screen shows each player's count, for example 4/6. More in [Training](../training/) and
+[Players](../player/).
 
 ## Rapid league
 
@@ -115,10 +161,10 @@ The Rapid league is a quick four-team tournament for Stars that sits outside the
 <Rules>
   <Rule icon="smart_display" title="Entry">
     One ad per entry (none with the Ads Pass), up to ten a day. Teams of similar strength are grouped
-    together; if four do not gather within a few minutes, bots fill the league.
+    together; if four do not gather within a few minutes, bots fill the league. <TestOnly />
   </Rule>
   <Rule icon="bolt" title="Played at once">
-    All six games are played immediately, everyone against everyone, without home ice.
+    All six games are played immediately, everyone against everyone, without home ice. <TestOnly />
   </Rule>
   <Rule icon="balance" title="Nothing from the season counts">
     Your current lineup and tactics play, but everyone is equally rested, form and mentality play no

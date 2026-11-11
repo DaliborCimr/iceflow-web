@@ -21,6 +21,8 @@ neveřejné, aby se hra vyhrávala hokejovými rozhodnutími, ne zpětným rozbo
 
 Dva vyrovnané týmy, na tým a zápas.
 
+<div class="num">
+
 | | Ice Flow | [NHL 2024/25](https://www.hockey-reference.com/leagues/stats.html) |
 |---|---|---|
 | Góly | 3,09 | 3,01 |
@@ -30,6 +32,8 @@ Dva vyrovnané týmy, na tým a zápas.
 | Úspěšnost přesilovek | 20,2 % | 21,6 % |
 | Pokusy o střelu | 58,1 | - |
 | Góly po třetinách | 1,00 / 1,00 / 0,99 | - |
+
+</div>
 
 <Callout type="tip" title="Co čísla říkají">
   Běžný zápas Ice Flow vypadá jako běžný zápas NHL: zhruba tři góly na tým, necelých třicet střel,
@@ -46,6 +50,8 @@ Dva vyrovnané týmy, na tým a zápas.
 
 ## Jak zápasy končí
 
+<div class="num">
+
 | | Ice Flow |
 |---|---|
 | Výhry prvního ze dvou stejných týmů | 50,1 % ± 0,35 |
@@ -53,10 +59,14 @@ Dva vyrovnané týmy, na tým a zápas.
 | Rozhodnuto v prodloužení | 12,0 % zápasů |
 | Rozhodnuto v nájezdech | 4,8 % zápasů |
 
+</div>
+
 Dva stejné týmy vyhrávají v rámci statistické odchylky stejně často - to je první kontrola, že engine
 žádnou stranu nezvýhodňuje.
 
 ## Tresty a speciální formace
+
+<div class="num">
 
 | Na tým a zápas | Ice Flow |
 |---|---|
@@ -66,10 +76,14 @@ Dva stejné týmy vyhrávají v rámci statistické odchylky stejně často - to
 | Velké tresty (na zápas) | 0,02 |
 | Góly v oslabení na jedno oslabení | 2,2 % |
 
+</div>
+
 ## Kdo střílí a nahrává
 
 Podíl gólů bez asistence, s jednou nebo dvěma asistencemi závisí na početním stavu - v přesilovce je
 připravený skoro každý gól, gól v oslabení bývá často sólo.
+
+<div class="num">
 
 | | Bez asistence | Jedna asistence | Dvě asistence |
 |---|---|---|---|
@@ -77,11 +91,17 @@ připravený skoro každý gól, gól v oslabení bývá často sólo.
 | Přesilovka | 0,9 % | 6,1 % | 93,0 % |
 | Oslabení | 22,8 % | 44,8 % | 32,4 % |
 
+</div>
+
 ## Čas na ledě podle formací
+
+<div class="num">
 
 | | 1. formace | 2. formace | 3. formace | 4. formace |
 |---|---|---|---|---|
 | Minuty na hráče | 18,1 | 15,9 | 13,7 | 11,5 |
+
+</div>
 
 ## Když je jeden tým silnější
 
@@ -91,14 +111,18 @@ všechno ostatní je stejné.
 
 <StrengthChart />
 
-| Atributy vyšší o | Výhry | Vstřelené góly | Obdržené góly | Střely | Střely soupeře | Zákroky slabšího brankáře |
+<div class="num">
+
+| Rozdíl atributů | Výhry | Vstřelené góly | Obdržené góly | Střely | Střely soupeře | Zákroky slabšího brankáře |
 |---|---|---|---|---|---|---|
 | 0 (vyrovnané) | 50,1 % | 3,09 | 3,08 | 29,6 | 29,5 | 89,6 % |
-| 5 | 68,1 % | 3,63 | 2,55 | 32,9 | 26,2 | 89,0 % |
-| 10 | 78,6 % | 4,01 | 2,20 | 34,8 | 24,4 | 88,6 % |
-| 15 | 85,4 % | 4,31 | 1,95 | 35,9 | 23,3 | 88,0 % |
-| 20 | 89,9 % | 4,58 | 1,73 | 36,6 | 22,6 | 87,6 % |
-| 50 | 99,9 % | 6,82 | 0,41 | 37,0 | 19,7 | 81,6 % |
+| +5 | 68,1 % | 3,63 | 2,55 | 32,9 | 26,2 | 89,0 % |
+| +10 | 78,6 % | 4,01 | 2,20 | 34,8 | 24,4 | 88,6 % |
+| +15 | 85,4 % | 4,31 | 1,95 | 35,9 | 23,3 | 88,0 % |
+| +20 | 89,9 % | 4,58 | 1,73 | 36,6 | 22,6 | 87,6 % |
+| +50 | 99,9 % | 6,82 | 0,41 | 37,0 | 19,7 | 81,6 % |
+
+</div>
 
 <Callout type="note" title="Překvapení se stávají">
   Tým lepší o deset bodů pořád prohraje zhruba každý pátý zápas a o dvacet bodů zhruba každý desátý.
@@ -111,6 +135,8 @@ všechno ostatní je stejné.
 Liga slabších hráčů musí hrát stejně jako liga silnějších - jinak by nižší ligy vypadaly jinak než
 ty nejvyšší. Tady má každý atribut obou týmů o 40 bodů méně nebo víc.
 
+<div class="num">
+
 | | Slabší liga (-40) | Průměrná liga | Silnější liga (+40) |
 |---|---|---|---|
 | Stejné týmy, výhry | 50,6 % | 50,1 % | 48,9 % |
@@ -119,6 +145,8 @@ ty nejvyšší. Tady má každý atribut obou týmů o 40 bodů méně nebo víc
 | Úspěšnost zákroků | 89,7 % | 89,7 % | 89,6 % |
 | Úspěšnost přesilovek | 20,1 % | 20,2 % | 19,9 % |
 | Tým lepší o 10 bodů vyhraje | 78,8 % | 78,6 % | 78,3 % |
+
+</div>
 
 Hra se hraje stejně, ať je liga jakkoli silná; o favoritovi rozhoduje jen rozdíl mezi oběma týmy.
 

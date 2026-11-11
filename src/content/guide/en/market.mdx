@@ -28,7 +28,7 @@ Everything on the transfer market is paid in **gold pucks**, and auctions run in
 
 A listing has no countdown until someone bids. The **first bid starts an eight-minute auction**, and
 the highest bid at closing buys the player. A bid in the last 90 seconds extends the auction so that
-90 seconds remain.
+90 seconds remain. <TestOnly />
 
 <Callout type="note">
   You can only bid where your squad has room at the position, and the place counts as taken from the
@@ -44,7 +44,11 @@ the highest bid at closing buys the player. A bid in the last 90 seconds extends
     nobody has bid.
   </Rule>
   <Rule icon="flash_on" title="Quick sell">
-    Closes at once at 70 % of the player's reference value. It cannot be undone.
+    Closes at once at 70 % of the player's reference value and cannot be undone. Ending the contract
+    early costs a buyout in Flow, paid at once: two thirds of what the contract still owes - the rest
+    of this season and every later season - or one third for a player under 26. For a player who has
+    announced retirement only this season counts. Without enough Flow for the buyout the quick sell
+    is refused. An auction sale pays no buyout.
   </Rule>
   <Rule icon="percent" title="What you receive">
     The selling club receives 75 % of the sale price - for a quick sale that is about 52.5 % of the

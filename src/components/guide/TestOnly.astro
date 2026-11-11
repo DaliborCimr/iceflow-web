@@ -1,0 +1,28 @@
+---
+// Marks a value that holds for the current test version (dev server timing, an unfinished
+// feature) and is expected to change for the release. Inline, next to the sentence it qualifies.
+import { useTranslations, type Locale } from '../../i18n/ui';
+
+const t = useTranslations(Astro.params.lang as Locale);
+---
+
+<span class="test" title={t('guide.testNote')}>{t('guide.testBadge')}</span>
+
+<style>
+  .test {
+    display: inline-block;
+    margin-left: 4px;
+    padding: 0 8px;
+    border-radius: 999px;
+    border: 1px dashed color-mix(in srgb, var(--gold) 70%, transparent);
+    color: var(--gold);
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1.6;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    vertical-align: 1px;
+    white-space: nowrap;
+    cursor: help;
+  }
+</style>
