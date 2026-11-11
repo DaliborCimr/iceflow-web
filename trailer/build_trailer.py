@@ -3,7 +3,9 @@
 The timeline is data: a list of segments played in order, joined by a short crossfade.
   - "title": a text card drawn here (dark background with soft light rays, the text revealed
     left to right in the brand blue), silent.
-  - "clip":  a video file, scaled and padded to the output size.
+  - "clip":  a video file, scaled and padded to the output size; optional start/end cut and speed.
+  - "logo_zoom": the camera flies into the logo in the background of a clip's last frame, the
+    sharp logo artwork fading in over it.
 The trailer is silent unless trailer.json sets "audio": true (then the clips keep their sound).
 
 Adding to the trailer means adding a segment to trailer.json and running the script again; the
@@ -187,19 +189,104 @@ def render_clip(segment: dict, settings: Settings, ffmpeg: str, out: Path) -> No
     if not src.exists():
         raise FileNotFoundError(f"Clip not found: {src} (source clips go to trailer/assets/)")
     w, h, fps = settings.width, settings.height, settings.fps
-    vf = f"scale={w}:{h}:force_original_aspect_ratio=decrease:flags=lanczos,pad={w}:{h}:(ow-iw)/2:(oh-ih)/2,fps={fps},format=yuv420p"
-    if "start" in segment or "end" in segment:
-        vf = f"trim={segment.get('start', 0)}:{segment.get('end', 1e9)},setpts=PTS-STARTPTS," + vf
+    # Optional cut (start/end, seconds of the source) and speed (2 = twice as fast).
+    speed = float(segment.get("speed", 1.0))
+    # fps first: screen recordings have a variable frame rate, and trimming them before they are
+    # made constant left the cut at its full length.
+    cut = f"trim=start={segment.get('start', 0)}:end={segment.get('end', 1e9)}," if ("start" in segment or "end" in segment) else ""
+    vf = (f"fps={fps},{cut}setpts=(PTS-STARTPTS)/{speed},fps={fps},"
+          f"scale={w}:{h}:force_original_aspect_ratio=decrease:flags=lanczos,pad={w}:{h}:(ow-iw)/2:(oh-ih)/2,format=yuv420p")
     args = [ffmpeg, "-y", "-loglevel", "error", "-i", str(src)]
     if probe_has_audio(ffmpeg, src):
         af = "aresample=48000,aformat=channel_layouts=stereo"
+        if speed != 1.0:
+            af = f"atempo={speed}," + af
+        af = "asetpts=PTS-STARTPTS," + af
         if "start" in segment or "end" in segment:
-            af = f"atrim={segment.get('start', 0)}:{segment.get('end', 1e9)},asetpts=PTS-STARTPTS," + af
+            af = f"atrim=start={segment.get('start', 0)}:end={segment.get('end', 1e9)}," + af
         args += ["-vf", vf, "-af", af]
     else:
-        args += ["-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo", "-vf", vf, "-shortest"]
-    args += ["-c:v", "libx264", "-crf", "16", "-preset", "slow", "-c:a", "aac", "-b:a", "192k", str(out)]
+        args += ["-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo", "-vf", vf]
+    # The cut's own length caps every stream: -shortest does not stop the silent track that ffmpeg
+    # 4.2 runs beside a filtered video, and the part came out as long as its whole source.
+    source_end = min(float(segment.get("end", 1e9)), probe_duration(ffmpeg, src))
+    length = (source_end - float(segment.get("start", 0))) / speed
+    args += ["-t", f"{length:.3f}", "-c:v", "libx264", "-crf", "16", "-preset", "slow", "-c:a", "aac", "-b:a", "192k", str(out)]
     run(args)
+
+
+# ---- Logo zoom ----------------------------------------------------------------------------------
+
+
+def ease_in_out(t: float) -> float:
+    t = min(1.0, max(0.0, t))
+    return t * t * (3 - 2 * t)
+
+
+def render_logo_zoom(segment: dict, settings: Settings, ffmpeg: str, out: Path) -> None:
+    """The camera flies from the whole last frame of a clip into the logo in its background.
+
+    The clip's own pixels go soft that close, so the sharp logo artwork (`logo`, a transparent PNG)
+    is laid exactly over the logo in the frame and fades in while the camera closes in; the room
+    behind it darkens away, leaving the clean logo.
+      box     - the logo's outline in the clip's own pixels [x0, y0, x1, y1]
+      margin  - how much room is left around the logo at the end (1.0 = edge to edge)
+    """
+    w, h, fps = settings.width, settings.height, settings.fps
+    src = (HERE / segment["path"]).resolve()
+    duration = float(segment.get("duration", 3.0))
+    zoom_time = float(segment.get("zoom", duration * 0.75))
+    margin = float(segment.get("margin", 1.6))
+    with tempfile.TemporaryDirectory() as tmp:
+        still = Path(tmp) / "last.png"
+        run([ffmpeg, "-y", "-loglevel", "error", "-sseof", "-0.1", "-i", str(src), "-frames:v", "1", str(still)])
+        base = Image.open(still).convert("RGB")
+    bw, bh = base.size
+    x0, y0, x1, y1 = segment["box"]
+    logo = Image.open(HERE / segment["logo"]).convert("RGBA")
+    logo = logo.crop(logo.getbbox())
+
+    # Camera rectangles in the clip's pixels, both of the output's aspect ratio.
+    aspect = w / h
+    start = (0.0, 0.0, float(bw), float(bh))
+    cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
+    end_h = max((y1 - y0), (x1 - x0) / aspect) * margin
+    end_w = end_h * aspect
+    end = (cx - end_w / 2, cy - end_h / 2, cx + end_w / 2, cy + end_h / 2)
+    dark = Image.new("RGB", (w, h), BACKGROUND)
+
+    proc = subprocess.Popen(
+        [ffmpeg, "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{w}x{h}", "-r", str(fps),
+         "-i", "-", "-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo", "-shortest",
+         "-c:v", "libx264", "-crf", "16", "-preset", "slow", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", str(out)],
+        stdin=subprocess.PIPE,
+    )
+    frames = int(round(duration * fps))
+    for i in range(frames):
+        p = ease_in_out(i / fps / zoom_time)
+        cam = tuple(start[k] + (end[k] - start[k]) * p for k in range(4))
+        frame = base.transform((w, h), Image.EXTENT, cam, resample=Image.BICUBIC)
+        # The room fades to the trailer's dark as the camera arrives.
+        frame = Image.blend(frame, dark, ease_in_out((p - 0.55) / 0.45) * 0.92)
+        # The sharp logo, placed where the frame's own logo is, fading in over the second half.
+        alpha = ease_in_out((p - 0.35) / 0.55)
+        if alpha > 0:
+            sx = w / (cam[2] - cam[0])
+            sy = h / (cam[3] - cam[1])
+            lx0, ly0 = (x0 - cam[0]) * sx, (y0 - cam[1]) * sy
+            lw, lh = (x1 - x0) * sx, (y1 - y0) * sy
+            scale = min(lw / logo.width, lh / logo.height)
+            size = (max(1, int(logo.width * scale)), max(1, int(logo.height * scale)))
+            sharp = logo.resize(size, Image.LANCZOS)
+            pos = (int(lx0 + (lw - size[0]) / 2), int(ly0 + (lh - size[1]) / 2))
+            layer = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+            layer.paste(sharp, pos, sharp)
+            layer.putalpha(layer.getchannel("A").point(lambda v: int(v * alpha)))
+            frame = Image.alpha_composite(frame.convert("RGBA"), layer).convert("RGB")
+        proc.stdin.write(frame.tobytes())
+    proc.stdin.close()
+    if proc.wait() != 0:
+        raise RuntimeError("ffmpeg failed while encoding the logo zoom")
 
 
 # ---- Assembly -----------------------------------------------------------------------------------
@@ -261,6 +348,8 @@ def main() -> None:
                 render_title(segment, settings, ffmpeg, part)
             elif kind == "clip":
                 render_clip(segment, settings, ffmpeg, part)
+            elif kind == "logo_zoom":
+                render_logo_zoom(segment, settings, ffmpeg, part)
             else:
                 raise ValueError(f"Unknown segment type {kind!r}")
             parts.append(part)

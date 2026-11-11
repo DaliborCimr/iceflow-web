@@ -4,6 +4,8 @@ import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
 import homeShot from '../../assets/screens/en/home.webp';
+import trailerPoster from '../../assets/screens/en/trailer.webp';
+import { getImage } from 'astro:assets';
 import { localePaths, useTranslations, type Locale, type UiKey } from '../../i18n/ui';
 import { fullName } from '../../brand';
 
@@ -28,6 +30,8 @@ const stats = [
   { value: '6 + 6', label: 'home.stat.tactics' },
   { value: '4', label: 'home.stat.lines' },
 ] as const;
+
+const poster = await getImage({ src: trailerPoster, width: 1600 });
 
 const chips = [
   { icon: 'mobile', label: 'home.chipMobile' },
@@ -67,6 +71,20 @@ const chips = [
         </div>
       </div>
     </div>
+  </section>
+
+  <section class="container trailer" aria-label={t('home.trailer')}>
+    <video
+      src={url('/media/trailer.mp4')}
+      poster={poster.src}
+      aria-label={t('home.trailer')}
+      controls
+      muted
+      loop
+      playsinline
+      preload="none"
+      data-trailer
+    ></video>
   </section>
 
   <section class="container features">
@@ -118,6 +136,17 @@ const chips = [
     </div>
   </section>
 </Base>
+
+<script>
+  // The trailer plays by itself while half of it is on screen (never with reduced motion).
+  const trailer = document.querySelector<HTMLVideoElement>('video[data-trailer]');
+  if (trailer && 'IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    new IntersectionObserver(
+      ([entry]) => (entry.isIntersecting ? trailer.play().catch(() => {}) : trailer.pause()),
+      { threshold: 0.5 },
+    ).observe(trailer);
+  }
+</script>
 
 <style>
   h2 {
@@ -302,6 +331,22 @@ const chips = [
     width: 100%;
     height: auto;
     border-radius: 18px;
+  }
+
+  /* Trailer */
+  .trailer {
+    margin-top: clamp(-56px, -4vw, -24px);
+    position: relative;
+  }
+
+  .trailer video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    box-shadow: 0 30px 80px rgb(0 0 0 / 0.5);
   }
 
   /* Features */

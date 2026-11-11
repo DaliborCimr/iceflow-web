@@ -31,6 +31,7 @@ const en = {
   'home.tagline':
     'Run your own hockey club: build the roster, set the tactics, develop juniors and lead your team through live matches, the league and Elite.',
   'home.featuresTitle': 'What you do in Ice Flow',
+  'home.trailer': 'Trailer',
   'home.ctaGuide': 'Explore the game guide',
   'home.ctaStory': 'Read the story',
   'home.chipMobile': 'Mobile',
@@ -94,6 +95,7 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'home.tagline':
       'Veď vlastní hokejový klub: sestav kádr, nastav taktiku, vychovej juniory a proveď tým živými zápasy, ligou i Elite.',
     'home.featuresTitle': 'Co v Ice Flow děláš',
+    'home.trailer': 'Trailer',
     'home.ctaGuide': 'Otevřít průvodce hrou',
     'home.ctaStory': 'Přečíst příběh',
     'home.chipMobile': 'Mobil',
@@ -152,6 +154,7 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'home.tagline':
       'Führe deinen eigenen Eishockeyclub: Stelle den Kader zusammen, lege die Taktik fest, fördere Junioren und führe dein Team durch Live-Spiele, die Liga und Elite.',
     'home.featuresTitle': 'Was du in Ice Flow tust',
+    'home.trailer': 'Trailer',
     'home.ctaGuide': 'Zum Spielguide',
     'home.ctaStory': 'Die Geschichte lesen',
     'home.chipMobile': 'Mobil',
@@ -210,6 +213,7 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'home.tagline':
       'Dirigez votre propre club de hockey : composez l’effectif, fixez la tactique, formez les juniors et menez votre équipe à travers les matchs en direct, le championnat et l’Elite.',
     'home.featuresTitle': 'Ce que vous faites dans Ice Flow',
+    'home.trailer': 'Bande-annonce',
     'home.ctaGuide': 'Découvrir le guide du jeu',
     'home.ctaStory': 'Lire l’histoire',
     'home.chipMobile': 'Mobile',
@@ -268,6 +272,7 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'home.tagline':
       'Gestisci il tuo club di hockey: costruisci la rosa, imposta la tattica, fai crescere i giovani e guida la squadra in partite dal vivo, campionato ed Elite.',
     'home.featuresTitle': 'Cosa fai in Ice Flow',
+    'home.trailer': 'Trailer',
     'home.ctaGuide': 'Scopri la guida al gioco',
     'home.ctaStory': 'Leggi la storia',
     'home.chipMobile': 'Mobile',
@@ -326,6 +331,7 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'home.tagline':
       'Driv din egen hockeyklubb: bygg truppen, lägg upp taktiken, utveckla juniorer och led laget genom livematcher, ligan och Elite.',
     'home.featuresTitle': 'Vad du gör i Ice Flow',
+    'home.trailer': 'Trailer',
     'home.ctaGuide': 'Utforska spelguiden',
     'home.ctaStory': 'Läs historien',
     'home.chipMobile': 'Mobil',
@@ -384,6 +390,7 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'home.tagline':
       'Johda omaa jääkiekkoseuraasi: kokoa joukkue, laadi taktiikka, kehitä junioreita ja vie joukkueesi live-otteluiden, sarjan ja Eliten läpi.',
     'home.featuresTitle': 'Mitä teet Ice Flow’ssa',
+    'home.trailer': 'Traileri',
     'home.ctaGuide': 'Tutustu peliohjeeseen',
     'home.ctaStory': 'Lue tarina',
     'home.chipMobile': 'Mobiili',
@@ -442,6 +449,7 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'home.tagline':
       'Driv din egen hockeyklubb: bygg stallen, legg taktikken, utvikle juniorer og led laget gjennom direktesendte kamper, ligaen og Elite.',
     'home.featuresTitle': 'Hva du gjør i Ice Flow',
+    'home.trailer': 'Trailer',
     'home.ctaGuide': 'Utforsk spillguiden',
     'home.ctaStory': 'Les historien',
     'home.chipMobile': 'Mobil',
@@ -500,6 +508,7 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'home.tagline':
       'Styr din egen hockeyklub: byg truppen, læg taktikken, udvikl juniorer og før holdet gennem livekampe, ligaen og Elite.',
     'home.featuresTitle': 'Hvad du laver i Ice Flow',
+    'home.trailer': 'Trailer',
     'home.ctaGuide': 'Udforsk spilguiden',
     'home.ctaStory': 'Læs historien',
     'home.chipMobile': 'Mobil',
@@ -558,6 +567,7 @@ export const ui: Record<Locale, Record<UiKey, string>> = {
     'home.tagline':
       'Управляйте собственным хоккейным клубом: собирайте состав, выбирайте тактику, растите юниоров и ведите команду через живые матчи, лигу и Elite.',
     'home.featuresTitle': 'Чем вы занимаетесь в Ice Flow',
+    'home.trailer': 'Трейлер',
     'home.ctaGuide': 'Открыть руководство по игре',
     'home.ctaStory': 'Прочитать историю',
     'home.chipMobile': 'Мобильная',
