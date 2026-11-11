@@ -171,6 +171,16 @@ milestones:
       67 new live-match animations, mentality, discipline and form, match importance from the
       table, Sign in with Google, a competitive market benchmark, push notifications and this
       website.
+  - date: After launch
+    phase: launch
+    phaseLabel: Plans
+    title: What comes next
+    text: >-
+      Planned, with no dates yet: contract negotiation with players and free agents (offer,
+      counter-offer, accepted, rejected), features unlocked gradually as seasons are played, chemistry
+      of forward lines and defense pairs, the effect of a player's natural position and stick side,
+      penalty shots during a game, shorter Rapid league formats, better match animations and graphics,
+      and servers for Europe, Asia and the Americas.
 notes:
   - title: Business model
     paragraphs:
