@@ -21,6 +21,9 @@
     { "type": "title", "text": "DRAFT TALENTS", "duration": 2.2, "reveal": 1.0 },
     { "type": "clip", "path": "assets/junior-draft.mp4", "taps": "assets/junior-draft.taps.json", "start": 0.7, "speed": 1.5, "hold": 0.8 },
 
+    { "type": "title", "text": "GROW YOUR CLUB", "duration": 2.2, "reveal": 1.0 },
+    { "type": "clip", "path": "assets/arena-upgrade.mp4", "taps": "assets/arena-upgrade.taps.json", "start": 0.9, "end": 6.0, "speed": 1.5, "hold": 0.4 },
+
     { "type": "title", "text": "EVERY DECISION MATTERS", "duration": 2.4, "reveal": 1.1 },
     { "type": "clip", "path": "assets/subtle_contract_pen_animation.mp4", "speed": 2, "end": 3.6 },
     {
