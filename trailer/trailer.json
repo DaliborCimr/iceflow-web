@@ -25,17 +25,14 @@
     { "type": "clip", "path": "assets/arena-upgrade.mp4", "taps": "assets/arena-upgrade.taps.json", "start": 0.9, "end": 6.0, "speed": 1.5, "hold": 0.4 },
 
     { "type": "title", "text": "EVERY DECISION MATTERS", "duration": 2.4, "reveal": 1.1 },
-    { "type": "clip", "path": "assets/subtle_contract_pen_animation.mp4", "speed": 2, "end": 3.6 },
     {
       "type": "logo_zoom",
-      "transition": 0,
-      "path": "assets/subtle_contract_pen_animation.mp4",
-      "from": 3.6,
-      "speed": 2,
-      "box": [967, 55, 1230, 262],
+      "path": "assets/manager-office.webp",
+      "box": [1189, 66, 1504, 321],
       "logo": "../src/assets/branding/logo_name.png",
-      "duration": 3.2,
-      "zoom": 2.4,
+      "lead": 2.6,
+      "duration": 5.4,
+      "zoom": 2.2,
       "margin": 1.5
     }
   ]

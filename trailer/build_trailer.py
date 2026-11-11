@@ -15,7 +15,8 @@ crossfade - the global "transition", or the segment's own "transition" (0 = a st
                 playing; the sharp logo artwork fades in exactly over it and the room behind
                 darkens away. With "transition": 0 and "from" where the clip before it ended, the
                 footage runs on without a seam.
-                  path, from (seconds of the source), speed, box (the logo in the source's
+                  path (a video, or a still picture), from (seconds of the source), speed,
+                  lead (seconds a still drifts and its logo glows before the flight), box (the logo in the source's
                   pixels: [x0, y0, x1, y1]), logo (transparent PNG), duration, zoom (seconds the
                   camera moves), margin (room left around the logo at the end)
 
@@ -33,6 +34,7 @@ Usage:
 from __future__ import annotations
 
 import json
+import math
 import random
 import shutil
 import subprocess
@@ -307,7 +309,11 @@ def render_logo_zoom(segment: dict, settings: Settings, ffmpeg: str, out: Path) 
     x0, y0, x1, y1 = segment["box"]
     logo = Image.open(HERE / segment["logo"]).convert("RGBA")
     logo = logo.crop(logo.getbbox())
-    footage = list(source_frames(ffmpeg, src, fps, float(segment.get("from", 0)), None, float(segment.get("speed", 1.0))))
+    if src.suffix.lower() in (".png", ".jpg", ".jpeg", ".webp"):
+        footage = [Image.open(src).convert("RGB")]  # a still picture, brought to life below
+    else:
+        footage = list(source_frames(ffmpeg, src, fps, float(segment.get("from", 0)), None, float(segment.get("speed", 1.0))))
+    lead = float(segment.get("lead", 0.0))
     if not footage:
         raise RuntimeError(f"No footage left in {src} after {segment.get('from', 0)} s")
     bw, bh = footage[0].size
@@ -321,12 +327,33 @@ def render_logo_zoom(segment: dict, settings: Settings, ffmpeg: str, out: Path) 
     end_h = max((y1 - y0), (x1 - x0) / aspect) * margin
     last = (cx - end_h * aspect / 2, cy - end_h / 2, cx + end_h * aspect / 2, cy + end_h / 2)
     dark = Image.new("RGB", (w, h), BACKGROUND)
+    # During the lead the camera drifts slowly in (6 %, a little towards the logo) and the logo's
+    # screen breathes - enough to bring a still picture to life before the flight.
+    drift = (first[0] + (cx - first[0]) * 0.06, first[1] + (cy - first[1]) * 0.06,
+             first[2] - (first[2] - cx) * 0.06, first[3] - (first[3] - cy) * 0.06)
+    glow_box = (int(x0 - (x1 - x0) * 0.25), int(y0 - (y1 - y0) * 0.25), int(x1 + (x1 - x0) * 0.25), int(y1 + (y1 - y0) * 0.25))
+    glow_mask = Image.new("L", (bw, bh), 0)
+    ImageDraw.Draw(glow_mask).ellipse(glow_box, fill=255)
+    glow_mask = glow_mask.filter(ImageFilter.GaussianBlur((x1 - x0) * 0.25))
 
     encoder = Encoder(ffmpeg, settings, out)
     for i in range(int(round(duration * fps))):
+        t = i / fps
         base = footage[min(i, len(footage) - 1)]  # the footage plays on, then holds its last frame
-        p = ease_in_out(i / fps / zoom_time)
-        cam = tuple(first[k] + (last[k] - first[k]) * p for k in range(4))
+        if lead > 0:
+            # A soft pulse of light around the logo on the wall.
+            pulse = 0.5 - 0.5 * math.cos(t * 2.6)
+            bright = base.point(lambda v: min(255, int(v * 1.25 + 6)))
+            base = Image.composite(bright, base, glow_mask.point(lambda v: int(v * pulse * 0.6)))
+        start_cam = first
+        if t < lead:
+            q = ease_in_out(t / lead) if lead else 1.0
+            cam = tuple(first[k] + (drift[k] - first[k]) * q for k in range(4))
+            p = 0.0
+        else:
+            start_cam = drift if lead > 0 else first
+            p = ease_in_out((t - lead) / zoom_time)
+            cam = tuple(start_cam[k] + (last[k] - start_cam[k]) * p for k in range(4))
         frame = base.transform((w, h), Image.EXTENT, cam, resample=Image.BICUBIC)
         # The room fades to the trailer's dark as the camera arrives.
         frame = Image.blend(frame, dark, ease_in_out((p - 0.5) / 0.5) * 0.92)
