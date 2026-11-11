@@ -174,10 +174,11 @@ milestones:
     title: Co přijde dál
     text: >-
       Plánované, zatím bez termínu: vyjednávání smluv s hráči a s volnými hráči (nabídka,
-      protinabídka, přijetí, odmítnutí), postupné odemykání funkcí s odehranými sezónami, sehranost
-      útočných trojic a obranných dvojic, vliv přirozeného postu a strany hole, trestné střílení
-      během zápasu, kratší varianty Rapid ligy, vylepšování animací a grafiky zápasu a servery pro
-      Evropu, Asii a Ameriku.
+      protinabídka, přijetí, odmítnutí), postupné odemykání funkcí s odehranými sezónami, asociace
+      a jejich All-Star obsah, sehranost útočných trojic a obranných dvojic, výzkum taktik pro
+      přesilovku, oslabení, hru 3 na 3 a hru bez brankáře - dnes taktika platí jen při 5 na 5 a 4 na
+      4 a nové systémy přibudou, až budou podložené zdroji a vyvážené -, trestné střílení během
+      zápasu, vylepšování animací a grafiky zápasu a servery pro Evropu, Asii a Ameriku.
 notes:
   - title: Obchodní model
     paragraphs:
