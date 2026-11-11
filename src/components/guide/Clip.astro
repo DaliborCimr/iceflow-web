@@ -1,9 +1,9 @@
 ---
 // A short muted looping video recorded in the app (public/media/<src>), with a screenshot from
-// src/assets/screens as its poster so something shows before it loads.
+// src/assets/screens as its poster so something shows before it loads. It plays by itself while
+// at least half of it is on screen and pauses when scrolled away; reduced motion leaves it paused.
 import { getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
-import { defaultLocale, type Locale } from '../../i18n/ui';
 
 interface Props {
   src: string;
@@ -13,18 +13,33 @@ interface Props {
 }
 
 const { src, poster, label, caption } = Astro.props;
-const images = import.meta.glob<{ default: ImageMetadata }>('../../assets/screens/*/*.webp', { eager: true });
-const lang = Astro.params.lang as Locale;
-const still =
-  images[`../../assets/screens/${lang}/${poster}.webp`] ?? images[`../../assets/screens/${defaultLocale}/${poster}.webp`];
+const images = import.meta.glob<{ default: ImageMetadata }>('../../assets/screens/en/*.webp', { eager: true });
+const still = images[`../../assets/screens/en/${poster}.webp`];
 if (!still) throw new Error(`Missing poster "${poster}"`);
 const posterImage = await getImage({ src: still.default, width: 1200 });
 ---
 
 <figure class="clip">
-  <video src={`/media/${src}`} poster={posterImage.src} aria-label={label} controls muted loop playsinline preload="none"></video>
+  <video src={`/media/${src}`} poster={posterImage.src} aria-label={label} controls muted loop playsinline preload="none" data-autoplay></video>
   {caption && <figcaption>{caption}</figcaption>}
 </figure>
+
+<script>
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduced && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const video = entry.target as HTMLVideoElement;
+          if (entry.isIntersecting) video.play().catch(() => {});
+          else video.pause();
+        }
+      },
+      { threshold: 0.5 },
+    );
+    document.querySelectorAll<HTMLVideoElement>('video[data-autoplay]').forEach((v) => observer.observe(v));
+  }
+</script>
 
 <style>
   .clip {

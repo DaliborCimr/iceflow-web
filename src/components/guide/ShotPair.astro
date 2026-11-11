@@ -1,0 +1,68 @@
+---
+// Two screenshots side by side (stacked on a phone), each with a small label in its corner -
+// for a before / after such as the arena at level 1 and level 6. Each opens in the lightbox.
+import Screenshot from './Screenshot.astro';
+
+interface Props {
+  left: { name: string; alt: string; label: string };
+  right: { name: string; alt: string; label: string };
+  caption?: string;
+}
+
+const { left, right, caption } = Astro.props;
+---
+
+<figure class="pair">
+  <div class="grid">
+    {[left, right].map((item) => (
+      <div class="item">
+        <Screenshot name={item.name} alt={item.alt} bare sizes="(max-width: 700px) 100vw, 380px" />
+        <span class="label">{item.label}</span>
+      </div>
+    ))}
+  </div>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+  .pair {
+    margin: 1.2em 0 1.6em;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .item {
+    position: relative;
+  }
+
+  .label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: rgb(4 10 16 / 0.78);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    pointer-events: none;
+  }
+
+  figcaption {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 700px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
