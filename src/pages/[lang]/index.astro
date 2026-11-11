@@ -172,9 +172,11 @@ const chips = [
 
   h1 {
     font-size: clamp(2.1rem, 5.2vw, 3.6rem);
-    line-height: 1.05;
+    line-height: 1.08;
     letter-spacing: -0.02em;
-    margin: 0 0 18px;
+    /* background-clip: text paints only the box: room for the descenders (g, y). */
+    padding-bottom: 0.12em;
+    margin: 0 0 6px;
     background: linear-gradient(180deg, #ffffff 30%, #b9d6ea);
     -webkit-background-clip: text;
     background-clip: text;
