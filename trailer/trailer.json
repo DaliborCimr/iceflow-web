@@ -4,6 +4,7 @@
   "height": 1080,
   "fps": 30,
   "transition": 0.6,
+  "audio": false,
   "fonts": [
     "fonts/OpenSans-SemiBold.ttf",
     "C:/Windows/Fonts/seguisb.ttf",

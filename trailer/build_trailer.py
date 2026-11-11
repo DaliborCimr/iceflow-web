@@ -3,7 +3,8 @@
 The timeline is data: a list of segments played in order, joined by a short crossfade.
   - "title": a text card drawn here (dark background with soft light rays, the text revealed
     left to right in the brand blue), silent.
-  - "clip":  a video file, scaled and padded to the output size, its own sound kept.
+  - "clip":  a video file, scaled and padded to the output size.
+The trailer is silent unless trailer.json sets "audio": true (then the clips keep their sound).
 
 Adding to the trailer means adding a segment to trailer.json and running the script again; the
 same inputs always give the same video (the light rays come from a fixed seed).
@@ -204,11 +205,8 @@ def render_clip(segment: dict, settings: Settings, ffmpeg: str, out: Path) -> No
 # ---- Assembly -----------------------------------------------------------------------------------
 
 
-def join(parts: list[Path], transition: float, settings: Settings, ffmpeg: str, out: Path) -> None:
-    """Crossfades every part into the next (picture and sound together)."""
-    if len(parts) == 1:
-        shutil.copyfile(parts[0], out)
-        return
+def join(parts: list[Path], transition: float, settings: Settings, ffmpeg: str, out: Path, audio: bool) -> None:
+    """Crossfades every part into the next - the picture, and the sound too when `audio` is on."""
     durations = [probe_duration(ffmpeg, p) for p in parts]
     width, height, fps = settings.width, settings.height, settings.fps
     starts = [0.0]
@@ -228,13 +226,16 @@ def join(parts: list[Path], transition: float, settings: Settings, ffmpeg: str, 
         chains.append(f"[{i}:v]format=yuva420p{fade},setpts=PTS-STARTPTS+{start:.3f}/TB[p{i}]")
         chains.append(f"[{v_prev}][p{i}]overlay=eof_action=pass:format=auto[c{i + 1}]")
         v_prev = f"c{i + 1}"
-    a_prev = "0:a"
-    for i in range(1, len(parts)):
-        chains.append(f"[{a_prev}][{i}:a]acrossfade=d={transition}[a{i}]")
-        a_prev = f"a{i}"
-    args += ["-filter_complex", ";".join(chains), "-map", f"[{v_prev}]", "-map", f"[{a_prev}]",
+    sound = ["-an"]
+    if audio:
+        a_prev = "0:a"
+        for i in range(1, len(parts)):
+            chains.append(f"[{a_prev}][{i}:a]acrossfade=d={transition}[a{i}]")
+            a_prev = f"a{i}"
+        sound = ["-map", f"[{a_prev}]", "-c:a", "aac", "-b:a", "192k"]
+    args += ["-filter_complex", ";".join(chains), "-map", f"[{v_prev}]", *sound,
              "-c:v", "libx264", "-crf", "18", "-preset", "slow", "-pix_fmt", "yuv420p",
-             "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", str(out)]
+             "-movflags", "+faststart", str(out)]
     run(args)
 
 
@@ -263,7 +264,7 @@ def main() -> None:
             else:
                 raise ValueError(f"Unknown segment type {kind!r}")
             parts.append(part)
-        join(parts, float(config.get("transition", 0.6)), settings, ffmpeg, out)
+        join(parts, float(config.get("transition", 0.6)), settings, ffmpeg, out, bool(config.get("audio", False)))
     print(f"Done: {out}")
 
 
