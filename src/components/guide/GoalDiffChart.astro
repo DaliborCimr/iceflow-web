@@ -1,0 +1,302 @@
+---
+// Distribution of the final goal difference (stronger minus weaker, overtime and shootout
+// included) for each attribute gap of the calibration table. One line per gap; hovering or
+// focusing a legend entry (or a line) brings that gap forward and fades the rest, a click pins it.
+// Data: src/data/goal-diff.json, from the game's calibration run (CALIBRATION_GD lines).
+import data from '../../data/goal-diff.json';
+import { defaultLocale, type Locale } from '../../i18n/ui';
+
+const labels = {
+  en: {
+    title: 'Final goal difference by attribute gap',
+    x: 'goal difference at the end (stronger team minus weaker)',
+    y: 'share of games',
+    legend: 'Attribute gap',
+    equal: 'equal',
+    games: 'games',
+    hint: 'Hover over or tap a gap to highlight it.',
+  },
+  cs: {
+    title: 'Konečný gólový rozdíl podle rozdílu atributů',
+    x: 'gólový rozdíl na konci (silnější tým minus slabší)',
+    y: 'podíl zápasů',
+    legend: 'Rozdíl atributů',
+    equal: 'vyrovnané',
+    games: 'zápasů',
+    hint: 'Najeď na rozdíl nebo na něj klepni a graf ho zvýrazní.',
+  },
+};
+const lang = Astro.params.lang as Locale;
+const l = labels[lang as keyof typeof labels] ?? labels[defaultLocale as 'en'];
+const pct = (v: number) => v.toLocaleString(lang, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+
+// Buckets shown: MIN..MAX without 0 (a game always has a winner); the end buckets hold everything
+// beyond them ("≤ -4", "≥ +8").
+const MIN = -4;
+const MAX = 8;
+const diffs = Array.from({ length: MAX - MIN + 1 }, (_, i) => MIN + i).filter((d) => d !== 0);
+const series = data.points.map((p) => {
+  const total = p.counts.reduce((a: number, b: number) => a + b, 0);
+  const at = (d: number) => {
+    // counts[i] is the difference i - 10, clamped to -10..+10
+    const idx = (from: number, to: number) => p.counts.slice(from + 10, to + 11).reduce((a: number, b: number) => a + b, 0);
+    if (d === MIN) return idx(-10, MIN);
+    if (d === MAX) return idx(MAX, 10);
+    return idx(d, d);
+  };
+  return { gap: p.gap, total, values: diffs.map((d) => (100 * at(d)) / total) };
+});
+const yMax = Math.ceil(Math.max(...series.flatMap((s) => s.values)) / 5) * 5;
+
+// Geometry
+const W = 680;
+const H = 330;
+const left = 52;
+const right = 16;
+const top = 16;
+const bottom = 64;
+const step = (W - left - right) / (diffs.length - 1);
+const x = (i: number) => left + step * i;
+const y = (v: number) => top + (H - top - bottom) * (1 - v / yMax);
+const ticks = Array.from({ length: yMax / 5 + 1 }, (_, i) => i * 5).filter((v) => yMax <= 30 || v % 10 === 0);
+const label = (d: number) => (d === MIN ? `≤ ${d}` : d === MAX ? `≥ +${d}` : d > 0 ? `+${d}` : `${d}`);
+const gapLabel = (g: number) => (g === 0 ? `0 (${l.equal})` : `+${g}`);
+---
+
+<figure class="gd" data-gd>
+  <figcaption class="head">
+    <strong>{l.title}</strong>
+    <span>{l.hint}</span>
+  </figcaption>
+
+  <div class="legend" role="group" aria-label={l.legend}>
+    <span class="legend-title">{l.legend}</span>
+    {series.map((s, i) => (
+      <button type="button" class="key" data-series={i} style={`--c: var(--gd-${i})`} aria-pressed="false">
+        <span class="swatch"></span>
+        {gapLabel(s.gap)}
+      </button>
+    ))}
+  </div>
+
+  <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={l.title}>
+    <title>{l.title}</title>
+    {ticks.map((v) => (
+      <>
+        <line class="grid" x1={left} x2={W - right} y1={y(v)} y2={y(v)} />
+        <text class="axis end" x={left - 8} y={y(v) + 4}>{v} %</text>
+      </>
+    ))}
+    {diffs.map((d, i) => (
+      <text class="axis mid" x={x(i)} y={H - bottom + 20}>{label(d)}</text>
+    ))}
+    <line class="zero" x1={(x(diffs.indexOf(-1)) + x(diffs.indexOf(1))) / 2} x2={(x(diffs.indexOf(-1)) + x(diffs.indexOf(1))) / 2} y1={top} y2={H - bottom} />
+    <text class="axis mid" x={(left + W - right) / 2} y={H - 14}>{l.x}</text>
+
+    {series.map((s, i) => (
+      <g class="series" data-series={i} style={`--c: var(--gd-${i})`}>
+        <polyline points={s.values.map((v, j) => `${x(j)},${y(v)}`).join(' ')} />
+        {s.values.map((v, j) => (
+          <circle cx={x(j)} cy={y(v)} r="4">
+            <title>{`${gapLabel(s.gap)} · ${label(diffs[j])}: ${pct(v)} % (${s.total.toLocaleString(lang)} ${l.games})`}</title>
+          </circle>
+        ))}
+      </g>
+    ))}
+  </svg>
+
+  <table class="sr">
+    <caption>{l.title}</caption>
+    <thead>
+      <tr><th>{l.legend}</th>{diffs.map((d) => <th>{label(d)}</th>)}</tr>
+    </thead>
+    <tbody>
+      {series.map((s) => (
+        <tr><th>{gapLabel(s.gap)}</th>{s.values.map((v) => <td>{pct(v)} %</td>)}</tr>
+      ))}
+    </tbody>
+  </table>
+</figure>
+
+<script>
+  // Highlight one series: hover/focus previews it, a click pins it (click again to release).
+  document.querySelectorAll<HTMLElement>('[data-gd]').forEach((root) => {
+    let pinned: string | null = null;
+    const show = (id: string | null) => {
+      root.classList.toggle('focus', id !== null);
+      root.querySelectorAll<HTMLElement>('[data-series]').forEach((el) => {
+        const on = el.dataset.series === id;
+        el.classList.toggle('on', on);
+        if (el.tagName === 'BUTTON') el.setAttribute('aria-pressed', String(on && pinned === id));
+      });
+    };
+    root.querySelectorAll<HTMLElement>('[data-series]').forEach((el) => {
+      const id = el.dataset.series!;
+      el.addEventListener('mouseenter', () => show(id));
+      el.addEventListener('mouseleave', () => show(pinned));
+      el.addEventListener('focus', () => show(id));
+      el.addEventListener('blur', () => show(pinned));
+      el.addEventListener('click', () => {
+        pinned = pinned === id ? null : id;
+        show(pinned);
+      });
+    });
+  });
+</script>
+
+<style>
+  .gd {
+    /* One hue, dim to bright: the bigger the gap, the brighter the line. */
+    --gd-0: #6b7c8c;
+    --gd-1: #2f6f95;
+    --gd-2: #1f86b8;
+    --gd-3: #12a0d8;
+    --gd-4: #4cc3f2;
+    --gd-5: #a6e4ff;
+    margin: 1.2em 0 1.6em;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 14px 8px;
+  }
+
+  .head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 4px 16px;
+    margin-bottom: 10px;
+  }
+
+  .head span {
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+
+  .legend-title {
+    color: var(--muted);
+    font-size: 0.82rem;
+    margin-right: 4px;
+  }
+
+  .key {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text);
+    font: inherit;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: opacity 0.15s ease, border-color 0.15s ease;
+  }
+
+  .swatch {
+    width: 14px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--c);
+  }
+
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .grid {
+    stroke: var(--border);
+  }
+
+  .zero {
+    stroke: var(--muted);
+    stroke-dasharray: 3 4;
+    opacity: 0.6;
+  }
+
+  .axis {
+    fill: var(--muted);
+    font-size: 12px;
+  }
+
+  .end {
+    text-anchor: end;
+  }
+
+  .mid {
+    text-anchor: middle;
+  }
+
+  .series {
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+  }
+
+  .series polyline {
+    fill: none;
+    stroke: var(--c);
+    stroke-width: 2;
+    stroke-linejoin: round;
+    transition: stroke-width 0.15s ease;
+  }
+
+  .series circle {
+    fill: var(--c);
+    stroke: var(--surface);
+    stroke-width: 2;
+  }
+
+  /* A series in focus: the rest fade back. */
+  .gd.focus .series {
+    opacity: 0.12;
+  }
+
+  .gd.focus .series.on {
+    opacity: 1;
+  }
+
+  .gd.focus .series.on polyline {
+    stroke-width: 3.5;
+  }
+
+  .gd.focus .key {
+    opacity: 0.45;
+  }
+
+  .gd.focus .key.on {
+    opacity: 1;
+    border-color: var(--c);
+  }
+
+  .key[aria-pressed='true'] {
+    background: color-mix(in srgb, var(--c) 18%, transparent);
+  }
+
+  .sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .series,
+    .key,
+    .series polyline {
+      transition: none;
+    }
+  }
+</style>

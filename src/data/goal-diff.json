@@ -1,0 +1,11 @@
+{
+  "source": "Ice Flow match-engine calibration, engine e60b4955; CALIBRATION_GD lines of MatchCalibrationGuardrailTest. counts[i] = games whose final score difference (stronger minus weaker, overtime and shootout included) was i - 10, clamped to -10..+10. Equal teams: 80,000 games; every gap: 40,000 games.",
+  "points": [
+    { "gap": 0, "counts": [0, 5, 23, 134, 598, 1782, 3447, 6086, 9361, 18785, 0, 18518, 9319, 6004, 3417, 1743, 590, 155, 28, 4, 1] },
+    { "gap": 5, "counts": [0, 0, 2, 12, 76, 326, 742, 1523, 3038, 7054, 0, 10167, 6030, 4651, 3231, 2054, 816, 237, 34, 6, 1] },
+    { "gap": 10, "counts": [0, 0, 0, 0, 26, 163, 371, 908, 1955, 5153, 0, 9633, 6405, 5741, 4339, 3089, 1610, 477, 104, 25, 1] },
+    { "gap": 15, "counts": [0, 0, 0, 5, 13, 66, 191, 553, 1233, 3797, 0, 8646, 6468, 6298, 5223, 4200, 2242, 794, 227, 40, 4] },
+    { "gap": 20, "counts": [0, 0, 0, 0, 2, 27, 96, 327, 854, 2739, 0, 7413, 6143, 6489, 5925, 5192, 3066, 1297, 335, 82, 13] },
+    { "gap": 50, "counts": [0, 0, 0, 0, 0, 0, 0, 0, 0, 21, 0, 293, 742, 1466, 2753, 5864, 8941, 9338, 6254, 3017, 1311] }
+  ]
+}
