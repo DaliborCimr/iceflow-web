@@ -1,0 +1,25 @@
+{
+  "output": "out/trailer.mp4",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "transition": 0.6,
+  "fonts": [
+    "fonts/OpenSans-SemiBold.ttf",
+    "C:/Windows/Fonts/seguisb.ttf",
+    "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
+    "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+  ],
+  "segments": [
+    {
+      "type": "title",
+      "text": "EVERY DECISION MATTERS",
+      "duration": 3.2,
+      "reveal": 1.4
+    },
+    {
+      "type": "clip",
+      "path": "assets/subtle_contract_pen_animation.mp4"
+    }
+  ]
+}

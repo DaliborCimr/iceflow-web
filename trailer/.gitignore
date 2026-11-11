@@ -1,0 +1,3 @@
+# Source clips and rendered output: large binaries, not versioned.
+assets/
+out/
