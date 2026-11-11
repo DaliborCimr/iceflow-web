@@ -99,7 +99,7 @@ být u telefonu v daný čas; **odvolání brankáře** jen při prohrávání v
 zneužít (schválné inkasování, zesměšňování soupeře) - vysvětleno v článku Zápas. **Délka smlouvy** (nejvýše
 5 sezón) je herní rozhodnutí a nevysvětluje se; **volba matchupů** se nevysvětluje (plyne z pětek).
 Přestupy bez jednání s volnými hráči jsou budoucí práce - v časové ose Příběhu („Co přijde dál“, z
-`iceflow-server/TODO.md`, včetně asociací s All-Star obsahem a výzkumu taktik mimo 5 na 5 a 4 na 4).
+`iceflow-server/TODO.md`, včetně All-Star (soutěž jako Rapid liga, hraná na principu asociací) a výzkumu taktik mimo 5 na 5 a 4 na 4).
 
 Rozhodnuto: **prodloužení v play-off 3 na 3 po 20 minutách** je záměr kvůli zrychlení hry; je to
 uvedené v článku Pravidla.

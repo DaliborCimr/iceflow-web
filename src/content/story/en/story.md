@@ -178,7 +178,8 @@ milestones:
     text: >-
       Planned, with no dates yet: contract negotiation with players and free agents (offer,
       counter-offer, accepted, rejected), features unlocked gradually as seasons are played, chemistry
-      of forward lines and defense pairs, associations and their All-Star content, research into
+      of forward lines and defense pairs, All-Star - a new
+      competition alongside the Rapid league, played on the principle of club associations, research into
       tactics for the power play, the penalty kill, 3 on 3 and play without a goalie - today a tactic
       applies only at 5 on 5 and 4 on 4, and new systems will come once they are backed by sources and
       balanced -, penalty shots during a game, better match animations and graphics, and servers for
