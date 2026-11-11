@@ -42,6 +42,7 @@ Zdrojem je stav repozitářů `iceflow-server`, `iceflow_mobile`, `hockey_gm` a
 | Kalibrace z nového běhu (engine e60b4955, 10 000 zápasů na bod, 80 000 / 40 000) | hotovo | `calibration.mdx` |
 | Pravidla NHL / IIHF s odkazy na konkrétní články IIHF | hotovo (NHL bez čísel článků, viz kap. 4) | `rules.mdx` |
 | Kontrola všech čísel na webu proti kódu serveru | hotovo 10. 11. 2026 | - |
+| Herní zjednodušení oproti realitě vysvětlená na místě (pětky, taktika jen v plném počtu, junioři místo draftu a cena útěchy jako draftová loterie, farma, nesouměrné počítání zápasů pro play-off, odstupné podle NHL, 44 hráčů) | hotovo 11. 11. 2026 | `match`, `juniors`, `season`, `market` |
 
 ## 2. Nutné před vydáním do obchodu
 
@@ -91,6 +92,19 @@ Zdrojem je stav repozitářů `iceflow-server`, `iceflow_mobile`, `hockey_gm` a
       amatérského skautingu, postup 8 týmů do play-off ligy, boost pomáhá až od únavy 6.
 - [ ] **Elite a trénink:** web podle upřesnění autora říká „klub, který v bloku Elite nehraje,
       dostane týmový trénink navíc“; v kódu nedohledáno, nápověda v aplikaci říká něco jiného (kap. 5).
+
+- [ ] **Zjednodušení bez dohledaného důvodu** (v kódu ani v `docs/` zdůvodnění není; doplnit od autora,
+      pak vysvětlit na webu):
+  - odvolání brankáře jen v posledních pěti minutách a jen při prohrávání (ve skutečnosti kdykoli),
+  - smlouva nejvýše na 5 sezón a prodloužení až od dvou zbývajících sezón (NHL: nejvýš 8 let,
+    prodloužení od 1. července posledního roku smlouvy),
+  - přestupy jen jako aukce za gold pucky - bez výměn hráčů mezi kluby a bez jednání s volnými hráči,
+  - proti které soupeřově formaci tvoje nastoupí, manažer nevybírá (dřívější volba „matchupů“ byla
+    z aplikace odebraná, `ClubLineMatchupEntity`).
+
+Rozhodnuto: **pětky** jsou záměr - taktika, riziko a ice time patří celé pětce (`iceflow-server/docs/tactics.md`,
+kap. 1); **junioři** jsou kompromis mezi draftem NHL a evropskou juniorkou a výběr je offline, aby nebylo nutné
+být u telefonu v daný čas.
 
 Rozhodnuto: **prodloužení v play-off 3 na 3 po 20 minutách** je záměr kvůli zrychlení hry; je to
 uvedené v článku Pravidla.
