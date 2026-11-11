@@ -31,8 +31,8 @@ const l = labels[lang as keyof typeof labels] ?? labels[defaultLocale as 'en'];
 const pct = (v: number) => v.toLocaleString(lang, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 
 // Buckets shown: MIN..MAX without 0 (a game always has a winner); the end buckets hold everything
-// beyond them ("≤ -4", "≥ +8").
-const MIN = -4;
+// beyond them ("≤ -6", "≥ +8").
+const MIN = -6;
 const MAX = 8;
 const diffs = Array.from({ length: MAX - MIN + 1 }, (_, i) => MIN + i).filter((d) => d !== 0);
 const series = data.points.map((p) => {

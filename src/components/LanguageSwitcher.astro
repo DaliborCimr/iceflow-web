@@ -1,5 +1,6 @@
 ---
 import { url, stripBase } from '../url';
+import Flag from './Flag.astro';
 import { languageNames, locales, useTranslations, type Locale } from '../i18n/ui';
 
 interface Props {
@@ -15,7 +16,7 @@ const current = languageNames[lang];
 
 <details class="lang">
   <summary aria-label={t('nav.language')}>
-    <span aria-hidden="true">{current.flag}</span>
+    <Flag lang={lang} />
     <span>{current.label}</span>
   </summary>
   <ul>
@@ -27,7 +28,7 @@ const current = languageNames[lang];
           lang={code}
           aria-current={code === lang ? 'true' : undefined}
         >
-          <span aria-hidden="true">{languageNames[code].flag}</span>
+          <Flag lang={code} />
           {languageNames[code].label}
         </a>
       </li>
