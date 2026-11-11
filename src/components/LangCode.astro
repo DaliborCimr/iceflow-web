@@ -1,0 +1,28 @@
+---
+// A language as its two-letter code in a small badge (EN, CS, ...). No flags: a language is not a
+// country. Same as the mobile app's language picker.
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+---
+
+<span class="code" aria-hidden="true">{lang.toUpperCase()}</span>
+
+<style>
+  .code {
+    display: inline-grid;
+    place-items: center;
+    flex: none;
+    min-width: 28px;
+    height: 20px;
+    padding: 0 4px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    line-height: 1;
+  }
+</style>

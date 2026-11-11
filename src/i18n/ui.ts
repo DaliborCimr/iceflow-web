@@ -3,18 +3,18 @@ import { defaultLocale, locales } from './locales';
 export type Locale = (typeof locales)[number];
 export { defaultLocale, locales };
 
-// Labels and flags match the mobile app's language picker.
-export const languageNames: Record<Locale, { label: string; flag: string }> = {
-  en: { label: 'English', flag: '🇬🇧' },
-  cs: { label: 'Čeština', flag: '🇨🇿' },
-  de: { label: 'Deutsch', flag: '🇩🇪' },
-  fr: { label: 'Français', flag: '🇫🇷' },
-  it: { label: 'Italiano', flag: '🇮🇹' },
-  sv: { label: 'Svenska', flag: '🇸🇪' },
-  fi: { label: 'Suomi', flag: '🇫🇮' },
-  no: { label: 'Norsk', flag: '🇳🇴' },
-  da: { label: 'Dansk', flag: '🇩🇰' },
-  ru: { label: 'Русский', flag: '🇷🇺' },
+// Labels match the mobile app's language picker; like the app it shows codes (EN, CS), no flags.
+export const languageNames: Record<Locale, { label: string }> = {
+  en: { label: 'English' },
+  cs: { label: 'Čeština' },
+  de: { label: 'Deutsch' },
+  fr: { label: 'Français' },
+  it: { label: 'Italiano' },
+  sv: { label: 'Svenska' },
+  fi: { label: 'Suomi' },
+  no: { label: 'Norsk' },
+  da: { label: 'Dansk' },
+  ru: { label: 'Русский' },
 };
 
 // English is the source of truth: every other language must have the same keys
