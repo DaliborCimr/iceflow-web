@@ -23,7 +23,9 @@ pip install -r requirements.txt
 python build_trailer.py
 ```
 
-The result is `out/trailer.mp4`. `assets/` and `out/` are not in git - keep the source clips
+The result is `out/trailer.mp4`: 1920x1080, 16:9, 30 fps, H.264 - the master to upload to
+YouTube (Google Play's promo video is a YouTube link). App footage (20:9) sits in a framed screen
+on the titles' backdrop, so the whole trailer keeps one look. The website uses a smaller copy. `assets/` and `out/` are not in git - keep the source clips
 elsewhere too. The light rays come from a fixed seed, so the same inputs give the same video.
 
 New app footage: `tools/record_with_taps.py` records the Android emulator while it taps, and

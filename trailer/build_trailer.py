@@ -264,14 +264,47 @@ def draw_touch(frame: Image.Image, x: float, y: float, age: float, scale: float)
     frame.paste(Image.alpha_composite(frame.convert("RGBA"), overlay).convert("RGB"))
 
 
+_STAGE: dict = {}
+
+
+def stage(settings: Settings) -> tuple[Image.Image, Image.Image, tuple[int, int, int, int]]:
+    """The backdrop app footage sits on - the title cards' light rays - with a soft shadow, and the
+    rectangle the footage fills. Phone recordings are 20:9 and the trailer 16:9 (YouTube, Google
+    Play), so rather than black bars the footage is a framed screen on the same backdrop as the
+    titles: every part of the trailer then shares one look."""
+    key = (settings.width, settings.height)
+    if key not in _STAGE:
+        w, h = key
+        margin = round(w * 0.045)
+        inner_w = w - 2 * margin
+        inner_h = round(inner_w * 9 / 20)
+        if inner_h > h - 2 * margin:
+            inner_h = h - 2 * margin
+            inner_w = round(inner_h * 20 / 9)
+        x0, y0 = (w - inner_w) // 2, (h - inner_h) // 2
+        rect = (x0, y0, x0 + inner_w, y0 + inner_h)
+        back = light_rays(w, h).crop((int(w * 0.04), 0, int(w * 0.04) + w, h))
+        shadow = Image.new("L", (w, h), 0)
+        ImageDraw.Draw(shadow).rounded_rectangle((rect[0], rect[1] + 18, rect[2], rect[3] + 18), radius=28, fill=200)
+        shadow = shadow.filter(ImageFilter.GaussianBlur(28))
+        back = Image.composite(Image.new("RGB", (w, h), (0, 0, 0)), back, shadow)
+        mask = Image.new("L", (w, h), 0)
+        ImageDraw.Draw(mask).rounded_rectangle(rect, radius=22, fill=255)
+        _STAGE[key] = (back, mask, rect)
+    return _STAGE[key]
+
+
 def fit(frame: Image.Image, settings: Settings) -> tuple[Image.Image, float, float, float]:
-    """The source frame scaled into the output, letterboxed; also the scale and offsets used."""
-    w, h = settings.width, settings.height
-    scale = min(w / frame.width, h / frame.height)
+    """The source frame on the stage, in its rounded frame; also the scale and offsets used."""
+    back, mask, rect = stage(settings)
+    rw, rh = rect[2] - rect[0], rect[3] - rect[1]
+    scale = min(rw / frame.width, rh / frame.height)
     size = (round(frame.width * scale), round(frame.height * scale))
-    canvas = Image.new("RGB", (w, h), LETTERBOX)
-    ox, oy = (w - size[0]) // 2, (h - size[1]) // 2
-    canvas.paste(frame.resize(size, Image.LANCZOS), (ox, oy))
+    ox, oy = rect[0] + (rw - size[0]) // 2, rect[1] + (rh - size[1]) // 2
+    layer = Image.new("RGB", (settings.width, settings.height), LETTERBOX)
+    layer.paste(frame.resize(size, Image.LANCZOS), (ox, oy))
+    canvas = Image.composite(layer, back, mask)
+    ImageDraw.Draw(canvas).rounded_rectangle(rect, radius=22, outline=(40, 70, 100), width=2)
     return canvas, scale, ox, oy
 
 
