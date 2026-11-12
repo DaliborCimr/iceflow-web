@@ -187,3 +187,24 @@ img {
 .prose-doc strong {
   color: var(--text);
 }
+
+/* Parts of a draft legal text that are not settled yet. */
+.prose mark.todo {
+  background: color-mix(in srgb, var(--gold) 18%, transparent);
+  color: var(--gold);
+  border: 1px dashed color-mix(in srgb, var(--gold) 60%, transparent);
+  border-radius: 4px;
+  padding: 0 4px;
+}
+
+.prose blockquote {
+  margin: 1em 0 1.5em;
+  padding: 10px 14px;
+  border-left: 3px solid var(--gold);
+  background: color-mix(in srgb, var(--gold) 8%, transparent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.prose blockquote p {
+  margin: 0;
+}
