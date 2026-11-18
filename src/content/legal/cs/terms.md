@@ -61,9 +61,9 @@ hru“ a co za něj hráč dostane.</mark>
 - Provoz hry můžeme ukončit; oznámíme to nejméně <mark class="todo">POČET</mark> dní předem.
 
 ## 7. Zrušení účtu
-Hrát můžeš kdykoli přestat. Smazání účtu: <mark class="todo">V APLIKACI / E-MAILEM - obchody s
-aplikacemi vyžadují smazání přímo v aplikaci</mark>. Smazáním účtu zmizí tvůj klub i vše v něm a
-nejde to vrátit.
+Hrát můžeš kdykoli přestat. Účet smažeš v aplikaci tlačítkem Smazat účet. Smažeme pak tvůj
+e-mail, přihlášení Google, fotku a přezdívku a odhlásíme tě na všech zařízeních; klub dohraje
+sezónu jako bot a už není tvůj. Smazání nejde vrátit.
 
 ## 8. Duševní vlastnictví
 Hra - její software, loga, grafika, texty a název a logo Ice Flow - patří nám nebo těm, od koho máme

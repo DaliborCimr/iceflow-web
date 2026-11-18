@@ -62,9 +62,9 @@ right of withdrawal; the "Support the game" gift and what it gives.</mark>
 - We may end the game. We will announce it at least <mark class="todo">NUMBER</mark> days ahead.
 
 ## 7. Ending your account
-You can stop playing at any time. To delete your account: <mark class="todo">IN THE APP / BY E-MAIL
-- the app stores require deletion inside the app</mark>. Deleting the account removes your club and
-everything in it; it cannot be undone.
+You can stop playing at any time. You can delete your account in the app with Delete account. We then
+delete your e-mail, Google sign-in, photo and nickname and sign you out on every device; your club
+plays out the season as a bot and is no longer yours. Deletion cannot be undone.
 
 ## 8. Intellectual property
 The game - its software, crests, graphics, texts and the Ice Flow name and logo - belongs to us or
