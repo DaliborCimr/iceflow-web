@@ -185,14 +185,15 @@ notes:
       - >-
         Hráče, Flow ani Gold Pucks nelze koupit za peníze. Prémiová měna Stars se získává hraním -
         za denní úkoly (10 denně, až 210 za sezónu), sezónní úkoly (130 za sezónu), celoživotní
-        achievementy (25 oblastí po 5 úrovních) a vstupy do Rapid ligy (1-5 hvězd, jedna reklama za
+        achievementy (25 oblastí po 5 úrovních) a umístění v Rapid lize (1-5 hvězd, jedna reklama za
         vstup, nejvýše 10 denně).
       - >-
-        Za Stars lze získat nový název nebo klubové barvy; logo a dva passy platné 21 dní jdou
-        koupit za Stars i za skutečné peníze. Ads Pass odstraní reklamy, ale denní limity
-        nemění. Sponsor Pass zvyšuje příjmy od sponzorů ve Flow i Gold Pucks o 20 %, což je skutečná
+        Za Stars lze získat nový název nebo klubové barvy, logo a dva passy platné 21 dní.
+        Platby skutečnými penězi nejsou v aktuální aplikaci zapnuté; placená loga a passy jsou
+        plánované. Ads Pass odstraní reklamy, ale denní limity nemění. Sponsor Pass zvyšuje příjmy
+        od sponzorů ve Flow i Gold Pucks o 20 %, což je skutečná
         ekonomická výhoda; obnovitelný příjem hvězd sám nestačí na to, aby byl aktivní každou
-        sezónu. Ice Flow tedy není pay-to-win ve smyslu nákupu hráčů nebo síly, placení ale přináší
+        sezónu. Ice Flow tedy není pay-to-win ve smyslu nákupu hráčů nebo síly, plánované placení by ale přinášelo
         mírnou dlouhodobou ekonomickou výhodu.
       - >-
         Protože hru vyvíjí jeden člověk, jsou náklady na provoz nízké a hra nepotřebuje agresivní
@@ -233,7 +234,7 @@ počtu asistencí.
 ### Kvalita a ověřování
 
 Jeden vývojář nemá k dispozici QA tým, proto je ověřování součástí samotného projektu. Server má
-kolem 310 automatických testů, zápasový engine se kontroluje kalibračními běhy přes tisíce zápasů
+přes 680 automatizovaných testovacích případů, zápasový engine se kontroluje kalibračními běhy přes tisíce zápasů
 a vícesezónními simulacemi a botí kluby zaplňují ligy a vytvářejí zátěž. Cílem je, aby šla každá
 změna ověřit objektivně, nejen hraním. Texty nápovědy v aplikaci se navíc porovnávají s tím, co
 server skutečně dělá - audit v říjnu 2026 našel a opravil 14 nesouladů ve všech deseti jazycích.

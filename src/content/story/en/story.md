@@ -190,15 +190,15 @@ notes:
       - >-
         Players, Flow and Gold Pucks cannot be bought for money. The premium currency, Stars, is
         earned in the game - through daily tasks (10 per day, up to 210 per season), season tasks (130 per
-        season), lifetime achievements (25 tracks with 5 levels each) and Rapid league entries
+        season), lifetime achievements (25 tracks with 5 levels each) and Rapid league placements
         (1-5 Stars each, one ad per entry, up to 10 per day).
       - >-
-        Stars buy a new name or club colours; a logo and two passes valid for 21 days can be bought
-        with Stars or with real money. The Ads Pass removes ads without changing any daily limits. The
-        Sponsor Pass increases sponsor income in Flow and Gold Pucks by 20 %, which is a real
+        Stars buy a new name or club colours, a logo and two passes valid for 21 days. Real-money
+        payments are not enabled in the current app; paid logos and passes are planned. The Ads Pass
+        removes ads without changing any daily limits. The Sponsor Pass increases sponsor income in Flow and Gold Pucks by 20 %, which is a real
         economic advantage; renewable Star income alone is not enough to keep it active every
         season. Ice Flow is therefore not pay-to-win in the sense of buying players or strength, but
-        paying does give a moderate long-term economic benefit.
+        the planned paid version would give a moderate long-term economic benefit.
       - >-
         Because the game is developed by one person, its running costs are low, and it does not
         need aggressive monetisation to be sustainable.
@@ -239,7 +239,7 @@ situation and the number of assists.
 ### Quality and verification
 
 With one developer there is no QA team, so verification is built into the project itself. The
-server has around 310 automated tests, the match engine is checked by calibration runs over
+server has more than 680 automated test cases, the match engine is checked by calibration runs over
 thousands of matches and by multi-season simulations, and bot clubs fill the leagues and generate
 load. The help texts in the app are also checked against what the server actually does - the
 audit in October 2026 found and corrected 14 mismatches across all ten languages. The goal is that
