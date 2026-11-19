@@ -29,6 +29,9 @@ Sezóna v Ice Flow trvá tři týdny skutečného času. Je krátká záměrně:
 
 <SeasonTimeline />
 
+Týmový kalendář lze přepnout mezi mřížkou a seznamem. Po dohrání zápasu nahradí čas začátku
+stejná značka výhry či prohry jako ve formě, včetně rozlišení prodloužení nebo nájezdů.
+
 ## Ligy podle síly
 
 Před každou sezónou se kluby losují do nových lig, aby hrály s týmy, které můžou porazit a které
@@ -51,8 +54,10 @@ pravidel jako všichni ostatní.
 | Prohra po prodloužení nebo nájezdech | 1 |
 | Prohra v základní době | 0 |
 
-Při rovnosti bodů rozhoduje rozdíl skóre, potom vzájemné zápasy, potom vstřelené góly. Čára v tabulce
-označuje poslední místo do play-off.
+Při rovnosti bodů rozhoduje rozdíl skóre, potom vzájemné zápasy, potom vstřelené góly. V tabulce
+tvé běžné ligy označuje zlatá čára za 2. místem přímý postup do příští Elite série, modrá čára za
+8. místem poslední postupové místo do play-off. Bot nad zlatou čárou smí doplnit volná místa,
+automatický postup ale nemá.
 
 ## Play-off
 
@@ -69,8 +74,8 @@ označuje poslední místo do play-off.
 </Rules>
 
 <Callout type="note" title="Proč je play-off takhle krátké">
-  Čtvrtfinále se hraje na dvě vítězství, protože semifinále ligy rozhoduje o postupu do Elite v další
-  sezóně - jeden zápas by o tom rozhodoval příliš náhodně. Semifinále a finále jsou na jeden zápas,
+  Čtvrtfinále se hraje na dvě vítězství, protože semifinále ligy je jednou z cest do příští
+  Elite série - jeden zápas by o tom rozhodoval příliš náhodně. Semifinále a finále jsou na jeden zápas,
   aby se celé play-off vešlo do posledních dvou dnů. Vyřazený tým tak nikdy nečeká na novou sezónu
   víc než dva dny.
 </Callout>
@@ -81,11 +86,20 @@ Elite je liga nejlepších klubů, která se hraje souběžně s tvou ligou.
 
 <Rules>
   <Rule icon="how_to_reg" title="Kdo postoupí">
-    Místo má každý manažerský klub, který ve své lize došel do semifinále. Elite se losuje na další
-    sezónu ve skupinách po 24 a volná místa se doplní v tomto pořadí: manažerské kluby z 1. až 5.
-    místa, které do semifinále nedošly, potom stálé botí kluby, které došly do semifinále ve své lize - nejdřív ty, které jsou
-    silou nejblíž manažerským klubům - a teprve potom další manažerské kluby podle tabulky. Stálých
-    botů je vždy dost, takže semifinalista o místo nikdy nepřijde.
+    Manažerský klub si zajistí místo v příští sezóně prvním nebo druhým místem základní části
+    své běžné ligy, postupem do semifinále ligového play-off nebo titulem v Elite sérii končící
+    sezóny. Stačí splnit jednu podmínku; každý klub se losuje jen jednou. Obhájce titulu Elite má
+    tuto cestu i tehdy, když se nekvalifikuje ze své běžné ligy.
+  </Rule>
+  <Rule icon="groups" title="Skupiny po 24 a volná místa">
+    Hraje se v úplných skupinách po 24. Počet zajištěných manažerských postupujících se zaokrouhlí
+    nahoru na celou skupinu, pokud je dost způsobilých klubů. Volná místa nejprve doplní další
+    manažerské kluby: 3.–5. místo základní části, pak ostatní, podle bodů, rozdílu skóre a vstřelených
+    gólů. Teprve potom přijdou stálí boti splňující stejná postupová kritéria, přednostně podobné
+    síly jako postupující manažerské týmy. Další stálí boti jsou poslední možnost; dočasní výplňoví
+    boti se neúčastní. Boti nepostupují automaticky. Pokud nejsou žádní zajištění manažerští
+    postupující, ze způsobilých klubů vznikne největší možný počet celých skupin. Při nedostatku
+    klubů vzniknou jen celé skupiny; při méně než 24 způsobilých klubech Elite série nevznikne.
   </Rule>
   <Rule icon="grid_view" title="Skupina: 6 kol švýcarským systémem">
     Pokaždé proti klubu s podobnou bilancí a nikdy dvakrát proti stejnému - tak funguje

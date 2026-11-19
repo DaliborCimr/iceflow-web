@@ -29,6 +29,9 @@ nobody waits long for the next chance.
 
 <SeasonTimeline />
 
+The team calendar has a grid and a list view. Once a match has finished, its kickoff time is
+replaced by the same win/loss badge used for form, including whether it went beyond regulation.
+
 ## Leagues drawn by strength
 
 Before every season clubs are drawn into new leagues, so that you play teams you can beat and that
@@ -52,7 +55,9 @@ rules as everyone else.
 | Loss in regulation | 0 |
 
 Teams level on points are split by goal difference, then by their games against each other, then by
-goals scored. The line in the table marks the last playoff place.
+goals scored. In your regular-league table, the gold line below second place marks direct
+qualification for next season’s Elite Series; the blue line below eighth marks the last playoff
+place. A bot above the gold line is eligible to fill a vacancy, not guaranteed a place.
 
 ## Playoff
 
@@ -69,8 +74,8 @@ goals scored. The line in the table marks the last playoff place.
 </Rules>
 
 <Callout type="note" title="Why the playoff is this short">
-  The quarterfinal is played to two wins because reaching the league semifinal decides a place in
-  next season's Elite - a single game would decide that too much by chance. The semifinal and final
+  The quarterfinal is played to two wins because reaching the league semifinal is one route into
+  next season’s Elite Series - a single game would decide that too much by chance. The semifinal and final
   are one game each so that the whole playoff fits into the last two days. A team that is knocked out
   therefore never waits more than two days for the new season.
 </Callout>
@@ -81,11 +86,21 @@ Elite is the league of the best clubs, played alongside your own league.
 
 <Rules>
   <Rule icon="how_to_reg" title="Who qualifies">
-    Every managed club that reached the semifinal of its league gets a place. Elite is drawn for the
-    next season in groups of 24, and the free places are filled in this order: managed clubs placed
-    first to fifth that did not reach the semifinal, then permanent bot clubs that reached a semifinal in their own league - those closest in
-    strength to the managed clubs first - and only then other managed clubs by their table. There are
-    always enough permanent bots, so a semifinalist never misses out.
+    A managed club qualifies for next season by finishing first or second in its regular league’s
+    group stage, reaching its league playoff semifinal, or winning the Elite Series title in the
+    closing season. Any one route is enough; a club is entered only once. The defending Elite
+    champion keeps that route even if it misses out through its regular league.
+  </Rule>
+  <Rule icon="groups" title="Groups of 24 and vacant places">
+    The field is drawn in complete groups of 24. The number of guaranteed managed qualifiers is
+    rounded up to a full group when enough eligible clubs exist. Vacancies go first to other
+    managed clubs: third to fifth in their group stage, then the rest, ordered by points, goal
+    difference and goals scored. Only then do permanent bots meeting the same qualification
+    criteria fill places, those closest in strength to the managed entrants first. Other permanent
+    bots are the last fallback; temporary padding bots never enter. Bots do not qualify
+    automatically. With no guaranteed managed qualifiers, the eligible pool fills the largest
+    possible number of complete groups. If too few clubs exist, only complete groups are drawn;
+    fewer than 24 eligible clubs means no Elite Series.
   </Rule>
   <Rule icon="grid_view" title="Group stage: 6 Swiss-system rounds">
     Each round against a club with a similar record and never the same one twice - the
