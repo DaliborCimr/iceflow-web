@@ -166,24 +166,14 @@ milestones:
       Engine recalibration against NHL data and a documented tactics model. Registration and a
       guided tutorial, then the Stars currency, daily and season tasks, the Rapid league, the store
       and 25 lifetime achievements.
-  - date: Early November 2026
-    phase: launch
-    phaseLabel: Launch preparation
-    title: Preparing for launch
+  - date: November 2026
+    phase: server
+    phaseLabel: Server
+    title: Contracts, presence and animations
     text: >-
-      67 new live-match animations, mentality, discipline and form, match importance from the
-      table, Sign in with Google, a competitive market benchmark, push notifications and this
-      website.
-  - date: Mid-November 2026
-    phase: launch
-    phaseLabel: Launch preparation
-    title: Audit, contracts and polish
-    text: >-
-      An independent audit of the server in 13 sections, with a test for every serious finding,
-      account deletion and frozen clubs for managers who stop playing. Contract negotiation with
-      ambition and loyalty, seasonal tutorials from the club's second season, a market search that
-      deals up to five shared cards, a bonus for the manager's presence at the live match and a
-      library of 71 goal animations in 200 clips.
+      Mentality, discipline and form, match importance from the table, contract negotiation with
+      ambition and loyalty, a bonus for the manager watching live, 71 goal animations in 200 clips,
+      Google sign-in, push notifications and an independent audit of the server.
   - date: After launch
     phase: launch
     phaseLabel: Plans

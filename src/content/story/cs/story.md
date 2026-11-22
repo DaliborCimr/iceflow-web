@@ -164,22 +164,14 @@ milestones:
       Nová kalibrace enginu podle dat z NHL a zdokumentovaný model taktik. Registrace a provázený
       tutoriál, potom měna Stars, denní a sezónní úkoly, Rapid liga, obchod a 25 celoživotních
       achievementů.
-  - date: Začátek listopadu 2026
-    phase: launch
-    phaseLabel: Příprava spuštění
-    title: Příprava na spuštění
+  - date: Listopad 2026
+    phase: server
+    phaseLabel: Server
+    title: Smlouvy, přítomnost a animace
     text: >-
-      67 nových animací živého zápasu, mentalita, disciplína a forma, důležitost zápasu podle
-      tabulky, přihlášení přes Google, srovnání s konkurencí na trhu, push notifikace a tento web.
-  - date: Polovina listopadu 2026
-    phase: launch
-    phaseLabel: Příprava spuštění
-    title: Audit, smlouvy a doladění
-    text: >-
-      Nezávislý audit serveru ve 13 sekcích s testem ke každému závažnému nálezu, smazání účtu
-      a zmrazení klubů manažerů, kteří přestanou hrát. Vyjednávání smluv s ambicí a loajalitou,
-      sezónní tutoriály od druhé sezóny klubu, hledání na trhu s až pěti sdílenými kartami, bonus za
-      přítomnost manažera u živého zápasu a knihovna 71 gólových animací ve 200 klipech.
+      Mentalita, disciplína a forma, důležitost zápasu podle tabulky, vyjednávání smluv s ambicí
+      a loajalitou, bonus za manažera u živého zápasu, 71 gólových animací ve 200 klipech, přihlášení
+      přes Google, push notifikace a nezávislý audit serveru.
   - date: Po spuštění
     phase: launch
     phaseLabel: Plány
