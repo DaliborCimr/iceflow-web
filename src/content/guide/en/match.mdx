@@ -190,25 +190,30 @@ sources are listed under the tables, and which player types suit each tactic is 
 
 ## During the match
 
-<Screenshot name="live-match" alt="Live match: score, period clock and both teams' players on the ice with their energy" caption="Live: who is on the ice for both teams and each player's energy." />
+<Screenshot name="live-match" alt="Live match: score, period clock and both teams' players on the ice with their energy" caption="Live: who is on the ice for both teams and the energy of your players." />
 
 <Rules>
   <Rule icon="visibility" title="What you see">
-    Who is on the ice and each player's energy, goals, penalties and injuries as they happen, and a
-    running box score.
+    Who is on the ice for both teams and the energy of your own players, goals, penalties and
+    injuries as they happen (an injured player gets a badge), the power-play time left and a running
+    box score. The opponent's energy stays hidden. Elsewhere in the app a cyan dot on the menu
+    tells you your match is live; it takes priority over the red dot.
   </Rule>
   <Rule icon="edit" title="What you can change">
     Lineup, tactics, risk, ice-time preset and goalie. A saved change plays from the moment it
-    takes effect until the end.
+    takes effect until the end. It works with the players dressed for the game and holds for this
+    match only - your lineup for later games stays as it was.
   </Rule>
   <Rule icon="person_pin" title="Being there">
-    Watching your team's live match helps it by itself, with no change at all: the team gets a small
-    edge in every period you watch. Coming in during a break does not change a period already
-    played, and leaving keeps what the period you were watching has earned.
+    Watching your team's live match helps it by itself, with no change at all: joining during a
+    period gives the team a small edge from that moment. Being there before it starts earns the
+    whole of it - the warm-up earns the first period, the first intermission the second, the second
+    intermission the third and the break before overtime the overtime. What a period has earned
+    stays even if you leave.
   </Rule>
   <Rule icon="sports" title="Pulling the goalie">
-    In the last five minutes of the third, when behind, you can pull the goalie for an extra
-    attacker. In real hockey a coach may pull the goalie at any time; Ice Flow limits it so that it
+    In the last five minutes of the third, when one to three goals behind, you can pull the goalie for
+    an extra attacker. In real hockey a coach may pull the goalie at any time; Ice Flow limits it so that it
     cannot be abused - a losing team could leave its net empty to concede more on purpose, and a
     leading team could pull its goalie to mock the opponent.
   </Rule>
@@ -219,3 +224,28 @@ sources are listed under the tables, and which player types suit each tactic is 
 </Rules>
 
 <Clip src="goal-highlight.mp4" poster="highlight" label="Goal animation on the rink" caption="A goal highlight. The animation matches the manpower and the number of assists of the real goal." />
+
+The library holds **71 different scoring plays** in 200 clips - variants for the number of assists
+and mirrored sides do not count as new plays. They fall into six kinds of attack: break, transition,
+cycle, pressure, dump and chase, and wrap-around.
+
+<div class="num">
+
+| Skaters (scoring team first) | Break | Transition | Cycle | Pressure | Dump and chase | Wrap-around | Plays |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 5 on 5 | 2 | 3 | 2 | 3 | 3 | 2 | 15 |
+| 5 on 4 | 0 | 1 | 4 | 1 | 1 | 0 | 7 |
+| 5 on 3 | 0 | 1 | 2 | 0 | 1 | 0 | 4 |
+| 4 on 5 | 5 | 0 | 0 | 0 | 0 | 0 | 5 |
+| 4 on 4 | 1 | 2 | 1 | 0 | 0 | 0 | 4 |
+| 4 on 3 | 0 | 1 | 2 | 0 | 1 | 0 | 4 |
+| 3 on 5 | 2 | 0 | 0 | 0 | 0 | 0 | 2 |
+| 3 on 4 | 2 | 0 | 0 | 0 | 0 | 0 | 2 |
+| 3 on 3 | 1 | 2 | 1 | 0 | 0 | 0 | 4 |
+| Own goalie pulled (6 on 3 to 4 on 5) | 0 | 3 | 9 | 0 | 3 | 0 | 15 |
+| Opponent's net empty (5 on 6 to 3 on 4) | 9 | 0 | 0 | 0 | 0 | 0 | 9 |
+
+</div>
+
+A play is always picked for the real manpower, goalies and number of assists; the kind of attack is
+drawn among the plays that fit.

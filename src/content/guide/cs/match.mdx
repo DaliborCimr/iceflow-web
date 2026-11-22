@@ -181,24 +181,28 @@ tabulkami a které typy hráčů se ke které taktice hodí, ukazuje stránka [T
 
 ## Během zápasu
 
-<Screenshot name="live-match" alt="Živý zápas: skóre, čas třetiny a hráči obou týmů na ledě s energií" caption="Živě: kdo je za oba týmy na ledě a energie každého hráče." />
+<Screenshot name="live-match" alt="Živý zápas: skóre, čas třetiny a hráči obou týmů na ledě s energií" caption="Živě: kdo je za oba týmy na ledě a energie tvých hráčů." />
 
 <Rules>
   <Rule icon="visibility" title="Co vidíš">
-    Kdo je na ledě a energii každého hráče, góly, tresty a zranění tak, jak se stanou, a průběžné
-    statistiky.
+    Kdo je za oba týmy na ledě a energii vlastních hráčů, góly, tresty a zranění tak, jak se stanou
+    (zraněný hráč dostane odznak), zbývající čas přesilovky a průběžné statistiky. Energie soupeře
+    zůstává skrytá. Jinde v aplikaci ti azurová tečka na menu připomene, že se hraje tvůj zápas;
+    má přednost před červenou tečkou.
   </Rule>
   <Rule icon="edit" title="Co můžeš měnit">
     Sestavu, taktiku, riziko, předvolbu ice timu i brankáře. Uložená změna platí od chvíle,
-    kdy začne působit, až do konce.
+    kdy začne působit, až do konce. Pracuje s hráči oblečenými na zápas a platí jen pro tento
+    zápas - sestava pro další zápasy zůstane, jak byla.
   </Rule>
   <Rule icon="person_pin" title="Tvoje přítomnost">
-    Sledování živého zápasu pomáhá týmu samo o sobě, i bez jediné změny: v každé třetině, kterou
-    sleduješ, má tým malou výhodu. Příchod o přestávce už odehranou třetinu nezmění a odchod nechá
-    výhodu, kterou si sledovaná třetina vysloužila.
+    Sledování živého zápasu pomáhá týmu samo o sobě, i bez jediné změny: příchod během třetiny dá
+    týmu malou výhodu od té chvíle. Kdo je u zápasu už před začátkem části, zajistí ji celou -
+    rozcvička první třetinu, první přestávka druhou, druhá přestávka třetí a přestávka před
+    prodloužením prodloužení. Co si část vysloužila, zůstane i po odchodu.
   </Rule>
   <Rule icon="sports" title="Odvolání brankáře">
-    V posledních pěti minutách třetí třetiny můžeš při prohrávání odvolat brankáře a hrát s hráčem
+    V posledních pěti minutách třetí třetiny můžeš při ztrátě jednoho až tří gólů odvolat brankáře a hrát s hráčem
     navíc. Ve skutečnosti trenér smí brankáře odvolat kdykoli; Ice Flow to omezuje, aby odvolání
     nešlo zneužít - prohrávající tým by si bez brankáře nechal schválně nastřílet další góly a vedoucí
     tým by odvoláním brankáře soupeře zesměšňoval.
@@ -210,3 +214,28 @@ tabulkami a které typy hráčů se ke které taktice hodí, ukazuje stránka [T
 </Rules>
 
 <Clip src="goal-highlight.mp4" poster="highlight" label="Animace gólu na kluzišti" caption="Záběr gólu. Animace odpovídá početnímu stavu a počtu asistencí skutečného gólu." />
+
+Knihovna má **71 různých gólových akcí** ve 200 klipech - varianty podle počtu asistencí a zrcadlené
+strany se jako nové akce nepočítají. Dělí se na šest druhů útoku: brejk, přechod, kombinace
+v pásmu, tlak, nahození a dobruslení a objetí branky.
+
+<div class="num">
+
+| Bruslaři (skórující tým první) | Brejk | Přechod | Kombinace | Tlak | Nahození | Objetí | Akce |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 5 na 5 | 2 | 3 | 2 | 3 | 3 | 2 | 15 |
+| 5 na 4 | 0 | 1 | 4 | 1 | 1 | 0 | 7 |
+| 5 na 3 | 0 | 1 | 2 | 0 | 1 | 0 | 4 |
+| 4 na 5 | 5 | 0 | 0 | 0 | 0 | 0 | 5 |
+| 4 na 4 | 1 | 2 | 1 | 0 | 0 | 0 | 4 |
+| 4 na 3 | 0 | 1 | 2 | 0 | 1 | 0 | 4 |
+| 3 na 5 | 2 | 0 | 0 | 0 | 0 | 0 | 2 |
+| 3 na 4 | 2 | 0 | 0 | 0 | 0 | 0 | 2 |
+| 3 na 3 | 1 | 2 | 1 | 0 | 0 | 0 | 4 |
+| Vlastní brankář odvolaný (6 na 3 až 4 na 5) | 0 | 3 | 9 | 0 | 3 | 0 | 15 |
+| Soupeřova branka prázdná (5 na 6 až 3 na 4) | 9 | 0 | 0 | 0 | 0 | 0 | 9 |
+
+</div>
+
+Akce se vždy vybírá podle skutečného početního stavu, brankářů a počtu asistencí; druh útoku se
+losuje mezi akcemi, které odpovídají.
