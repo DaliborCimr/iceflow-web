@@ -14,9 +14,9 @@ stats:
     label: měsíců vývoje, duben - listopad 2026
   - value: '4'
     label: kódové báze - prototyp enginu, server, mobilní aplikace, editor animací
-  - value: '1 700+'
+  - value: '2 000+'
     label: commitů
-  - value: '~256 000'
+  - value: '~290 000'
     label: řádků kódu
   - value: '10'
     label: jazyků od začátku
@@ -37,14 +37,15 @@ areas:
       - Střídání, míchání formací, odvolání brankáře a speciální formace lze měnit během hry
       - Odložené vyloučení, prodloužení 3 na 3 a prázdná branka jsou skutečné herní stavy
       - Stav zápasu posílá server každou sekundu přes SSE
+      - Přítomnost manažera u živého zápasu - i od rozcvičky a o přestávkách - dává týmu malou výhodu
   - title: Prezentace zápasu
     text: >-
       Góly a vybrané šance se zobrazují jako animované záběry odvozené ze skutečných událostí
       zápasu. Nejde o fyzikální záznam, ale zachovávají herní kontext.
     facts:
       - Všechny góly a další šance rovnoměrně rozložené v průběhu zápasu
-      - Varianta animace podle početní situace (5 na 5, 6 na 5 s prázdnou brankou, přesilovka 5 na 3 a další)
-      - Varianty pro góly bez asistence, s jednou nebo dvěma asistencemi
+      - 71 různých gólových akcí ve 200 klipech v šesti druzích útoku - od brejku po objetí branky
+      - Akce se vybírá podle skutečného početního stavu, brankářů a počtu asistencí (5 na 5, 6 na 5 s prázdnou brankou, přesilovka 5 na 3 a další)
       - Záběry vznikají ve vlastním editoru animací vytvořeném pro tento projekt
   - title: Hráč jako dlouhodobý systém
     text: >-
@@ -56,6 +57,7 @@ areas:
       - Zkušenosti stabilizují výkon a hospodaření s energií; forma odráží zhruba posledních 10-20 zápasů
       - Mentalita roste s vystavením důležitým zápasům; disciplína ovlivňuje vyloučení a bitky
       - Odolnost proti zraněním klesá s věkem a po vážných zraněních
+      - Ambice a loajalita rozhodují, jak hráč přijme nabídku smlouvy
       - Veteráni hrají stabilněji, ale ztrácejí rychlost a kondici, až ukončí kariéru
   - title: Řízení klubu
     text: >-
@@ -63,7 +65,8 @@ areas:
       v jedné oblasti má důsledky v ostatních.
     facts:
       - Farma hraje vlastní soutěž souběžně s prvním týmem
-      - Smlouvy až na 5 sezón; plat podle ratingů, věku a očekávaného vývoje, k tomu podpisový bonus
+      - Smlouvy až na 5 sezón; od druhé sezóny se plat vyjednává, s 5 pokusy u vlastního hráče a 3 u volného
+      - Hledání na trhu nabídne až pět karet, o které můžou soutěžit i ostatní manažeři
       - Přestupový trh s vyvolávací cenou 80-110 %, 8minutovou aukcí po prvním příhozu a 90sekundovým prodloužením
       - Dvě měny - Flow na provoz klubu, Gold Pucks na trh, skauting a juniory
       - Jeden sponzor na peníze a jeden na gold pucky za sezónu, každý vybraný ze tří druhů nabídek
@@ -168,13 +171,22 @@ milestones:
     text: >-
       67 nových animací živého zápasu, mentalita, disciplína a forma, důležitost zápasu podle
       tabulky, přihlášení přes Google, srovnání s konkurencí na trhu, push notifikace a tento web.
+  - date: Polovina listopadu 2026
+    phase: launch
+    phaseLabel: Příprava spuštění
+    title: Audit, smlouvy a doladění
+    text: >-
+      Nezávislý audit serveru ve 13 sekcích s testem ke každému závažnému nálezu, smazání účtu
+      a zmrazení klubů manažerů, kteří přestanou hrát. Vyjednávání smluv s ambicí a loajalitou,
+      sezónní tutoriály od druhé sezóny klubu, hledání na trhu s až pěti sdílenými kartami, bonus za
+      přítomnost manažera u živého zápasu a knihovna 71 gólových animací ve 200 klipech.
   - date: Po spuštění
     phase: launch
     phaseLabel: Plány
     title: Co přijde dál
     text: >-
-      Plánované, zatím bez termínu: vyjednávání smluv s hráči a s volnými hráči (nabídka,
-      protinabídka, přijetí, odmítnutí), postupné odemykání funkcí s odehranými sezónami, All-Star -
+      Plánované, zatím bez termínu: protinabídky při vyjednávání smluv, postupné odemykání dalších
+      funkcí s odehranými sezónami, All-Star -
       novou soutěž vedle Rapid ligy, hranou na principu asociací klubů, sehranost útočných trojic a obranných dvojic, výzkum taktik pro
       přesilovku, oslabení, hru 3 na 3 a hru bez brankáře - dnes taktika platí jen při 5 na 5 a 4 na
       4 a nové systémy přibudou, až budou podložené zdroji a vyvážené -, trestné střílení během
@@ -234,7 +246,8 @@ počtu asistencí.
 ### Kvalita a ověřování
 
 Jeden vývojář nemá k dispozici QA tým, proto je ověřování součástí samotného projektu. Server má
-přes 680 automatizovaných testovacích případů, zápasový engine se kontroluje kalibračními běhy přes tisíce zápasů
+přes 900 automatizovaných testovacích případů, zápasový engine se kontroluje kalibračními běhy přes tisíce zápasů
 a vícesezónními simulacemi a botí kluby zaplňují ligy a vytvářejí zátěž. Cílem je, aby šla každá
 změna ověřit objektivně, nejen hraním. Texty nápovědy v aplikaci se navíc porovnávají s tím, co
-server skutečně dělá - audit v říjnu 2026 našel a opravil 14 nesouladů ve všech deseti jazycích.
+server skutečně dělá - audit v říjnu 2026 našel a opravil 14 nesouladů ve všech deseti jazycích. V listopadu
+prošel server nezávislý audit ve 13 sekcích a každý závažný nález má teď svůj test.

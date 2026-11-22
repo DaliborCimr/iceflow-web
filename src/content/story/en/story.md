@@ -14,9 +14,9 @@ stats:
     label: months of development, April - November 2026
   - value: '4'
     label: codebases - engine prototype, server, mobile app, animation editor
-  - value: '1,700+'
+  - value: '2,000+'
     label: commits
-  - value: '~256,000'
+  - value: '~290,000'
     label: lines of code
   - value: '10'
     label: languages localised from the start
@@ -37,14 +37,15 @@ areas:
       - Line changes, line mixing, goalie pull and special teams can be changed during play
       - Delayed penalties, 3-on-3 overtime and empty net are modelled as real game states
       - Match state is pushed from the server every second over SSE
+      - The manager's presence at the live match - from the warm-up and intermissions too - gives the team a small edge
   - title: Match presentation
     text: >-
       Goals and selected chances are shown as animated highlights derived from the actual match
       events. They are not a physical replay, but they keep the game context.
     facts:
       - All goals plus additional chances, spread evenly through the match
-      - Animation variant chosen by manpower situation (5v5, 6v5 empty net, 5v3 power play and others)
-      - Variants for goals with zero, one or two assists
+      - 71 different scoring plays in 200 clips, in six kinds of attack - from a break to a wrap-around
+      - The play is picked by the real manpower, goalies and number of assists (5v5, 6v5 empty net, 5v3 power play and others)
       - Clips are authored in a dedicated animation editor built for the project
   - title: Players as long-term systems
     text: >-
@@ -56,6 +57,7 @@ areas:
       - Experience stabilises performance and energy management; form reflects roughly the last 10-20 games
       - Mentality grows with exposure to important matches; discipline affects penalties and fights
       - Injury resistance declines with age and after serious injuries
+      - Ambition and loyalty decide how a player takes a contract offer
       - Veterans play more steadily but lose speed and stamina until they retire
   - title: Club management
     text: >-
@@ -63,7 +65,8 @@ areas:
       decision in one area has consequences in the others.
     facts:
       - The farm team plays its own competition alongside the first team
-      - Contracts up to 5 seasons; salary depends on ratings, age and expected development, plus a signing bonus
+      - Contracts up to 5 seasons; from the second season the salary is negotiated, with 5 attempts for your own player and 3 for a free agent
+      - A market search deals up to five cards that other managers can bid on too
       - Transfer market with asking prices of 80-110 %, an 8-minute auction after the first bid and a 90-second soft close
       - Two currencies - Flow for running the club, Gold Pucks for the market, scouting and juniors
       - One cash and one gold-puck sponsor a season, each chosen from three kinds of offer
@@ -171,13 +174,23 @@ milestones:
       67 new live-match animations, mentality, discipline and form, match importance from the
       table, Sign in with Google, a competitive market benchmark, push notifications and this
       website.
+  - date: Mid-November 2026
+    phase: launch
+    phaseLabel: Launch preparation
+    title: Audit, contracts and polish
+    text: >-
+      An independent audit of the server in 13 sections, with a test for every serious finding,
+      account deletion and frozen clubs for managers who stop playing. Contract negotiation with
+      ambition and loyalty, seasonal tutorials from the club's second season, a market search that
+      deals up to five shared cards, a bonus for the manager's presence at the live match and a
+      library of 71 goal animations in 200 clips.
   - date: After launch
     phase: launch
     phaseLabel: Plans
     title: What comes next
     text: >-
-      Planned, with no dates yet: contract negotiation with players and free agents (offer,
-      counter-offer, accepted, rejected), features unlocked gradually as seasons are played, chemistry
+      Planned, with no dates yet: counter-offers in contract negotiation, more features unlocked
+      gradually as seasons are played, chemistry
       of forward lines and defense pairs, All-Star - a new
       competition alongside the Rapid league, played on the principle of club associations, research into
       tactics for the power play, the penalty kill, 3 on 3 and play without a goalie - today a tactic
@@ -239,8 +252,9 @@ situation and the number of assists.
 ### Quality and verification
 
 With one developer there is no QA team, so verification is built into the project itself. The
-server has more than 680 automated test cases, the match engine is checked by calibration runs over
+server has more than 900 automated test cases, the match engine is checked by calibration runs over
 thousands of matches and by multi-season simulations, and bot clubs fill the leagues and generate
 load. The help texts in the app are also checked against what the server actually does - the
-audit in October 2026 found and corrected 14 mismatches across all ten languages. The goal is that
+audit in October 2026 found and corrected 14 mismatches across all ten languages. In November an
+independent audit went through the server in 13 sections, and every serious finding now has a test. The goal is that
 every change can be verified objectively, not only by playing.
