@@ -30,7 +30,8 @@
     {
       "type": "logo_zoom",
       "path": "assets/manager-office.webp",
-      "box": [1189, 66, 1504, 321],
+      "box": [1182, 67, 1484, 319],
+      "repaint": [1176, 58, 1512, 328],
       "logo": "../src/assets/branding/logo_name.png",
       "lead": 1.2,
       "duration": 5.4,

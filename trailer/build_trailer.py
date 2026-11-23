@@ -17,7 +17,7 @@ crossfade - the global "transition", or the segment's own "transition" (0 = a st
                 footage runs on without a seam.
                   path (a video, or a still picture), from (seconds of the source), speed,
                   lead (seconds a still drifts and its logo glows before the flight), box (the logo in the source's
-                  pixels: [x0, y0, x1, y1]), logo (transparent PNG), duration, zoom (seconds the
+                  pixels: [x0, y0, x1, y1], matched on the mark), logo (transparent PNG), duration, zoom (seconds the
                   camera moves), margin (room left around the logo at the end)
 
 The trailer is silent. Adding to it means adding a segment to trailer.json and running the
@@ -333,6 +333,36 @@ def render_clip(segment: dict, settings: Settings, ffmpeg: str, out: Path) -> No
 # ---- Logo zoom ----------------------------------------------------------------------------------
 
 
+def repaint_logo(picture: Image.Image, area: list, logo: Image.Image, box: tuple) -> Image.Image:
+    """The picture's own logo (AI-drawn, a little off the real artwork) painted over with the
+    real one: the area is filled with the screen's colour around it, then the artwork goes into
+    "box" with a soft glow and the picture's slight softness. The sharp logo that fades in at the
+    end of the flight then lands on the very same shape - no second logo shows through."""
+    picture = picture.copy()
+    ax0, ay0, ax1, ay1 = area
+    ring = [picture.getpixel((x, y)) for x in range(ax0 - 6, ax1 + 6, 8) for y in (ay0 - 6, ay1 + 6)]
+    fill = tuple(sum(c[k] for c in ring) // len(ring) for k in range(3))
+    mask = Image.new("L", picture.size, 0)
+    ImageDraw.Draw(mask).rounded_rectangle(area, radius=18, fill=255)
+    mask = mask.filter(ImageFilter.GaussianBlur(6))
+    picture = Image.composite(Image.new("RGB", picture.size, fill), picture, mask)
+    bx0, by0, bx1, by1 = box
+    scale = min((bx1 - bx0) / logo.width, (by1 - by0) / logo.height)
+    size = (max(1, round(logo.width * scale)), max(1, round(logo.height * scale)))
+    art = logo.resize(size, Image.LANCZOS)
+    at = (round(bx0 + (bx1 - bx0 - size[0]) / 2), round(by0 + (by1 - by0 - size[1]) / 2))
+    glow = Image.new("RGBA", picture.size, (0, 0, 0, 0))
+    halo = Image.new("RGBA", size, (40, 140, 255, 0))
+    halo.putalpha(art.getchannel("A").point(lambda v: v * 0.55))
+    glow.paste(halo, at, halo)
+    glow = glow.filter(ImageFilter.GaussianBlur(9))
+    layer = Image.new("RGBA", picture.size, (0, 0, 0, 0))
+    layer.paste(art, at, art)
+    layer = layer.filter(ImageFilter.GaussianBlur(0.6))
+    out = Image.alpha_composite(picture.convert("RGBA"), glow)
+    return Image.alpha_composite(out, layer).convert("RGB")
+
+
 def render_logo_zoom(segment: dict, settings: Settings, ffmpeg: str, out: Path) -> None:
     w, h, fps = settings.width, settings.height, settings.fps
     src = (HERE / segment["path"]).resolve()
@@ -344,6 +374,8 @@ def render_logo_zoom(segment: dict, settings: Settings, ffmpeg: str, out: Path) 
     logo = logo.crop(logo.getbbox())
     if src.suffix.lower() in (".png", ".jpg", ".jpeg", ".webp"):
         footage = [Image.open(src).convert("RGB")]  # a still picture, brought to life below
+        if "repaint" in segment:
+            footage = [repaint_logo(footage[0], segment["repaint"], logo, (x0, y0, x1, y1))]
     else:
         footage = list(source_frames(ffmpeg, src, fps, float(segment.get("from", 0)), None, float(segment.get("speed", 1.0))))
     lead = float(segment.get("lead", 0.0))
@@ -390,9 +422,11 @@ def render_logo_zoom(segment: dict, settings: Settings, ffmpeg: str, out: Path) 
         frame = base.transform((w, h), Image.EXTENT, cam, resample=Image.BICUBIC)
         # The room fades to the trailer's dark as the camera arrives.
         # All the way: the end holds the logo alone on the trailer's backdrop, no room behind it.
-        frame = Image.blend(frame, dark, ease_in_out((p - 0.5) / 0.5))
-        # The sharp logo, placed where the frame's own logo is, fading in over the second half.
-        alpha = ease_in_out((p - 0.3) / 0.6)
+        frame = Image.blend(frame, dark, ease_in_out((p - 0.6) / 0.4))
+        # The sharp logo fades in over the frame's own logo while the camera slows down. "box" is
+        # where the artwork lies over the picture - matched on the mark, the biggest part - so the
+        # two marks cover each other and the swap does not show a second logo.
+        alpha = ease_in_out((p - 0.45) / 0.5)
         if alpha > 0:
             sx, sy = w / (cam[2] - cam[0]), h / (cam[3] - cam[1])
             lx0, ly0 = (x0 - cam[0]) * sx, (y0 - cam[1]) * sy
