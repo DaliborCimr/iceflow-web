@@ -389,7 +389,8 @@ def render_logo_zoom(segment: dict, settings: Settings, ffmpeg: str, out: Path) 
             cam = tuple(start_cam[k] + (last[k] - start_cam[k]) * p for k in range(4))
         frame = base.transform((w, h), Image.EXTENT, cam, resample=Image.BICUBIC)
         # The room fades to the trailer's dark as the camera arrives.
-        frame = Image.blend(frame, dark, ease_in_out((p - 0.5) / 0.5) * 0.92)
+        # All the way: the end holds the logo alone on the trailer's backdrop, no room behind it.
+        frame = Image.blend(frame, dark, ease_in_out((p - 0.5) / 0.5))
         # The sharp logo, placed where the frame's own logo is, fading in over the second half.
         alpha = ease_in_out((p - 0.3) / 0.6)
         if alpha > 0:
