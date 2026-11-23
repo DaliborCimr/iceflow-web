@@ -65,7 +65,7 @@ areas:
       decision in one area has consequences in the others.
     facts:
       - The farm team plays its own competition alongside the first team
-      - Contracts up to 5 seasons; from the second season the salary is negotiated, with 5 attempts for your own player and 3 for a free agent
+      - Contracts up to 5 seasons; from the second season the salary is negotiated, with 3 attempts per player
       - A market search deals up to five cards that other managers can bid on too
       - Transfer market with asking prices of 80-110 %, an 8-minute auction after the first bid and a 90-second soft close
       - Two currencies - Flow for running the club, Gold Pucks for the market, scouting and juniors

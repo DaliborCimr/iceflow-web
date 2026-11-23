@@ -65,7 +65,7 @@ areas:
       v jedné oblasti má důsledky v ostatních.
     facts:
       - Farma hraje vlastní soutěž souběžně s prvním týmem
-      - Smlouvy až na 5 sezón; od druhé sezóny se plat vyjednává, s 5 pokusy u vlastního hráče a 3 u volného
+      - Smlouvy až na 5 sezón; od druhé sezóny se plat vyjednává, se 3 pokusy na hráče
       - Hledání na trhu nabídne až pět karet, o které můžou soutěžit i ostatní manažeři
       - Přestupový trh s vyvolávací cenou 80-110 %, 8minutovou aukcí po prvním příhozu a 90sekundovým prodloužením
       - Dvě měny - Flow na provoz klubu, Gold Pucks na trh, skauting a juniory
