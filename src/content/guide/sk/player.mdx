@@ -1,0 +1,203 @@
+---
+title: Hráči
+description: Čo robí hráča dobrým, prečo toľko záleží na skúsenostiach a ako sa hráči vyvíjajú a starnú.
+group: ice
+order: 20
+icon: badge
+---
+
+Hráč v Ice Flow nie je jedno číslo. Atribúty hovoria, čo vie, skúsenosti ako spoľahlivo to predvedie,
+forma ako sa mu v poslednom čase darí a predpoklady ako sa bude vyvíjať počas kariéry. Táto stránka ich
+prechádza v tomto poradí.
+
+## Atribúty a ratingy
+
+<Rules>
+  <Rule icon="tune" title="Technické atribúty">
+    Streľba, prihrávky, práca s pukom, rozhodovanie, postavenie, krytie, práca hokejkou, hra telom,
+    blokovanie a korčuľovanie. Rozhodujú, ako hráč zvláda hru s pukom aj bez neho.
+  </Rule>
+  <Rule icon="fitness_center" title="Fyzické atribúty">
+    Rýchlosť, sila a kondícia. Kto je pri puku prvý, kto vyhrá súboj pri mantineli a ako rýchlo sa
+    hráč unaví.
+  </Rule>
+  <Rule icon="sports_hockey" title="Brankári">
+    Brankári majú vlastné technické atribúty: reflexy, sledovanie puku, kontrolu odrazov, lapačku a
+    vyrážačku.
+  </Rule>
+  <Rule icon="star" title="Ratingy">
+    Aplikácia atribúty zhŕňa do ratingov útoku (ÚT), obrany (OBR), fyzickej sily (FYZ) a
+    brankárskych zručností (BR), vedľa nich sú skúsenosti (SK).
+  </Rule>
+</Rules>
+
+<Screenshot name="player-card" alt="Karta hráča s atribútmi, ratingmi, energiou, únavou a šípkou formy" caption="Karta hráča: atribúty, nad nimi ratingy, vpravo energia, únava a šípka formy." />
+
+Tabuľka štatistík ukazuje chýbajúci údaj pomlčkou, nie nulou. Pri zoraďovaní zostávajú chýbajúce
+hodnoty na konci v oboch smeroch.
+
+## Typy hráčov
+
+Každý hráč má svoj typ - šesť pre útočníkov, štyri pre obrancov, tri pre brankárov. Typ rozhoduje, na
+ktorých atribútoch je hráč postavený, aké taktiky mu sedia a čo mu v tréningu rastie rýchlejšie. Všetko
+vrátane toho, odkiaľ typy pochádzajú, je na stránke [Typy hráčov](../player-types/).
+
+## Skúsenosti: ako spoľahlivo hráč hrá
+
+Skúsenosti sú jednou z vecí, ktorými sa Ice Flow líši od ostatných hier, a preto si zaslúžia viac než
+jednu vetu.
+
+### Každý zápas je iný deň
+
+Skutoční hráči nehrajú každý večer na rovnakej úrovni. V Ice Flow má každý hráč v každom zápase svoj
+**deň**: pred zápasom sa jeho zručnosti na tento jediný zápas posunú trochu nahor alebo nadol. Ako
+veľký ten posun môže byť, rozhodujú skúsenosti.
+
+- Hráč **s malými skúsenosťami** môže mať skvelý večer, ale aj veľmi slabý - a jeho zlé dni idú
+  hlbšie, než idú jeho dobré dni vysoko.
+- **Veterán** hrá takmer každý zápas blízko svojej skutočnej úrovne. Prekvapí málokedy, oboma smermi.
+- Pri všetkých platí, že väčšina zápasov je blízko obvyklej úrovne; extrémy sú zriedkavé, ale stávajú sa.
+
+<ExperienceChart />
+
+Graf je vykreslený z modelu samotnej hry. Ukazuje len tvar - ako sa rozptyl zužuje a ako je pri mladých
+hráčoch nesúmerný - nie veľkosť vplyvu.
+
+<Callout type="note" title="Profesionalita určuje smer, nie veľkosť">
+  Profesionálny hráč má o niečo väčšiu šancu na dobrý deň než na zlý. Ako veľmi sa deň môže vychýliť,
+  však ďalej rozhodujú skúsenosti.
+</Callout>
+
+### Čo ďalšie skúsenosti robia
+
+<Rules>
+  <Rule icon="battery_charging_full" title="Šetria energiu">
+    Skúsený hráč spotrebuje na rovnaké striedanie o trochu menej energie než súperi na ľade.
+  </Rule>
+  <Rule icon="gavel" title="Menej trestov">
+    Skúsenosti spolu s rozhodovaním a disciplínou držia hráča mimo trestnej lavice.
+  </Rule>
+  <Rule icon="trending_up" title="Férová forma">
+    Forma hodnotí hráča voči tomu, čo obvykle predvedie hráč s jeho skúsenosťami, takže mladý hráč
+    nie je penalizovaný len za to, že je menej stabilný.
+  </Rule>
+  <Rule icon="school" title="Ako rastú">
+    Skúsenosti rastú s každým odohraným zápasom, najrýchlejšie pri mladých hráčoch.
+  </Rule>
+</Rules>
+
+### Čo to znamená pre teba
+
+- Na **play-off** alebo vyrovnaný zápas je formácia skúsených hráčov istejšia voľba: vieš, čo dostaneš.
+- **Mladá talentovaná** formácia ti môže zápas vyhrať sama - a tiež prehrať. Daj jej zápasy, kde
+  zlý večer veľa nestojí, a získa skúsenosti, ktoré potrebuje.
+- Keď porovnávaš dvoch hráčov s podobnými ratingmi, pozri sa na **SK**: skúsenejší ich predvedie
+  častejšie.
+
+<Callout type="note" title="Odkiaľ to pochádza">
+  Že mladí hráči sú menej stabilní a veteráni vyrovnanejší, je v hokeji bežné pozorovanie, ale
+  publikovaných štúdií, ktoré by merali kolísanie výkonu medzi zápasmi podľa skúseností, je málo. Model
+  je preto dizajnovým rozhodnutím hry, postaveným a kalibrovaným v jej zápasovom engine.
+</Callout>
+
+## Forma
+
+<Rules>
+  <Rule icon="trending_up" title="Forma">
+    Bonus alebo postih až ±2 k atribútom podľa toho, ako hráč hral zhruba v posledných 10-20 zápasoch
+    voči tomu, čo sa od neho čakalo. Nejde o výkyv medzi dvoma zápasmi - to je deň opísaný vyššie.
+  </Rule>
+  <Rule icon="arrow_outward" title="Šípka">
+    Modrá nahor je najlepšia forma, zelená šikmo nahor dobrá, biela vodorovne priemerná, oranžová
+    šikmo nadol slabá a červená nadol najhoršia.
+  </Rule>
+</Rules>
+
+## Predpoklady
+
+Sedem predpokladov opisuje, aký je hráč človek a športovec. Menia sa pomaly alebo vôbec.
+
+<Rules columns>
+  <Rule icon="diamond" title="Talent">
+    Ako rýchlo a ako ďaleko sa technicky rozvíja.
+  </Rule>
+  <Rule icon="workspace_premium" title="Profesionalita">
+    Ako sa pripravuje - prejaví sa vo fyzickom tréningu, regenerácii a v tom, ako dlho si s vekom
+    udrží kondíciu.
+  </Rule>
+  <Rule icon="healing" title="Odolnosť voči zraneniam">
+    Ako ľahko sa zraní. Klesá s vekom a po vážnych zraneniach.
+  </Rule>
+  <Rule icon="gavel" title="Disciplína">
+    Ako často dostane trest a ako ľahko sa nechá vtiahnuť do bitky.
+  </Rule>
+  <Rule icon="psychology" title="Mentalita">
+    Ako zvláda tlak vo veľkých, vypätých chvíľach. Počas kariéry môže rásť zo zápasov pod tlakom.
+  </Rule>
+  <Rule icon="trending_up" title="Ambícia">
+    Aký plat čaká vzhľadom na svoju rolu a na silu a úspechy klubu. Mení to, či ponuku prijme, nie
+    základný plat.
+  </Rule>
+  <Rule icon="favorite" title="Lojalita">
+    Po niekoľkých sezónach v klube môže prijať nižší plat. Ambícia a lojalita hrajú rolu len pri
+    vyjednávaní zmluvy.
+  </Rule>
+  <Rule icon="unfold_more" title="Len odhad">
+    Klub pozná rozsah: dve šípky ukazujú najnižšiu a najvyššiu možnú úroveň. Pri vlastných hráčoch ho
+    profesionálny skauting časom spresňuje.
+  </Rule>
+</Rules>
+
+<Screenshot name="player-traits" alt="Záložka predpokladov na karte hráča s odhadom každého predpokladu ako šípkami" caption="Záložka Predpoklady: každý predpoklad ako odhad - kde sú dve šípky, skutočná úroveň leží medzi nimi." />
+
+Predpoklady sú herné abstrakcie. Z výskumu hra preberá len smer, nie čísla:
+
+- osobnosť sa s vekom stabilizuje, ale nie absolútne - preto sa predpoklady menia zriedka a len málo
+  ([Roberts & DelVecchio, 2000](https://pubmed.ncbi.nlm.nih.gov/10668348/); [metaanalýza, 2014](https://pmc.ncbi.nlm.nih.gov/articles/PMC4152379/)),
+- športová reziliencia je proces adaptácie, nie automatická odmena za stres - preto mentalita rastie zo
+  zápasov pod tlakom, ale nasýti sa ([Gupta & McCarthy, 2022](https://pmc.ncbi.nlm.nih.gov/articles/PMC9811683/)),
+- predchádzajúce zranenie zvyšuje riziko ďalšieho - preto odolnosť voči zraneniam po vážnych zraneniach klesá
+  ([Safe2Play, 2024](https://pmc.ncbi.nlm.nih.gov/articles/PMC11351362/)).
+
+Talent, profesionalita a disciplína sú modelované bez číselného zdroja.
+
+## Energia, únava a zranenia
+
+<Rules>
+  <Rule icon="battery_charging_full" title="Energia">
+    Počas zápasu klesá a na striedačke sa obnovuje. Hráč s nízkou energiou hrá horšie.
+  </Rule>
+  <Rule icon="bedtime" title="Únava">
+    Rastie so zápasmi a tvrdým tréningom a obmedzuje energiu, s ktorou hráč do zápasu vstupuje. Klesá
+    odpočinkom - o 5 na začiatku popoludnia a večera a o 10 cez noc.
+  </Rule>
+  <Rule icon="local_hospital" title="Zranenia">
+    Zranený hráč chýba v zápasoch aj tréningu počas doby, ktorú zranenie trvá; lepší zdravotníci ju
+    skracujú. Na začiatku zápasu zaňho nastúpi najlepší zdravý náhradník,
+    aj v presilovkových a oslabovacích formáciách.
+  </Rule>
+  <Rule icon="smart_display" title="Kratšia liečba">
+    Raz za herný deň môže každý zranený hráč pozrieť reklamu a skrátiť si liečbu o jeden blok.
+  </Rule>
+</Rules>
+
+## Vývoj a vek
+
+Hráči sa zlepšujú tréningom a zápasmi - mladí najrýchlejšie a tým pomalšie, čím bližšie sú svojmu
+potenciálu. Telo sa s vekom mení aj samo a každý fyzický atribút starne inak:
+
+- **rýchlosť** je hotová už koncom dospievania a odchádza prvá - zhruba od 29 rokov,
+- **sila** rastie zhruba do 30 rokov a drží sa zhruba do 36 rokov,
+- **kondícia** sa drží do 32 rokov a klesá od 33.
+
+Profesionalita posúva, kedy úbytok začne aj ako rýchlo ide, takže profesionálny hráč si telo udrží
+dlhšie. Zranený hráč fyzicky nerastie, ale starne ďalej. Skúsenosti držia veteránov stabilných až do konca
+kariéry.
+
+Krivky vychádzajú zo štúdie elitných hokejistov vo veku 18 až 33 rokov: najstaršia skupina bola
+v testoch šprintu a obratnosti o 2-3 % pomalšia, zatiaľ čo aeróbna kapacita sa medzi vekovými skupinami
+nelíšila ([Vigh-Larsen a kol., 2021](https://portal.findresearcher.sdu.dk/da/publications/the-relationship-between-age-and-fitness-profiles-in-elite-male-i/)).
+
+To zodpovedá tvaru skutočných kariér: výskum hráčov NHL kladie vrchol produktivity zhruba do 27-28 rokov pri
+útočníkoch a 28-29 rokov pri obrancoch, s výkonom blízko vrcholu v širokom rozmedzí veku (Brander, Egan a
+Yeung, [Estimating the effects of age on NHL player performance](https://econpapers.repec.org/RePEc:bpj:jqsprt:v:10:y:2014:i:2:p:19:n:6), 2014).

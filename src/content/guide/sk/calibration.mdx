@@ -1,0 +1,170 @@
+---
+title: Kalibrácia
+description: Ako sa zápasový engine overuje voči skutočnému hokeju - namerané čísla, nie recept.
+group: more
+order: 20
+icon: query_stats
+---
+
+Simulácia je taká vierohodná, aké vierohodné sú jej výsledky. Zápasový engine sa preto po každej zmene
+pustí na desiatky tisíc zápasov a výsledky sa porovnajú so skutočnými priemermi NHL. Táto stránka ukazuje
+práve tieto výsledky. Neukazuje, ako k nim engine dochádza - váhy, prahy a vnútorné vzorce zostávajú
+neverejné, aby sa hra vyhrávala hokejovými rozhodnutiami, nie spätným rozborom.
+
+<Callout type="note" title="Meranie">
+  Verzia enginu e60b4955, zmerané 10. novembra 2026. Dva vyrovnané tímy s predvolenou taktikou: 80 000
+  zápasov. Každý rozdiel sily: 40 000 zápasov. Referenciou je základná časť NHL 2024/25 (Hockey-Reference,
+  ligové priemery z [Hockey-Reference](https://www.hockey-reference.com/leagues/stats.html)).
+</Callout>
+
+## Bežný zápas
+
+Dva vyrovnané tímy, na tím a zápas.
+
+<div class="num">
+
+| | Ice Flow | [NHL 2024/25](https://www.hockey-reference.com/leagues/stats.html) |
+|---|---|---|
+| Góly | 3,09 | 3,01 |
+| Strely na bránku | 29,6 | 28,1 |
+| Úspešnosť zákrokov | 89,7 % | 90,0 % |
+| Presilovky | 2,80 | 2,71 |
+| Úspešnosť presiloviek | 20,2 % | 21,6 % |
+| Pokusy o strelu | 58,1 | 59,5 |
+| Góly po tretinách | 1,00 / 1,00 / 0,99 | 0,87 / 1,00 / 1,07 |
+
+</div>
+
+<Callout type="tip" title="Čo čísla hovoria">
+  Bežný zápas Ice Flow vyzerá ako bežný zápas NHL: zhruba tri góly na tím, necelých tridsať striel,
+  brankár chytí deväť striel z desiatich a z presilovky padne gól zhruba v každom piatom prípade. Góly
+  sú však rozložené rovnomerne do všetkých troch tretín, kým v NHL ich v prvej tretine padne menej a
+  v tretej viac (vrátane gólov do prázdnej bránky).
+</Callout>
+
+<Sources>
+
+- Stĺpec NHL: [Hockey-Reference, NHL League Averages, riadok 2024-25](https://www.hockey-reference.com/leagues/stats.html). Úspešnosť zákrokov nepočíta góly do prázdnej bránky.
+- Pokusy o strelu v NHL: [NHL.com, tímové štatistiky Realtime, 2024/25](https://www.nhl.com/stats/teams?report=realtime&reportType=season&seasonFrom=20242025&seasonTo=20242025&gameType=2) - strely na bránku, mimo aj zablokované vo všetkých herných situáciách, 156 071 pokusov v 2 624 tímových zápasoch.
+- Góly po tretinách v NHL: [NHL.com, tímové štatistiky Goals by Period, 2024/25](https://www.nhl.com/stats/teams?report=goalsbyperiod&reportType=season&seasonFrom=20242025&seasonTo=20242025&gameType=2) - 2 274 / 2 623 / 2 810 gólov v 2 624 tímových zápasoch.
+- Stĺpec Ice Flow: vlastný kalibračný beh hry, engine e60b4955, 80 000 zápasov.
+
+</Sources>
+
+## Ako zápasy končia
+
+<div class="num">
+
+| | Ice Flow |
+|---|---|
+| Výhry prvého z dvoch rovnakých tímov | 50,1 % ± 0,35 |
+| Nerozhodne po 60 minútach | 16,8 % zápasov |
+| Rozhodnuté v predĺžení | 12,0 % zápasov |
+| Rozhodnuté v nájazdoch | 4,8 % zápasov |
+
+</div>
+
+Dva rovnaké tímy vyhrávajú v rámci štatistickej odchýlky rovnako často - to je prvá kontrola, že engine
+žiadnu stranu nezvýhodňuje.
+
+## Tresty a špeciálne formácie
+
+<div class="num">
+
+| Na tím a zápas | Ice Flow |
+|---|---|
+| Menšie tresty | 3,18 |
+| Súbežné menšie tresty (na zápas) | 0,36 |
+| Bitky (na zápas) | 0,24 |
+| Veľké tresty (na zápas) | 0,02 |
+| Góly v oslabení na jedno oslabenie | 2,2 % |
+
+</div>
+
+## Kto strieľa a nahráva
+
+Podiel gólov bez asistencie, s jednou alebo dvoma asistenciami závisí od početného stavu - v presilovke je
+pripravený skoro každý gól, gól v oslabení býva často sólo.
+
+<div class="num">
+
+| | Bez asistencie | Jedna asistencia | Dve asistencie |
+|---|---|---|---|
+| Plný počet | 6,0 % | 20,1 % | 74,0 % |
+| Presilovka | 0,9 % | 6,1 % | 93,0 % |
+| Oslabenie | 22,8 % | 44,8 % | 32,4 % |
+
+</div>
+
+## Čas na ľade podľa formácií
+
+<div class="num">
+
+| | 1. formácia | 2. formácia | 3. formácia | 4. formácia |
+|---|---|---|---|---|
+| Minúty na hráča | 18,1 | 15,9 | 13,7 | 11,5 |
+
+</div>
+
+## Keď je jeden tím silnejší
+
+Silnejší tím má vyhrávať častejšie, ale nie vždy. V týchto zápasoch má **každý atribút každého hráča
+jedného tímu vrátane brankárov vyšší o daný počet bodov** - na rovnakej stupnici, akú ukazuje aplikácia - a
+všetko ostatné je rovnaké.
+
+<StrengthChart />
+
+<div class="num">
+
+| Rozdiel atribútov | Výhry | Strelené góly | Inkasované góly | Strely | Strely súpera | Zákroky slabšieho brankára |
+|---|---|---|---|---|---|---|
+| 0 (vyrovnané) | 50,1 % | 3,09 | 3,08 | 29,6 | 29,5 | 89,6 % |
+| +5 | 68,1 % | 3,63 | 2,55 | 32,9 | 26,2 | 89,0 % |
+| +10 | 78,6 % | 4,01 | 2,20 | 34,8 | 24,4 | 88,6 % |
+| +15 | 85,4 % | 4,31 | 1,95 | 35,9 | 23,3 | 88,0 % |
+| +20 | 89,9 % | 4,58 | 1,73 | 36,6 | 22,6 | 87,6 % |
+| +50 | 99,9 % | 6,82 | 0,41 | 37,0 | 19,7 | 81,6 % |
+
+</div>
+
+Tabuľka ukazuje priemery, graf ukazuje, ako zápasy naozaj končia - konečný gólový rozdiel vrátane
+predĺženia a nájazdov. Medzi vyrovnanými tímami sa skoro polovica zápasov rozhodne o jediný gól. Pri
+rozdiele +10 je stále zhruba štvrtina zápasov výhra o gól a od +20 končí viac než polovica rozdielom troch
+a viac gólov.
+
+<GoalDiffChart />
+
+<Callout type="note" title="Prekvapenia sa stávajú">
+  Tím lepší o desať bodov stále prehrá zhruba každý piaty zápas a o dvadsať bodov zhruba každý desiaty.
+  Lepší tím navyše vyhráva tým, že súpera prestrieľa, nie len tým, že z rovnakého počtu striel dá viac
+  gólov.
+</Callout>
+
+## Rovnaká hra na každej úrovni
+
+Liga slabších hráčov musí hrať rovnako ako liga silnejších - inak by nižšie ligy vyzerali inak než
+tie najvyššie. Tu má každý atribút oboch tímov o 40 bodov menej alebo viac.
+
+<div class="num">
+
+| | Slabšia liga (-40) | Priemerná liga | Silnejšia liga (+40) |
+|---|---|---|---|
+| Rovnaké tímy, výhry | 50,6 % | 50,1 % | 48,9 % |
+| Góly na tím | 3,09 | 3,09 | 3,05 |
+| Strely na bránku na tím | 29,6 | 29,6 | 29,5 |
+| Úspešnosť zákrokov | 89,7 % | 89,7 % | 89,6 % |
+| Úspešnosť presiloviek | 20,1 % | 20,2 % | 19,9 % |
+| Tím lepší o 10 bodov vyhrá | 78,8 % | 78,6 % | 78,3 % |
+
+</div>
+
+Hra sa hrá rovnako, nech je liga akokoľvek silná; o favoritovi rozhoduje len rozdiel medzi oboma tímami.
+
+## Čo tu nie je
+
+- váhy a vzorce enginu,
+- vplyv jednotlivých taktík, typov hráčov a ich kombinácií,
+- ako engine atribúty vnútri kombinuje.
+
+Tieto veci tu chýbajú zámerne. Cieľom stránky je ukázať, že výsledky sú realistické a férové, nie dať
+návod, ako ich obísť.

@@ -1,0 +1,126 @@
+---
+title: Prestupy, zmluvy a káder
+description: Nákup a predaj na trhu, zmluvy a predlžovanie a aký veľký môže byť káder.
+group: club
+order: 20
+icon: swap_horiz
+---
+
+Na prestupovom trhu sa všetko platí **gold puckami** a aukcie bežia v reálnom čase.
+
+## Nákup hráča
+
+<Rules>
+  <Rule icon="filter_alt" title="1. Hľadanie">
+    Zvoľ filtre a hľadaj - trh ti ponúkne až päť hráčov. Znova hľadať môžeš po 5 sekundách a 5 ďalších
+    za každého nájdeného hráča.
+  </Rule>
+  <Rule icon="timer" title="2. Karty z hľadania">
+    Karty nie sú len tvoje: na rovnakých hráčov môžu prihadzovať aj ostatní manažéri. Platia 2 minúty za
+    každého nájdeného hráča (najviac 10 minút) alebo do ďalšieho hľadania; dovtedy karta ukáže každú
+    novú cenu, aj to, že hráč z trhu zmizol. Minútu po zatvorení aplikácie hľadanie zanikne. Karta sa
+    otvorí ako karta hráča v tvojom tíme - všetky atribúty vrátane PHY a EXP - len bez štatistík;
+    prostredná dlaždica ukazuje históriu príhodov.
+  </Rule>
+  <Rule icon="gavel" title="3. Príhod alebo nákup">
+    Prihoď aspoň ďalší minimálny príhod, alebo hráča hneď kúp za cenu rýchleho nákupu. Tvoje gold
+    pucky sú blokované, kým tvoj príhod vedie, a vrátia sa, keď ťa niekto prehodí.
+  </Rule>
+</Rules>
+
+### Ako aukcia končí
+
+Ponuka nemá odpočet, kým nikto neprihodí. **Prvý príhod spustí osemminútovú aukciu** a najvyšší
+príhod na konci hráča kupuje. Príhod v posledných 90 sekundách aukciu predĺži tak, aby zostávalo 90
+sekúnd. <TestOnly />
+
+<Callout type="note">
+  Prihadzovať sa dá len tam, kde má káder na danom poste miesto, a miesto sa počíta ako obsadené už od
+  príhodu.
+</Callout>
+
+## Predaj hráča
+
+<Rules>
+  <Rule icon="sell" title="Aukcia">
+    Presuň hráča medzi náhradníkov a ponúkni ho s vyvolávacou cenou medzi 80 % a 110 % jeho hodnoty.
+    Ponúkaný hráč nehrá za žiadny z tvojich tímov. Stiahnuť ho možno, len kým nikto neprihodil.
+  </Rule>
+  <Rule icon="flash_on" title="Rýchly predaj">
+    Uzavrie sa hneď za 70 % referenčnej hodnoty hráča a nedá sa vrátiť. Predčasné ukončenie zmluvy stojí
+    odstupné vo Flow, zaplatené hneď: dve tretiny toho, čo zmluva ešte dlhuje - zvyšok tejto sezóny a
+    všetky ďalšie sezóny - pri hráčovi mladšom ako 26 rokov jedna tretina. Pri hráčovi, ktorý oznámil koniec
+    kariéry, sa počíta len táto sezóna. Keď na odstupné nemáš dosť Flow, rýchly predaj nejde. Predaj
+    v aukcii odstupné nestojí.
+  </Rule>
+  <Rule icon="percent" title="Koľko dostaneš">
+    Predávajúci klub dostane 75 % predajnej ceny - pri rýchlom predaji je to zhruba 52,5 % referenčnej
+    hodnoty.
+  </Rule>
+  <Rule icon="block" title="Obmedzenia">
+    Predajom nesmie post klesnúť pod 5 hráčov v poli alebo 3 brankárov. Hráčov v poslednej sezóne zmluvy
+    a hráčov, ktorí oznámili koniec kariéry, možno predať len do 15. dňa. Po predĺžení zmluvy už hráč
+    v poslednej sezóne nie je a predať ho možno aj neskôr.
+  </Rule>
+</Rules>
+
+Trh je otvorený celú sezónu až do večera posledného dňa a znova sa otvorí s novou sezónou.
+
+<Callout type="note" title="Odkiaľ je odstupné">
+  Podiel je prevzatý z NHL: dve tretiny zostávajúceho platu, pri hráčovi mladšom ako 26 rokov jedna tretina
+  ([PuckPedia](https://www.puckpedia.com/salary-cap/buyouts)). NHL ho rozkladá na dvojnásobok zostávajúcej dĺžky zmluvy kvôli platovému
+  stropu. Ice Flow platový strop nemá, preto sa odstupné platí naraz.
+</Callout>
+
+## Zmluvy
+
+<Rules>
+  <Rule icon="hourglass_bottom" title="Dĺžka">
+    Zostávajúce sezóny zmluvy sa odpočítavajú na konci každej sezóny. Keď zmluva vyprší bez predĺženia,
+    hráč odíde ako voľný hráč.
+  </Rule>
+  <Rule icon="update" title="Predĺženie">
+    Kedykoľvek, akonáhle zostávajú dve sezóny alebo menej. Výsledná zmluva môže mať celkovo najviac päť
+    sezón, nie päť pridaných.
+  </Rule>
+  <Rule icon="payments" title="Základný plat">
+    Základný plat za pridané sezóny závisí od ratingov, veku a očakávaného vývoja hráča počas
+    zmluvy. Vedenie klubu znižuje plat a bonus nových zmlúv až o 12 %.
+  </Rule>
+  <Rule icon="handshake" title="Vyjednávanie">
+    Od druhej sezóny klubu určuješ plat sám - ako podiel základného platu - aj dĺžku zmluvy. Nízku
+    ponuku hráč odmietne a štedrú prijme; medzi tým rozhoduje jeho ambícia a lojalita, dĺžka zmluvy,
+    sila a úspechy klubu a vedenie klubu. Podpisový bonus sa riadi ponúkaným platom a pridanými sezónami
+    a platí sa, až keď hráč ponuku prijme.
+  </Rule>
+  <Rule icon="replay" title="Pokusy">
+    Každá ponuka spotrebuje pokus - tri pri vlastnom aj voľnom hráčovi; voľného hráča možno podpísať až
+    po dohode o zmluve. Odmietnutie naznačí, ako ďaleko ponuka bola: blízko, ešte kus chýba, alebo
+    ďaleko. Keď pokusy dôjdu, s hráčom už do konca sezóny vyjednávať nemožno.
+  </Rule>
+  <Rule icon="logout" title="Koniec kariéry">
+    Hráča, ktorý oznámil koniec kariéry, predĺžiť nemožno a na konci sezóny odíde.
+  </Rule>
+</Rules>
+
+## Veľkosť kádra
+
+<Rules>
+  <Rule icon="groups" title="Limity">
+    Najviac 9 hráčov na každom poste v poli a 5 brankárov, celkovo 44.
+  </Rule>
+  <Rule icon="autorenew" title="Automatické doplnenie">
+    Počas sezóny nemožno káder predajom dostať pod 5 hráčov v poli a 3 brankárov na poste. Pod túto
+    hranicu sa typicky dostane prvý deň novej sezóny, keď káder automaticky opustia hráči, ktorí
+    ukončili kariéru, a hráči, ktorým vypršala zmluva. Klub potom chýbajúce miesta doplní sám - ráno na
+    4 hráčov v poli a 2 brankárov, aby sa dala postaviť zostava, popoludní na 5 a 3 - a zaplatí to
+    z dostupných gold puckov. Ráno ťa upozorní, ktoré posty sa popoludní doplnia, takže ich medzitým môžeš
+    obsadiť sám. Zranení hráči sa do počtov započítavajú.
+  </Rule>
+</Rules>
+
+<Callout type="note" title="Prečo 44 hráčov">
+  Káder nesie dva celé tímy - prvý tím a farmu, každý so štyrmi päťkami a dvoma brankármi. To je 8 hráčov
+  na každom poste v poli a 4 brankári, celkovo 44. Limit na poste je o jedného vyšší, aby sa dal kúpiť
+  lepší hráč skôr, než predáš horšieho.
+</Callout>

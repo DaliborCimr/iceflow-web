@@ -25,6 +25,15 @@ const labels = {
     games: 'zápasů',
     hint: 'Najeď na rozdíl nebo na něj klepni a graf ho zvýrazní.',
   },
+  sk: {
+    title: 'Konečný gólový rozdiel podľa rozdielu atribútov',
+    x: 'gólový rozdiel na konci (silnejší tím mínus slabší)',
+    y: 'podiel zápasov',
+    legend: 'Rozdiel atribútov',
+    equal: 'vyrovnané',
+    games: 'zápasov',
+    hint: 'Prejdi na rozdiel alebo naň ťukni a graf ho zvýrazní.',
+  },
 };
 const lang = Astro.params.lang as Locale;
 const l = labels[lang as keyof typeof labels] ?? labels[defaultLocale as 'en'];

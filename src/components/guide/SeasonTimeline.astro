@@ -32,6 +32,19 @@ const labels = {
     sponsors: 'Platby sponzorů',
     selling: '15. den: poslední den prodeje hráčů v poslední sezóně smlouvy a před koncem kariéry',
   },
+  sk: {
+    title: 'Sezóna o 21 herných dňoch',
+    league: 'Liga',
+    group: 'Základná časť - 44 zápasov',
+    playoff: 'Play-off',
+    elite: 'Elite',
+    eliteGroup: 'kolo skupiny',
+    eliteKo: 'play-off',
+    juniors: 'Podpis juniorov',
+    juniorsSeen: 'Skutočné ratingy ešte viditeľné',
+    sponsors: 'Platby sponzorov',
+    selling: '15. deň: posledný deň predaja hráčov v poslednej sezóne zmluvy a pred koncom kariéry',
+  },
 };
 const lang = Astro.params.lang as Locale;
 const l = labels[lang as keyof typeof labels] ?? labels[defaultLocale as 'en'];

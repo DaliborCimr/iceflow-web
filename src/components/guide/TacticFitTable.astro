@@ -30,6 +30,7 @@ const defense = ['Puck Hunt', 'Strong-Side Lock', 'Man Marking', 'Layered Zone',
 const labels = {
   en: { tactic: 'Tactic', suits: 'suits', neutral: 'neither', not: 'does not suit', forwards: 'Forwards', defense: 'Defensemen' },
   cs: { tactic: 'Taktika', suits: 'hodí se', neutral: 'neutrální', not: 'nehodí se', forwards: 'Útočníci', defense: 'Obránci' },
+  sk: { tactic: 'Taktika', suits: 'hodí sa', neutral: 'neutrálne', not: 'nehodí sa', forwards: 'Útočníci', defense: 'Obrancovia' },
 };
 const l = labels[(Astro.params.lang as Locale) as keyof typeof labels] ?? labels[defaultLocale as 'en'];
 const rows = Astro.props.side === 'attack' ? attack : defense;

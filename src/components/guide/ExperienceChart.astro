@@ -25,6 +25,16 @@ const labels = {
     most: '9 zápasů z 10',
     half: 'polovina zápasů',
   },
+  sk: {
+    title: 'Ako veľmi sa môže líšiť deň hráča podľa skúseností',
+    exp: 'SK',
+    better: 'lepší deň',
+    worse: 'horší deň',
+    usual: 'obvyklá úroveň',
+    full: 'možný rozsah',
+    most: '9 zápasov z 10',
+    half: 'polovica zápasov',
+  },
 };
 // The page's language comes from the route, so MDX can use <ExperienceChart /> bare.
 const l = labels[(Astro.params.lang as Locale) as keyof typeof labels] ?? labels[defaultLocale as 'en'];

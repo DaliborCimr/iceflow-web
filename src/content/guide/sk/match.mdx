@@ -1,0 +1,241 @@
+---
+title: Zápas a živé koučovanie
+description: Ako sa zápas simuluje, čo robia formácie, taktiky a riziko a čo sa dá meniť počas hry.
+group: ice
+order: 10
+icon: sports_hockey
+---
+
+Každý zápas sa odohráva na serveri v reálnom čase a prenáša sa do telefónu. Nesleduješ len výsledok
+- počas hry môžeš koučovať.
+
+## Ako sa zápas simuluje
+
+Hra prechádza z jednej situácie do ďalšej: tím získa puk, posunie ho dopredu, vznikne šanca, brankár
+zasiahne alebo sa hra preruší. O každom takom okamihu rozhoduje **kalibrovaná pravdepodobnosť** a
+tú posúva to, čo je práve na ľade.
+
+<Rules columns>
+  <Rule icon="groups" title="Kto je na ľade">
+    Atribúty hráčov, ich energia a forma a to, ako sa hodia k taktike.
+  </Rule>
+  <Rule icon="route" title="Ako hrajú">
+    Útočná a obranná taktika každej formácie a jej úroveň rizika.
+  </Rule>
+  <Rule icon="exposure" title="Početný stav">
+    Plný počet, presilovka, oslabenie, 4 na 4, prázdna bránka.
+  </Rule>
+  <Rule icon="psychology" title="Čo je v hre">
+    V dôležitých zápasoch má vo vypätých chvíľach väčšiu váhu mentalita hráčov.
+  </Rule>
+</Rules>
+
+Rovnaký zápas za rovnakých podmienok dá rovnaký výsledok, takže každý zápas sa dá prehrať a skontrolovať.
+Ako sú pravdepodobnosti naladené voči skutočnému hokeju, ukazuje stránka
+[Kalibrácia](../calibration/).
+
+## Keď je jeden tím silnejší
+
+V zápase vychádza sila tímu z atribútov jeho hráčov. Graf ukazuje, ako často tím vyhrá, keď má **každý atribút každého hráča vrátane brankárov vyšší o daný
+počet bodov** než súper a všetko ostatné je rovnaké. Zmerané na 40 000 zápasoch pre každý rozdiel.
+
+<StrengthChart />
+
+Lepší tím je jasný favorit, ale prekvapenia k hre patria ďalej: tím lepší o päť bodov vyhrá zhruba dva
+zápasy z troch, o desať bodov zhruba štyri z piatich. Ďalšie čísla sú na stránke
+[Kalibrácia](../calibration/).
+
+## Tvoje formácie
+
+<Rules>
+  <Rule icon="sports_hockey" title="Štyri formácie">
+    Každá má troch útočníkov a dvoch obrancov. Podiel ice timu určuje, ako často formácia hrá; striedanie sa
+    riadi energiou hráčov, pretože unavený hráč stráca energiu rýchlejšie a hrá horšie.
+  </Rule>
+  <Rule icon="shield_person" title="Brankári">
+    Zápas začína vybraný brankár. Náhradník ho môže zastúpiť pri zranení, alebo brankára vystriedaš
+    pri živom koučovaní. Výmena sa ukáže v prehľade udalostí zápasu. Únava brankára sa prenáša
+    zo zápasu do zápasu.
+  </Rule>
+  <Rule icon="add_circle" title="Presilovka: PP1 a PP2">
+    Dve päťky - traja útočníci, obranca a voľné miesto. Na ľad ide päťka s najviac energie. Proti dvom
+    trestom hrá celá; pri 4 na 3 jeden hráč vynechá.
+  </Rule>
+  <Rule icon="do_not_disturb_on" title="Oslabenie: PK1 a PK2">
+    Dve štvorice - dvaja útočníci a dvaja obrancovia. Pri oslabení o dvoch hrajú obaja obrancovia a prvý útočník.
+  </Rule>
+  <Rule icon="unfold_less" title="4 na 4 a 3 na 3">
+    Keď sú oslabené obe strany, formácia sa zmenší na dvoch obrancov a dvoch útočníkov, alebo dvoch útočníkov
+    a obrancu.
+  </Rule>
+</Rules>
+
+<Callout type="note" title="Prečo päťky, a nie útočné trojice a obranné dvojice">
+  V skutočnom hokeji sa útočné trojice a obranné dvojice zostavujú aj striedajú zvlášť. Tím obvykle
+  nasadí štyri trojice a tri dvojice ([Dummies](https://www.dummies.com/sports/hockey/hockey-substitutions-deciding-who-plays/)) - najviac 18 hráčov v poli a dvoch brankárov
+  ([NHL 5.1](https://media.d3.nhle.com/image/private/t_document/prd/i9yumvyaojps5kixzaxz.pdf)) - a obrancovia preto hrajú viac než útočníci.
+
+  Ice Flow skladá zostavu zo štyroch päťiek zámerne: taktika patrí celej päťke. Útočná a obranná taktika,
+  riziko aj podiel ice timu sa nastavujú pre päť hráčov naraz a to, ako formácii taktika sedí, je
+  súčet všetkých piatich. Na telefóne je tak jedna formácia jedna sada volieb. Cenou je, že hra nasadí ôsmich
+  obrancov namiesto šiestich a obrancovia nedostanú ice time zvlášť od útočníkov.
+
+  V zápase sa však päťka nestrieda ako jeden blok: hráči idú na striedačku podľa energie, takže sa
+  útočníci a obrancovia jednej päťky na ľade občas rozídu, aj keď spolu hrajú väčšinu času.
+</Callout>
+
+## Taktiky
+
+Každá formácia má **útočnú taktiku** - ako hrá s pukom - a **obrannú taktiku** - ako hrá bez
+neho. Každá je skutočný systém opísaný v trénerských materiáloch a analýzach - zdroje sú pod
+tabuľkami a ktoré typy hráčov sa ku ktorej taktike hodia, ukazuje stránka [Typy hráčov](../player-types/).
+
+| Útok | Čo formácia robí |
+|---|---|
+| Quick Strike | Rýchle podporené vyjazdenie a útok skôr, než sa obrana sformuje |
+| Stretch Counter | Dlhé prihrávky na vysunutých útočníkov a hneď protiútok |
+| Possession Cycle | Drží puk v pohybe pozdĺž mantinelu a za bránkou |
+| Direct Pressure | Nahodí puk a získa ho späť forčekingom a fyzickou hrou |
+| Point & Traffic | Strely od modrej s clonením, tečami a dorážkami |
+| Slot Overload | Rýchle rotácie a krátke prihrávky do slotu |
+
+| Obrana | Čo formácia robí |
+|---|---|
+| Puck Hunt | Napáda hráča s pukom vo všetkých pásmach |
+| Strong-Side Lock | Vytlačí puk k jednému mantinelu a uzavrie ho |
+| Man Marking | Tesne bráni jednotlivých súperov |
+| Layered Zone | Kompaktné vrstvy chránia nebezpečné miesta |
+| Neutral Trap | Uzavrie stred stredného pásma a núti súpera nahadzovať |
+| Low Collapse | Bráni blízko bránky a chráni slot |
+
+<Sources>
+
+- **Quick Strike**: [WBS Penguins](https://www.wbspenguins.com/blog/a-guide-to-offensive-ice-hockey-strategy/), [Elite Hockey Canada](https://www.elitehockeycanada.com/team-play/zone-play/role-and-responsibilities/defensemen-zone-play)
+- **Stretch Counter**: [Ice Hockey Man](https://icehockeyman.com/2026/06/12/what-is-a-stretch-pass-in-hockey-ihm/), [HockeyMonkey](https://www.hockeymonkey.com/learn/hockey-pass), [Two in the Box](https://twointhebox.com/2017/03/09/bylsmas-shortcomings-arent-exactly-new/)
+- **Possession Cycle**: [Hockey Graphs](https://hockey-graphs.com/2019/07/30/why-possession-is-the-key-to-zone-exits/), [HockeyPlayer](https://www.hockeyplayer.com/artman/publish/article_546.shtml), [Canucks Army](https://canucksarmy.com/news/amp/six-reasons-why-the-sedins-are-better-than-most-people-think), [Golden Stick Hockey](https://www.goldenstickhockey.com/post/power-forward-hockey-the-hammer), [USA Hockey handbook](https://cdn1.sportngin.com/attachments/document/0028/0001/Intermediate20042.pdf)
+- **Direct Pressure**: [Sports Illustrated](https://www.si.com/nhl/2014/01/15/fancystats-quietly-leading-nhl-teams-to-dump-the-dump-and-chase-strategy), [Hockey Graphs](https://hockey-graphs.com/2019/07/30/why-possession-is-the-key-to-zone-exits/), [LINHAC (Linköping University)](https://ecp.ep.liu.se/index.php/linhac/article/download/484/442), [Dictionary of Canadianisms](https://dchp.arts.ubc.ca/entries/dump-and-chase), [Silver Seven](https://www.silversevensens.com/tactical-formations-the-dump-and-chase/)
+- **Point & Traffic**: [Better Hockey](https://www.betterhockey.com/blogs/hockey-training/how-to-play-the-point-in-hockey), [Stickpedia](https://stickpedia.com/players/roles/power-forward/), [Gecko Simulations](https://gecko-simulations.com/mastering-net-front-presence-in-hockey-tips-deflections-and-screens/)
+- **Slot Overload**: [Bleacher Report](https://bleacherreport.com/articles/119593-the-4-1-overload-a-hockey-revolution), [NHL.com](https://www.nhl.com/kraken/news/net-front-offense-ft), [UpLvl](https://www.getuplvl.com/drills/hockey/positioning/offensive-zone-triangle-drill/), [Stickpedia](https://stickpedia.com/players/roles/power-forward/)
+- **Puck Hunt**: [Ice Hockey Man](https://icehockeyman.com/2025/12/13/what-is-a-2-1-2-forecheck-in-hockey/), [PW Ice](https://www.pwice.com/what-is-forechecking-in-hockey/), [Ice Hockey Systems](https://icehockeysystems.com/print/system/with-notes/183), [The Coaches Site](https://members.thecoachessite.com/article/ozfc-2-1-2), [WBS Penguins](https://www.wbspenguins.com/blog/understanding-forechecking-in-hockey/), [The Hockey News](https://thehockeynews.com/nhl/minnesota-wild/latest-news/wild-s-new-fourth-line-is-built-to-make-life-miserable), [Ice Hockey Systems](https://icehockeysystems.com/print/standard/61291)
+- **Strong-Side Lock**: [Wikipedia](https://en.wikipedia.org/wiki/Left_wing_lock), [Blue Seat Blogs](https://blueseatblogs.com/2013/02/19/hockey-systems-101-defensive-zone-strategies/), [HockeyPlayer](https://www.hockeyplayer.com/artman/publish/article_549.shtml), [HockeyPlayer](https://www.hockeyplayer.com/paid/publish/printer_523.shtml), [The Coaches Site](https://thecoachessitelive.com/how-barry-smiths-left-wing-lock-changed-hockey-forever/)
+- **Man Marking**: [Substack: man-on-man vs zone](https://jhanhky.substack.com/p/man-on-man-vs-zone-defense), [The Coaches Site](https://members.thecoachessite.com/article/what-is-man-to-man-defensive-zone-coverage-in-hockey), [The Hockey Site](https://my.thehockeysite.com/p/pros-and-cons-of-zonal-man-to-man)
+- **Layered Zone**: [The Coaches Site](https://members.thecoachessite.com/article/what-is-zone-defensive-coverage-in-hockey), [HockeyPlayer](https://www.hockeyplayer.com/artman/publish/article_560.shtml)
+- **Neutral Trap**: [Wikipedia](https://en.wikipedia.org/wiki/Neutral_zone_trap), [The Hockey Writers](https://thehockeywriters.com/the-dangers-of-policing-the-1-3-1-trap-system/), [Ice Hockey Systems](https://www.icehockeysystems.com/hockey-systems/ne-1-3-1-forecheck), [NHL.com](https://nhl.com/devils/news/underrated-devils-stan-s-stories), [The Hockey Writers](https://thehockeywriters.com/wilds-trap-game-key-to-defensive-success/), [Hockey Player Developer](https://hockeyplayerdeveloper.com/wp-content/uploads/2019/09/Why-Play-The-Trap.pdf), [The Coaches Site](https://members.thecoachessite.com/article/nzfc-1-3-1)
+- **Low Collapse**: [Ice Hockey Man](https://icehockeyman.com/2026/06/25/what-is-defensive-zone-collapse-in-hockey-ihm/), [The Hockey Writers](https://thehockeywriters.com/montreal-canadiens-julien-defensive-system-2017-18/), [The Hockey Writers](https://thehockeywriters.com/5-reasons-penguins-possession-problem/)
+
+</Sources>
+
+<Callout type="tip" title="Žiadna taktika nie je najlepšia sama osebe">
+  Každá taktika niektorým typom hráčov sedí a niekoľkým nesedí - popis v aplikácii ich vypisuje. Vhodnosť
+  sa meria voči priemernému hráčovi, takže bežná formácia je vo všetkých taktikách rovnaká. Taktika sa
+  oplatí, keď má tvoja formácia viac hráčov, ktorým sedí, než je obvyklé.
+</Callout>
+
+<Callout type="note" title="Prečo presilovka a oslabenie nemajú taktiku">
+  Taktiky sú vyvážené pre hru v plnom počte. Platia preto pri 5 na 5 a 4 na 4; presilovka, oslabenie,
+  hra 3 na 3 a hra bez brankára sa hrajú bez taktiky a jednotky PP a PK voľbu taktiky nemajú. Taktiky pre tieto stavy sa skúmajú; pribudnú, až budú
+  podložené zdrojmi a vyvážené.
+</Callout>
+
+## Riziko a ice time
+
+<Rules>
+  <Rule icon="speed" title="Úroveň rizika">
+    Od Betónovej obrany cez Kontrolu a Vyvážené po Presing a Vabank. Čím viac formácia riskuje, tým viac
+    tlačí dopredu a strieľa - a tým viac šancí súperovi dovolí. Opatrná formácia drží puk a hrá
+    bezpečne.
+  </Rule>
+  <Rule icon="pie_chart" title="Predvoľby ice timu">
+    Predvoľba rozdelí čas na ľade medzi tvoje štyri formácie. Proti ktorej súperovej formácii tvoja
+    nastúpi, nevyberáš.
+  </Rule>
+</Rules>
+
+## Pred zápasom
+
+<Screenshot name="preparation" alt="Príprava na zápas: ratingy formácií oboch tímov, riziko a skautský report" caption="Príprava: ratingy formácií oboch tímov po skautingu, riziko každej formácie a report z posledných zápasov." />
+
+<Rules>
+  <Rule icon="search" title="Skauting súpera">
+    Raz na zápas, pre tvoj budúci ligový zápas alebo zápas Elite série. Pred skautingom sú
+    ratingy súperových formácií otázniky. Skauting ukáže odhad formácií, ktoré by súper nasadil,
+    vrátane automatických náhrad nedostupných hráčov, a report z až piatich posledných zápasov.
+    Súper môže zostavu pred začiatkom ešte zmeniť.
+  </Rule>
+  <Rule icon="military_tech" title="Bonus za prípravu">
+    Skauting dá tvojmu tímu na ten zápas aj malý bonus, ktorý rastie s profesionálnym skautingom.
+  </Rule>
+  <Rule icon="signal_cellular_alt" title="Dôležitosť zápasu">
+    Stupnica má jeden až štyri dieliky a pre každý tím môže byť iná. V základnej časti zohľadňuje
+    boj o play-off, prvé dve miesta s postupom do Elite série, domácu výhodu a lepšie nasadenie.
+    Boj o prvé dve miesta má väčší význam než top 4 pre domáce štvrťfinále. Prvé ligové štvrťfinále
+    má dva dieliky, vedenie v sérii tri a hrozba vyradenia štyri. Rozhodujúci tretí zápas aj kolá
+    play-off na jediný zápas majú štyri. Čím vyššia je, tým viac vo vypätých chvíľach rozhoduje mentalita.
+  </Rule>
+  <Rule icon="schedule" title="Kedy je dôležitosť známa">
+    V základnej časti po dohraní predchádzajúceho kola. V play-off na jeden zápas hneď po žrebe dvojice;
+    ligové štvrťfinále čaká len na predchádzajúci zápas vlastnej série, nie na ostatné série.
+    Dôležitosť uvidíš v scouting reporte po skautingu.
+  </Rule>
+</Rules>
+
+## Počas zápasu
+
+<Screenshot name="live-match" alt="Živý zápas: skóre, čas tretiny a hráči oboch tímov na ľade s energiou" caption="Naživo: kto je za oba tímy na ľade a energia tvojich hráčov." />
+
+<Rules>
+  <Rule icon="visibility" title="Čo vidíš">
+    Kto je za oba tímy na ľade a energiu vlastných hráčov, góly, tresty a zranenia tak, ako sa stanú
+    (zranený hráč dostane odznak), zostávajúci čas presilovky a priebežné štatistiky. Energia súpera
+    zostáva skrytá. Inde v aplikácii ti azúrová bodka na menu pripomenie, že sa hrá tvoj zápas;
+    má prednosť pred červenou bodkou.
+  </Rule>
+  <Rule icon="edit" title="Čo môžeš meniť">
+    Zostavu, taktiku, riziko, predvoľbu ice timu aj brankára. Uložená zmena platí od chvíle,
+    keď začne pôsobiť, až do konca. Pracuje s hráčmi oblečenými na zápas a platí len pre tento
+    zápas - zostava pre ďalšie zápasy zostane, ako bola.
+  </Rule>
+  <Rule icon="person_pin" title="Tvoja prítomnosť">
+    Sledovanie živého zápasu pomáha tímu samo osebe, aj bez jedinej zmeny: príchod počas tretiny dá
+    tímu malú výhodu od tej chvíle. Kto je pri zápase už pred začiatkom časti, zaistí ju celú -
+    rozcvička prvú tretinu, prvá prestávka druhú, druhá prestávka tretiu a prestávka pred
+    predĺžením predĺženie. Čo si časť vyslúžila, zostane aj po odchode.
+  </Rule>
+  <Rule icon="sports" title="Odvolanie brankára">
+    V posledných piatich minútach tretej tretiny môžeš pri strate jedného až troch gólov odvolať brankára a hrať s hráčom
+    navyše. V skutočnosti tréner smie brankára odvolať kedykoľvek; Ice Flow to obmedzuje, aby sa odvolanie
+    nedalo zneužiť - prehrávajúci tím by si bez brankára nechal zámerne nastrieľať ďalšie góly a vedúci
+    tím by odvolaním brankára súpera zosmiešňoval.
+  </Rule>
+  <Rule icon="movie" title="Zábery">
+    Góly a vybrané šance - vrátane striel mimo - sa zobrazujú ako animácie vybrané podľa skutočnej
+    udalosti: početného stavu a počtu asistencií.
+  </Rule>
+</Rules>
+
+<Clip src="goal-highlight.mp4" poster="highlight" label="Animácia gólu na klzisku" caption="Záber gólu. Animácia zodpovedá početnému stavu a počtu asistencií skutočného gólu." />
+
+Knižnica má **71 rôznych gólových akcií** v 200 klipoch - varianty podľa počtu asistencií a zrkadlené
+strany sa ako nové akcie nepočítajú. Delia sa na šesť druhov útoku: brejk, prechod, kombinácia
+v pásme, tlak, nahodenie a dobehnutie a obídenie bránky.
+
+<div class="num">
+
+| Korčuliari (skórujúci tím prvý) | Brejk | Prechod | Kombinácia | Tlak | Nahodenie | Obídenie | Akcie |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 5 na 5 | 2 | 3 | 2 | 3 | 3 | 2 | 15 |
+| 5 na 4 | 0 | 1 | 4 | 1 | 1 | 0 | 7 |
+| 5 na 3 | 0 | 1 | 2 | 0 | 1 | 0 | 4 |
+| 4 na 5 | 5 | 0 | 0 | 0 | 0 | 0 | 5 |
+| 4 na 4 | 1 | 2 | 1 | 0 | 0 | 0 | 4 |
+| 4 na 3 | 0 | 1 | 2 | 0 | 1 | 0 | 4 |
+| 3 na 5 | 2 | 0 | 0 | 0 | 0 | 0 | 2 |
+| 3 na 4 | 2 | 0 | 0 | 0 | 0 | 0 | 2 |
+| 3 na 3 | 1 | 2 | 1 | 0 | 0 | 0 | 4 |
+| Vlastný brankár odvolaný (6 na 3 až 4 na 5) | 0 | 3 | 9 | 0 | 3 | 0 | 15 |
+| Súperova bránka prázdna (5 na 6 až 3 na 4) | 9 | 0 | 0 | 0 | 0 | 0 | 9 |
+
+</div>
+
+Akcia sa vždy vyberá podľa skutočného početného stavu, brankárov a počtu asistencií; druh útoku sa
+žrebuje medzi akciami, ktoré zodpovedajú.

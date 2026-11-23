@@ -1,0 +1,117 @@
+---
+title: Klub, zázemie a financie
+description: Aréna a personál, odkiaľ peniaze prichádzajú a kam odchádzajú a ako fungujú sponzori.
+group: club
+order: 30
+icon: account_balance
+---
+
+Silný tím potrebuje klub, ktorý si ho môže dovoliť. Aréna zarába, personál zlepšuje tím a oboje
+stojí peniaze na výstavbu aj prevádzku.
+
+## Dve meny
+
+<Rules columns>
+  <Rule icon="payments" title="Flow (peniaze)">
+    Platí platy, personál a zázemie.
+  </Rule>
+  <Rule icon="toll" title="Gold pucky">
+    Mena prestupového trhu, skautingu a podpisov juniorov.
+  </Rule>
+</Rules>
+
+## Aréna a personál
+
+<ShotPair left={{ name: "arena-level-1", alt: "Aréna na úrovni 1: malá hala s parkoviskom", label: "Úroveň 1" }} right={{ name: "arena-level-6", alt: "Aréna na úrovni 6: veľký osvetlený štadión s plným parkoviskom", label: "Úroveň 6" }} caption="Aréna na obrazovke Klub na úrovni 1 a na úrovni 6. Obrázok sa mení s každou úrovňou arény." />
+
+<Rules>
+  <Rule icon="stadium" title="Aréna">
+    Tribúny, VIP, fanshop, občerstvenie, parkovanie a tréningové zázemie. Prinášajú príjmy zo zápasov a
+    fanúšikov; tréningové zázemie pomáha aj rozvoju. Aréna ako celok postúpi o úroveň, až keď na ňu
+    dosiahnu všetky jej časti.
+  </Rule>
+  <Rule icon="badge" title="Personál">
+    Tréneri, zdravotníci, amatérsky skauting, profesionálny skauting, vedenie klubu a rozvoj hráčov.
+    Každý zlepšuje svoju časť klubu - tréning, regeneráciu a zranenia, reporty juniorov, prípravu na
+    zápas, zmluvy a ponuky sponzorov a rozvoj v zápasoch farmy.
+  </Rule>
+  <Rule icon="construction" title="Vylepšovanie">
+    Naraz jedno v aréne a jedno v personáli. Vyššie úrovne trvajú dlhšie - úroveň 2 hodinu herného času,
+    úroveň 3 jeden herný deň a každá ďalšia o deň viac, až po osem herných dní pri úrovni 10. Žiadne zariadenie nesmie byť o viac než dve úrovne pred zvyškom svojej skupiny.
+  </Rule>
+  <Rule icon="build" title="Stav">
+    Zariadenia arény sa každý deň opotrebúvajú, vyššie úrovne rýchlejšie, a opotrebované zariadenie dáva
+    menej, než sľubuje jeho úroveň. Automatická údržba drží každé na 75 %; oprava ho vráti na 100 % a
+    vylepšenie sa dá spustiť len pri opravenom. Personál sa neopotrebúva a opravy nepotrebuje.
+  </Rule>
+</Rules>
+
+<Clip src="arena-reveal.mp4" poster="arena-reveal" label="Odhalenie novej úrovne arény" caption="Keď vylepšenie arény skončí, ťuknutie na obrázok odhalí novú arénu." />
+
+## Príjmy a výdavky
+
+<Rules>
+  <Rule icon="savings" title="Príjmy">
+    Sponzori platia pevné splátky 1., 8. a 15. deň. Každý domáci zápas prinesie príjmy zo vstupeniek,
+    VIP, fanshopu, občerstvenia a parkovania - viac pri silnom a víťaziacom tíme, s veľkou fanúšikovskou
+    základňou a v play-off.
+  </Rule>
+  <Rule icon="receipt_long" title="Výdavky">
+    Platy hráčov a personálu sa platia každý deň, opravy a vylepšenia vo chvíli objednania.
+  </Rule>
+  <Rule icon="warning" title="Keď peniaze dochádzajú">
+    Klub upozorňuje na výhľad rozpočtu: príjmy, platy, prevádzku aj rezervu na končiace zmluvy.
+    Keď peniaze klesnú pod nulu, klub predá
+    najlepšie plateného hráča, ktorého môže postrádať, jedného denne, kým nie je znova nad nulou.
+    Takýto nútený predaj je bez odstupného, ale predajná cena je len polovica referenčnej hodnoty hráča
+    (namiesto 70 %) a klub z nej dostane obvyklý podiel 75 %.
+  </Rule>
+</Rules>
+
+Finančný prehľad oddeľuje dnešok a súčet za sezónu vo Flow aj gold puckoch. Riadok zmizne len vtedy,
+keď má nulu vo všetkých sumách oboch mien. Sezónny pohyb zostáva viditeľný, aj keď je dnes nula.
+Prestupové nákupy počítajú dokončené obchody, nie dočasne zablokované ponuky. Podpisové bonusy
+za nové zmluvy a predĺženia sú zahrnuté do platov hráčov.
+
+Rezerva rozpočtu na podpisové bonusy zahŕňa aktívne zmluvy s najviac jednou zostávajúcou sezónou,
+bez hráčov s oznámeným koncom kariéry. Pri dlhšej zmluve sa podpisový bonus do tejto rezervy nepočíta.
+
+## História klubu
+
+Počty trofejí rozlišujú tituly v ligovom play-off, prvé miesta v základnej časti a tituly Elite série.
+Aj riadok každej sezóny oddeľuje umiestnenie v základnej časti od výsledku play-off; víťazstvo v skupine
+nie je to isté ako titul z ligového play-off. Pri každej sezóne je aj bilancia základnej časti - výhry,
+výhry a prehry po predĺžení, prehry a skóre.
+
+## Keď nehráš
+
+<Rules>
+  <Rule icon="ac_unit" title="Zmrazený klub">
+    Klub, ktorého manažér 18 herných dní neotvoril hru, sa zmrazí. Zostane vo svojej lige a hrá zápasy
+    so zostavou, ktorú mu manažér nechal; únava sa ďalej zotavuje a zranenia liečia. Nič iné sa
+    nehýbe: platy, príjmy, platby sponzora, tréning, skauting, starnutie ani zmluvy.
+  </Rule>
+  <Rule icon="login" title="Návrat">
+    Prihlásenie alebo otvorenie aplikácie klub odmrazí tak, ako si ho nechal. Pri prechode sezóny väčšina
+    zmrazených klubov uvoľní miesto v súťaži; taký klub sa po návrate manažéra vráti rovno do
+    bežiacej sezóny.
+  </Rule>
+</Rules>
+
+## Sponzori
+
+Každú sezónu podpíšeš **jedného sponzora na peniaze a jedného na gold pucky**; voľba platí až do
+ďalšej sezóny. Ponuky rastú so silou tímu, reputáciou a vedením klubu.
+
+| Sponzor | Ako platí |
+|---|---|
+| Bezpečný sponzor | celú zmluvu v pevných splátkach, nech sa stane čokoľvek |
+| Administratíva | menšie splátky a odmenu za každý herný deň, keď otvoríš hru |
+| Účasť na zápase | menšie splátky a platbu za každý ligový zápas - v základnej časti aj v play-off - pri ktorého živom prenose si bol - počas hry, rozcvičky alebo prestávky; samotné otvorenie aplikácie nestačí |
+
+## Reputácia a fanúšikovia
+
+Na konci každej sezóny reputácia a fanúšikovia rastú s víťaznou bilanciou a klesajú s prehrávajúcou. Plnia
+arénu a zvyšujú ponuky sponzorov. Vysoké umiestnenie a dlhé play-off zdvihnú ponuky na ďalšiu sezónu
+až o 10 %. Titul v play-off ligy navyše reputáciu a fanúšikov trošku zdvihne, postup do Elite o niečo
+menej; počíta sa len najlepší výsledok sezóny.
