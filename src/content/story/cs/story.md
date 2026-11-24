@@ -171,7 +171,9 @@ milestones:
     text: >-
       Mentalita, disciplína a forma, důležitost zápasu podle tabulky, vyjednávání smluv s ambicí
       a loajalitou, bonus za manažera u živého zápasu, 71 gólových animací ve 200 klipech, přihlášení
-      přes Google, push notifikace, slovenština jako jedenáctý jazyk a nezávislý audit serveru.
+      přes Google, push notifikace, volitelné výdaje klubu (soustředění, příplatky k zápasu, speciální
+      regenerace), jména a vzhled hráčů v obchodě, nově vyladěná ekonomika, slovenština jako jedenáctý
+      jazyk a nezávislý audit serveru.
   - date: Po spuštění
     phase: launch
     phaseLabel: Plány

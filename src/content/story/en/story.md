@@ -173,7 +173,9 @@ milestones:
     text: >-
       Mentality, discipline and form, match importance from the table, contract negotiation with
       ambition and loyalty, a bonus for the manager watching live, 71 goal animations in 200 clips,
-      Google sign-in, push notifications, Slovak as the eleventh language and an independent audit of the server.
+      Google sign-in, push notifications, optional club expenses (training camps, match extras,
+      special regeneration), players' names and looks in the store, a recalibrated economy, Slovak as
+      the eleventh language and an independent audit of the server.
   - date: After launch
     phase: launch
     phaseLabel: Plans
