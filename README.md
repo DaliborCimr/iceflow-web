@@ -17,7 +17,7 @@ server-side mechanics the in-app help does not cover. Built with [Astro](https:/
 
 ```
 src/
-  i18n/locales.ts        # the 10 languages (same as the mobile app)
+  i18n/locales.ts        # the 11 languages (same as the mobile app)
   i18n/ui.ts             # UI strings; English is the source, others must have every key
   i18n/content.ts        # per-language content lookup with English fallback
   content/legal/<lang>/  # privacy.md, terms.md

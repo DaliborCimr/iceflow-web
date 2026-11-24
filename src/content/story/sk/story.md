@@ -18,8 +18,8 @@ stats:
     label: commitov
   - value: '~290 000'
     label: riadkov kódu
-  - value: '10'
-    label: jazykov od začiatku
+  - value: '11'
+    label: jazykov v aplikácii aj na webe
 storyTitle: Ako hra vznikala
 areasTitle: Čo hra obsahuje
 areasIntro: >-
@@ -171,7 +171,7 @@ milestones:
     text: >-
       Mentalita, disciplína a forma, dôležitosť zápasu podľa tabuľky, vyjednávanie zmlúv s ambíciou
       a lojalitou, bonus za manažéra pri živom zápase, 71 gólových animácií v 200 klipoch, prihlásenie
-      cez Google, push notifikácie a nezávislý audit servera.
+      cez Google, push notifikácie, slovenčina ako jedenásty jazyk a nezávislý audit servera.
   - date: Po spustení
     phase: launch
     phaseLabel: Plány

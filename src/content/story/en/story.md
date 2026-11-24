@@ -18,8 +18,8 @@ stats:
     label: commits
   - value: '~290,000'
     label: lines of code
-  - value: '10'
-    label: languages localised from the start
+  - value: '11'
+    label: languages in the app and on the web
 storyTitle: How it was built
 areasTitle: What the game contains
 areasIntro: >-
@@ -173,7 +173,7 @@ milestones:
     text: >-
       Mentality, discipline and form, match importance from the table, contract negotiation with
       ambition and loyalty, a bonus for the manager watching live, 71 goal animations in 200 clips,
-      Google sign-in, push notifications and an independent audit of the server.
+      Google sign-in, push notifications, Slovak as the eleventh language and an independent audit of the server.
   - date: After launch
     phase: launch
     phaseLabel: Plans
