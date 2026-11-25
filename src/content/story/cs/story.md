@@ -34,7 +34,7 @@ areas:
       - Čtyři kompletní formace, základní a náhradní brankář, dvě přesilovkové a dvě oslabené formace
       - 6 útočných a 6 obranných taktik a 5 úrovní rizika, nastavitelné pro každou formaci
       - Energie během střídání klesá a na střídačce se obnovuje; nahromaděná únava omezuje startovní energii
-      - Střídání, míchání formací, odvolání brankáře a speciální formace lze měnit během hry
+      - Střídání, míchání formací, odvolání brankáře a speciální formace lze měnit během hry, i v prodloužení
       - Odložené vyloučení, prodloužení 3 na 3 a prázdná branka jsou skutečné herní stavy
       - Stav zápasu posílá server každou sekundu přes SSE
       - Přítomnost manažera u živého zápasu - i od rozcvičky a o přestávkách - dává týmu malou výhodu
@@ -44,8 +44,9 @@ areas:
       zápasu. Nejde o fyzikální záznam, ale zachovávají herní kontext.
     facts:
       - Všechny góly a další šance rovnoměrně rozložené v průběhu zápasu
-      - 71 různých gólových akcí ve 200 klipech v šesti druzích útoku - od brejku po objetí branky
+      - 71 různých gólových akcí ve 194 klipech v šesti druzích útoku - od brejku po objetí branky
       - Akce se vybírá podle skutečného početního stavu, brankářů a počtu asistencí (5 na 5, 6 na 5 s prázdnou brankou, přesilovka 5 na 3 a další)
+      - Šance končí podle skutečné střely - zákrokem, dorážkou nebo ranou mimo branku - a obránci se v záběrech snaží akci zastavit
       - Záběry vznikají ve vlastním editoru animací vytvořeném pro tento projekt
   - title: Hráč jako dlouhodobý systém
     text: >-
@@ -65,12 +66,15 @@ areas:
       v jedné oblasti má důsledky v ostatních.
     facts:
       - Farma hraje vlastní soutěž souběžně s prvním týmem
-      - Smlouvy až na 5 sezón; od druhé sezóny se plat vyjednává, se 3 pokusy na hráče
+      - Smlouvy až na 5 sezón; od druhé sezóny se plat vyjednává a není to pevný ceník - hráč na nabídku reaguje podle své ambice a loajality
+      - Na každého hráče 3 pokusy; po odmítnutí se manažer dozví jen přibližně, jak daleko byla nabídka od hráčovy představy
+      - Sehranost vzniká mezi konkrétními dvojicemi spoluhráčů na ledě - roste se společnými minutami a bez nich slábne; vedle atributů, vhodnosti taktiky, zkušeností a stavu hráčů je další částí síly formace (v ostrém provozu se otevře po několika sezónách)
       - Hledání na trhu nabídne až pět karet, o které můžou soutěžit i ostatní manažeři
       - Přestupový trh s vyvolávací cenou 80-110 %, 8minutovou aukcí po prvním příhozu a 90sekundovým prodloužením
       - Dvě měny - Flow na provoz klubu, Gold Pucks na trh, skauting a juniory
       - Jeden sponzor na peníze a jeden na gold pucky za sezónu, každý vybraný ze tří druhů nabídek
-      - Aréna a zázemí pro trenéry, zdravotníky, skauting, vedení a rozvoj hráčů, se stavem a opravami
+      - Aréna se stavem a opravami a personál - trenéři, zdravotníci, skauting, vedení a rozvoj hráčů
+      - Volitelné výdaje - soustředění a školení pro trénink, VIP logistika na zápas venku, prémie do kabiny, která roste s důležitostí zápasu, a speciální regenerace zraněného hráče; manažer volí, kdy utratit Flow za krátkodobou výhodu a kdy je nechat na platy a dlouhodobý rozvoj
   - title: Sezóna a soutěže
     text: >-
       Sezóna trvá 21 skutečných dní. Kalendář je krátký, ale každý blok dne přináší rozhodnutí.
@@ -87,7 +91,7 @@ areas:
       simulacemi.
     facts:
       - Cíle na tým a zápas - zhruba 29 střel na branku, 3,1 gólu, úspěšnost zákroků 89,7 %, 2,8 přesilovky
-      - Samostatné kontroly rozdílu síly týmů, vlivu brankáře, rizika, diváků, formy a únavy
+      - Samostatné kontroly rozdílu síly týmů, vlivu brankáře, rizika, diváků, formy, únavy, sehranosti a vhodnosti taktiky
       - Patnáctisezónní simulace hlídají, aby vývoj, mentalita a disciplína neujížděly
       - Stejný zápas se z uložených snapshotů přehraje za stejných podmínek
 timelineTitle: Časová osa
@@ -170,8 +174,9 @@ milestones:
     title: Smlouvy, přítomnost a animace
     text: >-
       Mentalita, disciplína a forma, důležitost zápasu podle tabulky, vyjednávání smluv s ambicí
-      a loajalitou, bonus za manažera u živého zápasu, 71 gólových animací ve 200 klipech, přihlášení
-      přes Google, push notifikace, slovenština jako jedenáctý jazyk a nezávislý audit serveru.
+      a loajalitou, sehranost dvojic na ledě, volitelné výdaje klubu, bonus za manažera u živého
+      zápasu, 71 gólových animací ve 194 klipech, přihlášení přes Google, push notifikace,
+      slovenština jako jedenáctý jazyk a nezávislý audit serveru.
   - date: Po spuštění
     phase: launch
     phaseLabel: Plány
@@ -192,13 +197,15 @@ notes:
         achievementy (25 oblastí po 5 úrovních) a umístění v Rapid lize (1-5 hvězd, jedna reklama za
         vstup, nejvýše 10 denně).
       - >-
-        Za Stars lze získat nový název nebo klubové barvy, logo a dva passy platné 21 dní.
-        Platby skutečnými penězi nejsou v aktuální aplikaci zapnuté; placená loga a passy jsou
-        plánované. Ads Pass odstraní reklamy, ale denní limity nemění. Sponsor Pass zvyšuje příjmy
-        od sponzorů ve Flow i Gold Pucks o 20 %, což je skutečná
-        ekonomická výhoda; obnovitelný příjem hvězd sám nestačí na to, aby byl aktivní každou
-        sezónu. Ice Flow tedy není pay-to-win ve smyslu nákupu hráčů nebo síly, plánované placení by ale přinášelo
-        mírnou dlouhodobou ekonomickou výhodu.
+        Za Stars lze získat nový název nebo klubové barvy, logo, nové jméno nebo vzhled hráče a dva
+        passy platné 21 dní. Platby skutečnými penězi nejsou v aktuální aplikaci zapnuté; plánovaná
+        jsou placená loga a passy a příspěvek Podpořit hru, který je jen poděkováním bez herní
+        výhody. Ads Pass odstraní reklamy, ale denní limity nemění. Sponsor Pass zvyšuje po dobu
+        platnosti jen příjmy od sponzorů ve Flow i Gold Pucks, a to o 10 %. Je to ekonomické
+        urychlení, ne exkluzivní síla: stejný pass jde získat i za Stars vydělané hraním. Obnovitelný
+        příjem hvězd sám ale nestačí na to, aby byl aktivní každou sezónu, takže až bude placení
+        zapnuté, platící hráč ho bude moct mít častěji a získá tím malou dlouhodobou ekonomickou
+        výhodu. Ice Flow tedy není pay-to-win ve smyslu nákupu hráčů nebo síly.
       - >-
         Protože hru vyvíjí jeden člověk, jsou náklady na provoz nízké a hra nepotřebuje agresivní
         monetizaci, aby se udržela.

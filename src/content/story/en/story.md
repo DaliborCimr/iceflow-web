@@ -34,7 +34,7 @@ areas:
       - Four full lines, a starting and backup goalie, two power-play and two penalty-kill units
       - 6 offensive and 6 defensive tactics plus 5 risk levels, set per line
       - Energy drains during a shift and recovers on the bench; accumulated fatigue limits starting energy
-      - Line changes, line mixing, goalie pull and special teams can be changed during play
+      - Line changes, line mixing, goalie pull and special teams can be changed during play, overtime included
       - Delayed penalties, 3-on-3 overtime and empty net are modelled as real game states
       - Match state is pushed from the server every second over SSE
       - The manager's presence at the live match - from the warm-up and intermissions too - gives the team a small edge
@@ -44,8 +44,9 @@ areas:
       events. They are not a physical replay, but they keep the game context.
     facts:
       - All goals plus additional chances, spread evenly through the match
-      - 71 different scoring plays in 200 clips, in six kinds of attack - from a break to a wrap-around
+      - 71 different scoring plays in 194 clips, in six kinds of attack - from a break to a wrap-around
       - The play is picked by the real manpower, goalies and number of assists (5v5, 6v5 empty net, 5v3 power play and others)
+      - A chance ends as the real shot did - a save, a rebound or a miss - and defenders try to stop the play
       - Clips are authored in a dedicated animation editor built for the project
   - title: Players as long-term systems
     text: >-
@@ -65,12 +66,15 @@ areas:
       decision in one area has consequences in the others.
     facts:
       - The farm team plays its own competition alongside the first team
-      - Contracts up to 5 seasons; from the second season the salary is negotiated, with 3 attempts per player
+      - Contracts up to 5 seasons; from the second season the salary is negotiated, not read off a price list - the player weighs an offer by ambition and loyalty
+      - 3 attempts per player; a refused offer tells the manager only roughly how far it was from what the player wants
+      - Chemistry builds between specific pairs of teammates on the ice - it grows with minutes played together and fades without them; next to attributes, tactic fit, experience and the players' condition it is another part of a line's strength (it opens in the live game after a few seasons)
       - A market search deals up to five cards that other managers can bid on too
       - Transfer market with asking prices of 80-110 %, an 8-minute auction after the first bid and a 90-second soft close
       - Two currencies - Flow for running the club, Gold Pucks for the market, scouting and juniors
       - One cash and one gold-puck sponsor a season, each chosen from three kinds of offer
-      - Arena and staff facilities (coaching, medical, scouting, front office, player development) with condition and repairs
+      - Arena with condition and repairs, and staff - coaching, medical, scouting, front office, player development
+      - Optional expenses - a training camp and a training project, VIP logistics for an away game, a dressing-room bonus that grows with the match's importance and special regeneration for an injured player; the manager chooses when to spend Flow on a short-term edge and when to keep it for wages and long-term development
   - title: Season and competitions
     text: >-
       A season lasts 21 real days. The calendar is short, but every block of the day carries
@@ -88,7 +92,7 @@ areas:
       long simulated runs.
     facts:
       - Targets per team and game - about 29 shots on goal, 3.1 goals, 89.7 % save percentage, 2.8 power plays
-      - Separate checks for the gap in team strength, goalie impact, risk, crowd, form and fatigue
+      - Separate checks for the gap in team strength, goalie impact, risk, crowd, form, fatigue, chemistry and tactic fit
       - 15-season runs check that development, mentality and discipline do not drift
       - The same match is replayed under the same conditions from stored snapshots
 timelineTitle: Timeline
@@ -172,8 +176,9 @@ milestones:
     title: Contracts, presence and animations
     text: >-
       Mentality, discipline and form, match importance from the table, contract negotiation with
-      ambition and loyalty, a bonus for the manager watching live, 71 goal animations in 200 clips,
-      Google sign-in, push notifications, Slovak as the eleventh language and an independent audit of the server.
+      ambition and loyalty, chemistry between pairs on the ice, optional club expenses, a bonus for
+      the manager watching live, 71 goal animations in 194 clips, Google sign-in, push notifications,
+      Slovak as the eleventh language and an independent audit of the server.
   - date: After launch
     phase: launch
     phaseLabel: Plans
@@ -194,12 +199,15 @@ notes:
         season), lifetime achievements (25 tracks with 5 levels each) and Rapid league placements
         (1-5 Stars each, one ad per entry, up to 10 per day).
       - >-
-        Stars buy a new name or club colours, a logo and two passes valid for 21 days. Real-money
-        payments are not enabled in the current app; paid logos and passes are planned. The Ads Pass
-        removes ads without changing any daily limits. The Sponsor Pass increases sponsor income in Flow and Gold Pucks by 20 %, which is a real
-        economic advantage; renewable Star income alone is not enough to keep it active every
-        season. Ice Flow is therefore not pay-to-win in the sense of buying players or strength, but
-        the planned paid version would give a moderate long-term economic benefit.
+        Stars buy a new name or club colours, a logo, a player's new name or look and two passes
+        valid for 21 days. Real-money payments are not enabled in the current app; planned are paid
+        logos and passes and Support the game, a thank-you with no playing advantage. The Ads Pass
+        removes ads without changing any daily limits. While it runs, the Sponsor Pass raises only
+        sponsor income, in Flow and Gold Pucks, by 10 %. It speeds the economy up rather than
+        granting exclusive strength: the same pass can be had for Stars earned in play. Renewable Star
+        income alone is not enough to keep it active every season, though, so once payments are on, a
+        paying player could keep it more often and gain a small long-term economic advantage. Ice Flow
+        is therefore not pay-to-win in the sense of buying players or strength.
       - >-
         Because the game is developed by one person, its running costs are low, and it does not
         need aggressive monetisation to be sustainable.
