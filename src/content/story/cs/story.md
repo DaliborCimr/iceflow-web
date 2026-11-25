@@ -85,7 +85,7 @@ areas:
       - Elite liga - 24 týmů, 6 kol švýcarským systémem, nejlepších 16 do play-off, ve stejném kalendáři jako liga
       - Rapid liga - 4 týmy, každý s každým, odehraje se okamžitě, bez únavy, zranění a vlivu na ligové statistiky
       - Důležitost zápasu vychází ze skutečné situace v tabulce a pro každý tým může být jiná
-      - Plán postupného odemykání podle sezón klubu - 2. Elite a podpis juniorů, 3. herní předpoklady (talent, profesionalita, odolnost vůči zranění, disciplína, mentalita) a volitelné výdaje, 4. ambice, loajalita a vyjednávání smluv, 5. sehranost formací; od 3. sezóny jen při aktivním hraní. Testovací verze odemyká rychleji, ve 2. a 3. sezóně
+      - Plán postupného odemykání podle sezón klubu - 2. Elite a podpis juniorů, 3. herní předpoklady (talent, profesionalita, odolnost vůči zranění, disciplína, mentalita) a volitelné výdaje, 4. ambice, loajalita a vyjednávání smluv, 5. sehranost formací; od 3. sezóny jen po aktivních sezónách s přihlášením aspoň ve 14 herních dnech z 21. Testovací verze odemyká rychleji, ve 2. a 3. sezóně
   - title: Kalibrace simulace
     text: >-
       Zápasový engine je kalibrovaný na dlouhodobé průměry skutečného hokeje a ověřovaný dlouhými

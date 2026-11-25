@@ -86,7 +86,7 @@ areas:
       - Elite league - 24 teams, 6 Swiss-system rounds, top 16 to the playoff, on the same calendar as the league
       - Rapid league - 4 teams, round robin, played instantly, with no fatigue, injuries or effect on league statistics
       - Match importance comes from the real table situation and can differ for each team
-      - Planned gradual unlocks by the club's season - 2. Elite and signing juniors, 3. playing traits (talent, professionalism, injury resistance, discipline, mentality) and optional expenses, 4. ambition, loyalty and contract negotiation, 5. line chemistry; from season 3 only with active play. The test version unlocks faster, in seasons 2 and 3
+      - Planned gradual unlocks by the club's season - 2. Elite and signing juniors, 3. playing traits (talent, professionalism, injury resistance, discipline, mentality) and optional expenses, 4. ambition, loyalty and contract negotiation, 5. line chemistry; from season 3 only after active seasons, with logins on at least 14 game days out of 21. The test version unlocks faster, in seasons 2 and 3
   - title: Simulation calibration
     text: >-
       The match engine is calibrated against long-term real-world hockey averages and checked over
