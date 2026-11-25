@@ -66,15 +66,15 @@ areas:
       decision in one area has consequences in the others.
     facts:
       - The farm team plays its own competition alongside the first team
-      - Contracts up to 5 seasons; the salary is negotiated (from season 2 in the test version, from season 4 by the plan), not read off a price list - the player weighs an offer by ambition and loyalty
+      - Contracts up to 5 seasons; the salary is negotiated (from season 4 by the plan), not read off a price list - the player weighs an offer by ambition and loyalty
       - 3 attempts per player; a refused offer tells the manager only roughly how far it was from what the player wants
-      - Chemistry builds between specific pairs of teammates on the ice - it grows with minutes played together and fades without them; next to attributes, tactic fit, experience and the players' condition it is another part of a line's strength (by the plan it opens with the gradual unlocks, season not set yet)
+      - Chemistry builds between specific pairs of teammates on the ice - it grows with minutes played together and fades without them; next to attributes, tactic fit, experience and the players' condition it is another part of a line's strength (from season 5 by the plan)
       - A market search deals up to five cards that other managers can bid on too
       - Transfer market with asking prices of 80-110 %, an 8-minute auction after the first bid and a 90-second soft close
       - Two currencies - Flow for running the club, Gold Pucks for the market, scouting and juniors
       - One cash and one gold-puck sponsor a season, each chosen from three kinds of offer
       - Arena with condition and repairs, and staff - coaching, medical, scouting, front office, player development
-      - Optional expenses - a training camp and a training project, VIP logistics for an away game, a dressing-room bonus that grows with the match's importance and special regeneration for an injured player; the manager chooses when to spend Flow on a short-term edge and when to keep it for wages and long-term development
+      - Optional expenses (from season 3 by the plan) - a training camp and a training project, VIP logistics for an away game, a dressing-room bonus that grows with the match's importance and special regeneration for an injured player; the manager chooses when to spend Flow on a short-term edge and when to keep it for wages and long-term development
   - title: Season and competitions
     text: >-
       A season lasts 21 real days. The calendar is short, but every block of the day carries
@@ -86,7 +86,7 @@ areas:
       - Elite league - 24 teams, 6 Swiss-system rounds, top 16 to the playoff, on the same calendar as the league
       - Rapid league - 4 teams, round robin, played instantly, with no fatigue, injuries or effect on league statistics
       - Match importance comes from the real table situation and can differ for each team
-      - Planned gradual unlocks by the club's season - 2. Elite and juniors, 3. talent and professionalism, 4. ambition, loyalty and contract negotiation, 5. injury resistance, discipline and mentality, from season 3 only with active play; line chemistry later. The test version has everything sooner for now
+      - Planned gradual unlocks by the club's season - 2. Elite and signing juniors, 3. playing traits (talent, professionalism, injury resistance, discipline, mentality) and optional expenses, 4. ambition, loyalty and contract negotiation, 5. line chemistry; from season 3 only with active play. The test version unlocks faster, in seasons 2 and 3
   - title: Simulation calibration
     text: >-
       The match engine is calibrated against long-term real-world hockey averages and checked over
@@ -204,7 +204,6 @@ milestones:
     title: What comes next
     text: Planned, with no dates yet.
     todo:
-      - Features unlocked gradually as seasons are played, by the plan under Season and competitions, line chemistry included
       - All-Star - a new competition alongside the Rapid league, played on the principle of club associations
       - Research into tactics for the power play, the penalty kill, 3 on 3 and play without a goalie - today a tactic applies only at 5 on 5 and 4 on 4; new systems will come once they are backed by sources and balanced
       - Penalty shots during a game

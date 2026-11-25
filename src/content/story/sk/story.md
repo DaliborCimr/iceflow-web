@@ -66,15 +66,15 @@ areas:
       v jednej oblasti má dôsledky v ostatných.
     facts:
       - Farma hrá vlastnú súťaž súbežne s prvým tímom
-      - Zmluvy až na 5 sezón; plat sa vyjednáva (v testovacej verzii od 2. sezóny, podľa plánu od 4.) a nie je to pevný cenník - hráč na ponuku reaguje podľa svojej ambície a lojality
+      - Zmluvy až na 5 sezón; plat sa vyjednáva (podľa plánu od 4. sezóny) a nie je to pevný cenník - hráč na ponuku reaguje podľa svojej ambície a lojality
       - Na každého hráča 3 pokusy; po odmietnutí sa manažér dozvie len približne, ako ďaleko bola ponuka od hráčovej predstavy
-      - Zohratosť vzniká medzi konkrétnymi dvojicami spoluhráčov na ľade - rastie so spoločnými minútami a bez nich slabne; popri atribútoch, vhodnosti taktiky, skúsenostiach a stave hráčov je ďalšou časťou sily formácie (podľa plánu sa otvorí postupným odomykaním, sezóna zatiaľ nie je určená)
+      - Zohratosť vzniká medzi konkrétnymi dvojicami spoluhráčov na ľade - rastie so spoločnými minútami a bez nich slabne; popri atribútoch, vhodnosti taktiky, skúsenostiach a stave hráčov je ďalšou časťou sily formácie (podľa plánu od 5. sezóny)
       - Hľadanie na trhu ponúkne až päť kariet, o ktoré môžu súperiť aj ostatní manažéri
       - Prestupový trh s vyvolávacou cenou 80-110 %, 8-minútovou aukciou po prvom príhode a 90-sekundovým predĺžením
       - Dve meny - Flow na prevádzku klubu, Gold Pucks na trh, skauting a juniorov
       - Jeden sponzor na peniaze a jeden na gold pucky za sezónu, každý vybraný z troch druhov ponúk
       - Aréna so stavom a opravami a personál - tréneri, zdravotníci, skauting, vedenie a rozvoj hráčov
-      - Voliteľné výdavky - sústredenie a školenie pre tréning, VIP logistika na zápas vonku, prémia do kabíny, ktorá rastie s dôležitosťou zápasu, a špeciálna regenerácia zraneného hráča; manažér volí, kedy minúť Flow na krátkodobú výhodu a kedy ich nechať na platy a dlhodobý rozvoj
+      - Voliteľné výdavky (podľa plánu od 3. sezóny) - sústredenie a školenie pre tréning, VIP logistika na zápas vonku, prémia do kabíny, ktorá rastie s dôležitosťou zápasu, a špeciálna regenerácia zraneného hráča; manažér volí, kedy minúť Flow na krátkodobú výhodu a kedy ich nechať na platy a dlhodobý rozvoj
   - title: Sezóna a súťaže
     text: >-
       Sezóna trvá 21 skutočných dní. Kalendár je krátky, ale každý blok dňa prináša rozhodnutia.
@@ -85,7 +85,7 @@ areas:
       - Elite liga - 24 tímov, 6 kôl švajčiarskym systémom, najlepších 16 do play-off, v rovnakom kalendári ako liga
       - Rapid liga - 4 tímy, každý s každým, odohrá sa okamžite, bez únavy, zranení a vplyvu na ligové štatistiky
       - Dôležitosť zápasu vychádza zo skutočnej situácie v tabuľke a pre každý tím môže byť iná
-      - Plán postupného odomykania podľa sezón klubu - 2. Elite a juniori, 3. talent a profesionalita, 4. ambícia, lojalita a vyjednávanie zmlúv, 5. odolnosť voči zraneniu, disciplína a mentalita, od 3. sezóny len pri aktívnom hraní; zohratosť formácií neskôr. V testovacej verzii je zatiaľ všetko dostupné skôr
+      - Plán postupného odomykania podľa sezón klubu - 2. Elite a podpis juniorov, 3. herné predpoklady (talent, profesionalita, odolnosť voči zraneniu, disciplína, mentalita) a voliteľné výdavky, 4. ambícia, lojalita a vyjednávanie zmlúv, 5. zohratosť formácií; od 3. sezóny len pri aktívnom hraní. Testovacia verzia odomyká rýchlejšie, v 2. a 3. sezóne
   - title: Kalibrácia simulácie
     text: >-
       Zápasový engine je kalibrovaný na dlhodobé priemery skutočného hokeja a overovaný dlhými
@@ -202,7 +202,6 @@ milestones:
     title: Čo príde ďalej
     text: Plánované, zatiaľ bez termínu.
     todo:
-      - Postupné odomykanie funkcií s odohranými sezónami podľa plánu v časti Sezóna a súťaže, vrátane zohratosti formácií
       - All-Star - nová súťaž vedľa Rapid ligy, hraná na princípe asociácií klubov
       - Výskum taktík pre presilovku, oslabenie, hru 3 na 3 a hru bez brankára - dnes taktika platí len pri 5 na 5 a 4 na 4; nové systémy pribudnú, až budú podložené zdrojmi a vyvážené
       - Trestné strieľanie počas zápasu

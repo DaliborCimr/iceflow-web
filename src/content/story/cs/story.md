@@ -66,15 +66,15 @@ areas:
       v jedné oblasti má důsledky v ostatních.
     facts:
       - Farma hraje vlastní soutěž souběžně s prvním týmem
-      - Smlouvy až na 5 sezón; plat se vyjednává (v testovací verzi od 2. sezóny, podle plánu od 4.) a není to pevný ceník - hráč na nabídku reaguje podle své ambice a loajality
+      - Smlouvy až na 5 sezón; plat se vyjednává (podle plánu od 4. sezóny) a není to pevný ceník - hráč na nabídku reaguje podle své ambice a loajality
       - Na každého hráče 3 pokusy; po odmítnutí se manažer dozví jen přibližně, jak daleko byla nabídka od hráčovy představy
-      - Sehranost vzniká mezi konkrétními dvojicemi spoluhráčů na ledě - roste se společnými minutami a bez nich slábne; vedle atributů, vhodnosti taktiky, zkušeností a stavu hráčů je další částí síly formace (podle plánu se otevře postupným odemykáním, sezóna zatím není určená)
+      - Sehranost vzniká mezi konkrétními dvojicemi spoluhráčů na ledě - roste se společnými minutami a bez nich slábne; vedle atributů, vhodnosti taktiky, zkušeností a stavu hráčů je další částí síly formace (podle plánu od 5. sezóny)
       - Hledání na trhu nabídne až pět karet, o které můžou soutěžit i ostatní manažeři
       - Přestupový trh s vyvolávací cenou 80-110 %, 8minutovou aukcí po prvním příhozu a 90sekundovým prodloužením
       - Dvě měny - Flow na provoz klubu, Gold Pucks na trh, skauting a juniory
       - Jeden sponzor na peníze a jeden na gold pucky za sezónu, každý vybraný ze tří druhů nabídek
       - Aréna se stavem a opravami a personál - trenéři, zdravotníci, skauting, vedení a rozvoj hráčů
-      - Volitelné výdaje - soustředění a školení pro trénink, VIP logistika na zápas venku, prémie do kabiny, která roste s důležitostí zápasu, a speciální regenerace zraněného hráče; manažer volí, kdy utratit Flow za krátkodobou výhodu a kdy je nechat na platy a dlouhodobý rozvoj
+      - Volitelné výdaje (podle plánu od 3. sezóny) - soustředění a školení pro trénink, VIP logistika na zápas venku, prémie do kabiny, která roste s důležitostí zápasu, a speciální regenerace zraněného hráče; manažer volí, kdy utratit Flow za krátkodobou výhodu a kdy je nechat na platy a dlouhodobý rozvoj
   - title: Sezóna a soutěže
     text: >-
       Sezóna trvá 21 skutečných dní. Kalendář je krátký, ale každý blok dne přináší rozhodnutí.
@@ -85,7 +85,7 @@ areas:
       - Elite liga - 24 týmů, 6 kol švýcarským systémem, nejlepších 16 do play-off, ve stejném kalendáři jako liga
       - Rapid liga - 4 týmy, každý s každým, odehraje se okamžitě, bez únavy, zranění a vlivu na ligové statistiky
       - Důležitost zápasu vychází ze skutečné situace v tabulce a pro každý tým může být jiná
-      - Plán postupného odemykání podle sezón klubu - 2. Elite a junioři, 3. talent a profesionalita, 4. ambice, loajalita a vyjednávání smluv, 5. odolnost vůči zranění, disciplína a mentalita, od 3. sezóny jen při aktivním hraní; sehranost formací později. V testovací verzi je zatím všechno dostupné dřív
+      - Plán postupného odemykání podle sezón klubu - 2. Elite a podpis juniorů, 3. herní předpoklady (talent, profesionalita, odolnost vůči zranění, disciplína, mentalita) a volitelné výdaje, 4. ambice, loajalita a vyjednávání smluv, 5. sehranost formací; od 3. sezóny jen při aktivním hraní. Testovací verze odemyká rychleji, ve 2. a 3. sezóně
   - title: Kalibrace simulace
     text: >-
       Zápasový engine je kalibrovaný na dlouhodobé průměry skutečného hokeje a ověřovaný dlouhými
@@ -202,7 +202,6 @@ milestones:
     title: Co přijde dál
     text: Plánované, zatím bez termínu.
     todo:
-      - Postupné odemykání funkcí s odehranými sezónami podle plánu v části Sezóna a soutěže, včetně sehranosti formací
       - All-Star - nová soutěž vedle Rapid ligy, hraná na principu asociací klubů
       - Výzkum taktik pro přesilovku, oslabení, hru 3 na 3 a hru bez brankáře - dnes taktika platí jen při 5 na 5 a 4 na 4; nové systémy přibudou, až budou podložené zdroji a vyvážené
       - Trestná střílení během zápasu
