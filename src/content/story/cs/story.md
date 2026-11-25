@@ -177,9 +177,9 @@ milestones:
     phaseLabel: Plány
     title: Co přijde dál
     text: >-
-      Plánované, zatím bez termínu: protinabídky při vyjednávání smluv, postupné odemykání dalších
+      Plánované, zatím bez termínu: postupné odemykání dalších
       funkcí s odehranými sezónami, All-Star -
-      novou soutěž vedle Rapid ligy, hranou na principu asociací klubů, sehranost útočných trojic a obranných dvojic, výzkum taktik pro
+      novou soutěž vedle Rapid ligy, hranou na principu asociací klubů, výzkum taktik pro
       přesilovku, oslabení, hru 3 na 3 a hru bez brankáře - dnes taktika platí jen při 5 na 5 a 4 na
       4 a nové systémy přibudou, až budou podložené zdroji a vyvážené -, trestné střílení během
       zápasu, vylepšování animací a grafiky zápasu a servery pro Evropu, Asii a Ameriku.
