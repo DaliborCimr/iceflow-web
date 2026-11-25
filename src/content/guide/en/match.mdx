@@ -49,25 +49,25 @@ about two games in three, ten points better about four in five. More numbers are
 ## Your lines
 
 <Rules>
-  <Rule icon="sports_hockey" title="Four lines">
+  <Rule icon="view_list" title="Four lines">
     Each is three forwards and two defensemen. A line's share of ice time decides how often it
     plays; changes follow the players' energy, because a tired player loses energy faster and plays
     worse.
   </Rule>
-  <Rule icon="shield_person" title="Goalies">
+  <Rule icon="sports_hockey" title="Goalies">
     The starter begins the game. The backup can replace an injured starter, or you can switch
     goalies while coaching live. The change is shown in the match timeline. A goalie’s fatigue
     carries over from game to game.
   </Rule>
-  <Rule icon="add_circle" title="Power play: PP1 and PP2">
+  <Rule icon="bolt" title="Power play: PP1 and PP2">
     Two units of five - three forwards, a defenseman and a flex spot. The unit with the most energy
     goes on. Against two penalties it plays all five; in a 4 on 3 one skater sits out.
   </Rule>
-  <Rule icon="do_not_disturb_on" title="Penalty kill: PK1 and PK2">
+  <Rule icon="shield" title="Penalty kill: PK1 and PK2">
     Two units of four - two forwards and two defensemen. A three-man kill is the two defensemen and
     the unit's first forward.
   </Rule>
-  <Rule icon="unfold_less" title="4 on 4 and 3 on 3">
+  <Rule icon="groups_2" title="4 on 4 and 3 on 3">
     When both sides are short, the line is cut down to two defensemen and two forwards, or two
     forwards and a defenseman.
   </Rule>
@@ -75,12 +75,13 @@ about two games in three, ten points better about four in five. More numbers are
 
 <Rules>
   <Rule icon="handshake" title="Chemistry">
-    Skaters who play together get used to each other. Every pair of skaters at the club has a
-    chemistry from 0 to 100: it grows with the minutes they share on the ice in official games -
-    about 5 a game at first, slower near the top - and fades by 1 after every block in which the club played an official game. A
-    line with better chemistry than the line it faces wins its battles for the puck a little more
-    often; on special teams it counts half. A newcomer starts at 0 with everyone. Bots and every
-    pair before chemistry opens sit at 50, which changes nothing. <TestOnly />
+    Skaters who play together get used to each other. Every pair of skaters at the club has its
+    chemistry: it grows with the minutes they share on the ice in official games - quickly at
+    first, more slowly as it gets high - and slowly fades when they do not play together. A line
+    with better chemistry than the line it faces wins its battles for the puck a little more
+    often; on special teams it counts half as much. A newcomer starts with no chemistry with
+    anyone. Bots' pairs, and every pair until chemistry opens, stay at a middle value that changes
+    nothing. <TestOnly />
   </Rule>
 </Rules>
 
@@ -184,7 +185,7 @@ sources are listed under the tables, and which player types suit each tactic is 
     Scouting also gives your team a small bonus for that match, which grows with your professional
     scouting staff.
   </Rule>
-  <Rule icon="add_shopping_cart" title="Match extras">
+  <Rule icon="local_fire_department" title="Match extras">
     Once scouted, the preparation also offers VIP logistics for an away game and a dressing-room
     bonus, paid in Flow - see [optional expenses](../club/#optional-expenses).
   </Rule>
@@ -214,19 +215,19 @@ sources are listed under the tables, and which player types suit each tactic is 
     box score. The opponent's energy stays hidden. Elsewhere in the app a cyan dot on the menu
     tells you your match is live; it takes priority over the red dot.
   </Rule>
-  <Rule icon="edit" title="What you can change">
+  <Rule icon="groups" title="What you can change">
     Lineup, tactics, risk, ice-time preset and goalie. A saved change plays from the moment it
     takes effect until the end. It works with the players dressed for the game and holds for this
     match only - your lineup for later games stays as it was.
   </Rule>
-  <Rule icon="person_pin" title="Being there">
+  <Rule icon="person_pin_circle" title="Being there">
     Watching your team's live match helps it by itself, with no change at all: joining during a
     period gives the team a small edge from that moment. Being there before it starts earns the
     whole of it - the warm-up earns the first period, the first intermission the second, the second
     intermission the third and the break before overtime the overtime. What a period has earned
     stays even if you leave.
   </Rule>
-  <Rule icon="sports" title="Pulling the goalie">
+  <Rule icon="sports_hockey" title="Pulling the goalie">
     In the last five minutes of the third, when one to three goals behind, you can pull the goalie for
     an extra attacker. In real hockey a coach may pull the goalie at any time; Ice Flow limits it so that it
     cannot be abused - a losing team could leave its net empty to concede more on purpose, and a

@@ -1,7 +1,9 @@
 ---
 // Material Symbols Rounded - the same icon family the mobile app uses (Icons.*_rounded).
-// Read from the package at build time and inlined, so no icon font is loaded.
-import { readFileSync } from 'node:fs';
+// Read from the package at build time and inlined, so no icon font is loaded. The few icons the
+// app uses that Material Symbols does not carry under that name are in src/assets/icons, drawn from
+// the app's own Material Icons font (Flutter's MaterialIcons-Regular, the *_rounded glyph).
+import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 interface Props {
@@ -11,19 +13,22 @@ interface Props {
 }
 
 const { name, size = 20, class: className } = Astro.props;
-const file = join(process.cwd(), 'node_modules/@material-symbols/svg-400/rounded', `${name}.svg`);
+const symbol = join(process.cwd(), 'node_modules/@material-symbols/svg-400/rounded', `${name}.svg`);
+const appIcon = join(process.cwd(), 'src/assets/icons', `${name}.svg`);
+const file = existsSync(symbol) ? symbol : appIcon;
 let svg: string;
 try {
   svg = readFileSync(file, 'utf8');
 } catch {
-  throw new Error(`Unknown icon "${name}" (${file})`);
+  throw new Error(`Unknown icon "${name}" (${symbol}, ${appIcon})`);
 }
+const viewBox = /viewBox="([^"]+)"/.exec(svg)?.[1] ?? '0 -960 960 960';
 const body = svg.replace(/^<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '');
 ---
 
 <svg
   xmlns="http://www.w3.org/2000/svg"
-  viewBox="0 -960 960 960"
+  viewBox={viewBox}
   width={size}
   height={size}
   fill="currentColor"

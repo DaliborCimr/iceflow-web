@@ -48,23 +48,23 @@ zápasy z troch, o desať bodov zhruba štyri z piatich. Ďalšie čísla sú na
 ## Tvoje formácie
 
 <Rules>
-  <Rule icon="sports_hockey" title="Štyri formácie">
+  <Rule icon="view_list" title="Štyri formácie">
     Každá má troch útočníkov a dvoch obrancov. Podiel ice timu určuje, ako často formácia hrá; striedanie sa
     riadi energiou hráčov, pretože unavený hráč stráca energiu rýchlejšie a hrá horšie.
   </Rule>
-  <Rule icon="shield_person" title="Brankári">
+  <Rule icon="sports_hockey" title="Brankári">
     Zápas začína vybraný brankár. Náhradník ho môže zastúpiť pri zranení, alebo brankára vystriedaš
     pri živom koučovaní. Výmena sa ukáže v prehľade udalostí zápasu. Únava brankára sa prenáša
     zo zápasu do zápasu.
   </Rule>
-  <Rule icon="add_circle" title="Presilovka: PP1 a PP2">
+  <Rule icon="bolt" title="Presilovka: PP1 a PP2">
     Dve päťky - traja útočníci, obranca a voľné miesto. Na ľad ide päťka s najviac energie. Proti dvom
     trestom hrá celá; pri 4 na 3 jeden hráč vynechá.
   </Rule>
-  <Rule icon="do_not_disturb_on" title="Oslabenie: PK1 a PK2">
+  <Rule icon="shield" title="Oslabenie: PK1 a PK2">
     Dve štvorice - dvaja útočníci a dvaja obrancovia. Pri oslabení o dvoch hrajú obaja obrancovia a prvý útočník.
   </Rule>
-  <Rule icon="unfold_less" title="4 na 4 a 3 na 3">
+  <Rule icon="groups_2" title="4 na 4 a 3 na 3">
     Keď sú oslabené obe strany, formácia sa zmenší na dvoch obrancov a dvoch útočníkov, alebo dvoch útočníkov
     a obrancu.
   </Rule>
@@ -72,12 +72,12 @@ zápasy z troch, o desať bodov zhruba štyri z piatich. Ďalšie čísla sú na
 
 <Rules>
   <Rule icon="handshake" title="Zohratosť">
-    Hráči, ktorí spolu hrajú, si na seba zvyknú. Každá dvojica korčuliarov v klube má zohratosť od 0
-    do 100: rastie s minútami, ktoré spolu odohrajú v súťažných zápasoch - spočiatku asi o 5 za
-    zápas, pri vrchole pomalšie - a po každom bloku, v ktorom klub odohral súťažný zápas, klesne o 1. Formácia zohratejšia
-    než tá, proti ktorej hrá, vyhrá súboj o puk o niečo častejšie; v presilovke a oslabení platí
-    napoly. Nováčik začína so všetkými na 0. Boti a všetky dvojice, kým sa zohratosť neotvorí, majú
-    50, čo nič nemení. <TestOnly />
+    Hráči, ktorí spolu hrajú, si na seba zvyknú. Každá dvojica korčuliarov v klube má svoju
+    zohratosť: rastie s minútami, ktoré spolu odohrajú v súťažných zápasoch - spočiatku rýchlo,
+    pri vyššej zohratosti pomalšie - a keď spolu nehrajú, pomaly klesá. Formácia zohratejšia než
+    tá, proti ktorej hrá, vyhrá súboj o puk o niečo častejšie; v presilovke a oslabení platí
+    napoly. Nováčik začína bez zohratosti s kýmkoľvek. Dvojice botov a všetky dvojice, kým sa
+    zohratosť neotvorí, zostávajú na strednej hodnote, ktorá nič nemení. <TestOnly />
   </Rule>
 </Rules>
 
@@ -176,7 +176,7 @@ tabuľkami a ktoré typy hráčov sa ku ktorej taktike hodia, ukazuje stránka [
   <Rule icon="military_tech" title="Bonus za prípravu">
     Skauting dá tvojmu tímu na ten zápas aj malý bonus, ktorý rastie s profesionálnym skautingom.
   </Rule>
-  <Rule icon="add_shopping_cart" title="Príplatky k zápasu">
+  <Rule icon="local_fire_department" title="Príplatky k zápasu">
     Po skautingu ponúkne príprava aj VIP logistiku na zápas vonku a prémiu do kabíny, platené vo
     Flow - pozri [voliteľné výdavky](../club/#voliteľné-výdavky).
   </Rule>
@@ -205,18 +205,18 @@ tabuľkami a ktoré typy hráčov sa ku ktorej taktike hodia, ukazuje stránka [
     zostáva skrytá. Inde v aplikácii ti azúrová bodka na menu pripomenie, že sa hrá tvoj zápas;
     má prednosť pred červenou bodkou.
   </Rule>
-  <Rule icon="edit" title="Čo môžeš meniť">
+  <Rule icon="groups" title="Čo môžeš meniť">
     Zostavu, taktiku, riziko, predvoľbu ice timu aj brankára. Uložená zmena platí od chvíle,
     keď začne pôsobiť, až do konca. Pracuje s hráčmi oblečenými na zápas a platí len pre tento
     zápas - zostava pre ďalšie zápasy zostane, ako bola.
   </Rule>
-  <Rule icon="person_pin" title="Tvoja prítomnosť">
+  <Rule icon="person_pin_circle" title="Tvoja prítomnosť">
     Sledovanie živého zápasu pomáha tímu samo osebe, aj bez jedinej zmeny: príchod počas tretiny dá
     tímu malú výhodu od tej chvíle. Kto je pri zápase už pred začiatkom časti, zaistí ju celú -
     rozcvička prvú tretinu, prvá prestávka druhú, druhá prestávka tretiu a prestávka pred
     predĺžením predĺženie. Čo si časť vyslúžila, zostane aj po odchode.
   </Rule>
-  <Rule icon="sports" title="Odvolanie brankára">
+  <Rule icon="sports_hockey" title="Odvolanie brankára">
     V posledných piatich minútach tretej tretiny môžeš pri strate jedného až troch gólov odvolať brankára a hrať s hráčom
     navyše. V skutočnosti tréner smie brankára odvolať kedykoľvek; Ice Flow to obmedzuje, aby sa odvolanie
     nedalo zneužiť - prehrávajúci tím by si bez brankára nechal zámerne nastrieľať ďalšie góly a vedúci
