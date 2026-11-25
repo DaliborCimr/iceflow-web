@@ -66,9 +66,9 @@ areas:
       decision in one area has consequences in the others.
     facts:
       - The farm team plays its own competition alongside the first team
-      - Contracts up to 5 seasons; from the second season the salary is negotiated, not read off a price list - the player weighs an offer by ambition and loyalty
+      - Contracts up to 5 seasons; the salary is negotiated (from season 2 in the test version, from season 4 by the plan), not read off a price list - the player weighs an offer by ambition and loyalty
       - 3 attempts per player; a refused offer tells the manager only roughly how far it was from what the player wants
-      - Chemistry builds between specific pairs of teammates on the ice - it grows with minutes played together and fades without them; next to attributes, tactic fit, experience and the players' condition it is another part of a line's strength (it opens in the live game after a few seasons)
+      - Chemistry builds between specific pairs of teammates on the ice - it grows with minutes played together and fades without them; next to attributes, tactic fit, experience and the players' condition it is another part of a line's strength (by the plan it opens with the gradual unlocks, season not set yet)
       - A market search deals up to five cards that other managers can bid on too
       - Transfer market with asking prices of 80-110 %, an 8-minute auction after the first bid and a 90-second soft close
       - Two currencies - Flow for running the club, Gold Pucks for the market, scouting and juniors
@@ -86,6 +86,7 @@ areas:
       - Elite league - 24 teams, 6 Swiss-system rounds, top 16 to the playoff, on the same calendar as the league
       - Rapid league - 4 teams, round robin, played instantly, with no fatigue, injuries or effect on league statistics
       - Match importance comes from the real table situation and can differ for each team
+      - Planned gradual unlocks by the club's season - 2. Elite and juniors, 3. talent and professionalism, 4. ambition, loyalty and contract negotiation, 5. injury resistance, discipline and mentality, from season 3 only with active play; line chemistry later. The test version has everything sooner for now
   - title: Simulation calibration
     text: >-
       The match engine is calibrated against long-term real-world hockey averages and checked over
@@ -179,17 +180,36 @@ milestones:
       ambition and loyalty, chemistry between pairs on the ice, optional club expenses, a bonus for
       the manager watching live, 71 goal animations in 194 clips, Google sign-in, push notifications,
       Slovak as the eleventh language and an independent audit of the server.
+  - date: December 2026
+    phase: launch
+    phaseLabel: Plan
+    title: Testing the maths
+    text: >-
+      Checking the game's maths - economy, player development and matches - and fine-tuning the balance.
+  - date: January 2027
+    phase: launch
+    phaseLabel: Plan
+    title: Testing in the cloud
+    text: >-
+      Running on cloud servers, connected to the real libraries for payments and ads.
+  - date: February 2027
+    phase: launch
+    phaseLabel: Plan
+    title: Release
+    text: >-
+      Release of Ice Flow: Hockey Manager.
   - date: After launch
     phase: launch
     phaseLabel: Plans
     title: What comes next
-    text: >-
-      Planned, with no dates yet: more features unlocked gradually as seasons are played, All-Star - a new
-      competition alongside the Rapid league, played on the principle of club associations, research into
-      tactics for the power play, the penalty kill, 3 on 3 and play without a goalie - today a tactic
-      applies only at 5 on 5 and 4 on 4, and new systems will come once they are backed by sources and
-      balanced -, penalty shots during a game, better match animations and graphics, and servers for
-      Europe, Asia and the Americas.
+    text: Planned, with no dates yet.
+    todo:
+      - Features unlocked gradually as seasons are played, by the plan under Season and competitions, line chemistry included
+      - All-Star - a new competition alongside the Rapid league, played on the principle of club associations
+      - Research into tactics for the power play, the penalty kill, 3 on 3 and play without a goalie - today a tactic applies only at 5 on 5 and 4 on 4; new systems will come once they are backed by sources and balanced
+      - Penalty shots during a game
+      - Better match animations and graphics
+      - Servers for Europe, Asia and the Americas
 notes:
   - title: Business model
     paragraphs:

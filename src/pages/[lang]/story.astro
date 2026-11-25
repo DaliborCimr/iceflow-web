@@ -67,7 +67,12 @@ const textLang = isFallback ? 'en' : undefined;
             </div>
             <div class="card">
               <h3>{m.title}</h3>
-              <p>{m.text}</p>
+              {m.text && <p>{m.text}</p>}
+              {m.todo && (
+                <ul class="todo">
+                  {m.todo.map((item) => <li>{item}</li>)}
+                </ul>
+              )}
             </div>
           </li>
         ))}
@@ -163,7 +168,7 @@ const textLang = isFallback ? 'en' : undefined;
     background: var(--border);
   }
 
-  .timeline li {
+  .timeline > li {
     --phase: var(--accent);
     position: relative;
     display: grid;
@@ -173,12 +178,12 @@ const textLang = isFallback ? 'en' : undefined;
     margin-bottom: 16px;
   }
 
-  .timeline li.phase-idea { --phase: #b48cff; }
-  .timeline li.phase-engine { --phase: var(--gold); }
-  .timeline li.phase-server { --phase: var(--accent); }
-  .timeline li.phase-mobile { --phase: #3ccf91; }
-  .timeline li.phase-animation { --phase: #ff7a8a; }
-  .timeline li.phase-launch { --phase: #ffffff; }
+  .timeline > li.phase-idea { --phase: #b48cff; }
+  .timeline > li.phase-engine { --phase: var(--gold); }
+  .timeline > li.phase-server { --phase: var(--accent); }
+  .timeline > li.phase-mobile { --phase: #3ccf91; }
+  .timeline > li.phase-animation { --phase: #ff7a8a; }
+  .timeline > li.phase-launch { --phase: #ffffff; }
 
   .marker {
     position: absolute;
@@ -230,6 +235,38 @@ const textLang = isFallback ? 'en' : undefined;
   .card p {
     margin: 0;
     color: var(--muted);
+  }
+
+  /* A plan's to-do list: unticked boxes, nothing done yet. */
+  .card .todo {
+    list-style: none;
+    margin: 8px 0 0;
+    padding: 0;
+    color: var(--muted);
+  }
+
+  .card p + .todo {
+    margin-top: 10px;
+  }
+
+  .card .todo li {
+    position: relative;
+    padding-left: 26px;
+  }
+
+  .card .todo li + li {
+    margin-top: 6px;
+  }
+
+  .card .todo li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.3em;
+    width: 12px;
+    height: 12px;
+    border: 2px solid var(--phase);
+    border-radius: 3px;
   }
 
   .prose-block :global(p),
@@ -304,7 +341,7 @@ const textLang = isFallback ? 'en' : undefined;
       grid-template-columns: repeat(2, 1fr);
     }
 
-    .timeline li {
+    .timeline > li {
       grid-template-columns: 1fr;
     }
 

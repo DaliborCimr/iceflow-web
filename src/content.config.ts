@@ -46,7 +46,9 @@ const story = defineCollection({
         phase: z.enum(['idea', 'engine', 'server', 'mobile', 'animation', 'launch']),
         phaseLabel: z.string(),
         title: z.string(),
-        text: z.string(),
+        text: z.string().optional(),
+        // A plan as a to-do list, shown as unticked boxes under the text.
+        todo: z.array(z.string()).optional(),
       }),
     ),
     notes: z.array(z.object({ title: z.string(), paragraphs: z.array(z.string()) })),

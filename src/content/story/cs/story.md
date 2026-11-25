@@ -66,9 +66,9 @@ areas:
       v jedné oblasti má důsledky v ostatních.
     facts:
       - Farma hraje vlastní soutěž souběžně s prvním týmem
-      - Smlouvy až na 5 sezón; od druhé sezóny se plat vyjednává a není to pevný ceník - hráč na nabídku reaguje podle své ambice a loajality
+      - Smlouvy až na 5 sezón; plat se vyjednává (v testovací verzi od 2. sezóny, podle plánu od 4.) a není to pevný ceník - hráč na nabídku reaguje podle své ambice a loajality
       - Na každého hráče 3 pokusy; po odmítnutí se manažer dozví jen přibližně, jak daleko byla nabídka od hráčovy představy
-      - Sehranost vzniká mezi konkrétními dvojicemi spoluhráčů na ledě - roste se společnými minutami a bez nich slábne; vedle atributů, vhodnosti taktiky, zkušeností a stavu hráčů je další částí síly formace (v ostrém provozu se otevře po několika sezónách)
+      - Sehranost vzniká mezi konkrétními dvojicemi spoluhráčů na ledě - roste se společnými minutami a bez nich slábne; vedle atributů, vhodnosti taktiky, zkušeností a stavu hráčů je další částí síly formace (podle plánu se otevře postupným odemykáním, sezóna zatím není určená)
       - Hledání na trhu nabídne až pět karet, o které můžou soutěžit i ostatní manažeři
       - Přestupový trh s vyvolávací cenou 80-110 %, 8minutovou aukcí po prvním příhozu a 90sekundovým prodloužením
       - Dvě měny - Flow na provoz klubu, Gold Pucks na trh, skauting a juniory
@@ -85,6 +85,7 @@ areas:
       - Elite liga - 24 týmů, 6 kol švýcarským systémem, nejlepších 16 do play-off, ve stejném kalendáři jako liga
       - Rapid liga - 4 týmy, každý s každým, odehraje se okamžitě, bez únavy, zranění a vlivu na ligové statistiky
       - Důležitost zápasu vychází ze skutečné situace v tabulce a pro každý tým může být jiná
+      - Plán postupného odemykání podle sezón klubu - 2. Elite a junioři, 3. talent a profesionalita, 4. ambice, loajalita a vyjednávání smluv, 5. odolnost vůči zranění, disciplína a mentalita, od 3. sezóny jen při aktivním hraní; sehranost formací později. V testovací verzi je zatím všechno dostupné dřív
   - title: Kalibrace simulace
     text: >-
       Zápasový engine je kalibrovaný na dlouhodobé průměry skutečného hokeje a ověřovaný dlouhými
@@ -177,17 +178,36 @@ milestones:
       a loajalitou, sehranost dvojic na ledě, volitelné výdaje klubu, bonus za manažera u živého
       zápasu, 71 gólových animací ve 194 klipech, přihlášení přes Google, push notifikace,
       slovenština jako jedenáctý jazyk a nezávislý audit serveru.
+  - date: Prosinec 2026
+    phase: launch
+    phaseLabel: Plán
+    title: Testování matematiky
+    text: >-
+      Ověřování herní matematiky - ekonomiky, vývoje hráčů a zápasů - a dolaďování balancu.
+  - date: Leden 2027
+    phase: launch
+    phaseLabel: Plán
+    title: Testování v cloudu
+    text: >-
+      Provoz na cloudových serverech s napojením na skutečné knihovny pro platby a reklamy.
+  - date: Únor 2027
+    phase: launch
+    phaseLabel: Plán
+    title: Vydání
+    text: >-
+      Vydání Ice Flow: Hockey Manager.
   - date: Po spuštění
     phase: launch
     phaseLabel: Plány
     title: Co přijde dál
-    text: >-
-      Plánované, zatím bez termínu: postupné odemykání dalších
-      funkcí s odehranými sezónami, All-Star -
-      novou soutěž vedle Rapid ligy, hranou na principu asociací klubů, výzkum taktik pro
-      přesilovku, oslabení, hru 3 na 3 a hru bez brankáře - dnes taktika platí jen při 5 na 5 a 4 na
-      4 a nové systémy přibudou, až budou podložené zdroji a vyvážené -, trestné střílení během
-      zápasu, vylepšování animací a grafiky zápasu a servery pro Evropu, Asii a Ameriku.
+    text: Plánované, zatím bez termínu.
+    todo:
+      - Postupné odemykání funkcí s odehranými sezónami podle plánu v části Sezóna a soutěže, včetně sehranosti formací
+      - All-Star - nová soutěž vedle Rapid ligy, hraná na principu asociací klubů
+      - Výzkum taktik pro přesilovku, oslabení, hru 3 na 3 a hru bez brankáře - dnes taktika platí jen při 5 na 5 a 4 na 4; nové systémy přibudou, až budou podložené zdroji a vyvážené
+      - Trestná střílení během zápasu
+      - Vylepšování animací a grafiky zápasu
+      - Servery pro Evropu, Asii a Ameriku
 notes:
   - title: Obchodní model
     paragraphs:
